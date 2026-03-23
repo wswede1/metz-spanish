@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>🇨🇴 Colombia Vocabulary Review — Spanish 2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0%,#003893 50%,#CE1126 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px}
+
+.app-header{text-align:center;margin-bottom:20px}
+.app-header h1{font-family:'Fredoka One',cursive;color:#fff;font-size:2rem;text-shadow:2px 2px 6px rgba(0,0,0,.4);margin-bottom:4px}
+.app-header .subtitle{color:#ffffffcc;font-size:1rem;font-style:italic}
+.top-links{display:flex;justify-content:center;margin-bottom:14px}
+.home-link{
+  display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+  background:rgba(255,255,255,.94);color:#003893;font-weight:800;
+  padding:10px 16px;border-radius:999px;box-shadow:0 8px 18px rgba(0,0,0,.18)
+}
+.home-link:hover{transform:translateY(-1px)}
+
+.nav-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px}
+.nav-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:.85rem;padding:8px 16px;border:none;border-radius:20px;cursor:pointer;transition:all .25s;color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.nav-btn.active{transform:scale(1.05);box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.cat-0{background:#CE1126}.cat-0.active{background:#a00d1e}
+.cat-1{background:#003893}.cat-1.active{background:#002a6e}
+.cat-2{background:#1E8449}.cat-2.active{background:#166b3a}
+.cat-3{background:#8E44AD}.cat-3.active{background:#6f3488}
+.cat-4{background:#D4AC0D}.cat-4.active{background:#b8960b}
+.cat-5{background:#2C3E50}.cat-5.active{background:#1a252f}
+
+.stats-bar{display:flex;gap:20px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+.stat{background:rgba(255,255,255,.9);padding:6px 14px;border-radius:12px;font-weight:700;font-size:.85rem;color:#333;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.stat span{color:#003893}
+
+.mode-bar{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.mode-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:.8rem;padding:6px 14px;border:2px solid #fff;border-radius:16px;cursor:pointer;background:transparent;color:#fff;transition:all .2s}
+.mode-btn:hover,.mode-btn.active{background:#fff;color:#003893}
+
+.card-container{perspective:1000px;width:340px;height:220px;margin:0 auto 16px auto;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.card-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card-container.flipped .card-inner{transform:rotateY(180deg)}
+.card-front,.card-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;box-shadow:0 8px 28px rgba(0,0,0,.25)}
+.card-front{background:linear-gradient(145deg,#ffffff,#f0f4ff);border:3px solid #003893}
+.card-back{background:linear-gradient(145deg,#FCD116,#FFE566);border:3px solid #CE1126;transform:rotateY(180deg)}
+.card-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;opacity:.6}
+.card-word{font-family:'Fredoka One',cursive;font-size:1.5rem;text-align:center;color:#003893;line-height:1.3}
+.card-back .card-word{color:#333}
+.card-hint{font-size:.8rem;color:#666;margin-top:8px;font-style:italic}
+.tap-hint{font-size:.75rem;color:#999;margin-top:auto}
+
+.controls{display:flex;gap:12px;justify-content:center;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.ctrl-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:.9rem;padding:10px 20px;border:none;border-radius:12px;cursor:pointer;transition:all .2s;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.ctrl-btn:hover{transform:translateY(-1px)}
+.btn-prev{background:#6c757d}.btn-next{background:#003893}.btn-shuffle{background:#CE1126}.btn-know{background:#1E8449}.btn-study{background:#D4AC0D;color:#333}
+.ctrl-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.card-counter{font-weight:700;color:#fff;font-size:1rem;min-width:70px;text-align:center;text-shadow:1px 1px 3px rgba(0,0,0,.3)}
+
+.progress-wrap{width:340px;margin:0 auto 20px auto}
+.progress-track{height:8px;background:rgba(255,255,255,.3);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:#1E8449;border-radius:4px;transition:width .3s}
+
+.quiz-area{background:rgba(255,255,255,.95);border-radius:16px;padding:24px;width:360px;box-shadow:0 8px 28px rgba(0,0,0,.2);margin-bottom:16px;text-align:center}
+.quiz-prompt{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#003893;margin-bottom:16px}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{font-family:'Nunito',sans-serif;font-weight:600;font-size:1rem;padding:12px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:all .2s;text-align:left}
+.quiz-opt:hover{border-color:#003893;background:#f0f4ff}
+.quiz-opt.correct{border-color:#1E8449;background:#d5f5e3;color:#1E8449;font-weight:700}
+.quiz-opt.wrong{border-color:#CE1126;background:#fadbd8;color:#CE1126}
+.quiz-opt.reveal{border-color:#1E8449;background:#d5f5e3}
+.quiz-feedback{margin-top:12px;font-weight:700;font-size:1rem}
+.quiz-feedback.correct-fb{color:#1E8449}
+.quiz-feedback.wrong-fb{color:#CE1126}
+.quiz-score{font-size:.9rem;color:#555;margin-top:8px}
+
+.match-area{background:rgba(255,255,255,.95);border-radius:16px;padding:24px;width:380px;box-shadow:0 8px 28px rgba(0,0,0,.2);margin-bottom:16px}
+.match-title{font-family:'Fredoka One',cursive;font-size:1.1rem;color:#003893;text-align:center;margin-bottom:12px}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.match-tile{font-family:'Nunito',sans-serif;font-weight:600;font-size:.82rem;padding:10px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;transition:all .2s;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center}
+.match-tile:hover{border-color:#003893;background:#f0f4ff}
+.match-tile.selected{border-color:#003893;background:#d6eaf8;box-shadow:0 0 0 2px #003893}
+.match-tile.matched{border-color:#1E8449;background:#d5f5e3;color:#1E8449;cursor:default;opacity:.7}
+.match-tile.wrong-match{border-color:#CE1126;background:#fadbd8;animation:shake .4s}
+.match-timer{text-align:center;font-weight:700;color:#555;margin-top:10px}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+.complete-screen{background:rgba(255,255,255,.95);border-radius:16px;padding:32px;width:360px;box-shadow:0 8px 28px rgba(0,0,0,.2);text-align:center}
+.complete-screen h2{font-family:'Fredoka One',cursive;color:#003893;font-size:1.6rem;margin-bottom:8px}
+.complete-screen p{color:#555;margin-bottom:16px}
+.complete-screen .big-stat{font-size:2.5rem;font-weight:800;color:#1E8449;margin:8px 0}
+
+@media(max-width:420px){
+  .card-container{width:290px;height:190px}
+  .card-word{font-size:1.2rem}
+  .quiz-area,.match-area,.complete-screen{width:95vw}
+  .app-header h1{font-size:1.5rem}
+  .progress-wrap{width:290px}
+}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <h1>🇨🇴 ¡Conoce a Colombia!</h1>
+  <p class="subtitle">Spanish 2 — Vocabulary Review</p>
+</div>
+
+<div class="top-links">
+  <a class="home-link" href="student_site/index.html">← Back to Student Hub</a>
+</div>
+
+<div class="nav-bar" id="navBar"></div>
+
+<div class="mode-bar">
+  <button class="mode-btn active" onclick="setMode('flashcard')">📇 Flashcards</button>
+  <button class="mode-btn" onclick="setMode('quiz')">❓ Quiz</button>
+  <button class="mode-btn" onclick="setMode('match')">🔗 Match</button>
+</div>
+
+<div class="stats-bar">
+  <div class="stat">Learned: <span id="learnedCount">0</span> / <span id="totalCount">0</span></div>
+  <div class="stat">Streak: <span id="streak">0</span> 🔥</div>
+</div>
+
+<!-- Flashcard Mode -->
+<div id="flashcardMode">
+  <div class="card-container" id="cardContainer" onclick="flipCard()">
+    <div class="card-inner" id="cardInner">
+      <div class="card-front">
+        <div class="card-label" id="frontLabel">Spanish</div>
+        <div class="card-word" id="frontWord">—</div>
+        <div class="card-hint" id="frontHint"></div>
+        <div class="tap-hint">tap to flip</div>
+      </div>
+      <div class="card-back">
+        <div class="card-label" id="backLabel">English</div>
+        <div class="card-word" id="backWord">—</div>
+        <div class="tap-hint">tap to flip back</div>
+      </div>
+    </div>
+  </div>
+  <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div></div>
+  <div class="controls">
+    <button class="ctrl-btn btn-study" onclick="markStudy()" title="Still learning">📖 Study</button>
+    <button class="ctrl-btn btn-prev" onclick="prevCard()">◀</button>
+    <span class="card-counter" id="cardCounter">1 / 10</span>
+    <button class="ctrl-btn btn-next" onclick="nextCard()">▶</button>
+    <button class="ctrl-btn btn-know" onclick="markKnow()" title="I know this one">✅ Know</button>
+  </div>
+  <div class="controls" style="margin-top:4px">
+    <button class="ctrl-btn btn-shuffle" onclick="shuffleDeck()">🔀 Shuffle</button>
+  </div>
+</div>
+
+<!-- Quiz Mode -->
+<div id="quizMode" style="display:none">
+  <div class="quiz-area" id="quizArea"></div>
+  <div class="controls">
+    <button class="ctrl-btn btn-next" onclick="nextQuiz()">Next Question ▶</button>
+  </div>
+</div>
+
+<!-- Match Mode -->
+<div id="matchMode" style="display:none">
+  <div class="match-area" id="matchArea"></div>
+  <div class="controls">
+    <button class="ctrl-btn btn-shuffle" onclick="startMatch()">🔄 New Round</button>
+  </div>
+</div>
+
+<!-- Completion -->
+<div id="completeMode" style="display:none"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+// VOCABULARY DATA — Spanish 2 Colombia Unit
+// ═══════════════════════════════════════════════
+const categories = [
+  {
+    name: "Colombia & Travel",
+    color: "cat-0",
+    words: [
+      {es:"Colombia",en:"Colombia"},
+      {es:"Bogotá",en:"Bogotá (capital city)"},
+      {es:"Cartagena",en:"Cartagena (coastal city)"},
+      {es:"Medellín",en:"Medellín (city of eternal spring)"},
+      {es:"viajar",en:"to travel"},
+      {es:"el viaje",en:"the trip"},
+      {es:"el vuelo",en:"the flight"},
+      {es:"el aeropuerto",en:"the airport"},
+      {es:"el equipaje",en:"the luggage / baggage"},
+      {es:"la maleta",en:"the suitcase"},
+      {es:"el pasaporte",en:"the passport"},
+      {es:"el boleto / el billete",en:"the ticket"},
+      {es:"el hotel",en:"the hotel"},
+      {es:"la playa",en:"the beach"},
+      {es:"el mercado",en:"the market"},
+      {es:"tomar fotos",en:"to take photos"}
+    ]
+  },
+  {
+    name: "Preterite -AR Regular",
+    color: "cat-1",
+    words: [
+      {es:"yo hablé",en:"I spoke / talked"},
+      {es:"tú hablaste",en:"you spoke / talked"},
+      {es:"él/ella habló",en:"he/she spoke / talked"},
+      {es:"nosotros hablamos",en:"we spoke / talked"},
+      {es:"ellos hablaron",en:"they spoke / talked"},
+      {es:"yo viajé",en:"I traveled"},
+      {es:"tú viajaste",en:"you traveled"},
+      {es:"yo compré",en:"I bought"},
+      {es:"ella visitó",en:"she visited"},
+      {es:"nosotros caminamos",en:"we walked"},
+      {es:"ellos bailaron",en:"they danced"},
+      {es:"yo tomé",en:"I took / drank"},
+      {es:"tú llegaste",en:"you arrived"},
+      {es:"ella preparó",en:"she prepared"},
+      {es:"yo nadé",en:"I swam"},
+      {es:"ellos cantaron",en:"they sang"}
+    ]
+  },
+  {
+    name: "-CAR / -GAR / -ZAR",
+    color: "cat-2",
+    words: [
+      {es:"buscar → yo busqué",en:"to search → I searched"},
+      {es:"tocar → yo toqué",en:"to touch/play → I touched/played"},
+      {es:"sacar → yo saqué",en:"to take out → I took out"},
+      {es:"practicar → yo practiqué",en:"to practice → I practiced"},
+      {es:"explicar → yo expliqué",en:"to explain → I explained"},
+      {es:"llegar → yo llegué",en:"to arrive → I arrived"},
+      {es:"jugar → yo jugué",en:"to play → I played"},
+      {es:"pagar → yo pagué",en:"to pay → I paid"},
+      {es:"navegar → yo navegué",en:"to navigate → I navigated"},
+      {es:"empezar → yo empecé",en:"to begin → I began"},
+      {es:"almorzar → yo almorcé",en:"to eat lunch → I ate lunch"},
+      {es:"comenzar → yo comencé",en:"to start → I started"},
+      {es:"cruzar → yo crucé",en:"to cross → I crossed"},
+      {es:"abrazar → yo abracé",en:"to hug → I hugged"},
+      {es:"-car → c → qu (yo)",en:"spelling change in yo form"},
+      {es:"-gar → g → gu (yo)",en:"spelling change in yo form"}
+    ]
+  },
+  {
+    name: "Y-Verbs Preterite",
+    color: "cat-3",
+    words: [
+      {es:"leer → leyó / leyeron",en:"to read → he read / they read"},
+      {es:"yo leí",en:"I read (past)"},
+      {es:"creer → creyó / creyeron",en:"to believe → he believed / they believed"},
+      {es:"yo creí",en:"I believed"},
+      {es:"oír → oyó / oyeron",en:"to hear → he heard / they heard"},
+      {es:"yo oí",en:"I heard"},
+      {es:"caer → cayó / cayeron",en:"to fall → he fell / they fell"},
+      {es:"yo caí",en:"I fell"},
+      {es:"construir → construyó",en:"to build → he/she built"},
+      {es:"yo construí",en:"I built"},
+      {es:"destruir → destruyó",en:"to destroy → he/she destroyed"},
+      {es:"incluir → incluyó",en:"to include → he/she included"},
+      {es:"huir → huyó",en:"to flee → he/she fled"},
+      {es:"i → y (él/ellos)",en:"spelling change: i changes to y between vowels"},
+      {es:"contribuir → contribuyó",en:"to contribute → he/she contributed"},
+      {es:"sustituir → sustituyó",en:"to substitute → he/she substituted"}
+    ]
+  },
+  {
+    name: "Stem-Change -IR Pret.",
+    color: "cat-4",
+    words: [
+      {es:"dormir → durmió / durmieron",en:"to sleep → he slept / they slept"},
+      {es:"morir → murió / murieron",en:"to die → he died / they died"},
+      {es:"pedir → pidió / pidieron",en:"to ask for → he asked / they asked"},
+      {es:"servir → sirvió / sirvieron",en:"to serve → he served / they served"},
+      {es:"preferir → prefirió",en:"to prefer → he/she preferred"},
+      {es:"sentir → sintió / sintieron",en:"to feel → he felt / they felt"},
+      {es:"repetir → repitió",en:"to repeat → he/she repeated"},
+      {es:"seguir → siguió / siguieron",en:"to follow → he followed / they followed"},
+      {es:"vestirse → se vistió",en:"to get dressed → he/she got dressed"},
+      {es:"mentir → mintió",en:"to lie → he/she lied"},
+      {es:"divertirse → se divirtió",en:"to have fun → he/she had fun"},
+      {es:"conseguir → consiguió",en:"to get/obtain → he/she obtained"},
+      {es:"o → u (él/ellos)",en:"stem change: o→u in 3rd person preterite"},
+      {es:"e → i (él/ellos)",en:"stem change: e→i in 3rd person preterite"},
+      {es:"yo dormí",en:"I slept"},
+      {es:"yo pedí",en:"I asked for / ordered"}
+    ]
+  },
+  {
+    name: "Irregular Preterite",
+    color: "cat-5",
+    words: [
+      {es:"decir → dije, dijo, dijeron",en:"to say/tell → I said, he said, they said"},
+      {es:"traer → traje, trajo, trajeron",en:"to bring → I brought, he brought, they brought"},
+      {es:"venir → vine, vino, vinieron",en:"to come → I came, he came, they came"},
+      {es:"dar → di, dio, dieron",en:"to give → I gave, he gave, they gave"},
+      {es:"ver → vi, vio, vieron",en:"to see → I saw, he saw, they saw"},
+      {es:"hacer → hice, hizo, hicieron",en:"to do/make → I did, he did, they did"},
+      {es:"ir → fui, fue, fueron",en:"to go → I went, he went, they went"},
+      {es:"ser → fui, fue, fueron",en:"to be → I was, he was, they were"},
+      {es:"tener → tuve, tuvo, tuvieron",en:"to have → I had, he had, they had"},
+      {es:"estar → estuve, estuvo",en:"to be → I was, he/she was"},
+      {es:"poder → pude, pudo, pudieron",en:"to be able → I could, he could, they could"},
+      {es:"poner → puse, puso, pusieron",en:"to put → I put, he put, they put"},
+      {es:"saber → supe, supo, supieron",en:"to know → I found out, he found out"},
+      {es:"querer → quise, quiso",en:"to want → I wanted, he/she wanted"},
+      {es:"hay → hubo",en:"there is/are → there was/were"},
+      {es:"no hay acentos",en:"irregular preterite stems have no accents"}
+    ]
+  }
+];
+
+// ═══════════════════════════════════
+// APP STATE
+// ═══════════════════════════════════
+let currentCat = 0;
+let currentIdx = 0;
+let deck = [];
+let known = new Set();
+let streak = 0;
+let mode = 'flashcard';
+let quizScore = 0;
+let quizTotal = 0;
+let quizCurrent = null;
+let matchSelected = null;
+let matchPairs = 0;
+let matchStart = 0;
+
+function init(){
+  renderNav();
+  selectCategory(0);
+}
+
+function renderNav(){
+  const bar = document.getElementById('navBar');
+  bar.innerHTML = categories.map((c,i) =>
+    `<button class="nav-btn ${c.color}${i===currentCat?' active':''}" onclick="selectCategory(${i})">${c.name}</button>`
+  ).join('');
+}
+
+function selectCategory(idx){
+  currentCat = idx;
+  currentIdx = 0;
+  deck = [...categories[idx].words];
+  known = new Set();
+  renderNav();
+  updateStats();
+  if(mode==='flashcard') showCard();
+  else if(mode==='quiz') startQuiz();
+  else if(mode==='match') startMatch();
+}
+
+function setMode(m){
+  mode = m;
+  document.querySelectorAll('.mode-btn').forEach((b,i) => {
+    b.classList.toggle('active', ['flashcard','quiz','match'][i] === m);
+  });
+  document.getElementById('flashcardMode').style.display = m==='flashcard'?'':'none';
+  document.getElementById('quizMode').style.display = m==='quiz'?'':'none';
+  document.getElementById('matchMode').style.display = m==='match'?'':'none';
+  document.getElementById('completeMode').style.display = 'none';
+  if(m==='flashcard'){currentIdx=0;showCard();}
+  else if(m==='quiz'){quizScore=0;quizTotal=0;startQuiz();}
+  else if(m==='match') startMatch();
+}
+
+// FLASHCARD MODE
+function showCard(){
+  const c = document.getElementById('cardContainer');
+  c.classList.remove('flipped');
+  if(deck.length === 0){showComplete();return;}
+  const w = deck[currentIdx % deck.length];
+  document.getElementById('frontWord').textContent = w.es;
+  document.getElementById('backWord').textContent = w.en;
+  document.getElementById('frontHint').textContent = '';
+  document.getElementById('cardCounter').textContent = `${currentIdx+1} / ${deck.length}`;
+  const pct = deck.length > 0 ? (known.size / (known.size + deck.length)) * 100 : 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function flipCard(){document.getElementById('cardContainer').classList.toggle('flipped');}
+function nextCard(){if(deck.length===0)return;currentIdx=(currentIdx+1)%deck.length;showCard();}
+function prevCard(){if(deck.length===0)return;currentIdx=(currentIdx-1+deck.length)%deck.length;showCard();}
+
+function markKnow(){
+  if(deck.length===0) return;
+  const w = deck.splice(currentIdx,1)[0];
+  known.add(w.es);
+  streak++;
+  if(currentIdx >= deck.length) currentIdx = 0;
+  updateStats();
+  showCard();
+}
+
+function markStudy(){
+  if(deck.length===0) return;
+  streak = 0;
+  nextCard();
+  updateStats();
+}
+
+function shuffleDeck(){
+  for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
+  currentIdx=0;
+  showCard();
+}
+
+function showComplete(){
+  document.getElementById('flashcardMode').style.display='none';
+  document.getElementById('quizMode').style.display='none';
+  document.getElementById('matchMode').style.display='none';
+  const el=document.getElementById('completeMode');
+  el.style.display='';
+  el.innerHTML=`<div class="complete-screen">
+    <h2>🎉 ¡Excelente!</h2>
+    <p>You've reviewed all cards in <strong>${categories[currentCat].name}</strong>!</p>
+    <div class="big-stat">${known.size} / ${categories[currentCat].words.length}</div>
+    <p>Words marked as known</p>
+    <button class="ctrl-btn btn-next" onclick="resetCategory()" style="margin-top:12px">🔄 Study Again</button>
+  </div>`;
+}
+
+function resetCategory(){selectCategory(currentCat);setMode(mode);}
+
+// QUIZ MODE
+function startQuiz(){quizScore=0;quizTotal=0;nextQuiz();}
+
+function nextQuiz(){
+  const words = categories[currentCat].words;
+  if(words.length < 4) return;
+  const idx = Math.floor(Math.random()*words.length);
+  const correct = words[idx];
+  const dir = Math.random()>.5 ? 'es2en' : 'en2es';
+  let opts = [correct];
+  while(opts.length<4){
+    const r = words[Math.floor(Math.random()*words.length)];
+    if(!opts.includes(r)) opts.push(r);
+  }
+  opts.sort(()=>Math.random()-.5);
+  quizCurrent = {correct, dir, answered:false};
+  const area = document.getElementById('quizArea');
+  const prompt = dir==='es2en' ? correct.es : correct.en;
+  const qLabel = dir==='es2en' ? 'What does this mean in English?' : '¿Cómo se dice en español?';
+  area.innerHTML = `
+    <div class="quiz-prompt">${prompt}</div>
+    <p style="color:#666;margin-bottom:12px;font-size:.9rem">${qLabel}</p>
+    <div class="quiz-options">
+      ${opts.map((o,i) => {
+        const display = dir==='es2en' ? o.en : o.es;
+        return `<button class="quiz-opt" data-idx="${i}" onclick="answerQuiz(this,${o===correct})">${display}</button>`;
+      }).join('')}
+    </div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+    <div class="quiz-score">Score: ${quizScore} / ${quizTotal}</div>
+  `;
+}
+
+function answerQuiz(btn, isCorrect){
+  if(quizCurrent.answered) return;
+  quizCurrent.answered = true;
+  quizTotal++;
+  const fb = document.getElementById('quizFeedback');
+  if(isCorrect){
+    btn.classList.add('correct');
+    quizScore++;
+    streak++;
+    fb.className='quiz-feedback correct-fb';
+    fb.textContent='✅ ¡Correcto!';
+  } else {
+    btn.classList.add('wrong');
+    streak=0;
+    fb.className='quiz-feedback wrong-fb';
+    fb.textContent='❌ Not quite…';
+    const dir = quizCurrent.dir;
+    const correctText = dir==='es2en' ? quizCurrent.correct.en : quizCurrent.correct.es;
+    document.querySelectorAll('.quiz-opt').forEach(b => {
+      if(b.textContent === correctText) b.classList.add('reveal');
+    });
+  }
+  updateStats();
+}
+
+// MATCH MODE
+function startMatch(){
+  const words = categories[currentCat].words;
+  const count = Math.min(6, words.length);
+  const shuffled = [...words].sort(()=>Math.random()-.5).slice(0,count);
+  const tiles = [];
+  shuffled.forEach(w => {
+    tiles.push({text:w.es, pairId:w.es, type:'es'});
+    tiles.push({text:w.en, pairId:w.es, type:'en'});
+  });
+  tiles.sort(()=>Math.random()-.5);
+  matchPairs = 0;
+  matchSelected = null;
+  matchStart = Date.now();
+  const area = document.getElementById('matchArea');
+  area.innerHTML = `
+    <div class="match-title">Match Spanish ↔ English (${count} pairs)</div>
+    <div class="match-grid">
+      ${tiles.map((t,i) => `<div class="match-tile" data-pair="${t.pairId}" data-type="${t.type}" data-idx="${i}" onclick="matchTap(this)">${t.text}</div>`).join('')}
+    </div>
+    <div class="match-timer" id="matchTimer">Pairs found: 0 / ${count}</div>
+  `;
+}
+
+function matchTap(tile){
+  if(tile.classList.contains('matched')) return;
+  if(matchSelected && matchSelected === tile){
+    tile.classList.remove('selected');
+    matchSelected = null;
+    return;
+  }
+  if(!matchSelected){
+    tile.classList.add('selected');
+    matchSelected = tile;
+    return;
+  }
+  const pair1 = matchSelected.dataset.pair;
+  const pair2 = tile.dataset.pair;
+  const type1 = matchSelected.dataset.type;
+  const type2 = tile.dataset.type;
+  if(pair1 === pair2 && type1 !== type2){
+    matchSelected.classList.remove('selected');
+    matchSelected.classList.add('matched');
+    tile.classList.add('matched');
+    matchPairs++;
+    streak++;
+    const total = document.querySelectorAll('.match-tile').length / 2;
+    document.getElementById('matchTimer').textContent = `Pairs found: ${matchPairs} / ${total}`;
+    if(matchPairs === total){
+      const elapsed = ((Date.now()-matchStart)/1000).toFixed(1);
+      document.getElementById('matchTimer').innerHTML = `<strong>🎉 All matched in ${elapsed}s!</strong>`;
+    }
+  } else {
+    matchSelected.classList.remove('selected');
+    matchSelected.classList.add('wrong-match');
+    tile.classList.add('wrong-match');
+    streak = 0;
+    const s1=matchSelected, s2=tile;
+    setTimeout(()=>{s1.classList.remove('wrong-match');s2.classList.remove('wrong-match');},500);
+  }
+  matchSelected = null;
+  updateStats();
+}
+
+function updateStats(){
+  document.getElementById('learnedCount').textContent = known.size;
+  document.getElementById('totalCount').textContent = categories[currentCat].words.length;
+  document.getElementById('streak').textContent = streak;
+}
+
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 2 — Vocabulario (Colombia) — Spanish 1</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Nunito', sans-serif; font-size: 11pt; line-height: 1.45; color: #333; background: #fff; }
+        .page { width: 8.5in; min-height: 10.5in; padding: 0.5in; margin: 0 auto; background: #fff; page-break-after: always; }
+        .page:last-child { page-break-after: avoid; }
+        .header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2pt solid #003893; padding-bottom: 8px; margin-bottom: 18px; }
+        .header-title { font-family: 'Fredoka One', cursive; font-size: 18pt; color: #003893; }
+        .header-subtitle { font-size: 10pt; color: #666; font-style: italic; }
+        .header-info { display: flex; gap: 15px; font-size: 10pt; }
+        .header-field { display: flex; align-items: center; gap: 5px; }
+        .header-field label { font-weight: 700; }
+        .header-field .line { border-bottom: 1pt solid #333; width: 100px; height: 16px; }
+        .header-field .line.short { width: 50px; }
+        .section-title { font-family: 'Fredoka One', cursive; font-size: 12pt; color: #fff; padding: 6px 12px; border-radius: 5px; margin: 16px 0 10px 0; background: linear-gradient(135deg, #003893, #0047b3); }
+        .section-title.match { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .section-title.practice { background: linear-gradient(135deg, #CE1126, #e63946); }
+        .section-title.exit { background: linear-gradient(135deg, #8e44ad, #9b59b6); }
+        .instructions { font-size: 10pt; color: #555; margin-bottom: 10px; padding: 8px 12px; background: #f8fafc; border-radius: 5px; border-left: 3pt solid #003893; }
+        .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; margin: 12px 0; font-size: 10.5pt; }
+        .match-item { display: flex; align-items: center; gap: 8px; }
+        .match-item .num { font-weight: 700; width: 24px; }
+        .match-item .spanish { font-style: italic; color: #003893; }
+        .match-item .blank { width: 80px; border-bottom: 1pt solid #333; height: 18px; }
+        .fillin-box { padding: 12px 16px; background: #f0fdf4; border: 1.5pt solid #27ae60; border-radius: 8px; margin: 12px 0; }
+        .fillin-item { margin: 10px 0; display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; }
+        .fillin-item .blank { width: 120px; border-bottom: 1.5pt solid #333; display: inline-block; min-height: 18px; }
+        .word-bank { font-size: 10pt; padding: 8px 12px; background: #f8f4fc; border: 1pt solid #8e44ad; border-radius: 6px; margin: 10px 0; }
+        .exit-box { border: 2pt solid #8e44ad; border-radius: 8px; padding: 14px 18px; margin: 12px 0; background: #f8f4fc; }
+        .exit-prompt { font-weight: 700; margin-bottom: 10px; color: #6c3483; }
+        .exit-lines .line { border-bottom: 1pt solid #333; min-height: 22px; margin: 6px 0; }
+        @media print { body { background: #fff; } .page { margin: 0; padding: 0.5in; } .section-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+    </style>
+</head>
+<body>
+<style>@media print{.home-btn{display:none!important}}</style>
+<a class="home-btn" href="../../student_site/index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:#003893;color:#fff;border-radius:999px;padding:8px 16px;font-family:Nunito,sans-serif;font-weight:800;text-decoration:none;font-size:.85rem;box-shadow:0 4px 14px rgba(0,56,147,.3);display:inline-flex;align-items:center;gap:6px">← Home</a>
+
+<div class="page">
+    <div class="header">
+        <div>
+            <div class="header-title">Day 2 — Vocabulario</div>
+            <div class="header-subtitle">Unidad Colombia / Spanish 1 — Vocabulary introduction</div>
+        </div>
+        <div class="header-info">
+            <div class="header-field"><label>Nombre:</label><div class="line"></div></div>
+            <div class="header-field"><label>Clase:</label><div class="line short"></div></div>
+            <div class="header-field"><label>Fecha:</label><div class="line short"></div></div>
+        </div>
+    </div>
+
+    <div class="section-title">Part 1 — Warm-up</div>
+    <div class="instructions">Con tu compañero, comparte una cosa que recordaste del Day 1 (estaciones o video). / <em>With your partner, share one thing you remembered from Day 1.</em></div>
+    <div style="border-bottom: 1pt solid #333; min-height: 30px;"></div>
+
+    <div class="section-title match">Part 2 — Matching (vocabulario en contexto)</div>
+    <div class="instructions">Match each Spanish word to its meaning. Use Colombia images from class. <em>Teacher: verify word list matches your Day 2 presentation.</em></div>
+    <div class="match-grid">
+        <div class="match-item"><span class="num">1.</span><span class="spanish">la plaza</span><span class="blank"></span></div>
+        <div class="match-item"><span class="num">2.</span><span class="spanish">el colegio</span><span class="blank"></span></div>
+        <div class="match-item"><span class="num">3.</span><span class="spanish">el mercado</span><span class="blank"></span></div>
+        <div class="match-item"><span class="num">4.</span><span class="spanish">la clase</span><span class="blank"></span></div>
+        <div class="match-item"><span class="num">5.</span><span class="spanish">el libro</span><span class="blank"></span></div>
+        <div class="match-item"><span class="num">6.</span><span class="spanish">la mochila</span><span class="blank"></span></div>
+        <div class="match-item"><span class="num">7.</span><span class="spanish">la ventana</span><span class="blank"></span></div>
+        <div class="match-item"><span class="num">8.</span><span class="spanish">la puerta</span><span class="blank"></span></div>
+    </div>
+
+    <div class="section-title practice">Part 3 — Fill in the blank (Colombia sentences)</div>
+    <div class="word-bank"><strong>Word bank:</strong> la plaza &nbsp; el colegio &nbsp; el mercado &nbsp; la clase &nbsp; el libro &nbsp; la mochila &nbsp; la ventana &nbsp; la puerta</div>
+    <div class="fillin-box">
+        <div class="fillin-item">1. En Bogotá hay una <span class="blank"></span> grande en el centro.</div>
+        <div class="fillin-item">2. Los estudiantes en Medellín van al <span class="blank"></span> cada día.</div>
+        <div class="fillin-item">3. En Cartagena, la gente compra frutas en el <span class="blank"></span>.</div>
+        <div class="fillin-item">4. Tengo el <span class="blank"></span> en la mochila.</div>
+        <div class="fillin-item">5. La <span class="blank"></span> está al lado de la ventana.</div>
+    </div>
+
+    <div class="section-title exit">Part 4 — Cinco palabras nuevas</div>
+    <div class="exit-box">
+        <div class="exit-prompt">Escribe 5 palabras nuevas de hoy. Dibuja o traduce una. / <em>Write 5 new words from today. Draw or translate one.</em></div>
+        <div class="exit-lines">
+            <div class="line">1.</div>
+            <div class="line">2.</div>
+            <div class="line">3.</div>
+            <div class="line">4.</div>
+            <div class="line">5.</div>
+            <div class="line">Dibujo o traducción / <em>Draw or translation:</em></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

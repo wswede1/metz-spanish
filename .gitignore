@@ -1,0 +1,44 @@
+# ── OS / Editor ───────────────────────────────────────────────────────────────
+.DS_Store
+**/.DS_Store
+Thumbs.db
+*.swp
+
+# ── Python environment ────────────────────────────────────────────────────────
+.venv/
+__pycache__/
+*.pyc
+
+# ── Licensed curriculum content (DO NOT PUBLISH) ─────────────────────────────
+# These folders contain materials with distribution restrictions.
+somos/
+spain/
+coco-bundle/
+Ask a Story Resource Pack 2/
+administrative/
+
+# ── Root-level teacher documents (not for students) ──────────────────────────
+UbD_WhitePaper0312.pdf
+spanish_sols.pdf
+pacing26.pdf
+Mexico_Review_Spanish1.pptx
+"The AI Classroom Newsletter.docx"
+Week_of_March_2.md
+get_youtube_transcript.py
+Screenshot*.png
+
+# ── Teacher-only documents (never publish these) ──────────────────────────────
+**/*Answer_Key*
+**/*Listening_Script*
+**/TEACHER_GUIDE_FULL_UNIT.md
+**/UNIT_MAP_COLOMBIA.md
+
+# ── Codex / AI generation artifacts ──────────────────────────────────────────
+**/prompt.md
+**/PLAN.md
+**/SLIDE_OUTLINES.md
+**/SOMOS_COLOMBIA_RESOURCES.md
+**/REFERENCE_MEXICO_ASSESSMENTS.md
+
+# ── Misc ──────────────────────────────────────────────────────────────────────
+*.log

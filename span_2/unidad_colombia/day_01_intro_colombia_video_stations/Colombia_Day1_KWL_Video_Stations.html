@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conoce a Colombia — Day 1 — Spanish 2</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Nunito', sans-serif; font-size: 10.5pt; line-height: 1.4; color: #333; background: #fff; }
+        .page { width: 8.5in; min-height: 10.5in; padding: 0.45in; margin: 0 auto; background: #fff; page-break-after: always; }
+        .page:last-child { page-break-after: avoid; }
+        .header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2pt solid #003893; padding-bottom: 6px; margin-bottom: 12px; }
+        .header-title { font-family: 'Fredoka One', cursive; font-size: 18pt; color: #003893; }
+        .header-subtitle { font-size: 9.5pt; color: #666; font-style: italic; }
+        .header-info { display: flex; gap: 15px; font-size: 10pt; }
+        .header-field { display: flex; align-items: center; gap: 5px; }
+        .header-field label { font-weight: 700; }
+        .header-field .line { border-bottom: 1pt solid #333; width: 100px; height: 16px; }
+        .header-field .line.short { width: 50px; }
+        .page-label { font-size: 9pt; color: #666; text-align: right; margin-bottom: 6px; }
+        .section-title { font-family: 'Fredoka One', cursive; font-size: 11pt; color: #fff; padding: 5px 10px; border-radius: 5px; margin: 10px 0 8px 0; background: linear-gradient(135deg, #003893, #0047b3); }
+        .section-title.kwl { background: linear-gradient(135deg, #FCD116, #f5d84d); color: #222; }
+        .section-title.video { background: linear-gradient(135deg, #CE1126, #e63946); }
+        .section-title.comp { background: linear-gradient(135deg, #2980b9, #3498db); }
+        .section-title.map { background: linear-gradient(135deg, #1a5276, #2980b9); }
+        .section-title.stations { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .section-title.slides { background: linear-gradient(135deg, #8e44ad, #9b59b6); }
+        .section-title.learned { background: linear-gradient(135deg, #003893, #0047b3); }
+        .kwl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0; }
+        .kwl-col { border: 1.5pt solid #003893; border-radius: 8px; padding: 10px 12px; background: #f8fafc; }
+        .kwl-col h4 { font-size: 10.5pt; color: #003893; margin-bottom: 6px; font-family: 'Fredoka One', cursive; }
+        .kwl-col .sub { font-size: 8.5pt; color: #555; margin-bottom: 4px; }
+        .kwl-col .lines { border-bottom: 1pt solid #333; min-height: 16px; margin: 3px 0; }
+        .kwl-col .lines.tall { min-height: 28px; }
+        .video-box { border: 2pt solid #CE1126; border-radius: 8px; padding: 10px 14px; margin: 8px 0; background: #fef5f5; }
+        .video-box .field { margin: 6px 0; display: flex; align-items: baseline; gap: 8px; }
+        .video-box .field label { font-weight: 700; min-width: 130px; font-size: 10pt; }
+        .video-box .field .line { flex: 1; border-bottom: 1pt solid #333; height: 16px; }
+        .video-box .preterite-note { margin-top: 8px; padding: 8px 10px; background: #f0f9ff; border-left: 3pt solid #003893; font-size: 9.5pt; }
+        .comp-note { font-size: 9pt; color: #555; margin-bottom: 8px; padding: 6px 10px; background: #e8f4f8; border-radius: 5px; border-left: 3pt solid #2980b9; }
+        .question-item { margin: 8px 0; padding: 8px 10px; background: #f8fafc; border: 1pt solid #bdc3c7; border-radius: 6px; font-size: 10pt; }
+        .question-item strong { color: #003893; }
+        .question-item .answer-lines { border-bottom: 1pt solid #333; min-height: 36px; margin-top: 4px; }
+        .map-intro { font-size: 9.5pt; color: #555; margin-bottom: 8px; padding: 6px 10px; background: #e8f4f8; border-radius: 6px; border-left: 4pt solid #1a5276; }
+        .map-activity { margin: 8px 0; padding: 10px 12px; border: 2pt solid #1a5276; border-radius: 8px; background: #f0f9ff; }
+        .map-activity h4 { font-size: 10.5pt; color: #1a5276; margin-bottom: 6px; font-family: 'Fredoka One', cursive; }
+        .map-activity ol, .map-activity ul { margin: 4px 0 6px 18px; font-size: 9.5pt; }
+        .map-activity li { margin: 2px 0; }
+        .map-activity .label-list { columns: 3; column-gap: 12px; }
+        .map-activity table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 9pt; }
+        .map-activity th, .map-activity td { border: 1pt solid #bdc3c7; padding: 3px 5px; text-align: left; }
+        .map-activity th { background: #1a5276; color: #fff; font-size: 8.5pt; }
+        .station-pick-intro { font-size: 9.5pt; color: #333; padding: 8px 10px; background: #e8f8ef; border-radius: 6px; border-left: 4pt solid #27ae60; margin-bottom: 10px; }
+        .station-option { margin: 10px 0; padding: 10px 12px; border: 2pt solid #27ae60; border-radius: 8px; background: #fafffe; page-break-inside: avoid; }
+        .station-option.alt { border-color: #2980b9; background: #f8fcff; }
+        .station-option .pick-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-weight: 700; color: #1e8449; font-size: 10.5pt; }
+        .station-option.alt .pick-row { color: #1f618d; }
+        .station-option .pick-row input { width: 16px; height: 16px; }
+        .station-option .ent-title { font-size: 9.5pt; font-weight: 700; color: #003893; margin-bottom: 4px; }
+        .station-option .ent-list { margin: 6px 0 6px 16px; font-size: 9.5pt; }
+        .station-option .ent-list li { margin: 3px 0; }
+        .station-option .lines { border-bottom: 1pt solid #333; min-height: 20px; margin: 4px 0; }
+        .slides-box { border: 2pt solid #8e44ad; border-radius: 8px; padding: 12px 14px; margin: 10px 0; background: #f8f4fc; font-size: 10pt; }
+        .slides-box ul { margin: 8px 0 8px 18px; }
+        .slides-box li { margin: 4px 0; }
+        .learned-box { border: 1.5pt solid #003893; border-radius: 8px; padding: 10px 14px; margin: 10px 0; background: #f8fafc; }
+        .learned-box h4 { font-size: 10.5pt; color: #003893; margin-bottom: 6px; font-family: 'Fredoka One', cursive; }
+        .learned-box .lines { border-bottom: 1pt solid #333; min-height: 22px; margin: 4px 0; }
+        .exit-box { border: 2pt solid #8e44ad; border-radius: 8px; padding: 10px 14px; margin: 10px 0; background: #fef9ff; }
+        .exit-prompt { font-weight: 700; margin-bottom: 8px; color: #6c3483; font-size: 10pt; }
+        .exit-lines .line { border-bottom: 1pt solid #333; min-height: 20px; margin: 4px 0; }
+        @media print { body { background: #fff; } .page { margin: 0; padding: 0.45in; } .section-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+    </style>
+</head>
+<body>
+<style>@media print{.home-btn{display:none!important}}</style>
+<a class="home-btn" href="../../student_site/index.html" style="position:fixed;top:12px;left:12px;z-index:9999;background:#003893;color:#fff;border-radius:999px;padding:8px 16px;font-family:Nunito,sans-serif;font-weight:800;text-decoration:none;font-size:.85rem;box-shadow:0 4px 14px rgba(0,56,147,.3);display:inline-flex;align-items:center;gap:6px">← Home</a>
+
+<div class="page">
+    <div class="page-label">Hoja 1 de 3 / <em>Page 1 of 3</em></div>
+    <div class="header">
+        <div>
+            <div class="header-title">Conoce a Colombia</div>
+            <div class="header-subtitle">Spanish 2 — Unidad Colombia — Day 1</div>
+        </div>
+        <div class="header-info">
+            <div class="header-field"><label>Nombre:</label><div class="line"></div></div>
+            <div class="header-field"><label>Clase:</label><div class="line short"></div></div>
+            <div class="header-field"><label>Fecha:</label><div class="line short"></div></div>
+        </div>
+    </div>
+
+    <div class="section-title kwl">1. KWL — Solo K y W (L en la página 3)</div>
+    <p style="font-size: 9pt; color: #555; margin-bottom: 6px;">Antes del video: <strong>K</strong> y <strong>W</strong>.</p>
+    <div class="kwl-grid">
+        <div class="kwl-col">
+            <h4>K — Lo que ya sé</h4>
+            <div class="sub"><em>What I already know</em></div>
+            <div class="sub">Geografía / cultura / comida (breve):</div>
+            <div class="lines"></div>
+            <div class="lines"></div>
+            <div class="lines"></div>
+        </div>
+        <div class="kwl-col">
+            <h4>W — Lo que quiero saber</h4>
+            <div class="sub"><em>What I want to know</em> — 3 preguntas</div>
+            <div class="lines tall"></div>
+            <div class="lines tall"></div>
+            <div class="lines tall"></div>
+        </div>
+    </div>
+
+    <div class="section-title video">2. Video (~15 min)</div>
+    <div class="video-box">
+        <div class="field"><label>Título:</label><div class="line"></div></div>
+        <div class="field"><label>Enlace:</label><div class="line"></div></div>
+        <div class="preterite-note"><strong>Opcional:</strong> 3 verbos en <strong>pretérito</strong> que oyes o lees en subtítulos.
+            <div class="lines" style="min-height:18px;margin-top:6px;"></div>
+        </div>
+    </div>
+
+    <div class="section-title comp">3. Comprensión — 5 preguntas</div>
+    <div class="comp-note">Responde en frases completas. <em>See transcript.</em></div>
+
+    <div class="question-item">
+        <strong>1.</strong> Name <strong>three</strong> different kinds of places or natural features mentioned at the start.
+        <div class="answer-lines"></div>
+    </div>
+    <div class="question-item">
+        <strong>2.</strong> Why was Colombia <strong>not on the tourist map</strong>? What has the government done?
+        <div class="answer-lines"></div>
+    </div>
+    <div class="question-item">
+        <strong>3.</strong> <strong>Villa de Leyva:</strong> Plaza Mayor + one festival mentioned.
+        <div class="answer-lines"></div>
+    </div>
+    <div class="question-item">
+        <strong>4.</strong> <strong>El Peñón de Guatapé:</strong> How many <strong>steps</strong>? What do you see from the top?
+        <div class="answer-lines"></div>
+    </div>
+    <div class="question-item">
+        <strong>5.</strong> <strong>Zona cafetera</strong> <em>or</em> <strong>Salt Cathedral (Zipaquirá)</strong> — <strong>two facts</strong>.
+        <div class="answer-lines"></div>
+        <div class="answer-lines" style="min-height: 28px;"></div>
+    </div>
+</div>
+
+<div class="page">
+    <div class="page-label">Hoja 2 de 3 / <em>Page 2 of 3</em></div>
+    <div class="header">
+        <div>
+            <div class="header-title">Conoce a Colombia</div>
+            <div class="header-subtitle">Spanish 2 — Day 1 — Mapa</div>
+        </div>
+        <div class="header-info">
+            <div class="header-field"><label>Nombre:</label><div class="line"></div></div>
+            <div class="header-field"><label>Clase:</label><div class="line short"></div></div>
+            <div class="header-field"><label>Fecha:</label><div class="line short"></div></div>
+        </div>
+    </div>
+
+    <div class="section-title map">4. Mapa de Colombia — <em>todos completan</em></div>
+    <p class="map-intro"><strong>Necesitas:</strong> Un mapa impreso de Colombia aparte. / <em>You need a separate printed map of Colombia.</em></p>
+
+    <div class="map-activity">
+        <h4>Actividad A — Etiquetar el mapa / <em>Label the map</em></h4>
+        <p style="font-size: 9pt; margin-bottom: 4px;">Busca cada lugar en tu mapa. Escribe el <strong>número</strong> en el mapa. Luego completa la tabla.</p>
+        <ol class="label-list">
+            <li>Bogotá</li>
+            <li>Medellín</li>
+            <li>Cartagena</li>
+            <li>Cali</li>
+            <li>Villa de Leyva</li>
+            <li>mar Caribe</li>
+            <li>océano Pacífico</li>
+            <li>río Amazonas</li>
+            <li>Andes (cordillera)</li>
+            <li>Amazonía</li>
+            <li>Zona cafetera</li>
+        </ol>
+        <table>
+            <thead><tr><th style="width:28px;">Nº</th><th>Nombre</th><th>¿Qué es? (ciudad / agua / región)</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td></td><td></td></tr>
+                <tr><td>2</td><td></td><td></td></tr>
+                <tr><td>3</td><td></td><td></td></tr>
+                <tr><td>4</td><td></td><td></td></tr>
+                <tr><td>5</td><td></td><td></td></tr>
+                <tr><td>6</td><td></td><td></td></tr>
+                <tr><td>7</td><td></td><td></td></tr>
+                <tr><td>8</td><td></td><td></td></tr>
+                <tr><td>9</td><td></td><td></td></tr>
+                <tr><td>10</td><td></td><td></td></tr>
+                <tr><td>11</td><td></td><td></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="map-activity">
+        <h4>Actividad B — Preguntas del mapa / <em>Map questions</em></h4>
+        <p style="font-size: 9pt; margin-bottom: 6px;">Responde mirando tu mapa etiquetado. <strong>Opcional:</strong> Usa el pretérito en la pregunta 5 (<em>Los turistas viajaron a… porque…</em>).</p>
+        <div class="question-item" style="margin:4px 0; padding:6px 10px;"><strong>1.</strong> ¿Qué ciudad está más cerca de la costa del Caribe?<div class="answer-lines" style="min-height:20px;"></div></div>
+        <div class="question-item" style="margin:4px 0; padding:6px 10px;"><strong>2.</strong> Nombra una región donde se cultiva café. ¿Dónde está en el mapa?<div class="answer-lines" style="min-height:20px;"></div></div>
+        <div class="question-item" style="margin:4px 0; padding:6px 10px;"><strong>3.</strong> ¿Qué cuerpo de agua limita Colombia al oeste?<div class="answer-lines" style="min-height:20px;"></div></div>
+        <div class="question-item" style="margin:4px 0; padding:6px 10px;"><strong>4.</strong> ¿Bogotá está más cerca de la costa o del centro del país? (aproximado)<div class="answer-lines" style="min-height:20px;"></div></div>
+        <div class="question-item" style="margin:4px 0; padding:6px 10px;"><strong>5.</strong> Elige un lugar del mapa que quieras visitar. Escribe una oración: <em>Los turistas viajaron a… porque…</em> (o describe por qué quieres ir).<div class="answer-lines" style="min-height:26px;"></div></div>
+    </div>
+
+    <div class="station-pick-intro">
+        <strong>Sin rotación:</strong> Elige <strong>una</strong> opción (A–F en la página 3). Ve a esa estación. Completa <strong>solo</strong> ese entregable.
+        <br><em>Pick ONE station option. Complete only that deliverable on page 3.</em>
+    </div>
+</div>
+
+<div class="page">
+    <div class="page-label">Hoja 3 de 3 / <em>Page 3 of 3</em></div>
+    <div class="header">
+        <div>
+            <div class="header-title">Conoce a Colombia</div>
+            <div class="header-subtitle">Spanish 2 — Una estación</div>
+        </div>
+        <div class="header-info">
+            <div class="header-field"><label>Nombre:</label><div class="line"></div></div>
+            <div class="header-field"><label>Clase:</label><div class="line short"></div></div>
+            <div class="header-field"><label>Fecha:</label><div class="line short"></div></div>
+        </div>
+    </div>
+
+    <div class="section-title stations">5. Una estación — entregable (pretérito cuando hable de hechos pasados)</div>
+    <p style="font-size: 9pt; color: #c0392b; margin-bottom: 6px;"><strong>Una casilla solamente.</strong></p>
+
+    <div class="station-option">
+        <div class="pick-row"><label><input type="checkbox" name="pick" value="A"> A — Regiones</label></div>
+        <div class="ent-title">Entregable: Tabla de 3 regiones (nombre + una oración en español con <em>hay / es</em> + por qué te interesa).</div>
+        <div class="lines"></div><div class="lines"></div><div class="lines"></div>
+    </div>
+
+    <div class="station-option alt">
+        <div class="pick-row"><label><input type="checkbox" name="pick" value="B"> B — Ciudades</label></div>
+        <div class="ent-title">Entregable: Dos ciudades — para cada una: qué hicieron los turistas o qué ofrece la ciudad (usa al menos <strong>2 verbos en pretérito</strong> en total: <em>visité, vi, comí…</em> si es hipotético, explica).</div>
+        <div class="lines"></div><div class="lines"></div>
+    </div>
+
+    <div class="station-option">
+        <div class="pick-row"><label><input type="checkbox" name="pick" value="C"> C — Café / eje cafetero</label></div>
+        <div class="ent-title">Entregable: 3 datos + 1 oración en pretérito: <em>Colombia produjo… / Se cultivó…</em> (si aplica).</div>
+        <div class="lines"></div><div class="lines"></div>
+    </div>
+
+    <div class="station-option alt">
+        <div class="pick-row"><label><input type="checkbox" name="pick" value="D"> D — Biodiversidad</label></div>
+        <div class="ent-title">Entregable: 2 animales, 2 plantas + 1 oración: <em>Fue importante cuando…</em> (pretérito).</div>
+        <div class="lines"></div>
+    </div>
+
+    <div class="station-option">
+        <div class="pick-row"><label><input type="checkbox" name="pick" value="E"> E — Música / cultura</label></div>
+        <div class="ent-title">Entregable: Género + 2 términos en español + 1 oración: <em>Escuché / Me gustó…</em></div>
+        <div class="lines"></div>
+    </div>
+
+    <div class="station-option alt">
+        <div class="pick-row"><label><input type="checkbox" name="pick" value="F"> F — Vida escolar</label></div>
+        <div class="ent-title">Entregable: Tabla Colombia | mi escuela (3 ideas cada una) + 1 comparación con <em>es / era</em> o pretérito si hablas del pasado.</div>
+        <div class="lines"></div><div class="lines"></div>
+    </div>
+
+    <div class="section-title slides">6. Google Slides</div>
+    <div class="slides-box">
+        <ul>
+            <li>Título + nombre</li>
+            <li>3–5 datos nuevos en español; <strong>pretérito</strong> para hechos pasados</li>
+            <li>1+ imagen con crédito · fuentes</li>
+        </ul>
+        <p style="margin-top: 8px;"><strong>Mi tema:</strong> <span style="border-bottom: 1pt solid #333; display: inline-block; min-width: 85%; min-height: 18px;"></span></p>
+    </div>
+
+    <div class="section-title learned">7. L — Lo que aprendí</div>
+    <div class="learned-box">
+        <h4>L</h4>
+        <div class="lines"></div>
+        <div class="lines"></div>
+        <div class="lines"></div>
+    </div>
+
+    <div class="exit-box">
+        <div class="exit-prompt">Salida — Dos oraciones en español (pretérito si puedes)</div>
+        <div class="exit-lines">
+            <div class="line">1.</div>
+            <div class="line">2.</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
