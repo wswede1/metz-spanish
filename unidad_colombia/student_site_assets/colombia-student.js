@@ -449,43 +449,91 @@
       card.appendChild(glossaryCard);
     }
 
-    // Listen button — uses pre-generated audio file if available, otherwise Web Speech
+    // Audio controls — full player if pre-generated MP3 exists, Web Speech fallback otherwise
     if ((activity.passage || []).length) {
       var controls = el('div', 'reading-controls');
-      var listenBtn = el('button', 'tts-btn', '🔊 Listen');
-      listenBtn.type = 'button';
-      var ttsActive = false;
 
       if (activity.audioUrl) {
-        // High-quality pre-generated audio
+        // ── Full player: −10s | Play/Pause | +10s ─────────────────────────
         var audioEl = new Audio(activity.audioUrl);
-        audioEl.addEventListener('ended', function () {
-          listenBtn.classList.remove('playing');
-          listenBtn.textContent = '🔊 Listen';
-          ttsActive = false;
+        var player  = el('div', 'audio-player');
+
+        var btnBack  = el('button', 'ap-btn ap-skip', '');
+        btnBack.type = 'button';
+        btnBack.title = 'Back 10 seconds';
+        btnBack.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/><text x="7.5" y="17" font-size="6" font-weight="700" stroke="none" fill="currentColor">10</text></svg>';
+
+        var btnPlay  = el('button', 'ap-btn ap-play', '');
+        btnPlay.type = 'button';
+        btnPlay.title = 'Play';
+        btnPlay.innerHTML = '<svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="6" y="3" width="4" height="18"/><rect x="14" y="3" width="4" height="18"/></svg>';
+
+        var btnFwd   = el('button', 'ap-btn ap-skip', '');
+        btnFwd.type  = 'button';
+        btnFwd.title = 'Forward 10 seconds';
+        btnFwd.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-3.51"/><text x="7.5" y="17" font-size="6" font-weight="700" stroke="none" fill="currentColor">10</text></svg>';
+
+        var progWrap = el('div', 'ap-progress-wrap');
+        var progBar  = el('div', 'ap-progress-bar');
+        var progFill = el('div', 'ap-progress-fill');
+        progBar.appendChild(progFill);
+        progWrap.appendChild(progBar);
+
+        var timeEl   = el('span', 'ap-time', '0:00');
+
+        function setPlaying(playing) {
+          btnPlay.querySelector('.icon-play').style.display  = playing ? 'none'  : '';
+          btnPlay.querySelector('.icon-pause').style.display = playing ? ''      : 'none';
+          btnPlay.title = playing ? 'Pause' : 'Play';
+          btnPlay.classList.toggle('active', playing);
+        }
+
+        function fmtTime(s) {
+          var m = Math.floor(s / 60);
+          var sec = Math.floor(s % 60);
+          return m + ':' + (sec < 10 ? '0' : '') + sec;
+        }
+
+        audioEl.addEventListener('timeupdate', function () {
+          if (!audioEl.duration) { return; }
+          var pct = audioEl.currentTime / audioEl.duration * 100;
+          progFill.style.width = pct + '%';
+          timeEl.textContent = fmtTime(audioEl.currentTime) + ' / ' + fmtTime(audioEl.duration);
         });
-        audioEl.addEventListener('error', function () {
-          listenBtn.classList.remove('playing');
-          listenBtn.textContent = '🔊 Listen';
-          ttsActive = false;
+        audioEl.addEventListener('ended', function () { setPlaying(false); });
+        audioEl.addEventListener('error', function () { setPlaying(false); });
+
+        btnPlay.addEventListener('click', function () {
+          if (audioEl.paused) { audioEl.play(); setPlaying(true); }
+          else                { audioEl.pause(); setPlaying(false); }
         });
-        listenBtn.addEventListener('click', function () {
-          if (ttsActive) {
-            audioEl.pause();
-            audioEl.currentTime = 0;
-            listenBtn.classList.remove('playing');
-            listenBtn.textContent = '🔊 Listen';
-            ttsActive = false;
-            return;
-          }
-          ttsActive = true;
-          listenBtn.classList.add('playing');
-          listenBtn.textContent = '⏹ Stop';
-          audioEl.play();
+        btnBack.addEventListener('click', function () {
+          audioEl.currentTime = Math.max(0, audioEl.currentTime - 10);
         });
+        btnFwd.addEventListener('click', function () {
+          audioEl.currentTime = Math.min(audioEl.duration || 0, audioEl.currentTime + 10);
+        });
+
+        // Click on progress bar to seek
+        progBar.addEventListener('click', function (e) {
+          if (!audioEl.duration) { return; }
+          var rect = progBar.getBoundingClientRect();
+          audioEl.currentTime = ((e.clientX - rect.left) / rect.width) * audioEl.duration;
+        });
+
+        player.appendChild(btnBack);
+        player.appendChild(btnPlay);
+        player.appendChild(btnFwd);
+        player.appendChild(progWrap);
+        player.appendChild(timeEl);
+        controls.appendChild(player);
+
       } else if (window.speechSynthesis) {
-        // Fallback: browser Web Speech API
-        var fullText = activity.passage.join(' ');
+        // ── Fallback: Web Speech (no seek controls) ────────────────────────
+        var fullText  = activity.passage.join(' ');
+        var ttsActive = false;
+        var listenBtn = el('button', 'tts-btn', '🔊 Listen');
+        listenBtn.type = 'button';
         listenBtn.addEventListener('click', function () {
           if (ttsActive) {
             window.speechSynthesis.cancel();
@@ -503,11 +551,9 @@
             ttsActive = false;
           });
         });
-      } else {
-        listenBtn.disabled = true;
+        controls.appendChild(listenBtn);
       }
 
-      controls.appendChild(listenBtn);
       var hintText = activity.glossary && activity.glossary.length
         ? 'Hover a word for translation · Click any word to hear it'
         : 'Click any word to hear it';
