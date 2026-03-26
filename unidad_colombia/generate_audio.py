@@ -1,72 +1,50 @@
 """
 Colombia Unit — Audio Generation Script
-========================================
-Generates high-quality Spanish neural-voice MP3 files for all reading passages.
-Uses Microsoft Edge TTS (edge-tts) — free, no API key, no browser, no Colab.
 
-Voices:
-  es-MX-DaliaNeural  →  female, warm, clear  (L2 / language learner readings)
-  es-MX-JorgeNeural  →  male, measured, calm  (Heritage readings)
+STEP 1 (one-time install):
+    pip3 install edge-tts
 
-HOW TO RUN (one-time setup + run):
-  1. Open Terminal and navigate to this repo:
-       cd ~/Desktop/metz
-  2. Install edge-tts once (needs Python 3.7+, which macOS includes):
-       pip3 install edge-tts
-  3. Run the script:
-       python3 unidad_colombia/generate_audio.py
-  4. When done, copy the files into the site:
-       cp colombia_audio/sp1-*.mp3  span_1/unidad_colombia/student_site/audio/
-       cp colombia_audio/sp2-*.mp3  span_2/unidad_colombia/student_site/audio/
-  5. Commit and push:
-       git add span_1/unidad_colombia/student_site/audio/ span_2/unidad_colombia/student_site/audio/
-       git commit -m "Add neural TTS audio for all reading passages"
-       git push origin main
+STEP 2 (generate files):
+    python3 unidad_colombia/generate_audio.py
 
-The 🔊 Listen button on every reading page will then use Dalia/Jorge instead
-of the browser's robotic built-in TTS. Web Speech is still used as a fallback
-for per-word pronunciation when students click individual words.
+STEP 3 (publish):
+    git add span_1/unidad_colombia/student_site/audio/
+    git add span_2/unidad_colombia/student_site/audio/
+    git commit -m "Add neural TTS audio for all readings"
+    git push origin main
+
+That's it. No Colab, no zip files, no copying.
+The text of every reading is already in this script.
 """
 
 import asyncio
 import re
-import zipfile
+import sys
 from pathlib import Path
 
-try:
-    import edge_tts
-except ImportError:
-    print("\n  ❌  edge-tts is not installed.")
-    print("  Run:  pip3 install edge-tts\n")
-    raise SystemExit(1)
+# ── Output paths (relative to this script's location) ─────────────────────────
+REPO      = Path(__file__).resolve().parent.parent
+SP1_AUDIO = REPO / "span_1/unidad_colombia/student_site/audio"
+SP2_AUDIO = REPO / "span_2/unidad_colombia/student_site/audio"
+SP1_AUDIO.mkdir(parents=True, exist_ok=True)
+SP2_AUDIO.mkdir(parents=True, exist_ok=True)
 
-
-# ── Config ─────────────────────────────────────────────────────────────────────
-
-FEMALE = "es-MX-DaliaNeural"   # L2 (language learner) readings
+FEMALE = "es-MX-DaliaNeural"   # L2 / language-learner readings
 MALE   = "es-MX-JorgeNeural"   # Heritage readings
-RATE   = "-8%"                  # Slightly slower than default — good for learners
-
-OUT = Path("colombia_audio")
-OUT.mkdir(exist_ok=True)
-
 
 def clean(text):
-    """Replace paragraph breaks with period+space so the TTS pauses naturally."""
+    """Replace paragraph breaks with a period so TTS pauses naturally."""
     t = re.sub(r'\s*\n\n+\s*', '.  ', text.strip())
     t = re.sub(r'\s+', ' ', t)
     return t.strip()
 
-
-# ── Passage data ───────────────────────────────────────────────────────────────
-# Format: (output_filename, voice, passage_text)
-# Add new passages here as the unit grows.
+# ── Passages ── (output_path, voice, text) ─────────────────────────────────────
 
 PASSAGES = [
 
-    # ── Spanish 1 — Day 4 L2 ───────────────────────────────────────────────────
-    ("sp1-day-04-reading-l2.mp3", FEMALE, """
-Sofía vive en Medellín con su familia. Cada mañana, come fruta y bebe café con leche
+    # ── Spanish 1 — Day 4 L2 ──────────────────────────────────────────────────
+    (SP1_AUDIO / "sp1-day-04-reading-l2.mp3", FEMALE,
+     """Sofía vive en Medellín con su familia. Cada mañana, come fruta y bebe café con leche
 antes de salir para la escuela. Su desayuno favorito es una arepa con queso.
 Sofía sale de su casa a las siete de la mañana.
 
@@ -80,12 +58,11 @@ en el parque de su barrio tres veces por semana.
 
 Los fines de semana, la familia de Sofía va al mercado para comprar frutas y verduras.
 Su papá bebe café mientras camina entre los puestos. Sofía comparte la lista de compras
-con su mamá. Después del mercado, toda la familia come junta en casa.
-"""),
+con su mamá. Después del mercado, toda la familia come junta en casa."""),
 
-    # ── Spanish 1 — Day 4 Heritage ─────────────────────────────────────────────
-    ("sp1-day-04-reading-heritage.mp3", MALE, """
-En Colombia, el colegio es una institución central en la vida de los jóvenes.
+    # ── Spanish 1 — Day 4 Heritage ────────────────────────────────────────────
+    (SP1_AUDIO / "sp1-day-04-reading-heritage.mp3", MALE,
+     """En Colombia, el colegio es una institución central en la vida de los jóvenes.
 Los estudiantes generalmente llegan temprano — muchos salen de su casa antes de las siete
 de la mañana, incluso en días fríos en ciudades como Bogotá o Medellín, donde las
 temperaturas pueden bajar bastante en las mañanas.
@@ -104,12 +81,11 @@ colombianos recuerdan con mucha alegría.
 Después del colegio, Valentina va directamente a casa porque su mamá trabaja y ella cuida
 a su hermano menor. Los fines de semana, la familia camina al mercado del barrio y compra
 ingredientes para la semana. Esta rutina semanal es una tradición que conecta a la familia
-con su comunidad local y con la historia del barrio donde viven desde hace tres generaciones.
-"""),
+con su comunidad local y con la historia del barrio donde viven desde hace tres generaciones."""),
 
-    # ── Spanish 1 — Day 7 L2 ───────────────────────────────────────────────────
-    ("sp1-day-07-culture-l2.mp3", FEMALE, """
-Colombia es uno de los países más famosos del mundo por su café. El café crece en las
+    # ── Spanish 1 — Day 7 L2 ──────────────────────────────────────────────────
+    (SP1_AUDIO / "sp1-day-07-culture-l2.mp3", FEMALE,
+     """Colombia es uno de los países más famosos del mundo por su café. El café crece en las
 montañas de una región que se llama el eje cafetero. En esta región, hay muchas fincas
 donde familias trabajan juntas durante la cosecha para recoger los granos.
 
@@ -120,12 +96,11 @@ sabor suave y rico. Por eso, el café de Colombia se exporta a muchos países de
 El Biblioburro es un proyecto famoso en Colombia. Un hombre llamado Luis Soriano lleva
 libros a niños en zonas rurales usando burros. Este proyecto muestra que los colombianos
 cuidan a su comunidad de maneras creativas. El café y el Biblioburro son dos ejemplos de
-cómo Colombia conecta trabajo, cultura y comunidad.
-"""),
+cómo Colombia conecta trabajo, cultura y comunidad."""),
 
-    # ── Spanish 1 — Day 7 Heritage ─────────────────────────────────────────────
-    ("sp1-day-07-culture-heritage.mp3", MALE, """
-El café colombiano no es simplemente un producto de exportación; es una expresión de
+    # ── Spanish 1 — Day 7 Heritage ────────────────────────────────────────────
+    (SP1_AUDIO / "sp1-day-07-culture-heritage.mp3", MALE,
+     """El café colombiano no es simplemente un producto de exportación; es una expresión de
 identidad nacional. Desde el siglo XIX, el cultivo del café transformó la economía
 colombiana y creó una clase media rural que antes no existía. Las familias cafeteras de
 la región del eje cafetero construyeron un modo de vida basado en el trabajo colectivo,
@@ -147,12 +122,11 @@ El Paisaje Cultural Cafetero, declarado Patrimonio de la Humanidad por la UNESCO
 representa un intento de respuesta a esta pregunta. Al reconocer no solo el producto sino
 también la arquitectura, las tradiciones, y las prácticas culturales de la región cafetera,
 Colombia afirma que el valor del café va más allá de su precio en el mercado internacional.
-Es, en suma, una historia de quién es Colombia y cómo llegó a serlo.
-"""),
+Es, en suma, una historia de quién es Colombia y cómo llegó a serlo."""),
 
-    # ── Spanish 2 — Day 4 L2 ───────────────────────────────────────────────────
-    ("sp2-day-04-reading-l2.mp3", FEMALE, """
-La familia Restrepo viajó a Cartagena durante el mes de julio. Llegaron al aeropuerto
+    # ── Spanish 2 — Day 4 L2 ──────────────────────────────────────────────────
+    (SP2_AUDIO / "sp2-day-04-reading-l2.mp3", FEMALE,
+     """La familia Restrepo viajó a Cartagena durante el mes de julio. Llegaron al aeropuerto
 a las diez de la mañana y tomaron un taxi al hotel. El hotel estaba cerca del casco
 antiguo, la parte histórica de la ciudad.
 
@@ -167,12 +141,11 @@ que son un plato típico de la costa caribeña.
 
 Antes de regresar al hotel, los niños corrieron en la Plaza de los Coches y oyeron a
 músicos tocar vallenato. Fue un día largo pero todos dijeron que fue uno de los mejores
-días de sus vidas.
-"""),
+días de sus vidas."""),
 
-    # ── Spanish 2 — Day 4 Heritage ─────────────────────────────────────────────
-    ("sp2-day-04-reading-heritage.mp3", MALE, """
-Cartagena de Indias fue fundada en 1533 por los españoles y se convirtió en uno de los
+    # ── Spanish 2 — Day 4 Heritage ────────────────────────────────────────────
+    (SP2_AUDIO / "sp2-day-04-reading-heritage.mp3", MALE,
+     """Cartagena de Indias fue fundada en 1533 por los españoles y se convirtió en uno de los
 puertos más importantes del comercio colonial en América. Durante siglos, fue el centro
 de un sistema brutal: el tráfico de personas esclavizadas procedentes de África Occidental.
 Esta historia —incómoda pero fundamental— dejó un legado cultural profundo que todavía se
@@ -198,12 +171,11 @@ La historia de Cartagena invita a reflexionar sobre una pregunta universal: ¿qu
 el derecho de contar la historia de un lugar y quién se beneficia de su preservación?
 Esta pregunta no tiene respuesta fácil, pero es exactamente la que una ciudad como
 Cartagena — con sus murallas, sus memoriales, y sus barrios en transformación —
-nos obliga a hacernos.
-"""),
+nos obliga a hacernos."""),
 
-    # ── Spanish 2 — Day 7 L2 ───────────────────────────────────────────────────
-    ("sp2-day-07-culture-l2.mp3", FEMALE, """
-Colombia tiene una historia musical muy rica. La cumbia nació en la región caribeña y
+    # ── Spanish 2 — Day 7 L2 ──────────────────────────────────────────────────
+    (SP2_AUDIO / "sp2-day-07-culture-l2.mp3", FEMALE,
+     """Colombia tiene una historia musical muy rica. La cumbia nació en la región caribeña y
 se mezcló con tradiciones africanas, indígenas, y europeas. Por siglos, la gente bailó
 cumbia en celebraciones y festividades de las comunidades costeras.
 
@@ -215,12 +187,11 @@ noventa y llevaron esta música a todo el mundo.
 En 2015, la UNESCO declaró el vallenato Patrimonio Cultural Inmaterial de la Humanidad.
 Esta declaración reconoció la importancia histórica y cultural de la música para las
 comunidades del norte de Colombia. Para muchas familias de esa región, el vallenato no es
-solo entretenimiento — es una forma de recordar de dónde vienen y qué vivieron sus abuelos.
-"""),
+solo entretenimiento — es una forma de recordar de dónde vienen y qué vivieron sus abuelos."""),
 
-    # ── Spanish 2 — Day 7 Heritage ─────────────────────────────────────────────
-    ("sp2-day-07-culture-heritage.mp3", MALE, """
-Cuando la UNESCO declaró el vallenato Patrimonio Cultural Inmaterial de la Humanidad en
+    # ── Spanish 2 — Day 7 Heritage ────────────────────────────────────────────
+    (SP2_AUDIO / "sp2-day-07-culture-heritage.mp3", MALE,
+     """Cuando la UNESCO declaró el vallenato Patrimonio Cultural Inmaterial de la Humanidad en
 2015, Colombia celebró el reconocimiento como una validación internacional de su identidad
 cultural. Sin embargo, este tipo de declaraciones raramente son simples: al nombrar una
 práctica cultural como patrimonio, se crea automáticamente una tensión entre la
@@ -244,41 +215,35 @@ eso implica para la dinámica entre los músicos tradicionales y la industria cu
 expresión cultural no depende solo de su pureza original, sino de su capacidad para ser
 reinterpretada por nuevas generaciones sin perder su núcleo esencial. La pregunta más
 productiva no es: ¿es auténtico?, sino: ¿quién lo interpreta, para quién, y bajo qué
-condiciones económicas y culturales?
-"""),
+condiciones económicas y culturales?"""),
 ]
 
 
-# ── Generator ──────────────────────────────────────────────────────────────────
+# ── Runner ─────────────────────────────────────────────────────────────────────
+async def make_one(path, voice, text):
+    try:
+        import edge_tts
+    except ImportError:
+        print("\nERROR: edge-tts is not installed.")
+        print("Fix:   pip3 install edge-tts\n")
+        sys.exit(1)
+    comm = edge_tts.Communicate(clean(text), voice, rate="-8%")
+    await comm.save(str(path))
+    kb = path.stat().st_size // 1024
+    print(f"  ✓  {path.name:<42}  {kb:>4} KB")
 
-async def make_one(filename, voice, text):
-    out_path = OUT / filename
-    comm = edge_tts.Communicate(clean(text), voice, rate=RATE)
-    await comm.save(str(out_path))
-    kb = out_path.stat().st_size // 1024
-    print(f"  ✓  {filename}  ({kb} KB)")
+async def run_all():
+    print(f"\nGenerating {len(PASSAGES)} audio files...\n")
+    for path, voice, text in PASSAGES:
+        await make_one(path, voice, text)
+    print("""
+All done!  Run these commands to publish:
 
-
-async def run():
-    print(f"\nGenerating {len(PASSAGES)} audio files into ./{OUT}/\n")
-    for fname, voice, text in PASSAGES:
-        await make_one(fname, voice, text)
-
-    # Zip for convenience
-    zip_path = Path("colombia_audio.zip")
-    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
-        for mp3 in sorted(OUT.glob("*.mp3")):
-            zf.write(mp3, mp3.name)
-    total_kb = zip_path.stat().st_size // 1024
-
-    print(f"\n✅  Done — {len(PASSAGES)} files, zipped to {zip_path} ({total_kb} KB)")
-    print("\nNext steps:")
-    print("  cp colombia_audio/sp1-*.mp3  span_1/unidad_colombia/student_site/audio/")
-    print("  cp colombia_audio/sp2-*.mp3  span_2/unidad_colombia/student_site/audio/")
-    print("  git add span_*/unidad_colombia/student_site/audio/")
-    print("  git commit -m 'Add neural TTS audio'")
-    print("  git push origin main")
-
+  git add span_1/unidad_colombia/student_site/audio/
+  git add span_2/unidad_colombia/student_site/audio/
+  git commit -m "Add neural TTS audio for all readings"
+  git push origin main
+""")
 
 if __name__ == "__main__":
-    asyncio.run(run())
+    asyncio.run(run_all())
