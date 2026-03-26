@@ -374,7 +374,9 @@ a {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(0, 56, 147, 0.1);
 }
 
 .activity-header h2 {
@@ -392,7 +394,31 @@ a {
   margin-top: 4px;
 }
 
-.objectives-list,
+.objectives-list {
+  display: grid;
+  gap: 2px;
+  margin: 0 0 12px;
+  padding: 0;
+}
+
+.objective-item {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 5px 2px;
+  font-size: 0.93rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.objective-item::before {
+  content: '✓';
+  color: var(--col-green);
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
 .reflection-list,
 .checklist-list {
   display: grid;
@@ -400,7 +426,6 @@ a {
   margin-top: 12px;
 }
 
-.objective-item,
 .reflection-item,
 .checklist-item {
   padding: 12px 14px;
@@ -427,6 +452,9 @@ a {
 .practice-form {
   display: grid;
   gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 56, 147, 0.1);
+  margin-top: 4px;
 }
 
 .question-block {
