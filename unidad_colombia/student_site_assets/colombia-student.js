@@ -608,6 +608,52 @@
     renderDrillUI();
   }
 
+  function renderListening(target, activity) {
+    var layout = el('div', 'activity-layout');
+    var left = el('div');
+
+    var card = el('section', 'content-card');
+    var header = el('div', 'activity-header');
+    var textWrap = el('div');
+    textWrap.appendChild(el('h2', null, activity.title));
+    textWrap.appendChild(el('p', null, first(activity.instructions, activity.description)));
+    header.appendChild(textWrap);
+    var meta = el('div', 'mini-meta');
+    [activity.dayLabel, activity.kindLabel, activity.minutes ? activity.minutes + ' min' : null].forEach(function (item) {
+      if (item) meta.appendChild(el('span', 'meta-pill', item));
+    });
+    header.appendChild(meta);
+    card.appendChild(header);
+
+    if (activity.objectives && activity.objectives.length) {
+      var objWrap = el('div', 'objectives-list');
+      activity.objectives.forEach(function (item) {
+        objWrap.appendChild(el('div', 'objective-item', item));
+      });
+      card.appendChild(objWrap);
+    }
+
+    var videoWrap = el('div', 'video-wrap');
+    var iframe = document.createElement('iframe');
+    var src = 'https://www.youtube-nocookie.com/embed/' + activity.youtubeId;
+    if (activity.startTime) {
+      src += '?start=' + activity.startTime;
+    }
+    iframe.src = src;
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    iframe.allowFullscreen = true;
+    videoWrap.appendChild(iframe);
+    card.appendChild(videoWrap);
+
+    left.appendChild(card);
+    layout.appendChild(left);
+    target.appendChild(layout);
+
+    if (activity.questions && activity.questions.length) {
+      renderPractice(target, activity, { embeddedHeader: true, practiceHeading: 'Comprehension Check' });
+    }
+  }
+
   function renderActivity(site) {
     var params = new URLSearchParams(window.location.search);
     var activityId = params.get('activity');
@@ -634,6 +680,8 @@
       renderResource(mount, activity);
     } else if (activity.type === 'drill') {
       renderDrill(mount, activity);
+    } else if (activity.type === 'listening') {
+      renderListening(mount, activity);
     } else {
       renderPractice(mount, activity);
     }

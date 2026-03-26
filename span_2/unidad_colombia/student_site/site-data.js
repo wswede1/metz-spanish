@@ -262,6 +262,24 @@ window.unitSite = {
           icon: "📋"
         }
       ]
+    },
+    {
+      title: "Listening",
+      icon: "🎧",
+      description: "Watch and listen to authentic Colombian music and cultural content, then check your comprehension using preterite and cultural vocabulary.",
+      cards: [
+        {
+          title: "El Vallenato — Music Listening",
+          description: "Watch a vallenato performance and answer comprehension questions about Colombian musical heritage.",
+          route: "activity.html?activity=sp2-listening-vallenato",
+          releaseDate: "",
+          status: "New",
+          kindLabel: "Listening",
+          minutes: 10,
+          dayLabel: "Bonus",
+          icon: "🎵"
+        }
+      ]
     }
   ],
 
@@ -1268,6 +1286,56 @@ window.unitSite = {
           answer: ["empece", "empecé"]
         }
       ]
+    },
+
+    // ─── LISTENING ACTIVITIES ──────────────────────────────────────────────────
+    // Replace YOUTUBE_ID below with the actual YouTube video ID (the part after ?v= in the URL)
+    "sp2-listening-vallenato": {
+      type: "listening",
+      title: "El Vallenato — Patrimonio Cultural",
+      dayLabel: "Bonus",
+      kindLabel: "Listening",
+      minutes: 10,
+      description: "El vallenato es el ritmo nacional de Colombia y patrimonio cultural de la humanidad. Escucha y responde.",
+      instructions: "Watch the video at least once. Use what you already know about Colombian culture to answer the questions.",
+      objectives: [
+        "Identify the vallenato as a UNESCO-recognized Colombian cultural tradition",
+        "Connect preterite narration vocabulary to cultural context"
+      ],
+      youtubeId: "REPLACE_WITH_YOUTUBE_ID",
+      questions: [
+        {
+          type: "mc",
+          prompt: "¿Qué organización reconoció el vallenato como Patrimonio Cultural Inmaterial?",
+          options: [
+            { value: "a", label: "La UNESCO" },
+            { value: "b", label: "La ONU" },
+            { value: "c", label: "El gobierno colombiano" },
+            { value: "d", label: "La OEA" }
+          ],
+          answer: "a"
+        },
+        {
+          type: "mc",
+          prompt: "El instrumento principal del vallenato es…",
+          options: [
+            { value: "a", label: "el acordeón" },
+            { value: "b", label: "la guitarra" },
+            { value: "c", label: "el piano" },
+            { value: "d", label: "la flauta" }
+          ],
+          answer: "a"
+        },
+        {
+          type: "short",
+          prompt: "¿De qué región de Colombia viene el vallenato? Escribe la región.",
+          placeholder: "e.g. la Costa Caribe",
+          answer: ["la costa caribe", "costa caribe", "caribe", "la costa", "valledupar", "la region caribe", "region caribe"]
+        }
+      ],
+      resultTitle: "Comprensión",
+      resultIntro: "Submit your answers after watching the video.",
+      submitLabel: "Check Answers"
     }
   }
 };

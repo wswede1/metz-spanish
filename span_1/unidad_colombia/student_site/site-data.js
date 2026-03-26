@@ -262,6 +262,24 @@ window.unitSite = {
           icon: "📋"
         }
       ]
+    },
+    {
+      title: "Listening",
+      icon: "🎧",
+      description: "Watch and listen to authentic Colombian music and cultural content, then check your comprehension.",
+      cards: [
+        {
+          title: "La Cumbia — Music Listening",
+          description: "Watch a cumbia performance and answer comprehension questions about Colombian musical culture.",
+          route: "activity.html?activity=sp1-listening-cumbia",
+          releaseDate: "",
+          status: "New",
+          kindLabel: "Listening",
+          minutes: 10,
+          dayLabel: "Bonus",
+          icon: "🎵"
+        }
+      ]
     }
   ],
 
@@ -1326,6 +1344,56 @@ window.unitSite = {
           answer: ["escribimos"]
         }
       ]
+    },
+
+    // ─── LISTENING ACTIVITIES ──────────────────────────────────────────────────
+    // Replace YOUTUBE_ID below with the actual YouTube video ID (the part after ?v= in the URL)
+    "sp1-listening-cumbia": {
+      type: "listening",
+      title: "La Cumbia — Colombian Music",
+      dayLabel: "Bonus",
+      kindLabel: "Listening",
+      minutes: 10,
+      description: "Listen to cumbia, Colombia's national rhythm, and answer questions about the music and culture.",
+      instructions: "Watch the video at least once. Then answer the comprehension questions below.",
+      objectives: [
+        "Identify key features of cumbia as a Colombian cultural tradition",
+        "Connect vocabulary from the unit to what you hear and see"
+      ],
+      youtubeId: "REPLACE_WITH_YOUTUBE_ID",
+      questions: [
+        {
+          type: "mc",
+          prompt: "¿De dónde es la cumbia?",
+          options: [
+            { value: "a", label: "Colombia" },
+            { value: "b", label: "México" },
+            { value: "c", label: "Argentina" },
+            { value: "d", label: "España" }
+          ],
+          answer: "a"
+        },
+        {
+          type: "mc",
+          prompt: "La cumbia es un tipo de…",
+          options: [
+            { value: "a", label: "música y baile" },
+            { value: "b", label: "comida típica" },
+            { value: "c", label: "deporte nacional" },
+            { value: "d", label: "idioma regional" }
+          ],
+          answer: "a"
+        },
+        {
+          type: "short",
+          prompt: "¿Qué instrumentos escuchas en la cumbia? Escribe uno en español.",
+          placeholder: "e.g. la flauta, el tambor",
+          answer: ["la flauta", "el tambor", "tambor", "flauta", "las maracas", "maracas", "gaita", "la gaita"]
+        }
+      ],
+      resultTitle: "Comprensión",
+      resultIntro: "Submit your answers after watching the video.",
+      submitLabel: "Check Answers"
     }
   }
 };
