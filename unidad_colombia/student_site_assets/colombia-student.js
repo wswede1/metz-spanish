@@ -43,13 +43,52 @@
     return map;
   }
 
-  function speakSpanish(text) {
+  var _spanishVoice = null;
+  var _voicesReady = false;
+
+  function pickSpanishVoice(voices) {
+    // Prefer Latin American Spanish; fall back to any Spanish voice
+    var priority = ['es-MX', 'es-US', 'es-419', 'es-CO', 'es-AR', 'es-ES'];
+    for (var i = 0; i < priority.length; i++) {
+      for (var j = 0; j < voices.length; j++) {
+        if (voices[j].lang === priority[i]) { return voices[j]; }
+      }
+    }
+    for (var k = 0; k < voices.length; k++) {
+      if (voices[k].lang.slice(0, 2) === 'es') { return voices[k]; }
+    }
+    return null;
+  }
+
+  function getSpanishVoice(callback) {
+    if (_voicesReady) { callback(_spanishVoice); return; }
+    var voices = window.speechSynthesis.getVoices();
+    if (voices.length) {
+      _spanishVoice = pickSpanishVoice(voices);
+      _voicesReady = true;
+      callback(_spanishVoice);
+    } else {
+      window.speechSynthesis.onvoiceschanged = function () {
+        voices = window.speechSynthesis.getVoices();
+        _spanishVoice = pickSpanishVoice(voices);
+        _voicesReady = true;
+        callback(_spanishVoice);
+      };
+    }
+  }
+
+  function speakSpanish(text, onEnd) {
     if (!window.speechSynthesis) { return; }
     window.speechSynthesis.cancel();
-    var utt = new SpeechSynthesisUtterance(text);
-    utt.lang = 'es-ES';
-    utt.rate = 0.9;
-    window.speechSynthesis.speak(utt);
+    getSpanishVoice(function (voice) {
+      var utt = new SpeechSynthesisUtterance(text);
+      utt.lang = voice ? voice.lang : 'es-MX';
+      if (voice) { utt.voice = voice; }
+      utt.rate = 0.88;
+      utt.pitch = 1.0;
+      if (onEnd) { utt.onend = onEnd; utt.onerror = onEnd; }
+      window.speechSynthesis.speak(utt);
+    });
   }
 
   function tokenizeParagraph(text, glossMap) {
@@ -429,15 +468,11 @@
         ttsActive = true;
         listenBtn.classList.add('playing');
         listenBtn.textContent = '⏹ Stop';
-        var utt = new SpeechSynthesisUtterance(fullText);
-        utt.lang = 'es-ES';
-        utt.rate = 0.9;
-        utt.onend = utt.onerror = function () {
+        speakSpanish(fullText, function () {
           listenBtn.classList.remove('playing');
           listenBtn.textContent = '🔊 Listen';
           ttsActive = false;
-        };
-        window.speechSynthesis.speak(utt);
+        });
       });
       controls.appendChild(listenBtn);
       if (activity.glossary && activity.glossary.length) {
@@ -704,9 +739,7 @@
   }
 
   function renderListening(target, activity) {
-    var layout = el('div', 'activity-layout');
-    var left = el('div');
-
+    var wrapper = el('div');
     var card = el('section', 'content-card');
     var header = el('div', 'activity-header');
     var textWrap = el('div');
@@ -740,9 +773,8 @@
     videoWrap.appendChild(iframe);
     card.appendChild(videoWrap);
 
-    left.appendChild(card);
-    layout.appendChild(left);
-    target.appendChild(layout);
+    wrapper.appendChild(card);
+    target.appendChild(wrapper);
 
     if (activity.questions && activity.questions.length) {
       renderPractice(target, activity, { embeddedHeader: true, practiceHeading: 'Comprehension Check' });
