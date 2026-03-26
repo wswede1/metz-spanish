@@ -450,36 +450,69 @@
       card.appendChild(glossaryCard);
     }
 
-    // TTS "Listen" button + word-click hint
-    if (window.speechSynthesis && (activity.passage || []).length) {
-      var fullText = activity.passage.join(' ');
+    // Listen button — uses pre-generated audio file if available, otherwise Web Speech
+    if ((activity.passage || []).length) {
       var controls = el('div', 'reading-controls');
       var listenBtn = el('button', 'tts-btn', '🔊 Listen');
       listenBtn.type = 'button';
       var ttsActive = false;
-      listenBtn.addEventListener('click', function () {
-        if (ttsActive) {
-          window.speechSynthesis.cancel();
-          listenBtn.classList.remove('playing');
-          listenBtn.textContent = '🔊 Listen';
-          ttsActive = false;
-          return;
-        }
-        ttsActive = true;
-        listenBtn.classList.add('playing');
-        listenBtn.textContent = '⏹ Stop';
-        speakSpanish(fullText, function () {
+
+      if (activity.audioUrl) {
+        // High-quality pre-generated audio
+        var audioEl = new Audio(activity.audioUrl);
+        audioEl.addEventListener('ended', function () {
           listenBtn.classList.remove('playing');
           listenBtn.textContent = '🔊 Listen';
           ttsActive = false;
         });
-      });
-      controls.appendChild(listenBtn);
-      if (activity.glossary && activity.glossary.length) {
-        controls.appendChild(el('span', 'reading-hint', 'Hover a word for translation · Click any word to hear it'));
+        audioEl.addEventListener('error', function () {
+          listenBtn.classList.remove('playing');
+          listenBtn.textContent = '🔊 Listen';
+          ttsActive = false;
+        });
+        listenBtn.addEventListener('click', function () {
+          if (ttsActive) {
+            audioEl.pause();
+            audioEl.currentTime = 0;
+            listenBtn.classList.remove('playing');
+            listenBtn.textContent = '🔊 Listen';
+            ttsActive = false;
+            return;
+          }
+          ttsActive = true;
+          listenBtn.classList.add('playing');
+          listenBtn.textContent = '⏹ Stop';
+          audioEl.play();
+        });
+      } else if (window.speechSynthesis) {
+        // Fallback: browser Web Speech API
+        var fullText = activity.passage.join(' ');
+        listenBtn.addEventListener('click', function () {
+          if (ttsActive) {
+            window.speechSynthesis.cancel();
+            listenBtn.classList.remove('playing');
+            listenBtn.textContent = '🔊 Listen';
+            ttsActive = false;
+            return;
+          }
+          ttsActive = true;
+          listenBtn.classList.add('playing');
+          listenBtn.textContent = '⏹ Stop';
+          speakSpanish(fullText, function () {
+            listenBtn.classList.remove('playing');
+            listenBtn.textContent = '🔊 Listen';
+            ttsActive = false;
+          });
+        });
       } else {
-        controls.appendChild(el('span', 'reading-hint', 'Click any word to hear it'));
+        listenBtn.disabled = true;
       }
+
+      controls.appendChild(listenBtn);
+      var hintText = activity.glossary && activity.glossary.length
+        ? 'Hover a word for translation · Click any word to hear it'
+        : 'Click any word to hear it';
+      controls.appendChild(el('span', 'reading-hint', hintText));
       card.appendChild(controls);
     }
 
