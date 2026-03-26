@@ -219,6 +219,82 @@ productiva no es: ¿es auténtico?, sino: ¿quién lo interpreta, para quién, y
 condiciones económicas y culturales?"""),
 ]
 
+# ── Spanish 1 Vocab Terms ──────────────────────────────────────────────────────
+# Small files (~2–5 KB each). Played by the 🔊 button on each flashcard.
+# Output → span_1/unidad_colombia/audio/vocab-sp1-SLUG.mp3
+
+SP1_VOCAB_AUDIO = REPO / "span_1/unidad_colombia/audio"
+SP1_VOCAB_AUDIO.mkdir(parents=True, exist_ok=True)
+
+import unicodedata
+
+def vocab_slug(text):
+    """Generate a filename-safe slug from a Spanish vocab term."""
+    t = unicodedata.normalize('NFD', text.lower())
+    t = ''.join(c for c in t if unicodedata.category(c) != 'Mn')  # strip accents
+    t = re.sub(r'[¿?!¡…]', '', t)
+    t = re.sub(r'\s*/\s*[a-z]+', '', t)  # remove /a, / alla, etc.
+    t = re.sub(r'\s*\+\s*', '-', t)      # + → dash
+    t = re.sub(r'\s*\(([^)]+)\)', r'-\1', t)  # (de) → -de
+    t = t.strip()
+    t = re.sub(r'\s+', '-', t)
+    t = re.sub(r'[^a-z0-9\-]', '', t)    # strip any remaining non-safe chars
+    t = re.sub(r'-+', '-', t).strip('-')
+    return t
+
+def tts_text(term):
+    """Clean vocab term text so TTS reads it naturally."""
+    t = term.replace('/a', '').replace('…', '?').replace(' / ', ', ')
+    t = re.sub(r'\s*\+\s*infinitivo', ' más infinitivo', t)
+    t = re.sub(r'\s*\([^)]+\)', '', t)   # remove (de) parentheticals
+    return t.strip()
+
+SP1_VOCAB = [
+    # ── Colombia & Culture ─────────────────────────────────────────────────────
+    "Colombia", "Bogotá", "el café", "la cumbia", "la arepa", "el vallenato",
+    "la selva", "la costa", "la montaña", "la ciudad", "el pueblo", "la bandera",
+    "el país", "bonito/a", "famoso/a", "colombiano/a",
+    # ── -ER / -IR Verbs ────────────────────────────────────────────────────────
+    "comer", "beber", "leer", "correr", "aprender", "comprender", "creer",
+    "vender", "escribir", "vivir", "abrir", "recibir", "compartir", "decidir",
+    "describir", "asistir a",
+    # ── Gustar ────────────────────────────────────────────────────────────────
+    "me gusta", "me gustan", "te gusta", "le gusta", "nos gusta", "me encanta",
+    "no me gusta", "me gusta mucho", "¿Te gusta…?", "también", "tampoco",
+    "más", "menos", "mejor", "peor", "favorito/a",
+    # ── Estar, Emotions, Location ─────────────────────────────────────────────
+    "estar", "estoy", "estás", "está", "estamos", "están",
+    "aquí", "allí / allá", "cerca (de)", "lejos (de)",
+    "delante (de)", "detrás (de)", "encima (de)", "debajo (de)",
+    "al lado (de)", "entre",
+    "contento/a", "triste", "cansado/a", "nervioso/a",
+    "enojado/a", "enfermo/a", "ocupado/a",
+    # ── Ir ────────────────────────────────────────────────────────────────────
+    "ir", "voy", "vas", "va", "vamos", "van",
+    "ir a + infinitivo",
+    # ── Places ────────────────────────────────────────────────────────────────
+    "el parque", "el centro comercial",
+]
+
+for term in SP1_VOCAB:
+    slug = vocab_slug(term)
+    out  = SP1_VOCAB_AUDIO / f"vocab-sp1-{slug}.mp3"
+    PASSAGES.append((out, FEMALE, tts_text(term)))
+
+# ── Word-order audio phrases ───────────────────────────────────────────────────
+SP1_WO_AUDIO = SP1_AUDIO   # reuse span_1 student_site audio folder
+
+WO_PHRASES_SP1 = [
+    ("wo-sp1-01.mp3", "Sofía vive en Medellín con su familia."),
+    ("wo-sp1-02.mp3", "Le gusta bailar y escuchar música."),
+    ("wo-sp1-03.mp3", "Los fines de semana, la familia va al mercado."),
+    ("wo-sp1-04.mp3", "El café crece en las montañas."),
+    ("wo-sp1-05.mp3", "Me gusta aprender sobre Colombia."),
+]
+
+for fname, phrase in WO_PHRASES_SP1:
+    PASSAGES.append((SP1_WO_AUDIO / fname, FEMALE, phrase))
+
 
 # ── Runner ─────────────────────────────────────────────────────────────────────
 async def make_one(path, voice, text):

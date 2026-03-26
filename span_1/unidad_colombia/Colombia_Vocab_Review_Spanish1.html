@@ -54,6 +54,10 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 .card-back .card-word{color:#333}
 .card-hint{font-size:.8rem;color:#666;margin-top:8px;font-style:italic}
 .tap-hint{font-size:.75rem;color:#999;margin-top:auto}
+/* Speaker button */
+.speak-btn{position:absolute;top:10px;right:10px;background:rgba(0,56,147,.12);border:none;border-radius:50%;width:34px;height:34px;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:2}
+.speak-btn:hover{background:rgba(0,56,147,.25)}
+.speak-btn.playing{background:rgba(30,132,73,.2)}
 
 /* Controls */
 .controls{display:flex;gap:12px;justify-content:center;align-items:center;margin-bottom:12px;flex-wrap:wrap}
@@ -138,6 +142,7 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
   <div class="card-container" id="cardContainer" onclick="flipCard()">
     <div class="card-inner" id="cardInner">
       <div class="card-front">
+        <button class="speak-btn" id="speakBtn" onclick="event.stopPropagation();speakWord()" title="Hear pronunciation">🔊</button>
         <div class="card-label" id="frontLabel">Spanish</div>
         <div class="card-word" id="frontWord">—</div>
         <div class="card-hint" id="frontHint"></div>
@@ -360,6 +365,46 @@ function setMode(m){
 }
 
 // ═══════════════════════════════════
+// ── Audio pronunciation ──────────────────────────────────────────────────────
+function vocabSlug(text){
+  return text
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')  // strip accents
+    .replace(/[¿?!¡…\/]/g,'')                         // strip punctuation
+    .replace(/\s*\+\s*/g,'-')                          // + → dash
+    .replace(/\s*\(([^)]+)\)/g,'-$1')                 // (de) → -de
+    .replace(/\/[a-z]/g,'')                            // /a → remove
+    .trim()
+    .replace(/[\s]+/g,'-')                             // spaces → dashes
+    .replace(/-+/g,'-')
+    .replace(/^-|-$/g,'');
+}
+var _currentAudio = null;
+function speakWord(){
+  if(deck.length===0) return;
+  var w = deck[currentIdx % deck.length];
+  var btn = document.getElementById('speakBtn');
+  // stop any playing audio
+  if(_currentAudio){ _currentAudio.pause(); _currentAudio.currentTime=0; }
+  var slug = vocabSlug(w.es);
+  var mp3  = 'audio/vocab-sp1-' + slug + '.mp3';
+  var audio = new Audio(mp3);
+  _currentAudio = audio;
+  btn.classList.add('playing');
+  audio.addEventListener('ended', function(){ btn.classList.remove('playing'); });
+  audio.onerror = function(){
+    btn.classList.remove('playing');
+    // fallback: Web Speech API
+    if(window.speechSynthesis){
+      var u = new SpeechSynthesisUtterance(w.es.replace('/a','').replace('…',''));
+      u.lang='es-MX'; u.rate=0.82;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    }
+  };
+  audio.play().catch(function(){ audio.onerror(); });
+}
+
 // FLASHCARD MODE
 // ═══════════════════════════════════
 function showCard(){
