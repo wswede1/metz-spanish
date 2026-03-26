@@ -346,7 +346,6 @@
       }
     } else {
       card.appendChild(el('h3', null, options.practiceHeading || 'Check Your Understanding'));
-      card.appendChild(el('p', null, first(activity.instructions, activity.description)));
     }
 
     var form = el('form', 'practice-form');
@@ -773,6 +772,7 @@
 
   function renderListening(target, activity) {
     var wrapper = el('div');
+    wrapper.style.marginBottom = '18px';
     var card = el('section', 'content-card');
     var header = el('div', 'activity-header');
     var textWrap = el('div');

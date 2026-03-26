@@ -372,16 +372,13 @@ a {
 
 .activity-header {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 8px;
   margin-bottom: 16px;
 }
 
 .activity-header h2 {
-  margin-bottom: 4px;
-  padding-top: 4px;
+  margin: 0 0 2px;
   font-family: 'Fredoka One', cursive;
   font-size: 1.5rem;
 }
@@ -389,6 +386,10 @@ a {
 .activity-header p {
   margin: 0;
   color: var(--muted);
+}
+
+.activity-header .mini-meta {
+  margin-top: 4px;
 }
 
 .objectives-list,
