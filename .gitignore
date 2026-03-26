@@ -32,6 +32,15 @@ Screenshot*.png
 **/*Listening_Script*
 **/TEACHER_GUIDE_FULL_UNIT.md
 **/UNIT_MAP_COLOMBIA.md
+LAUNCH_GUIDE.md
+
+# ── Classroom materials (teacher-facing, not for the public repo) ─────────────
+**/day_*/
+**/index.html
+**/*.pptx
+**/*.pptx
+**/video_transcript.txt
+span_1/unidad_colombia/Colombia_Cultural_Research_Packet.html
 
 # ── Codex / AI generation artifacts ──────────────────────────────────────────
 **/prompt.md
