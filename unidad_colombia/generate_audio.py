@@ -1,20 +1,21 @@
 """
 Colombia Unit — Audio Generation Script
+Run from the repo root (Desktop/metz).
 
-STEP 1 (one-time install):
-    pip3 install edge-tts
+FIRST TIME ONLY — set up the virtual environment:
+    python3 -m venv unidad_colombia/.venv
+    unidad_colombia/.venv/bin/pip install edge-tts -q
 
-STEP 2 (generate files):
-    python3 unidad_colombia/generate_audio.py
+EVERY TIME you want to regenerate audio:
+    unidad_colombia/.venv/bin/python3 unidad_colombia/generate_audio.py
 
-STEP 3 (publish):
+THEN PUBLISH:
     git add span_1/unidad_colombia/student_site/audio/
     git add span_2/unidad_colombia/student_site/audio/
     git commit -m "Add neural TTS audio for all readings"
     git push origin main
 
-That's it. No Colab, no zip files, no copying.
-The text of every reading is already in this script.
+The venv is already created. All reading text is hardcoded below.
 """
 
 import asyncio
