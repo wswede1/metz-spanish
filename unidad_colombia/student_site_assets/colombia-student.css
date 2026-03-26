@@ -434,13 +434,15 @@ a {
   border-radius: 18px;
   background: #f9fbfd;
   border: 1px solid rgba(0, 56, 147, 0.08);
+  /* Reset fieldset browser defaults in case fieldset is ever used */
+  margin: 0;
+  min-width: 0;
 }
 
-.question-block legend,
 .question-title {
   font-weight: 800;
   color: var(--col-blue);
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 }
 
 .option-list {

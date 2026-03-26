@@ -350,9 +350,9 @@
 
     var form = el('form', 'practice-form');
     activity.questions.forEach(function (question, index) {
-      var block = el('fieldset', 'question-block');
-      var legend = el('legend', 'question-title', (index + 1) + '. ' + question.prompt);
-      block.appendChild(legend);
+      var block = el('div', 'question-block');
+      var title = el('div', 'question-title', (index + 1) + '. ' + question.prompt);
+      block.appendChild(title);
       if (question.type === 'mc') {
         var optionList = el('div', 'option-list');
         question.options.forEach(function (option) {
