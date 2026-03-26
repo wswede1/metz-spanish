@@ -56,6 +56,26 @@ window.unitSite = {
       ]
     },
     {
+      title: "Daily Warm-Ups",
+      icon: "☀️",
+      description: "Start each class with a quick 5-minute review of yesterday's language. Pick the card that matches today's day number.",
+      cards: [
+        { title: "Day 2 Warm-Up", description: "Quick review of Colombia geography and map anchors from Day 1.", route: "activity.html?activity=sp1-warmup-day02", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 2", icon: "🔄" },
+        { title: "Day 3 Warm-Up", description: "Review school and place vocabulary from Day 2.", route: "activity.html?activity=sp1-warmup-day03", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 3", icon: "🔄" },
+        { title: "Day 4 Warm-Up", description: "Review -ER/-IR conjugation and gustar from Day 3.", route: "activity.html?activity=sp1-warmup-day04", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 4", icon: "🔄" },
+        { title: "Day 5 Warm-Up", description: "Review gustar forms with nouns and infinitives from Day 4.", route: "activity.html?activity=sp1-warmup-day05", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 5", icon: "🔄" },
+        { title: "Day 6 Warm-Up", description: "Review estar conjugation and location prepositions from Day 5.", route: "activity.html?activity=sp1-warmup-day06", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 6", icon: "🔄" },
+        { title: "Day 7 Warm-Up", description: "Review emotions with estar and ir a + place/infinitive from Day 6.", route: "activity.html?activity=sp1-warmup-day07", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 7", icon: "🔄" },
+        { title: "Day 8 Warm-Up", description: "Review Colombian coffee culture and community from Day 7.", route: "activity.html?activity=sp1-warmup-day08", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 8", icon: "🔄" },
+        { title: "Day 9 Warm-Up", description: "Review key language frames for project work from Day 8.", route: "activity.html?activity=sp1-warmup-day09", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 9", icon: "🔄" },
+        { title: "Day 10 Warm-Up", description: "Grammar review for presentation day — gustar, estar, ir, -ER/-IR.", route: "activity.html?activity=sp1-warmup-day10", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 10", icon: "🔄" },
+        { title: "Day 11 Warm-Up", description: "Review key vocabulary and takeaways from Day 10 presentations.", route: "activity.html?activity=sp1-warmup-day11", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 11", icon: "🔄" },
+        { title: "Day 12 Warm-Up", description: "Review Encanto Part 1 vocabulary and setting details.", route: "activity.html?activity=sp1-warmup-day12", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 12", icon: "🔄" },
+        { title: "Day 13 Warm-Up", description: "Review Encanto themes and Colombia connections from Day 12.", route: "activity.html?activity=sp1-warmup-day13", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 13", icon: "🔄" },
+        { title: "Day 14 Warm-Up", description: "Flash review of the four main grammar areas before review stations.", route: "activity.html?activity=sp1-warmup-day14", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 14", icon: "🔄" }
+      ]
+    },
+    {
       title: "Grammar Lab",
       icon: "✏️",
       description: "Practice the unit grammar in short, self-checking pages that match the classroom pacing.",
@@ -231,6 +251,46 @@ window.unitSite = {
           minutes: 12,
           dayLabel: "Day 12",
           icon: "🎬"
+        }
+      ]
+    },
+    {
+      title: "Las 3 P's: Productos, Prácticas y Perspectivas",
+      icon: "🌎",
+      description: "Explore Colombian culture through the ACTFL 3 P's framework — what Colombians make, do, and believe.",
+      cards: [
+        {
+          title: "Productos Culturales",
+          description: "Investigate tangible and intangible cultural products — music, food, crafts, and art from Colombia.",
+          route: "activity.html?activity=sp1-3p-productos",
+          releaseDate: "",
+          status: "New",
+          kindLabel: "Culture",
+          minutes: 20,
+          dayLabel: "3 P's",
+          icon: "🎨"
+        },
+        {
+          title: "Prácticas Culturales",
+          description: "Explore Colombian daily routines, traditions, rituals, and celebrations.",
+          route: "activity.html?activity=sp1-3p-practicas",
+          releaseDate: "",
+          status: "New",
+          kindLabel: "Culture",
+          minutes: 20,
+          dayLabel: "3 P's",
+          icon: "🤝"
+        },
+        {
+          title: "Perspectivas Culturales",
+          description: "Dig into the values and beliefs that explain why Colombian products and practices exist.",
+          route: "activity.html?activity=sp1-3p-perspectivas",
+          releaseDate: "",
+          status: "New",
+          kindLabel: "Culture",
+          minutes: 20,
+          dayLabel: "3 P's",
+          icon: "💡"
         }
       ]
     },
@@ -1343,6 +1403,330 @@ window.unitSite = {
           placeholder: "verb form",
           answer: ["escribimos"]
         }
+      ]
+    },
+
+    // ── Daily Warm-Ups ──────────────────────────────────────────────────────────
+    "sp1-warmup-day02": {
+      type: "practice", title: "Day 2 Warm-Up — Colombia Geography", dayLabel: "Day 2", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute review of Day 1 map anchors before today's vocabulary work.",
+      instructions: "No notes needed. Answer from memory!",
+      questions: [
+        { type: "mc", prompt: "What is the capital city of Colombia?", options: [{ value: "a", label: "Bogotá" }, { value: "b", label: "Cartagena" }, { value: "c", label: "Medellín" }, { value: "d", label: "Cali" }], answer: "a" },
+        { type: "mc", prompt: "Which region is Colombia known for growing world-famous coffee?", options: [{ value: "a", label: "El eje cafetero (Coffee Region)" }, { value: "b", label: "La Amazonía" }, { value: "c", label: "La Guajira" }, { value: "d", label: "El Chocó" }], answer: "a" },
+        { type: "mc", prompt: "Which historic coastal city was a major port during the colonial era?", options: [{ value: "a", label: "Cartagena" }, { value: "b", label: "Bogotá" }, { value: "c", label: "Bucaramanga" }, { value: "d", label: "Pereira" }], answer: "a" },
+        { type: "short", prompt: "Name one geographic anchor from Day 1 (city, region, or feature).", placeholder: "One name", answer: ["bogota", "bogotá", "cartagena", "medellin", "medellín", "eje cafetero", "andes", "amazon", "amazonas", "caribe", "caribbean", "cali"] }
+      ]
+    },
+
+    "sp1-warmup-day03": {
+      type: "practice", title: "Day 3 Warm-Up — School Vocabulary", dayLabel: "Day 3", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute review of Day 2 school and place vocabulary.",
+      instructions: "Quick check — choose or type from memory!",
+      questions: [
+        { type: "mc", prompt: "What does la mochila mean?", options: [{ value: "a", label: "the backpack" }, { value: "b", label: "the door" }, { value: "c", label: "the window" }, { value: "d", label: "the market" }], answer: "a" },
+        { type: "short", prompt: "Write the Spanish word for market.", placeholder: "Spanish word", answer: ["mercado", "el mercado"] },
+        { type: "mc", prompt: "Choose the best sentence: Students go to school.", options: [{ value: "a", label: "Los estudiantes van al colegio." }, { value: "b", label: "Los estudiantes van al mercado." }, { value: "c", label: "Los estudiantes van a la ventana." }, { value: "d", label: "Los estudiantes van a la mochila." }], answer: "a" },
+        { type: "short", prompt: "Write the Spanish word for window.", placeholder: "Spanish word", answer: ["ventana", "la ventana"] }
+      ]
+    },
+
+    "sp1-warmup-day04": {
+      type: "practice", title: "Day 4 Warm-Up — -ER/-IR Verbs + gustar", dayLabel: "Day 4", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute review of Day 3 -ER/-IR conjugation and gustar.",
+      instructions: "No notes! Apply the rules from yesterday.",
+      questions: [
+        { type: "mc", prompt: "Choose the best form: Yo ____ arepas. (comer)", options: [{ value: "a", label: "como" }, { value: "b", label: "come" }, { value: "c", label: "comen" }, { value: "d", label: "comer" }], answer: "a" },
+        { type: "short", prompt: "Write the correct form: Ellos ____ en Bogotá. (vivir)", placeholder: "verb form", answer: ["viven"] },
+        { type: "mc", prompt: "Choose the correct gustar sentence:", options: [{ value: "a", label: "Me gusta bailar cumbia." }, { value: "b", label: "Me gusto bailar cumbia." }, { value: "c", label: "Me gusta bailo cumbia." }, { value: "d", label: "Gusta a mí bailar cumbia." }], answer: "a" },
+        { type: "short", prompt: "Write the correct form: Nosotros ____ en el cuaderno. (escribir)", placeholder: "verb form", answer: ["escribimos"] }
+      ]
+    },
+
+    "sp1-warmup-day05": {
+      type: "practice", title: "Day 5 Warm-Up — Gustar Forms", dayLabel: "Day 5", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute review of Day 4 gustar structures with nouns and infinitives.",
+      instructions: "Choose the correct gustar form based on what follows it.",
+      questions: [
+        { type: "mc", prompt: "Complete: A ella ____ bailar cumbia.", options: [{ value: "a", label: "le gusta" }, { value: "b", label: "le gustan" }, { value: "c", label: "me gusta" }, { value: "d", label: "les gusta" }], answer: "a" },
+        { type: "mc", prompt: "Complete: A nosotros ____ las arepas.", options: [{ value: "a", label: "nos gustan" }, { value: "b", label: "nos gusta" }, { value: "c", label: "les gustan" }, { value: "d", label: "me gustan" }], answer: "a" },
+        { type: "short", prompt: "Complete: A mí ____ el café colombiano.", placeholder: "me gusta / me gustan", answer: ["me gusta"] },
+        { type: "mc", prompt: "Which question is correct for your friend (tú)?", options: [{ value: "a", label: "¿Te gusta la música?" }, { value: "b", label: "¿Me gusta la música?" }, { value: "c", label: "¿Le gusto la música?" }, { value: "d", label: "¿Les gusta la música?" }], answer: "a" }
+      ]
+    },
+
+    "sp1-warmup-day06": {
+      type: "practice", title: "Day 6 Warm-Up — Estar + Location", dayLabel: "Day 6", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute review of Day 5 estar forms and location prepositions.",
+      instructions: "Quick location check — think about estar and the prepositions.",
+      questions: [
+        { type: "mc", prompt: "Choose the correct sentence: The book is on the desk.", options: [{ value: "a", label: "El libro está encima del escritorio." }, { value: "b", label: "El libro es encima del escritorio." }, { value: "c", label: "El libro está debajo del escritorio." }, { value: "d", label: "El libro está en lado del escritorio." }], answer: "a" },
+        { type: "short", prompt: "Write the yo form of estar.", placeholder: "verb form", answer: ["estoy"] },
+        { type: "mc", prompt: "Which phrase means under the chair?", options: [{ value: "a", label: "debajo de la silla" }, { value: "b", label: "encima de la silla" }, { value: "c", label: "al lado de la silla" }, { value: "d", label: "dentro de la silla" }], answer: "a" },
+        { type: "short", prompt: "Write the nosotros form of estar.", placeholder: "verb form", answer: ["estamos"] }
+      ]
+    },
+
+    "sp1-warmup-day07": {
+      type: "practice", title: "Day 7 Warm-Up — Emotions + ir", dayLabel: "Day 7", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute review of Day 6 emotions with estar and ir a + place/infinitive.",
+      instructions: "Choose or type the best answer for each emotion or destination.",
+      questions: [
+        { type: "mc", prompt: "A student has a big test. The best sentence is:", options: [{ value: "a", label: "Está nervioso/a." }, { value: "b", label: "Va nervioso/a." }, { value: "c", label: "Es nervioso/a." }, { value: "d", label: "Gusta nervioso/a." }], answer: "a" },
+        { type: "short", prompt: "Complete: Yo voy a ___ después de clase.", placeholder: "a place in Spanish", answer: ["la biblioteca", "la cafeteria", "la cafetería", "la escuela", "casa", "el parque", "el mercado"] },
+        { type: "mc", prompt: "I am going to study = ?", options: [{ value: "a", label: "Voy a estudiar." }, { value: "b", label: "Estoy estudiar." }, { value: "c", label: "Voy estudia." }, { value: "d", label: "Me gusta estudio." }], answer: "a" },
+        { type: "short", prompt: "Complete: Nosotros ____ cansados hoy. (estar)", placeholder: "verb form", answer: ["estamos"] }
+      ]
+    },
+
+    "sp1-warmup-day08": {
+      type: "practice", title: "Day 8 Warm-Up — Coffee Culture", dayLabel: "Day 8", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute review of Day 7 reading about Colombian coffee and community.",
+      instructions: "What do you remember from the coffee culture reading?",
+      questions: [
+        { type: "mc", prompt: "Where does Colombian coffee grow?", options: [{ value: "a", label: "In the Andes mountains (eje cafetero)" }, { value: "b", label: "On the Caribbean coast" }, { value: "c", label: "In Bogotá city" }, { value: "d", label: "In the Amazon" }], answer: "a" },
+        { type: "short", prompt: "What is the Biblioburro? Answer in English.", placeholder: "Short answer", answer: ["books", "burros", "donkeys", "rural", "libraries", "carries books", "bring books", "luis"] },
+        { type: "mc", prompt: "What makes Colombian coffee special?", options: [{ value: "a", label: "It grows at high altitude, giving it a soft and rich flavor." }, { value: "b", label: "It is only grown in Bogotá." }, { value: "c", label: "It is the cheapest coffee in the world." }, { value: "d", label: "It is only for export." }], answer: "a" },
+        { type: "mc", prompt: "The reading said Colombia connects:", options: [{ value: "a", label: "Work, culture, and community" }, { value: "b", label: "Sports, tourism, and government" }, { value: "c", label: "Fashion, technology, and food" }, { value: "d", label: "History, science, and war" }], answer: "a" }
+      ]
+    },
+
+    "sp1-warmup-day09": {
+      type: "practice", title: "Day 9 Warm-Up — Project Language Review", dayLabel: "Day 9", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute grammar warm-up using the language frames from Day 8 Project Launch.",
+      instructions: "Review the key sentence frames before continuing your project work.",
+      questions: [
+        { type: "mc", prompt: "Which sentence frame works best for a project about Colombia?", options: [{ value: "a", label: "En Colombia hay muchos ..." }, { value: "b", label: "Colombia tiene estoy ..." }, { value: "c", label: "Colombia va gusta ..." }, { value: "d", label: "En Colombia soy un ..." }], answer: "a" },
+        { type: "short", prompt: "Complete: Los estudiantes colombianos ____ mucho. (leer)", placeholder: "verb form", answer: ["leen"] },
+        { type: "mc", prompt: "Many Colombians like ... =", options: [{ value: "a", label: "A muchas personas les gusta(n) ..." }, { value: "b", label: "A muchas personas va a ..." }, { value: "c", label: "A muchas personas están ..." }, { value: "d", label: "A muchas personas es ..." }], answer: "a" },
+        { type: "short", prompt: "Complete: La ciudad de Bogotá ____ en los Andes. (estar)", placeholder: "verb form", answer: ["esta", "está"] }
+      ]
+    },
+
+    "sp1-warmup-day10": {
+      type: "practice", title: "Day 10 Warm-Up — Project Grammar Check", dayLabel: "Day 10", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute review of key grammar from Days 3–6 before presentations.",
+      instructions: "Review the grammar you used in your project. Quick check before you present!",
+      questions: [
+        { type: "mc", prompt: "Choose the correct location sentence:", options: [{ value: "a", label: "Bogotá está al norte de Colombia." }, { value: "b", label: "Bogotá es al norte de Colombia." }, { value: "c", label: "Bogotá va al norte de Colombia." }, { value: "d", label: "Bogotá gusta al norte de Colombia." }], answer: "a" },
+        { type: "short", prompt: "Complete: Los turistas ____ visitar Cartagena. (ir a)", placeholder: "van a", answer: ["van a"] },
+        { type: "mc", prompt: "Choose the best gustar sentence for your project:", options: [{ value: "a", label: "A muchos colombianos les gusta bailar cumbia." }, { value: "b", label: "A muchos colombianos les gusto bailar cumbia." }, { value: "c", label: "A muchos colombianos gusta bailar cumbia." }, { value: "d", label: "A muchos colombianos me gusta bailar cumbia." }], answer: "a" },
+        { type: "short", prompt: "Complete: Los estudiantes ____ al colegio. (ir)", placeholder: "verb form", answer: ["van"] }
+      ]
+    },
+
+    "sp1-warmup-day11": {
+      type: "practice", title: "Day 11 Warm-Up — Presentation Takeaways", dayLabel: "Day 11", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute review using ideas and vocabulary from Day 10 presentations.",
+      instructions: "Think about what you heard from other groups yesterday.",
+      questions: [
+        { type: "mc", prompt: "What does ¿Dónde está...? ask about?", options: [{ value: "a", label: "Location" }, { value: "b", label: "A person's name" }, { value: "c", label: "A preference" }, { value: "d", label: "An emotion" }], answer: "a" },
+        { type: "short", prompt: "Write one new thing you learned about Colombia from another group. Start with: En Colombia ...", placeholder: "En Colombia ...", answer: ["colombia", "hay", "gusta", "en", "esta", "están"] },
+        { type: "mc", prompt: "Which question stem works well after a presentation?", options: [{ value: "a", label: "¿Qué aprendiste sobre Colombia?" }, { value: "b", label: "¿Cuánto cuesta Colombia?" }, { value: "c", label: "¿Colombia estudia inglés?" }, { value: "d", label: "¿Colombia va a la escuela?" }], answer: "a" },
+        { type: "short", prompt: "Write the Spanish question: Where is the coffee region?", placeholder: "¿Dónde está...?", answer: ["donde esta el eje cafetero", "dónde está el eje cafetero", "donde esta", "dónde está"] }
+      ]
+    },
+
+    "sp1-warmup-day12": {
+      type: "practice", title: "Day 12 Warm-Up — Encanto Part 1", dayLabel: "Day 12", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute review of Encanto Part 1 vocabulary and setting details.",
+      instructions: "Think about the film. What did you see and hear?",
+      questions: [
+        { type: "mc", prompt: "La familia = ?", options: [{ value: "a", label: "the family" }, { value: "b", label: "the school" }, { value: "c", label: "the village" }, { value: "d", label: "the market" }], answer: "a" },
+        { type: "mc", prompt: "El pueblo in Encanto is best described as:", options: [{ value: "a", label: "a magical village in the mountains" }, { value: "b", label: "a coffee farm near Bogotá" }, { value: "c", label: "an airport in Cartagena" }, { value: "d", label: "a school in Medellín" }], answer: "a" },
+        { type: "short", prompt: "Write one emotion word in Spanish connected to a character in Part 1.", placeholder: "Spanish emotion word", answer: ["nervioso", "nerviosa", "triste", "feliz", "contento", "contenta", "alegre", "preocupado", "preocupada", "asustado", "asustada", "enojado", "enojada"] },
+        { type: "mc", prompt: "Which Day 1 geography anchor connects best to Encanto's setting?", options: [{ value: "a", label: "The Andes mountains" }, { value: "b", label: "Cartagena's port" }, { value: "c", label: "Amazon river" }, { value: "d", label: "Coffee export industry" }], answer: "a" }
+      ]
+    },
+
+    "sp1-warmup-day13": {
+      type: "practice", title: "Day 13 Warm-Up — Encanto Themes", dayLabel: "Day 13", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute review of Day 12 Encanto discussion themes and Colombia connections.",
+      instructions: "Think about the film's themes and the discussion from yesterday.",
+      questions: [
+        { type: "mc", prompt: "Which is a major theme of Encanto?", options: [{ value: "a", label: "Family pressure and belonging" }, { value: "b", label: "Learning to drive" }, { value: "c", label: "Traveling to Cartagena" }, { value: "d", label: "Coffee farming" }], answer: "a" },
+        { type: "short", prompt: "Write one connection between Encanto and our Colombia unit. Start with: Una conexión es ...", placeholder: "Una conexión es ...", answer: ["colombia", "montanas", "mountains", "familia", "family", "cultura", "culture", "musica", "music", "andes", "pueblo"] },
+        { type: "mc", prompt: "Which sentence correctly uses a Day 12 discussion stem?", options: [{ value: "a", label: "Un personaje importante es Mirabel porque ella busca la verdad." }, { value: "b", label: "Un personaje es va a la escuela todos los días." }, { value: "c", label: "La familia está mochila." }, { value: "d", label: "En la película gusta bailar mucho." }], answer: "a" },
+        { type: "short", prompt: "Write one thing the film does NOT explain about real Colombia.", placeholder: "The film does not explain ...", answer: ["real", "colombia", "documentary", "history", "historia", "real places", "real people"] }
+      ]
+    },
+
+    "sp1-warmup-day14": {
+      type: "practice", title: "Day 14 Warm-Up — Unit Flash Review", dayLabel: "Day 14", kindLabel: "Warm-Up", minutes: 5,
+      description: "5-minute flash review of the four main grammar areas before today's review stations.",
+      instructions: "No notes! Show what you know from the whole unit.",
+      questions: [
+        { type: "mc", prompt: "Choose the best gustar sentence:", options: [{ value: "a", label: "A nosotros nos gustan las arepas." }, { value: "b", label: "A nosotros nos gusta las arepas." }, { value: "c", label: "A nosotros me gustan las arepas." }, { value: "d", label: "A nosotros les gustan las arepas." }], answer: "a" },
+        { type: "short", prompt: "Write the tú form of beber.", placeholder: "verb form", answer: ["bebes"] },
+        { type: "mc", prompt: "Choose the best emotion sentence:", options: [{ value: "a", label: "Estoy emocionado/a hoy." }, { value: "b", label: "Soy emocionado/a hoy." }, { value: "c", label: "Voy emocionado/a hoy." }, { value: "d", label: "Me gusta emocionado/a hoy." }], answer: "a" },
+        { type: "short", prompt: "Complete: La mochila ____ debajo de la mesa. (estar)", placeholder: "verb form", answer: ["esta", "está"] }
+      ]
+    },
+
+    // ── Las 3 P's ────────────────────────────────────────────────────────────────
+    "sp1-3p-productos": {
+      type: "resource",
+      title: "Productos Culturales de Colombia",
+      dayLabel: "3 P's",
+      kindLabel: "Culture",
+      minutes: 20,
+      description: "Products are the tangible and intangible things a culture creates — music, food, art, crafts, literature, and more.",
+      instructions: "Read the overview. Use the research checklist to find examples. Be ready to share at least two Colombian products with your class.",
+      objectives: [
+        "I can define what a cultural product is.",
+        "I can name at least three Colombian cultural products.",
+        "I can connect a product to the Colombia unit vocabulary."
+      ],
+      callout: "A product can be something you can touch (like an arepa or a handwoven mochila) OR something you experience (like cumbia or vallenato).",
+      checklist: [
+        "Name one food product from Colombia.",
+        "Name one musical product from Colombia.",
+        "Name one craft or art form from Colombia.",
+        "Find one image of a Colombian product.",
+        "Write one sentence: 'Un producto cultural de Colombia es ...'"
+      ],
+      sidebarTitle: "Research Checklist",
+      sidebarNote: "Try to find products from different regions — not everything comes from Bogotá!",
+      sections: [
+        {
+          title: "¿Qué es un Producto Cultural?",
+          paragraphs: [
+            "In the ACTFL 3 P's framework, a Product is anything a culture creates — whether you can hold it in your hands or simply experience it. Products are the visible, hearable, or edible expressions of a culture's creativity and values.",
+            "Colombia is rich in cultural products. Some are world-famous; others are deeply local and tied to a specific region or community."
+          ],
+          bullets: [
+            "Foods: arepas, bandeja paisa, sancocho, empanadas, chocolate santafereño",
+            "Music: cumbia, vallenato, mapalé, porro, champeta",
+            "Crafts & textiles: mochilas Wayuu (handwoven bags from La Guajira), sombrero vueltiao, filigrana (gold jewelry from Mompox)",
+            "Literature & art: works by Gabriel García Márquez, paintings by Fernando Botero",
+            "Architecture: colonial walls of Cartagena, the Pueblito Paisa in Medellín"
+          ]
+        },
+        {
+          title: "Colombia in Focus — Pick One to Research",
+          bullets: [
+            "El sombrero vueltiao — Colombia's national hat, from the Sinú River communities",
+            "La mochila Wayuu — handmade bags from the indigenous Wayuu community in La Guajira",
+            "El vallenato — music born from a mix of African, indigenous, and European traditions",
+            "Las arepas — corn cakes eaten across all regions with endless regional variations",
+            "Las flores de Medellín — Colombia is the world's second-largest flower exporter"
+          ]
+        }
+      ],
+      reflectionPrompts: [
+        "Write one sentence in Spanish: Un producto cultural de Colombia es ...",
+        "Why do you think this product is important to Colombian identity?",
+        "Does your own culture have a similar product? Describe it in one sentence."
+      ]
+    },
+
+    "sp1-3p-practicas": {
+      type: "resource",
+      title: "Prácticas Culturales de Colombia",
+      dayLabel: "3 P's",
+      kindLabel: "Culture",
+      minutes: 20,
+      description: "Practices are what people DO — routines, traditions, rituals, celebrations, and ways of interacting with each other.",
+      instructions: "Read the overview and examples. Use the research checklist to explore one Colombian practice in depth. Be ready to describe it using vocabulary from the unit.",
+      objectives: [
+        "I can define what a cultural practice is.",
+        "I can describe a Colombian cultural practice using present-tense verbs.",
+        "I can connect a practice to a perspective or value."
+      ],
+      callout: "Practices happen on a SCHEDULE — daily, weekly, seasonally, or at important life events. Think about what Colombians DO regularly or traditionally.",
+      checklist: [
+        "Name one daily practice in Colombian life (home, school, or community).",
+        "Name one seasonal or annual tradition in Colombia.",
+        "Find out where or when this practice happens.",
+        "Write two sentences using ir a or gustar to describe the practice.",
+        "Be ready to explain: who does it, when, and why?"
+      ],
+      sidebarTitle: "Research Guide",
+      sidebarNote: "Focus on one practice. One practice explained well is better than five listed quickly.",
+      sections: [
+        {
+          title: "¿Qué es una Práctica Cultural?",
+          paragraphs: [
+            "A Practice is a behavior or routine that a community does together, regularly or traditionally. Practices tell us a lot about what a culture values — from how people greet each other to how they celebrate important moments.",
+            "In Colombia, practices range from everyday routines like the morning tinto (small black coffee) to national events like the Feria de las Flores in Medellín."
+          ],
+          bullets: [
+            "Daily practices: drinking tinto, going to the mercado, el madrugón (early morning commute to school)",
+            "School practices: el recreo, national anthem ceremonies, school uniforms",
+            "Family practices: Sunday family lunch (el almuerzo familiar), weekly market trips",
+            "Community celebrations: Feria de Cali, Carnaval de Barranquilla, Festival de la Leyenda Vallenata",
+            "Agricultural practices: la cosecha de café (coffee harvest), involving whole families in the eje cafetero"
+          ]
+        },
+        {
+          title: "Compare: Colombia and Your Community",
+          paragraphs: [
+            "Every practice has a meaning behind it. The weekly family market trip connects generations and local businesses. The coffee harvest brings families together for shared work. What practices in your own life carry similar meaning?"
+          ],
+          bullets: [
+            "What do you do every week with your family or community?",
+            "Is there a food-related practice that connects you to your culture?",
+            "What happens at school in Colombia that is different from or similar to your school?"
+          ]
+        }
+      ],
+      reflectionPrompts: [
+        "Describe one Colombian practice using 'En Colombia, la gente ...' and a verb.",
+        "What value or belief might explain WHY Colombians practice this? (Think: community, family, religion, celebration, tradition)",
+        "Write one comparison: En Colombia ___ pero en mi comunidad ___."
+      ]
+    },
+
+    "sp1-3p-perspectivas": {
+      type: "resource",
+      title: "Perspectivas Culturales de Colombia",
+      dayLabel: "3 P's",
+      kindLabel: "Culture",
+      minutes: 20,
+      description: "Perspectives are the beliefs, values, and attitudes that explain WHY a culture creates what it creates and does what it does.",
+      instructions: "Read through the examples. Choose one perspective to explore deeply. Use the reflection prompts to get talking and thinking.",
+      objectives: [
+        "I can explain what a cultural perspective is.",
+        "I can connect a Colombian product or practice to an underlying belief or value.",
+        "I can respectfully discuss a perspective that may differ from my own."
+      ],
+      callout: "Perspectives are INVISIBLE — they are the 'why' behind everything else. They take the most work to uncover, but they are the most powerful part of cultural understanding.",
+      checklist: [
+        "Identify one value that drives a Colombian practice or product.",
+        "Find one source that gives a Colombian voice to that value.",
+        "Connect your perspective example to a real product or practice.",
+        "Be ready to discuss: does your own culture share this value, or differ from it?",
+        "Write one sentence: 'En Colombia, la gente valora ... porque ...'"
+      ],
+      sidebarTitle: "Discussion Starters",
+      sidebarNote: "There are no right or wrong answers — perspectives are complex. Bring curiosity, not judgment.",
+      sections: [
+        {
+          title: "¿Qué es una Perspectiva Cultural?",
+          paragraphs: [
+            "A Perspective is the belief, value, attitude, or worldview that gives meaning to a cultural product or practice. You cannot always see or hear a perspective — you have to infer it by asking WHY.",
+            "Example: Why do Colombians spend Sunday afternoon together as a family? Because family unity (la unidad familiar) is a deeply held cultural value. The practice (Sunday lunch) reflects the perspective (family is central to life)."
+          ],
+          bullets: [
+            "Community over individualism: practices like the coffee harvest, market trips, and mutual aid reflect collective values",
+            "Pride in heritage: the preservation of cumbia, vallenato, and indigenous crafts reflects cultural pride",
+            "Resilience: Colombia's history of rebuilding after conflict reflects a national identity of perseverance",
+            "Celebration as community: festivals like Carnaval de Barranquilla reflect joy as a shared, public value",
+            "Connection to the land: coffee farming culture reflects a deep relationship with geography and nature"
+          ]
+        },
+        {
+          title: "Making the Connection: Product → Practice → Perspective",
+          paragraphs: [
+            "The 3 P's work together. Start with a product or practice you already know, and then ask WHY it exists. That 'why' is the perspective.",
+            "Example: The mochila Wayuu (product) is handwoven by Wayuu women (practice) because it expresses individual identity, family lineage, and spiritual beliefs (perspective)."
+          ]
+        }
+      ],
+      reflectionPrompts: [
+        "Choose one product from Colombia. What practice is connected to it? What perspective might explain both?",
+        "Write a 3 P's chain: Producto = ___, Práctica = ___, Perspectiva = ___.",
+        "Does this perspective feel familiar or different from values in your own community? Explain one similarity and one difference."
       ]
     },
 

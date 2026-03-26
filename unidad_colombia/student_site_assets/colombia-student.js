@@ -27,6 +27,62 @@
     return value === undefined || value === null || value === '' ? fallback : value;
   }
 
+  // ── Glossary helpers ────────────────────────────────────────────────────────
+
+  function buildGlossMap(glossary) {
+    var map = {};
+    (glossary || []).forEach(function (entry) {
+      var eq = entry.indexOf('=');
+      if (eq < 0) return;
+      var raw = entry.slice(0, eq).trim().toLowerCase();
+      var val = entry.slice(eq + 1).trim();
+      map[normalize(raw)] = val;
+      var stripped = raw.replace(/^(el|la|los|las|un|una|lo)\s+/, '');
+      if (stripped !== raw) { map[normalize(stripped)] = val; }
+    });
+    return map;
+  }
+
+  function speakSpanish(text) {
+    if (!window.speechSynthesis) { return; }
+    window.speechSynthesis.cancel();
+    var utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'es-ES';
+    utt.rate = 0.9;
+    window.speechSynthesis.speak(utt);
+  }
+
+  function tokenizeParagraph(text, glossMap) {
+    var p = document.createElement('p');
+    var tokens = text.split(/(\s+)/);
+    tokens.forEach(function (token) {
+      if (/^\s+$/.test(token)) {
+        p.appendChild(document.createTextNode(token));
+        return;
+      }
+      var m = token.match(/^([^A-Za-z\u00C0-\u024F'-]*)([A-Za-z\u00C0-\u024F'-]+)([^A-Za-z\u00C0-\u024F'-]*)$/);
+      if (!m) {
+        p.appendChild(document.createTextNode(token));
+        return;
+      }
+      if (m[1]) { p.appendChild(document.createTextNode(m[1])); }
+      var word = m[2];
+      var span = document.createElement('span');
+      span.className = 'word-token';
+      span.textContent = word;
+      var gloss = glossMap[normalize(word)];
+      if (gloss) {
+        span.className = 'word-token word-gloss';
+        span.setAttribute('data-gloss', gloss);
+        span.setAttribute('tabindex', '0');
+      }
+      span.addEventListener('click', function () { speakSpanish(word); });
+      p.appendChild(span);
+      if (m[3]) { p.appendChild(document.createTextNode(m[3])); }
+    });
+    return p;
+  }
+
   function todayISO() {
     return new Date().toISOString().slice(0, 10);
   }
@@ -355,9 +411,48 @@
       card.appendChild(glossaryCard);
     }
 
+    // TTS "Listen" button + word-click hint
+    if (window.speechSynthesis && (activity.passage || []).length) {
+      var fullText = activity.passage.join(' ');
+      var controls = el('div', 'reading-controls');
+      var listenBtn = el('button', 'tts-btn', '🔊 Listen');
+      listenBtn.type = 'button';
+      var ttsActive = false;
+      listenBtn.addEventListener('click', function () {
+        if (ttsActive) {
+          window.speechSynthesis.cancel();
+          listenBtn.classList.remove('playing');
+          listenBtn.textContent = '🔊 Listen';
+          ttsActive = false;
+          return;
+        }
+        ttsActive = true;
+        listenBtn.classList.add('playing');
+        listenBtn.textContent = '⏹ Stop';
+        var utt = new SpeechSynthesisUtterance(fullText);
+        utt.lang = 'es-ES';
+        utt.rate = 0.9;
+        utt.onend = utt.onerror = function () {
+          listenBtn.classList.remove('playing');
+          listenBtn.textContent = '🔊 Listen';
+          ttsActive = false;
+        };
+        window.speechSynthesis.speak(utt);
+      });
+      controls.appendChild(listenBtn);
+      if (activity.glossary && activity.glossary.length) {
+        controls.appendChild(el('span', 'reading-hint', 'Hover a word for translation · Click any word to hear it'));
+      } else {
+        controls.appendChild(el('span', 'reading-hint', 'Click any word to hear it'));
+      }
+      card.appendChild(controls);
+    }
+
+    var glossMap = buildGlossMap(activity.glossary);
+
     (activity.passage || []).forEach(function (paragraph) {
       var reading = el('div', 'reading-block');
-      reading.appendChild(el('p', null, paragraph));
+      reading.appendChild(tokenizeParagraph(paragraph, glossMap));
       card.appendChild(reading);
     });
     wrapper.appendChild(card);
@@ -687,10 +782,36 @@
     }
   }
 
+  function initTooltip() {
+    if (document.getElementById('wordTip')) { return; }
+    var tip = el('div', 'word-tip');
+    tip.id = 'wordTip';
+    document.body.appendChild(tip);
+    document.addEventListener('mouseover', function (e) {
+      var t = e.target;
+      if (t.classList && t.classList.contains('word-gloss')) {
+        tip.textContent = t.getAttribute('data-gloss');
+        tip.classList.add('visible');
+      }
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.classList && e.target.classList.contains('word-gloss')) {
+        tip.classList.remove('visible');
+      }
+    });
+    document.addEventListener('mousemove', function (e) {
+      if (tip.classList.contains('visible')) {
+        tip.style.left = (e.clientX + 14) + 'px';
+        tip.style.top = (e.clientY - 40) + 'px';
+      }
+    });
+  }
+
   function init() {
     if (!window.unitSite) {
       return;
     }
+    initTooltip();
     if (byId('hubSections')) {
       renderHub(window.unitSite);
     }

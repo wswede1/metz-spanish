@@ -810,3 +810,81 @@ a {
   height: 100%;
   border: 0;
 }
+
+/* ── Reading interactivity: word tokens, TTS, tooltip ─────────────── */
+.reading-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 6px;
+  flex-wrap: wrap;
+}
+
+.tts-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1.5px solid var(--col-blue);
+  color: var(--col-blue);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.tts-btn:hover {
+  background: rgba(0, 56, 147, 0.08);
+}
+.tts-btn.playing {
+  background: var(--col-blue);
+  color: #fff;
+}
+
+.reading-hint {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.word-token {
+  display: inline;
+  cursor: pointer;
+}
+.word-token:hover {
+  background: rgba(0, 56, 147, 0.07);
+  border-radius: 3px;
+}
+
+.word-gloss {
+  border-bottom: 1.5px dashed var(--col-blue);
+  cursor: help;
+}
+.word-gloss:hover,
+.word-gloss:focus {
+  background: rgba(0, 56, 147, 0.1);
+  border-radius: 3px;
+  outline: none;
+}
+
+.word-tip {
+  position: fixed;
+  background: #1a2a3a;
+  color: #fff;
+  font-size: 13px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 9999;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.12s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+.word-tip.visible {
+  opacity: 1;
+}

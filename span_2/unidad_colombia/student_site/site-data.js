@@ -56,6 +56,26 @@ window.unitSite = {
       ]
     },
     {
+      title: "Daily Warm-Ups",
+      icon: "☀️",
+      description: "Start each class with a 3–5 minute review of the previous day's key grammar or vocabulary.",
+      cards: [
+        { title: "Day 2 Warm-Up", description: "Quick review of Day 1 Colombia geography and preterite reporting frames.", route: "activity.html?activity=sp2-warmup-day02", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 2", icon: "🌅" },
+        { title: "Day 3 Warm-Up", description: "Review Day 2 travel vocabulary in short preterite sentence contexts.", route: "activity.html?activity=sp2-warmup-day03", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 3", icon: "🌅" },
+        { title: "Day 4 Warm-Up", description: "Quick check of -CAR/-GAR/-ZAR spelling changes from Day 3.", route: "activity.html?activity=sp2-warmup-day04", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 4", icon: "🌅" },
+        { title: "Day 5 Warm-Up", description: "Review Day 4 -Y verb preterites and Cartagena reading comprehension.", route: "activity.html?activity=sp2-warmup-day05", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 5", icon: "🌅" },
+        { title: "Day 6 Warm-Up", description: "Review Day 5 stem-changing -IR preterites: pidió, durmió, prefirió.", route: "activity.html?activity=sp2-warmup-day06", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 6", icon: "🌅" },
+        { title: "Day 7 Warm-Up", description: "Review Day 6 irregular preterites: decir, traer, venir.", route: "activity.html?activity=sp2-warmup-day07", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 7", icon: "🌅" },
+        { title: "Day 8 Warm-Up", description: "Review Day 7 Colombian music culture — vallenato, cumbia, UNESCO.", route: "activity.html?activity=sp2-warmup-day08", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 8", icon: "🌅" },
+        { title: "Day 9 Warm-Up", description: "Review Day 8 project launch — grammar requirements and language frames.", route: "activity.html?activity=sp2-warmup-day09", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 9", icon: "🌅" },
+        { title: "Day 10 Warm-Up", description: "Pre-presentation grammar check: verify preterite accuracy before class.", route: "activity.html?activity=sp2-warmup-day10", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 10", icon: "🌅" },
+        { title: "Day 11 Warm-Up", description: "Reflect on Day 10 presentations — use past-tense reporting to share takeaways.", route: "activity.html?activity=sp2-warmup-day11", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 11", icon: "🌅" },
+        { title: "Day 12 Warm-Up", description: "Review Day 11 Encanto Part 1 key vocabulary and plot events.", route: "activity.html?activity=sp2-warmup-day12", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 12", icon: "🌅" },
+        { title: "Day 13 Warm-Up", description: "Review Day 12 Encanto ending and Colombia connections from the film.", route: "activity.html?activity=sp2-warmup-day13", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 13", icon: "🌅" },
+        { title: "Day 14 Warm-Up", description: "Full preterite flash review — all four patterns before the exam.", route: "activity.html?activity=sp2-warmup-day14", releaseDate: "", status: "Ready", kindLabel: "Warm-Up", minutes: 5, dayLabel: "Day 14", icon: "🌅" }
+      ]
+    },
+    {
       title: "Preterite Lab",
       icon: "⚙️",
       description: "Practice the new Colombia unit preterite targets in a sequence that mirrors class.",
@@ -231,6 +251,46 @@ window.unitSite = {
           minutes: 12,
           dayLabel: "Day 12",
           icon: "🏠"
+        }
+      ]
+    },
+    {
+      title: "Las 3 P's",
+      icon: "🌍",
+      description: "Explore Colombian culture through the ACTFL lens: Productos, Prácticas, and Perspectivas.",
+      cards: [
+        {
+          title: "Productos Culturales",
+          description: "Research and analyze tangible and intangible cultural products from Colombia — music, food, art, and more.",
+          route: "activity.html?activity=sp2-3p-productos",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Culture",
+          minutes: 20,
+          dayLabel: "Bonus",
+          icon: "🎨"
+        },
+        {
+          title: "Prácticas Culturales",
+          description: "Examine everyday customs, rituals, and social practices that define Colombian daily life.",
+          route: "activity.html?activity=sp2-3p-practicas",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Culture",
+          minutes: 20,
+          dayLabel: "Bonus",
+          icon: "🤝"
+        },
+        {
+          title: "Perspectivas Culturales",
+          description: "Uncover the values, beliefs, and attitudes that explain why Colombians do what they do.",
+          route: "activity.html?activity=sp2-3p-perspectivas",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Culture",
+          minutes: 20,
+          dayLabel: "Bonus",
+          icon: "💡"
         }
       ]
     },
@@ -1285,6 +1345,433 @@ window.unitSite = {
           placeholder: "preterite form",
           answer: ["empece", "empecé"]
         }
+      ]
+    },
+
+    // ─── DAILY WARM-UP ACTIVITIES ─────────────────────────────────────────────
+    "sp2-warmup-day02": {
+      title: "Day 2 Warm-Up: Colombia Geography Review",
+      dayLabel: "Day 2",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Quick review of Day 1 Colombia geography and preterite reporting frames.",
+      instructions: "Answer without notes. Use the preterite to report what you learned on Day 1.",
+      objectives: [
+        "I can name key Colombia regions and cities.",
+        "I can use a preterite reporting frame to share one fact."
+      ],
+      questions: [
+        { type: "mc", prompt: "Which city is the capital of Colombia?", options: [{ value: "a", label: "Cartagena" }, { value: "b", label: "Medellín" }, { value: "c", label: "Bogotá" }, { value: "d", label: "Cali" }], answer: "c" },
+        { type: "mc", prompt: "Which region is known for coffee production?", options: [{ value: "a", label: "Caribbean coast" }, { value: "b", label: "Eje cafetero (Coffee Region)" }, { value: "c", label: "Amazon basin" }, { value: "d", label: "Pacific coast" }], answer: "b" },
+        { type: "short", prompt: "Complete the sentence: Aprendí que Colombia tiene ___.", placeholder: "any fact in Spanish or English", answer: ["cafe", "café", "coffee", "biodiversidad", "biodiversity", "selva", "jungle", "musica", "música", "music", "costa", "coast", "montanas", "montañas", "mountains"] },
+        { type: "mc", prompt: "Which preterite frame means 'I learned that...'?", options: [{ value: "a", label: "Aprendí que ..." }, { value: "b", label: "Aprendo que ..." }, { value: "c", label: "Aprenderé que ..." }, { value: "d", label: "Aprendemos que ..." }], answer: "a" }
+      ]
+    },
+
+    "sp2-warmup-day03": {
+      title: "Day 3 Warm-Up: Travel Vocab in the Preterite",
+      dayLabel: "Day 3",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Review Day 2 travel vocabulary by matching words to preterite sentence contexts.",
+      instructions: "Choose the correct word or form to complete each sentence.",
+      objectives: [
+        "I can use travel vocabulary in a past-tense sentence.",
+        "I can recognize regular preterite endings for -AR, -ER, and -IR verbs."
+      ],
+      questions: [
+        { type: "mc", prompt: "Which word means 'luggage'?", options: [{ value: "a", label: "el vuelo" }, { value: "b", label: "el equipaje" }, { value: "c", label: "el pasaporte" }, { value: "d", label: "la aduana" }], answer: "b" },
+        { type: "short", prompt: "Complete the sentence: Llegamos al ___ a las ocho de la mañana.", placeholder: "travel word", answer: ["aeropuerto", "el aeropuerto"] },
+        { type: "mc", prompt: "Which sentence uses the preterite correctly?", options: [{ value: "a", label: "Nosotros compramos los boletos ayer." }, { value: "b", label: "Nosotros compramos los boletos mañana." }, { value: "c", label: "Nosotros compramos los boletos siempre." }, { value: "d", label: "Nosotros compramos los boletos cada día." }], answer: "a" },
+        { type: "short", prompt: "Write the Spanish word for 'flight'.", placeholder: "Spanish word", answer: ["vuelo", "el vuelo"] }
+      ]
+    },
+
+    "sp2-warmup-day04": {
+      title: "Day 4 Warm-Up: -CAR/-GAR/-ZAR Quick Check",
+      dayLabel: "Day 4",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Check your yo-form spelling changes from Day 3 before moving to -Y verb preterites.",
+      instructions: "Apply the spelling change rules in the yo form only.",
+      objectives: [
+        "I can produce saqué, pagué, and empecé correctly.",
+        "I can explain why the spelling changes happen."
+      ],
+      questions: [
+        { type: "mc", prompt: "What is the yo preterite of sacar?", options: [{ value: "a", label: "sacé" }, { value: "b", label: "saqué" }, { value: "c", label: "sacó" }, { value: "d", label: "sacé" }], answer: "b" },
+        { type: "short", prompt: "Write the yo preterite of llegar.", placeholder: "preterite form", answer: ["llegue", "llegué"] },
+        { type: "mc", prompt: "Why does buscar → busqué in yo?", options: [{ value: "a", label: "To keep the hard /k/ sound before -é." }, { value: "b", label: "Because all yo forms add a qu." }, { value: "c", label: "Because buscar is irregular." }, { value: "d", label: "To match the plural ending." }], answer: "a" },
+        { type: "short", prompt: "Write the yo preterite of empezar.", placeholder: "preterite form", answer: ["empece", "empecé"] }
+      ]
+    },
+
+    "sp2-warmup-day05": {
+      title: "Day 5 Warm-Up: -Y Verb Preterites + Cartagena Review",
+      dayLabel: "Day 5",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Review the Day 4 Cartagena reading and -Y verb preterite forms (leer, oír, creer).",
+      instructions: "These verbs add -y in the third person: leyó, oyó, creyó.",
+      objectives: [
+        "I can produce -Y verb preterite forms.",
+        "I can recall one detail from the Cartagena reading."
+      ],
+      questions: [
+        { type: "mc", prompt: "What is the ella preterite of leer?", options: [{ value: "a", label: "leió" }, { value: "b", label: "leyó" }, { value: "c", label: "leó" }, { value: "d", label: "leeó" }], answer: "b" },
+        { type: "short", prompt: "Write the ellos preterite of oír.", placeholder: "preterite form", answer: ["oyeron"] },
+        { type: "mc", prompt: "From the Day 4 reading: Where did the Restrepo family go?", options: [{ value: "a", label: "Bogotá" }, { value: "b", label: "Cartagena" }, { value: "c", label: "Medellín" }, { value: "d", label: "Cali" }], answer: "b" },
+        { type: "mc", prompt: "Which sentence is correct?", options: [{ value: "a", label: "Ella creyó la historia." }, { value: "b", label: "Ella creió la historia." }, { value: "c", label: "Ella creyeron la historia." }, { value: "d", label: "Ella creeron la historia." }], answer: "a" }
+      ]
+    },
+
+    "sp2-warmup-day06": {
+      title: "Day 6 Warm-Up: Stem-Changing -IR Preterites",
+      dayLabel: "Day 6",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Review Day 5 stem-changing -IR preterites: pedir, dormir, preferir.",
+      instructions: "Remember: these changes (e→i, o→u) happen only in él/ella and ellos/ellas.",
+      objectives: [
+        "I can produce pidió, durmió, and prefirió correctly.",
+        "I can identify which subjects do NOT trigger the stem change."
+      ],
+      questions: [
+        { type: "mc", prompt: "What is the ella preterite of pedir?", options: [{ value: "a", label: "pedió" }, { value: "b", label: "pidió" }, { value: "c", label: "piden" }, { value: "d", label: "pediste" }], answer: "b" },
+        { type: "short", prompt: "Write the él preterite of dormir.", placeholder: "preterite form", answer: ["durmio", "durmió"] },
+        { type: "mc", prompt: "Which subject does NOT trigger the stem change?", options: [{ value: "a", label: "él" }, { value: "b", label: "ella" }, { value: "c", label: "nosotros" }, { value: "d", label: "ellos" }], answer: "c" },
+        { type: "short", prompt: "Write the ellos preterite of pedir.", placeholder: "preterite form", answer: ["pidieron"] }
+      ]
+    },
+
+    "sp2-warmup-day07": {
+      title: "Day 7 Warm-Up: Irregular Preterites Review",
+      dayLabel: "Day 7",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Review Day 6 irregular preterites: decir (dij-), traer (traj-), venir (vin-).",
+      instructions: "These verbs share the same ending pattern. No written accent marks on the yo and él forms.",
+      objectives: [
+        "I can produce dije, traje, and vine.",
+        "I can use the plural forms dijeron, trajeron, vinieron."
+      ],
+      questions: [
+        { type: "mc", prompt: "What is the yo preterite of decir?", options: [{ value: "a", label: "decí" }, { value: "b", label: "dicé" }, { value: "c", label: "dije" }, { value: "d", label: "deció" }], answer: "c" },
+        { type: "short", prompt: "Write the nosotros preterite of traer.", placeholder: "preterite form", answer: ["trajimos"] },
+        { type: "mc", prompt: "Choose the correct sentence:", options: [{ value: "a", label: "Ellos dijeron que Colombia es hermosa." }, { value: "b", label: "Ellos decieron que Colombia es hermosa." }, { value: "c", label: "Ellos dijieron que Colombia es hermosa." }, { value: "d", label: "Ellos dicearon que Colombia es hermosa." }], answer: "a" },
+        { type: "short", prompt: "Write the ella preterite of venir.", placeholder: "preterite form", answer: ["vino"] }
+      ]
+    },
+
+    "sp2-warmup-day08": {
+      title: "Day 8 Warm-Up: Colombian Music Culture Review",
+      dayLabel: "Day 8",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Review Day 7 Colombian music culture — vallenato, cumbia, and UNESCO recognition.",
+      instructions: "Use the reading and your class notes to recall cultural details.",
+      objectives: [
+        "I can recall key facts about vallenato and cumbia.",
+        "I can use a preterite verb to report what happened in music history."
+      ],
+      questions: [
+        { type: "mc", prompt: "Which organization recognized vallenato as Intangible Cultural Heritage?", options: [{ value: "a", label: "UNESCO" }, { value: "b", label: "ONU" }, { value: "c", label: "FIFA" }, { value: "d", label: "La OEA" }], answer: "a" },
+        { type: "short", prompt: "Name one instrument associated with vallenato.", placeholder: "instrument name", answer: ["acordeon", "acordeón", "accordion", "caja", "guacharaca"] },
+        { type: "mc", prompt: "Which preterite sentence describes the UNESCO event?", options: [{ value: "a", label: "UNESCO declaró el vallenato Patrimonio Cultural Inmaterial en 2015." }, { value: "b", label: "UNESCO declara el vallenato Patrimonio Cultural Inmaterial en 2015." }, { value: "c", label: "UNESCO va a declarar el vallenato en 2015." }, { value: "d", label: "UNESCO declarará el vallenato en 2015." }], answer: "a" },
+        { type: "mc", prompt: "Cumbia originated from a mix of which three traditions?", options: [{ value: "a", label: "African, Indigenous, and European" }, { value: "b", label: "Spanish, Indigenous, and Asian" }, { value: "c", label: "African, European, and North American" }, { value: "d", label: "Andean, Caribbean, and Pacific" }], answer: "a" }
+      ]
+    },
+
+    "sp2-warmup-day09": {
+      title: "Day 9 Warm-Up: Project Grammar Requirements",
+      dayLabel: "Day 9",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Review Day 8 project launch — grammar requirements before the checkpoint session.",
+      instructions: "Check that your draft meets the preterite requirements from the Day 8 checklist.",
+      objectives: [
+        "I can identify which preterite patterns my draft includes.",
+        "I can use a preterite language frame for project presentation."
+      ],
+      questions: [
+        { type: "mc", prompt: "Which grammar requirement was NOT listed for the project?", options: [{ value: "a", label: "At least one -CAR/-GAR/-ZAR spelling change" }, { value: "b", label: "At least one stem-changing -IR or irregular form" }, { value: "c", label: "At least one conditional tense verb" }, { value: "d", label: "At least one regular preterite form" }], answer: "c" },
+        { type: "short", prompt: "Complete the project frame: Nuestra investigación ___ que ...", placeholder: "preterite verb", answer: ["mostro", "mostró", "revelo", "reveló", "encontro", "encontró"] },
+        { type: "mc", prompt: "Which sentence correctly uses a project language frame?", options: [{ value: "a", label: "Visitamos Cartagena y aprendimos sobre las murallas." }, { value: "b", label: "Visitar Cartagena y aprender sobre las murallas." }, { value: "c", label: "Visitaremos Cartagena y aprenderemos sobre las murallas." }, { value: "d", label: "Visito Cartagena y aprende sobre las murallas." }], answer: "a" },
+        { type: "short", prompt: "Write one sentence about your project using the preterite.", placeholder: "your sentence in Spanish", answer: ["aprendimos", "investigamos", "encontramos", "descubrimos", "mostramos", "dijimos", "escribimos"] }
+      ]
+    },
+
+    "sp2-warmup-day10": {
+      title: "Day 10 Warm-Up: Pre-Presentation Grammar Check",
+      dayLabel: "Day 10",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Final grammar review before Day 10 presentations — check irregular and stem-change accuracy.",
+      instructions: "Answer without notes to identify any last-minute gaps.",
+      objectives: [
+        "I can verify my preterite forms before presenting.",
+        "I can use past-tense question stems for audience participation."
+      ],
+      questions: [
+        { type: "mc", prompt: "Choose the correct ella form of traer:", options: [{ value: "a", label: "trajo" }, { value: "b", label: "trajó" }, { value: "c", label: "traió" }, { value: "d", label: "trae" }], answer: "a" },
+        { type: "short", prompt: "Write the yo preterite of buscar.", placeholder: "preterite form", answer: ["busque", "busqué"] },
+        { type: "mc", prompt: "Which past-tense question is correct?", options: [{ value: "a", label: "¿Qué aprendieron ustedes sobre Colombia?" }, { value: "b", label: "¿Qué aprendieran ustedes sobre Colombia?" }, { value: "c", label: "¿Qué aprenden ustedes sobre Colombia?" }, { value: "d", label: "¿Qué aprenderán ustedes sobre Colombia?" }], answer: "a" },
+        { type: "short", prompt: "Write the ellos preterite of dormir.", placeholder: "preterite form", answer: ["durmieron"] }
+      ]
+    },
+
+    "sp2-warmup-day11": {
+      title: "Day 11 Warm-Up: Presentation Takeaways",
+      dayLabel: "Day 11",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Reflect on Day 10 presentations using preterite past-tense reporting.",
+      instructions: "Use the preterite to report what you heard and learned from other groups.",
+      objectives: [
+        "I can report a takeaway from another group's presentation.",
+        "I can use dijo/dijeron, aprendió/aprendieron in context."
+      ],
+      questions: [
+        { type: "mc", prompt: "Which sentence correctly reports what another group said?", options: [{ value: "a", label: "Un grupo dijo que Cartagena fue fundada en 1533." }, { value: "b", label: "Un grupo dice que Cartagena fue fundada en 1533." }, { value: "c", label: "Un grupo dirá que Cartagena fue fundada en 1533." }, { value: "d", label: "Un grupo decir que Cartagena fue fundada en 1533." }], answer: "a" },
+        { type: "short", prompt: "Complete: Yo aprendí que Colombia ___.", placeholder: "any fact in Spanish", answer: ["tiene", "es", "fue", "produjo", "exporta", "exportó", "tiene biodiversidad", "tiene cafe", "tiene música"] },
+        { type: "mc", prompt: "Which question would work best to follow up after a presentation?", options: [{ value: "a", label: "¿Por qué fue importante ese evento?" }, { value: "b", label: "¿Por qué es importante ese evento?" }, { value: "c", label: "¿Por qué será importante ese evento?" }, { value: "d", label: "¿Por qué fuera importante ese evento?" }], answer: "a" },
+        { type: "mc", prompt: "Which verb set is all preterite?", options: [{ value: "a", label: "dijo, trajo, vino, aprendió" }, { value: "b", label: "dice, trae, viene, aprende" }, { value: "c", label: "dijo, trae, vendrá, aprende" }, { value: "d", label: "decía, traía, venía, aprendía" }], answer: "a" }
+      ]
+    },
+
+    "sp2-warmup-day12": {
+      title: "Day 12 Warm-Up: Encanto Part 1 Vocabulary",
+      dayLabel: "Day 12",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Review Day 11 Encanto Part 1 key vocabulary and plot events in the preterite.",
+      instructions: "Use preterite verbs from your Day 11 notes to retell Part 1 events.",
+      objectives: [
+        "I can retell two early plot events using the preterite.",
+        "I can connect a setting detail from Encanto to a Colombia fact."
+      ],
+      questions: [
+        { type: "mc", prompt: "Which verb correctly retells an Encanto Part 1 event?", options: [{ value: "a", label: "La familia Madrigal recibió poderes mágicos." }, { value: "b", label: "La familia Madrigal recibirá poderes mágicos." }, { value: "c", label: "La familia Madrigal recibe poderes mágicos." }, { value: "d", label: "La familia Madrigal recibía poderes mágicos." }], answer: "a" },
+        { type: "short", prompt: "Name one setting detail from Encanto that connects to Colombia.", placeholder: "English or Spanish", answer: ["mountains", "montanas", "montañas", "flowers", "flores", "coffee", "cafe", "café", "colombia", "jungle", "selva", "village", "pueblo"] },
+        { type: "mc", prompt: "Which preterite verb could you use to retell a conflict in Part 1?", options: [{ value: "a", label: "empezó" }, { value: "b", label: "empieza" }, { value: "c", label: "empezará" }, { value: "d", label: "empezaba" }], answer: "a" },
+        { type: "short", prompt: "Write one preterite sentence about what Mirabel did in Part 1.", placeholder: "sentence in Spanish", answer: ["vio", "dijo", "fue", "llego", "llegó", "descubrio", "descubrió", "encontro", "encontró", "busco", "buscó", "hablo", "habló"] }
+      ]
+    },
+
+    "sp2-warmup-day13": {
+      title: "Day 13 Warm-Up: Encanto Themes + Colombia",
+      dayLabel: "Day 13",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Review Day 12 Encanto ending and the connection between film themes and real Colombia.",
+      instructions: "Use discussion stems to connect the film to the unit content.",
+      objectives: [
+        "I can summarize the Encanto ending in two preterite sentences.",
+        "I can make one respectful comparison between the film and Colombia."
+      ],
+      questions: [
+        { type: "mc", prompt: "Which sentence correctly summarizes the ending?", options: [{ value: "a", label: "Al final, la familia Madrigal reconstruyó la casa y se reconcilió." }, { value: "b", label: "Al final, la familia Madrigal reconstruye la casa y se reconcilia." }, { value: "c", label: "Al final, la familia Madrigal va a reconstruir la casa." }, { value: "d", label: "Al final, la familia Madrigal reconstruía la casa." }], answer: "a" },
+        { type: "short", prompt: "Name one real Colombia connection from Encanto (English or Spanish).", placeholder: "your connection", answer: ["mountains", "montanas", "montañas", "flowers", "flores", "coffee", "cafe", "cafe", "biodiversity", "biodiversidad", "music", "musica", "música", "family", "familia"] },
+        { type: "mc", prompt: "Which is a respectful comparison statement?", options: [{ value: "a", label: "La película mostró montañas, pero no explicó la historia real de Colombia." }, { value: "b", label: "La película es exactamente como Colombia en la realidad." }, { value: "c", label: "La película no tiene nada que ver con Colombia." }, { value: "d", label: "La película mostró que Colombia es un lugar de magia solamente." }], answer: "a" },
+        { type: "short", prompt: "Write: Una conexión con Colombia fue ___.", placeholder: "any connection in Spanish", answer: ["las montanas", "las montañas", "la musica", "la música", "la familia", "el cafe", "el café", "las flores", "la selva"] }
+      ]
+    },
+
+    "sp2-warmup-day14": {
+      title: "Day 14 Warm-Up: Full Preterite Flash Review",
+      dayLabel: "Day 14",
+      kindLabel: "Warm-Up",
+      type: "practice",
+      minutes: 5,
+      description: "Quick review of all four preterite patterns before the unit exam.",
+      instructions: "Work through each pattern in order: regular, -CAR/-GAR/-ZAR, stem-change, irregular.",
+      objectives: [
+        "I can identify which preterite pattern each question targets.",
+        "I can produce any preterite form in context."
+      ],
+      questions: [
+        { type: "mc", prompt: "[Regular] Choose the correct form: Nosotros ___ mucho en el viaje. (aprender)", options: [{ value: "a", label: "aprendimos" }, { value: "b", label: "aprendemos" }, { value: "c", label: "aprendimos" }, { value: "d", label: "aprendieron" }], answer: "a" },
+        { type: "short", prompt: "[-CAR/-GAR/-ZAR] Write the yo preterite of pagar.", placeholder: "preterite form", answer: ["pague", "pagué"] },
+        { type: "mc", prompt: "[Stem-change] Which is correct: She served the coffee. (servir)", options: [{ value: "a", label: "Ella sirvió el café." }, { value: "b", label: "Ella servió el café." }, { value: "c", label: "Ella sirvó el café." }, { value: "d", label: "Ella servéó el café." }], answer: "a" },
+        { type: "short", prompt: "[Irregular] Write the ellos preterite of traer.", placeholder: "preterite form", answer: ["trajeron"] },
+        { type: "mc", prompt: "[-Y verb] Which is the correct ella preterite of oír?", options: [{ value: "a", label: "oyó" }, { value: "b", label: "oió" }, { value: "c", label: "oiyó" }, { value: "d", label: "oó" }], answer: "a" }
+      ]
+    },
+
+    // ─── LAS 3 P's ACTIVITIES ─────────────────────────────────────────────────
+    "sp2-3p-productos": {
+      title: "Productos Culturales de Colombia",
+      dayLabel: "Bonus",
+      kindLabel: "Culture",
+      type: "resource",
+      minutes: 20,
+      description: "Analyze tangible and intangible cultural products from Colombia using the ACTFL 3 P's framework.",
+      callout: "ACTFL: Relating Cultural Products to Perspectives — What does this product reveal about Colombian values and identity?",
+      objectives: [
+        "I can identify at least three tangible and three intangible Colombian cultural products.",
+        "I can explain what each product communicates about Colombian culture.",
+        "I can use the preterite to describe the origin or history of a cultural product."
+      ],
+      checklist: [
+        "List two tangible products (physical objects) from Colombia.",
+        "List two intangible products (music, traditions, literature) from Colombia.",
+        "Write one sentence about a product's origin using the preterite.",
+        "Connect your product to a Colombian value or belief."
+      ],
+      sections: [
+        {
+          title: "Productos Tangibles",
+          bullets: [
+            "El café colombiano — exported worldwide, symbol of regional pride",
+            "La mochila Wayuu — woven bag handmade by Wayuu indigenous artisans",
+            "Las flores de Colombia — #2 flower exporter in the world",
+            "El sombrero vueltiao — traditional hat from the Caribbean coast, national symbol"
+          ]
+        },
+        {
+          title: "Productos Intangibles",
+          bullets: [
+            "El vallenato — UNESCO Intangible Cultural Heritage of Humanity (2015)",
+            "La cumbia — blending of African, Indigenous, and European traditions",
+            "Cien años de soledad — Nobel Prize-winning novel by Gabriel García Márquez",
+            "El Carnaval de Barranquilla — UNESCO-recognized cultural celebration"
+          ]
+        },
+        {
+          title: "Preterite Analysis Frame",
+          bullets: [
+            "Este producto se originó en ...",
+            "La comunidad lo creó para ...",
+            "Con el tiempo, se convirtió en símbolo de ...",
+            "La UNESCO lo reconoció / declaró en ..."
+          ]
+        }
+      ],
+      reflectionPrompts: [
+        "Choose one product and write two preterite sentences about its origin.",
+        "What does this product tell us about Colombian priorities or values?",
+        "How does this product connect to anything you learned in Days 1–7?"
+      ]
+    },
+
+    "sp2-3p-practicas": {
+      title: "Prácticas Culturales de Colombia",
+      dayLabel: "Bonus",
+      kindLabel: "Culture",
+      type: "resource",
+      minutes: 20,
+      description: "Examine everyday customs, social rituals, and practices that define Colombian daily life — and compare them to your own culture.",
+      callout: "ACTFL: Relating Cultural Practices to Perspectives — Why do Colombians do this? What belief or value does this practice express?",
+      objectives: [
+        "I can describe at least three Colombian cultural practices.",
+        "I can make a respectful, specific comparison between a Colombian and US practice.",
+        "I can use the preterite to report how a practice developed historically."
+      ],
+      checklist: [
+        "Describe one daily life practice (food, schedule, greetings).",
+        "Describe one celebration or annual tradition.",
+        "Write one comparison using 'En Colombia, ... pero en los EE.UU., ...'",
+        "Write one preterite sentence about how a practice developed or changed."
+      ],
+      sections: [
+        {
+          title: "Prácticas Cotidianas",
+          bullets: [
+            "El tinto — Colombians drink small, strong black coffee multiple times per day",
+            "El almuerzo familiar — the main meal of the day, shared as a family",
+            "Los saludos — greeting with a kiss on the cheek is standard among friends",
+            "La hora colombiana — informal time flexibility at social gatherings"
+          ]
+        },
+        {
+          title: "Prácticas Sociales y Celebraciones",
+          bullets: [
+            "La Cosecha Cafetera — seasonal coffee harvest involves entire communities",
+            "El Carnaval de Barranquilla — 4-day pre-Lenten celebration with music, dance, costumes",
+            "El Día de las Velitas — December 7 candle-lighting tradition before Christmas",
+            "Los mercados campesinos — regular farmers' market culture in towns"
+          ]
+        },
+        {
+          title: "Comparison Frames",
+          bullets: [
+            "En Colombia, la gente ... pero en los EE.UU., la gente ...",
+            "Una diferencia que noté fue que ...",
+            "Me sorprendió que en Colombia ...",
+            "Esta práctica me recuerda a ..."
+          ]
+        }
+      ],
+      reflectionPrompts: [
+        "Choose one practice and write a preterite sentence about how it developed.",
+        "Which practice surprised you most? Why?",
+        "What does the practice of el almuerzo familiar tell us about Colombian values?"
+      ]
+    },
+
+    "sp2-3p-perspectivas": {
+      title: "Perspectivas Culturales de Colombia",
+      dayLabel: "Bonus",
+      kindLabel: "Culture",
+      type: "resource",
+      minutes: 20,
+      description: "Explore the values, beliefs, and attitudes that explain why Colombians create what they create and do what they do.",
+      callout: "ACTFL: The Product → Practice → Perspective chain: A product or practice exists because of a deeper perspective. Your job is to find the why.",
+      objectives: [
+        "I can explain the perspective behind at least two cultural products or practices.",
+        "I can follow the Product → Practice → Perspective reasoning chain.",
+        "I can use analytical language to connect preterite narration to cultural analysis."
+      ],
+      checklist: [
+        "Choose one product from the Productos page and trace it to a perspective.",
+        "Choose one practice from the Prácticas page and trace it to a perspective.",
+        "Write one sentence using the analysis frame below.",
+        "Discuss: how does knowing the perspective change how you understand the product or practice?"
+      ],
+      sections: [
+        {
+          title: "The 3 P's Chain",
+          bullets: [
+            "Product: el café → Practice: el tinto múltiples veces al día → Perspective: work and social life are interconnected; hospitality is shown through sharing",
+            "Product: el vallenato → Practice: playing at celebrations and family events → Perspective: cultural memory and regional identity are preserved through music",
+            "Product: la mochila Wayuu → Practice: artisans weave for months following ancestral patterns → Perspective: indigenous knowledge and women's labor deserve recognition",
+            "Product: Carnaval de Barranquilla → Practice: 4 days of communal celebration → Perspective: community resilience and Afro-Colombian heritage are worth celebrating publicly"
+          ]
+        },
+        {
+          title: "Analysis Frames",
+          bullets: [
+            "Este producto / esta práctica existe porque los colombianos valoran ...",
+            "La perspectiva detrás de esto es que ...",
+            "Esto refleja una creencia cultural de que ...",
+            "Comparado con mi cultura, esta perspectiva es similar / diferente porque ..."
+          ]
+        },
+        {
+          title: "Discussion Prompts",
+          bullets: [
+            "¿Cuál es la perspectiva más difícil de entender desde afuera? ¿Por qué?",
+            "¿Qué perspectiva colombiana te parece más universal?",
+            "¿Cuál de las 3 P's te pareció más fácil o difícil de investigar?"
+          ]
+        }
+      ],
+      reflectionPrompts: [
+        "Write the full 3 P's chain for one example: Product → Practice → Perspective.",
+        "Which Colombian perspective challenged you to think differently about your own culture?",
+        "How could you use this framework to analyze a culture product from the U.S.?"
       ]
     },
 
