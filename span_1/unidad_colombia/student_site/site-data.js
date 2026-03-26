@@ -338,7 +338,8 @@ window.unitSite = {
           minutes: 10,
           dayLabel: "Bonus",
           icon: "🎵"
-        }
+        },
+        { id: "sp1-word-order-day04", label: "Day 4", sub: "Arrange the sentence" }
       ]
     }
   ],
@@ -1731,6 +1732,53 @@ window.unitSite = {
         "Choose one product from Colombia. What practice is connected to it? What perspective might explain both?",
         "Write a 3 P's chain: Producto = ___, Práctica = ___, Perspectiva = ___.",
         "Does this perspective feel familiar or different from values in your own community? Explain one similarity and one difference."
+      ]
+    },
+
+    // ─── WORD-ORDER ACTIVITIES ─────────────────────────────────────────────────
+    "sp1-word-order-day04": {
+      type: "word-order",
+      title: "¿Qué hace Sofía? — Word Order",
+      dayLabel: "Day 4",
+      kindLabel: "Word Order",
+      minutes: 10,
+      instructions: "Listen to each phrase, then tap the words to arrange them in the correct order.",
+      items: [
+        {
+          prompt: "Listen and arrange:",
+          audioUrl: "audio/wo-sp1-01.mp3",
+          words: ["Sofía", "vive", "en", "Medellín", "con", "su", "familia."],
+          answer: ["Sofía", "vive", "en", "Medellín", "con", "su", "familia."],
+          translation: "Sofía lives in Medellín with her family."
+        },
+        {
+          prompt: "Listen and arrange:",
+          audioUrl: "audio/wo-sp1-02.mp3",
+          words: ["Le", "gusta", "bailar", "y", "escuchar", "música."],
+          answer: ["Le", "gusta", "bailar", "y", "escuchar", "música."],
+          translation: "She likes to dance and listen to music."
+        },
+        {
+          prompt: "Listen and arrange:",
+          audioUrl: "audio/wo-sp1-03.mp3",
+          words: ["Los", "fines", "de", "semana,", "la", "familia", "va", "al", "mercado."],
+          answer: ["Los", "fines", "de", "semana,", "la", "familia", "va", "al", "mercado."],
+          translation: "On weekends, the family goes to the market."
+        },
+        {
+          prompt: "Listen and arrange:",
+          audioUrl: "audio/wo-sp1-04.mp3",
+          words: ["El", "café", "crece", "en", "las", "montañas."],
+          answer: ["El", "café", "crece", "en", "las", "montañas."],
+          translation: "Coffee grows in the mountains."
+        },
+        {
+          prompt: "Listen and arrange:",
+          audioUrl: "audio/wo-sp1-05.mp3",
+          words: ["Me", "gusta", "aprender", "sobre", "Colombia."],
+          answer: ["Me", "gusta", "aprender", "sobre", "Colombia."],
+          translation: "I like to learn about Colombia."
+        }
       ]
     },
 

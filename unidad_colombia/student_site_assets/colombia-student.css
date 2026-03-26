@@ -985,3 +985,80 @@ a {
 .word-tip.visible {
   opacity: 1;
 }
+
+/* ── Word-Order activity ─────────────────────────────────────────── */
+.wo-prompt {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+.wo-audio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--col-blue);
+  color: #fff;
+  border: none;
+  border-radius: 99px;
+  padding: 10px 20px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background 0.2s, transform 0.1s;
+}
+.wo-audio-btn:hover { background: #002a6e; transform: translateY(-1px); }
+.wo-audio-btn.playing { background: var(--col-green); }
+.wo-translation {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 6px;
+  min-height: 1.2em;
+}
+.wo-answer-zone {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 52px;
+  padding: 10px 12px;
+  border: 2px dashed rgba(0,56,147,0.2);
+  border-radius: 14px;
+  background: rgba(0,56,147,0.03);
+  margin-bottom: 16px;
+  align-items: center;
+}
+.wo-answer-zone.correct-zone { border-color: var(--col-green); background: rgba(30,132,73,0.06); }
+.wo-answer-zone.wrong-zone { border-color: var(--col-red); background: rgba(206,17,38,0.06); }
+.wo-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  min-height: 44px;
+  align-items: flex-start;
+}
+.wo-tile {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 2px solid rgba(0,56,147,0.18);
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  user-select: none;
+}
+.wo-tile:hover { border-color: var(--col-blue); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.12); }
+.wo-tile.placed { border-color: var(--col-blue); background: rgba(0,56,147,0.08); }
+.wo-tile.correct-tile { border-color: var(--col-green); background: rgba(30,132,73,0.1); color: #145a32; }
+.wo-tile.wrong-tile { border-color: var(--col-red); background: rgba(206,17,38,0.08); }
+.wo-item { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid rgba(0,56,147,0.08); }
+.wo-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.wo-item-num { font-weight: 800; color: var(--col-blue); margin-bottom: 10px; font-size: 0.9rem; }
+.wo-feedback { font-weight: 700; font-size: 0.9rem; margin-top: 8px; min-height: 1.3em; }
+.wo-feedback.correct { color: var(--col-green); }
+.wo-feedback.wrong { color: var(--col-red); }

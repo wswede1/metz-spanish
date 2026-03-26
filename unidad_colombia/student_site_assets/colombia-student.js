@@ -860,6 +860,159 @@
     }
   }
 
+  function renderWordOrder(target, activity) {
+    var layout = el('div', 'activity-layout');
+    var left   = el('div');
+    var right  = el('aside', 'result-card');
+
+    // right panel score
+    right.appendChild(el('h3', null, 'Check Your Work'));
+    var scoreNode = el('div', 'score', '--');
+    scoreNode.id = 'woScore';
+    right.appendChild(scoreNode);
+    right.appendChild(el('p', null, 'Complete all items and submit to see your score.'));
+
+    var card = el('section', 'content-card');
+
+    // header
+    var header = el('div', 'activity-header');
+    var hw = el('div');
+    hw.appendChild(el('h2', null, activity.title));
+    hw.appendChild(el('p', null, activity.instructions || 'Listen, then tap the words in the correct order.'));
+    header.appendChild(hw);
+    var meta = el('div', 'mini-meta');
+    [activity.dayLabel, activity.kindLabel, activity.minutes ? activity.minutes + ' min' : null].forEach(function(item) {
+      if (item) meta.appendChild(el('span', 'meta-pill', item));
+    });
+    header.appendChild(meta);
+    card.appendChild(header);
+
+    // items
+    var itemResults = [];
+    var form = el('div', 'practice-form');
+
+    (activity.items || []).forEach(function(item, idx) {
+      var wrap = el('div', 'wo-item');
+      wrap.appendChild(el('div', 'wo-item-num', (idx + 1) + '. ' + (item.prompt || 'Arrange the words:')));
+
+      // audio button
+      if (item.audioUrl) {
+        var audioEl = new Audio(item.audioUrl);
+        var btn = el('button', 'wo-audio-btn', '🔊 Play');
+        btn.type = 'button';
+        audioEl.addEventListener('ended', function() {
+          btn.classList.remove('playing');
+          btn.textContent = '🔊 Play';
+        });
+        btn.addEventListener('click', function() {
+          if (!audioEl.paused) {
+            audioEl.pause(); audioEl.currentTime = 0;
+            btn.classList.remove('playing');
+            btn.textContent = '🔊 Play';
+          } else {
+            audioEl.play();
+            btn.classList.add('playing');
+            btn.textContent = '⏹ Stop';
+          }
+        });
+        wrap.appendChild(btn);
+      }
+
+      // answer zone
+      var answerZone = el('div', 'wo-answer-zone');
+      wrap.appendChild(answerZone);
+
+      // word bank — shuffle the words
+      var shuffled = item.words.slice().sort(function() { return Math.random() - 0.5; });
+      var bank = el('div', 'wo-bank');
+      var placed = [];   // tiles currently in answer zone
+
+      shuffled.forEach(function(word) {
+        var tile = el('div', 'wo-tile', word);
+        tile._word = word;
+        tile._inZone = false;
+
+        tile.addEventListener('click', function() {
+          if (!tile._inZone) {
+            // move from bank to zone
+            tile._inZone = true;
+            tile.classList.add('placed');
+            bank.removeChild(tile);
+            answerZone.appendChild(tile);
+            placed.push(tile);
+          } else {
+            // move back to bank
+            tile._inZone = false;
+            tile.classList.remove('placed');
+            answerZone.removeChild(tile);
+            bank.appendChild(tile);
+            placed.splice(placed.indexOf(tile), 1);
+          }
+        });
+        bank.appendChild(tile);
+      });
+
+      wrap.appendChild(bank);
+
+      // translation reveal (hidden until checked)
+      var transDiv = el('div', 'wo-translation', '');
+      wrap.appendChild(transDiv);
+
+      // feedback
+      var feedDiv = el('div', 'wo-feedback', '');
+      wrap.appendChild(feedDiv);
+
+      itemResults.push({ answerZone: answerZone, placed: placed, correct: item.answer, transDiv: transDiv, translation: item.translation || '', feedDiv: feedDiv });
+      form.appendChild(wrap);
+    });
+
+    card.appendChild(form);
+
+    // submit row
+    var actionRow = el('div', 'action-group');
+    var submitBtn = el('button', 'btn-primary', 'Check Answers');
+    submitBtn.type = 'button';
+    submitBtn.addEventListener('click', function() {
+      var total = itemResults.length;
+      var correct = 0;
+      itemResults.forEach(function(r) {
+        // get current words in answer zone in order
+        var given = Array.from(r.answerZone.querySelectorAll('.wo-tile')).map(function(t) { return t._word; });
+        var isCorrect = given.length === r.correct.length && given.every(function(w, i) { return w === r.correct[i]; });
+        if (isCorrect) {
+          correct++;
+          r.answerZone.classList.add('correct-zone');
+          r.answerZone.classList.remove('wrong-zone');
+          r.feedDiv.textContent = '✓ Correct!';
+          r.feedDiv.className = 'wo-feedback correct';
+          Array.from(r.answerZone.querySelectorAll('.wo-tile')).forEach(function(t) { t.classList.add('correct-tile'); });
+        } else {
+          r.answerZone.classList.add('wrong-zone');
+          r.answerZone.classList.remove('correct-zone');
+          r.feedDiv.textContent = '✗ Try again — answer: ' + r.correct.join(' ');
+          r.feedDiv.className = 'wo-feedback wrong';
+          Array.from(r.answerZone.querySelectorAll('.wo-tile')).forEach(function(t) { t.classList.add('wrong-tile'); });
+        }
+        if (r.translation) r.transDiv.textContent = r.translation;
+      });
+      scoreNode.textContent = correct + ' / ' + total;
+    });
+    actionRow.appendChild(submitBtn);
+
+    var resetBtn = el('button', 'btn-secondary', 'Reset');
+    resetBtn.type = 'button';
+    resetBtn.addEventListener('click', function() {
+      window.location.reload();
+    });
+    actionRow.appendChild(resetBtn);
+    card.appendChild(actionRow);
+
+    left.appendChild(card);
+    layout.appendChild(left);
+    layout.appendChild(right);
+    target.appendChild(layout);
+  }
+
   function renderActivity(site) {
     var params = new URLSearchParams(window.location.search);
     var activityId = params.get('activity');
@@ -888,6 +1041,7 @@
       renderDrill(mount, activity);
     } else if (activity.type === 'listening') {
       renderListening(mount, activity);
+    } else if (activity.type === 'word-order') { renderWordOrder(mount, activity);
     } else {
       renderPractice(mount, activity);
     }
