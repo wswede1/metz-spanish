@@ -296,6 +296,73 @@ for fname, phrase in WO_PHRASES_SP1:
     PASSAGES.append((SP1_WO_AUDIO / fname, FEMALE, phrase))
 
 
+# ── Spanish 2 Vocab Terms ──────────────────────────────────────────────────────
+# Small files (~2–5 KB each). Played by the 🔊 button on each flashcard.
+# Output → span_2/unidad_colombia/audio/vocab-sp2-SLUG.mp3
+
+SP2_VOCAB_AUDIO = REPO / "span_2/unidad_colombia/audio"
+SP2_VOCAB_AUDIO.mkdir(parents=True, exist_ok=True)
+
+SP2_VOCAB = [
+    # ── Colombia & Travel ─────────────────────────────────────────────────────
+    "Colombia", "Bogotá", "Cartagena", "Medellín", "viajar", "el viaje",
+    "el vuelo", "el aeropuerto", "el equipaje", "la maleta", "el pasaporte",
+    "el boleto / el billete", "el hotel", "la playa", "el mercado", "tomar fotos",
+    # ── Preterite -AR Regular ─────────────────────────────────────────────────
+    "yo hablé", "tú hablaste", "él/ella habló", "nosotros hablamos",
+    "ellos hablaron", "yo viajé", "tú viajaste", "yo compré", "ella visitó",
+    "nosotros caminamos", "ellos bailaron", "yo tomé", "tú llegaste",
+    "ella preparó", "yo nadé", "ellos cantaron",
+    # ── -CAR / -GAR / -ZAR ───────────────────────────────────────────────────
+    "buscar → yo busqué", "tocar → yo toqué", "sacar → yo saqué",
+    "practicar → yo practiqué", "explicar → yo expliqué",
+    "llegar → yo llegué", "jugar → yo jugué", "pagar → yo pagué",
+    "navegar → yo navegué", "empezar → yo empecé", "almorzar → yo almorcé",
+    "comenzar → yo comencé", "cruzar → yo crucé", "abrazar → yo abracé",
+    "-car → c → qu (yo)", "-gar → g → gu (yo)",
+    # ── Y-Verbs Preterite ────────────────────────────────────────────────────
+    "leer → leyó / leyeron", "yo leí", "creer → creyó / creyeron", "yo creí",
+    "oír → oyó / oyeron", "yo oí", "caer → cayó / cayeron", "yo caí",
+    "construir → construyó", "yo construí", "destruir → destruyó",
+    "incluir → incluyó", "huir → huyó",
+    "i → y (él/ellos)", "contribuir → contribuyó", "sustituir → sustituyó",
+    # ── Stem-Change -IR Preterite ────────────────────────────────────────────
+    "dormir → durmió / durmieron", "morir → murió / murieron",
+    "pedir → pidió / pidieron", "servir → sirvió / sirvieron",
+    "preferir → prefirió", "sentir → sintió / sintieron",
+    "repetir → repitió", "seguir → siguió / siguieron",
+    "vestirse → se vistió", "mentir → mintió",
+    "divertirse → se divirtió", "conseguir → consiguió",
+    "o → u (él/ellos)", "e → i (él/ellos)", "yo dormí", "yo pedí",
+    # ── Irregular Preterite ──────────────────────────────────────────────────
+    "decir → dije, dijo, dijeron", "traer → traje, trajo, trajeron",
+    "venir → vine, vino, vinieron", "dar → di, dio, dieron",
+    "ver → vi, vio, vieron", "hacer → hice, hizo, hicieron",
+    "ir → fui, fue, fueron", "ser → fui, fue, fueron",
+    "tener → tuve, tuvo, tuvieron", "estar → estuve, estuvo",
+    "poder → pude, pudo, pudieron", "poner → puse, puso, pusieron",
+    "saber → supe, supo, supieron", "querer → quise, quiso",
+    "hay → hubo", "no hay acentos",
+]
+
+for term in SP2_VOCAB:
+    slug = vocab_slug(term)
+    out  = SP2_VOCAB_AUDIO / f"vocab-sp2-{slug}.mp3"
+    PASSAGES.append((out, FEMALE, tts_text(term)))
+
+# ── Word-order audio phrases — Spanish 2 ──────────────────────────────────────
+WO_PHRASES_SP2 = [
+    ("wo-sp2-01.mp3", "La familia viajó a Cartagena en julio."),
+    ("wo-sp2-02.mp3", "Caminaron por las murallas de la ciudad."),
+    ("wo-sp2-03.mp3", "Probaron frutas tropicales en el mercado."),
+    ("wo-sp2-04.mp3", "Los niños oyeron músicos tocar vallenato."),
+    ("wo-sp2-05.mp3", "Fue uno de los mejores días."),
+]
+
+for fname, phrase in WO_PHRASES_SP2:
+    PASSAGES.append((SP2_AUDIO / fname, FEMALE, phrase))
+
+
 # ── Runner ─────────────────────────────────────────────────────────────────────
 async def make_one(path, voice, text):
     try:

@@ -1013,6 +1013,70 @@
     target.appendChild(layout);
   }
 
+  function renderPodcast(target, activity) {
+    var wrapper = el('div');
+    wrapper.style.marginBottom = '18px';
+    var card = el('section', 'content-card');
+
+    // header
+    var header = el('div', 'activity-header');
+    var textWrap = el('div');
+    textWrap.appendChild(el('h2', null, activity.title));
+    textWrap.appendChild(el('p', null, first(activity.instructions, activity.description)));
+    header.appendChild(textWrap);
+    var meta = el('div', 'mini-meta');
+    [activity.dayLabel, activity.kindLabel, activity.minutes ? activity.minutes + ' min' : null].forEach(function (item) {
+      if (item) meta.appendChild(el('span', 'meta-pill', item));
+    });
+    header.appendChild(meta);
+    card.appendChild(header);
+
+    if (activity.objectives && activity.objectives.length) {
+      var objWrap = el('div', 'objectives-list');
+      activity.objectives.forEach(function (item) {
+        objWrap.appendChild(el('div', 'objective-item', item));
+      });
+      card.appendChild(objWrap);
+    }
+
+    // Spotify embed — episode-level if spotifyId is set, show-level fallback
+    var embedWrap = el('div', 'podcast-embed');
+    var iframe = document.createElement('iframe');
+    var embedBase = activity.spotifyId
+      ? 'https://open.spotify.com/embed/episode/' + activity.spotifyId
+      : 'https://open.spotify.com/embed/show/' + (activity.spotifyShowId || '2uDEXRSkpRdCmZUw8qt5fh');
+    iframe.src = embedBase + '?utm_source=generator&theme=0';
+    iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
+    iframe.setAttribute('loading', 'lazy');
+    iframe.style.borderRadius = '12px';
+    embedWrap.appendChild(iframe);
+    card.appendChild(embedWrap);
+
+    // podcast metadata
+    if (activity.podcastName || activity.episodeNumber) {
+      var pmeta = el('div', 'podcast-meta');
+      if (activity.podcastName) pmeta.appendChild(el('span', null, '🎙️ ' + activity.podcastName));
+      if (activity.episodeNumber) pmeta.appendChild(el('span', null, '📋 Episode ' + activity.episodeNumber));
+      if (activity.level) pmeta.appendChild(el('span', null, '📊 ' + activity.level));
+      card.appendChild(pmeta);
+    }
+
+    // listening tip
+    if (activity.tip) {
+      var tipDiv = el('div', 'podcast-tip');
+      tipDiv.innerHTML = '<strong>Tip:</strong> ' + activity.tip;
+      card.appendChild(tipDiv);
+    }
+
+    wrapper.appendChild(card);
+    target.appendChild(wrapper);
+
+    // optional comprehension questions
+    if (activity.questions && activity.questions.length) {
+      renderPractice(target, activity, { embeddedHeader: true, practiceHeading: activity.resultTitle || 'Comprehension Check' });
+    }
+  }
+
   function renderActivity(site) {
     var params = new URLSearchParams(window.location.search);
     var activityId = params.get('activity');
@@ -1042,6 +1106,7 @@
     } else if (activity.type === 'listening') {
       renderListening(mount, activity);
     } else if (activity.type === 'word-order') { renderWordOrder(mount, activity);
+    } else if (activity.type === 'podcast') { renderPodcast(mount, activity);
     } else {
       renderPractice(mount, activity);
     }

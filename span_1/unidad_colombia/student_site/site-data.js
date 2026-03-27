@@ -341,6 +341,123 @@ window.unitSite = {
         },
         { id: "sp1-word-order-day04", label: "Day 4", sub: "Arrange the sentence" }
       ]
+    },
+    {
+      title: "Podcasts",
+      icon: "🎙️",
+      description: "Listen to real Spanish podcasts made for learners. Great for building listening skills at your own pace.",
+      cards: [
+        {
+          title: "Mi héroe, mi amigo",
+          description: "Duolingo Spanish Podcast — A boy in Colombia discovers an unexpected hero in his own family.",
+          route: "activity.html?activity=sp1-podcast-duo-01",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 25,
+          dayLabel: "Bonus",
+          icon: "🟢"
+        },
+        {
+          title: "Sin miedo",
+          description: "Duolingo Spanish Podcast — A woman overcomes fear to start a new chapter in her life.",
+          route: "activity.html?activity=sp1-podcast-duo-02",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 25,
+          dayLabel: "Bonus",
+          icon: "🟢"
+        },
+        {
+          title: "Memorias y milanesas",
+          description: "Duolingo Spanish Podcast — A story about family traditions and the food that connects generations.",
+          route: "activity.html?activity=sp1-podcast-duo-03",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 25,
+          dayLabel: "Bonus",
+          icon: "🟢"
+        },
+        {
+          title: "Una chilena en China",
+          description: "Duolingo Spanish Podcast — A Chilean woman navigates culture shock halfway across the world.",
+          route: "activity.html?activity=sp1-podcast-duo-04",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 25,
+          dayLabel: "Bonus",
+          icon: "🟢"
+        },
+        {
+          title: "Helen Brown",
+          description: "Duolingo Spanish Podcast — An unexpected name leads to a story about identity and belonging.",
+          route: "activity.html?activity=sp1-podcast-duo-05",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 25,
+          dayLabel: "Bonus",
+          icon: "🟢"
+        },
+        {
+          title: "¿Qué dicen los animales?",
+          description: "Garbanzo Podcast — What sounds do animals make in Spanish? A fun first episode for beginners.",
+          route: "activity.html?activity=sp1-podcast-garb-01",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 15,
+          dayLabel: "Bonus",
+          icon: "🫘"
+        },
+        {
+          title: "Los pollitos dicen",
+          description: "Garbanzo Podcast — Learn the classic children's song and the vocabulary behind it.",
+          route: "activity.html?activity=sp1-podcast-garb-02",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 15,
+          dayLabel: "Bonus",
+          icon: "🫘"
+        },
+        {
+          title: "La canguro Catrina",
+          description: "Garbanzo Podcast — A babysitter kangaroo teaches everyday Spanish through storytelling.",
+          route: "activity.html?activity=sp1-podcast-garb-03",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 15,
+          dayLabel: "Bonus",
+          icon: "🫘"
+        },
+        {
+          title: "Penelope y el gigante",
+          description: "Garbanzo Podcast — A brave girl faces a giant in this fairy-tale listening activity.",
+          route: "activity.html?activity=sp1-podcast-garb-04",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 15,
+          dayLabel: "Bonus",
+          icon: "🫘"
+        },
+        {
+          title: "No puedes pasar",
+          description: "Garbanzo Podcast — A story about boundaries, negotiation, and creative problem solving.",
+          route: "activity.html?activity=sp1-podcast-garb-05",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 15,
+          dayLabel: "Bonus",
+          icon: "🫘"
+        }
+      ]
     }
   ],
 
@@ -1830,6 +1947,191 @@ window.unitSite = {
       resultTitle: "Comprensión",
       resultIntro: "Submit your answers after watching the video.",
       submitLabel: "Check Answers"
+    },
+
+    // ─── PODCAST ACTIVITIES — Duolingo Spanish Podcast ───────────────────────────
+    "sp1-podcast-duo-01": {
+      type: "podcast",
+      title: "Mi héroe, mi amigo",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 25,
+      description: "Listen to a true story told in simple Spanish with English narration to help you follow along.",
+      instructions: "Press play and listen. You can pause and replay as needed. Focus on the Spanish sections — try to catch words you know!",
+      objectives: [
+        "Listen to authentic Spanish in a storytelling context",
+        "Identify familiar vocabulary within a longer narrative",
+        "Build listening stamina with a real-world podcast"
+      ],
+      spotifyId: "0HQ27yBUHuPhgsea1MWbfC",
+      podcastName: "Duolingo Spanish Podcast",
+      episodeNumber: "1",
+      level: "Beginner–Intermediate",
+      tip: "Don't worry about understanding every word. Listen for the main idea and any words you recognize from class."
+    },
+    "sp1-podcast-duo-02": {
+      type: "podcast",
+      title: "Sin miedo",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 25,
+      description: "A woman overcomes fear to start a new chapter. Told in Spanish with English support.",
+      instructions: "Search for Episode 2: 'Sin miedo' in the Duolingo Spanish Podcast player below. Press play and listen.",
+      objectives: [
+        "Practice listening to natural Spanish speech",
+        "Identify cognates and familiar vocabulary in context"
+      ],
+      spotifyShowId: "2uDEXRSkpRdCmZUw8qt5fh",
+      podcastName: "Duolingo Spanish Podcast",
+      episodeNumber: "2",
+      level: "Beginner–Intermediate",
+      tip: "Try listening once all the way through, then go back and pause at the Spanish sections to catch more details."
+    },
+    "sp1-podcast-duo-03": {
+      type: "podcast",
+      title: "Memorias y milanesas",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 25,
+      description: "A story about family traditions and the food that connects generations across borders.",
+      instructions: "Listen and enjoy the story. Write down 3 Spanish words you recognized.",
+      objectives: [
+        "Connect food and family vocabulary to a real narrative",
+        "Practice sustained listening in Spanish"
+      ],
+      spotifyId: "4hLZhgx0UfuY8f6Z4jwuEJ",
+      podcastName: "Duolingo Spanish Podcast",
+      episodeNumber: "3",
+      level: "Beginner–Intermediate",
+      tip: "This episode mentions food — listen for any words related to cooking or family meals."
+    },
+    "sp1-podcast-duo-04": {
+      type: "podcast",
+      title: "Una chilena en China",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 25,
+      description: "A Chilean woman navigates culture shock halfway around the world. Told bilingually.",
+      instructions: "Search for Episode 4: 'Una chilena en China' in the Duolingo Spanish Podcast player below.",
+      objectives: [
+        "Follow a bilingual narrative about cultural experiences",
+        "Identify travel and culture vocabulary in context"
+      ],
+      spotifyShowId: "2uDEXRSkpRdCmZUw8qt5fh",
+      podcastName: "Duolingo Spanish Podcast",
+      episodeNumber: "4",
+      level: "Beginner–Intermediate",
+      tip: "This episode connects to our unit themes — living in a new place and experiencing a different culture."
+    },
+    "sp1-podcast-duo-05": {
+      type: "podcast",
+      title: "Helen Brown",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 25,
+      description: "An unexpected name leads to a story about identity and belonging.",
+      instructions: "Listen and think: what is the main message of this story?",
+      objectives: [
+        "Practice listening for the main idea of a story",
+        "Build confidence with longer audio in Spanish"
+      ],
+      spotifyId: "30ohnXaaCnme94C7kbT0L7",
+      podcastName: "Duolingo Spanish Podcast",
+      episodeNumber: "5",
+      level: "Beginner–Intermediate",
+      tip: "If the Spanish feels fast, that's normal! Focus on the emotions and the story arc, not every single word."
+    },
+
+    // ─── PODCAST ACTIVITIES — Garbanzo Spanish Podcast ───────────────────────────
+    "sp1-podcast-garb-01": {
+      type: "podcast",
+      title: "¿Qué dicen los animales?",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 15,
+      description: "What sounds do animals make in Spanish? A fun, beginner-friendly podcast episode.",
+      instructions: "Listen and try to repeat the animal sounds in Spanish! This episode is designed for beginners.",
+      objectives: [
+        "Learn animal vocabulary and onomatopoeia in Spanish",
+        "Practice listening to slow, clear Spanish"
+      ],
+      spotifyId: "3N9fFa0IQdK66V4lFUwc3K",
+      podcastName: "Garbanzo Spanish Podcast",
+      episodeNumber: "1",
+      level: "Beginner",
+      tip: "Garbanzo episodes are shorter and slower — perfect for building confidence with listening."
+    },
+    "sp1-podcast-garb-02": {
+      type: "podcast",
+      title: "Los pollitos dicen",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 15,
+      description: "Learn the classic Spanish children's song and the vocabulary behind it.",
+      instructions: "Listen to the episode. Can you sing along by the end?",
+      objectives: [
+        "Learn a classic Spanish children's song",
+        "Identify animal and nature vocabulary"
+      ],
+      spotifyId: "5wwCFsQqVAOd5qUFiNwG81",
+      podcastName: "Garbanzo Spanish Podcast",
+      episodeNumber: "2",
+      level: "Beginner",
+      tip: "Try to learn the chorus — it uses simple, repetitive vocabulary that's great for memorization."
+    },
+    "sp1-podcast-garb-03": {
+      type: "podcast",
+      title: "La canguro Catrina",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 15,
+      description: "A babysitter kangaroo teaches everyday Spanish through storytelling.",
+      instructions: "Listen to the story. Write down any new words you hear.",
+      objectives: [
+        "Follow a simple narrative in Spanish",
+        "Identify everyday vocabulary in a story context"
+      ],
+      spotifyId: "3apq4WBL781P6QYlrkmJpC",
+      podcastName: "Garbanzo Spanish Podcast",
+      episodeNumber: "3",
+      level: "Beginner",
+      tip: "Stories help your brain learn language naturally — just enjoy the story and let the Spanish wash over you."
+    },
+    "sp1-podcast-garb-04": {
+      type: "podcast",
+      title: "Penelope y el gigante",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 15,
+      description: "A brave girl faces a giant in this fairy-tale listening activity.",
+      instructions: "Listen and think about the story. What does Penelope do that is brave?",
+      objectives: [
+        "Follow a fairy-tale narrative in Spanish",
+        "Practice listening for character actions and descriptions"
+      ],
+      spotifyId: "6wTqBxJRAB6kmZ7PXoqAX6",
+      podcastName: "Garbanzo Spanish Podcast",
+      episodeNumber: "4",
+      level: "Beginner",
+      tip: "Fairy tales use patterns and repetition — notice which phrases come back again and again."
+    },
+    "sp1-podcast-garb-05": {
+      type: "podcast",
+      title: "No puedes pasar",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 15,
+      description: "A story about boundaries, negotiation, and creative problem solving.",
+      instructions: "Listen to the episode. How does the character solve the problem?",
+      objectives: [
+        "Practice listening for problem and solution in a story",
+        "Build vocabulary around negotiation and daily interactions"
+      ],
+      spotifyId: "5VOzwR3cxlLGLZ19B4CsDF",
+      podcastName: "Garbanzo Spanish Podcast",
+      episodeNumber: "5",
+      level: "Beginner",
+      tip: "Listen for the words 'no' and 'sí' — they help you follow the negotiation in the story."
     }
   }
 };

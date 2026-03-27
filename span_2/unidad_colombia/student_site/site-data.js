@@ -338,6 +338,134 @@ window.unitSite = {
           minutes: 10,
           dayLabel: "Bonus",
           icon: "🎵"
+        },
+        {
+          title: "Day 4 — Word Order",
+          description: "Listen to preterite sentences about Cartagena and arrange the words in the correct order.",
+          route: "activity.html?activity=sp2-word-order-day04",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Word Order",
+          minutes: 10,
+          dayLabel: "Day 4",
+          icon: "🔀"
+        }
+      ]
+    },
+    {
+      title: "Podcasts",
+      icon: "🎙️",
+      description: "Listen to real Spanish podcasts made for learners. Build your listening skills with stories told in Spanish.",
+      cards: [
+        {
+          title: "Mi héroe, mi amigo",
+          description: "Duolingo Spanish Podcast — A boy in Colombia discovers an unexpected hero in his own family.",
+          route: "activity.html?activity=sp2-podcast-duo-01",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 25,
+          dayLabel: "Bonus",
+          icon: "🟢"
+        },
+        {
+          title: "Sin miedo",
+          description: "Duolingo Spanish Podcast — A woman overcomes fear to start a new chapter in her life.",
+          route: "activity.html?activity=sp2-podcast-duo-02",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 25,
+          dayLabel: "Bonus",
+          icon: "🟢"
+        },
+        {
+          title: "Memorias y milanesas",
+          description: "Duolingo Spanish Podcast — A story about family traditions and the food that connects generations.",
+          route: "activity.html?activity=sp2-podcast-duo-03",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 25,
+          dayLabel: "Bonus",
+          icon: "🟢"
+        },
+        {
+          title: "Una chilena en China",
+          description: "Duolingo Spanish Podcast — A Chilean woman navigates culture shock halfway across the world.",
+          route: "activity.html?activity=sp2-podcast-duo-04",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 25,
+          dayLabel: "Bonus",
+          icon: "🟢"
+        },
+        {
+          title: "Helen Brown",
+          description: "Duolingo Spanish Podcast — An unexpected name leads to a story about identity and belonging.",
+          route: "activity.html?activity=sp2-podcast-duo-05",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 25,
+          dayLabel: "Bonus",
+          icon: "🟢"
+        },
+        {
+          title: "¿Qué dicen los animales?",
+          description: "Garbanzo Podcast — What sounds do animals make in Spanish? A fun episode for building listening skills.",
+          route: "activity.html?activity=sp2-podcast-garb-01",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 15,
+          dayLabel: "Bonus",
+          icon: "🫘"
+        },
+        {
+          title: "Los pollitos dicen",
+          description: "Garbanzo Podcast — Learn the classic children's song and the vocabulary behind it.",
+          route: "activity.html?activity=sp2-podcast-garb-02",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 15,
+          dayLabel: "Bonus",
+          icon: "🫘"
+        },
+        {
+          title: "La canguro Catrina",
+          description: "Garbanzo Podcast — A babysitter kangaroo teaches everyday Spanish through storytelling.",
+          route: "activity.html?activity=sp2-podcast-garb-03",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 15,
+          dayLabel: "Bonus",
+          icon: "🫘"
+        },
+        {
+          title: "Penelope y el gigante",
+          description: "Garbanzo Podcast — A brave girl faces a giant in this fairy-tale listening activity.",
+          route: "activity.html?activity=sp2-podcast-garb-04",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 15,
+          dayLabel: "Bonus",
+          icon: "🫘"
+        },
+        {
+          title: "No puedes pasar",
+          description: "Garbanzo Podcast — A story about boundaries, negotiation, and creative problem solving.",
+          route: "activity.html?activity=sp2-podcast-garb-05",
+          releaseDate: "",
+          status: "Ready",
+          kindLabel: "Podcast",
+          minutes: 15,
+          dayLabel: "Bonus",
+          icon: "🫘"
         }
       ]
     }
@@ -1779,6 +1907,53 @@ window.unitSite = {
       ]
     },
 
+    // ─── WORD-ORDER ACTIVITY ─────────────────────────────────────────────────
+    "sp2-word-order-day04": {
+      type: "word-order",
+      title: "¿Qué pasó en Cartagena? — Word Order",
+      dayLabel: "Day 4",
+      kindLabel: "Word Order",
+      minutes: 10,
+      instructions: "Listen to each phrase, then tap the words to arrange them in the correct order.",
+      items: [
+        {
+          prompt: "Listen and arrange:",
+          audioUrl: "audio/wo-sp2-01.mp3",
+          words: ["La", "familia", "viajó", "a", "Cartagena", "en", "julio."],
+          answer: ["La", "familia", "viajó", "a", "Cartagena", "en", "julio."],
+          translation: "The family traveled to Cartagena in July."
+        },
+        {
+          prompt: "Listen and arrange:",
+          audioUrl: "audio/wo-sp2-02.mp3",
+          words: ["Caminaron", "por", "las", "murallas", "de", "la", "ciudad."],
+          answer: ["Caminaron", "por", "las", "murallas", "de", "la", "ciudad."],
+          translation: "They walked along the city walls."
+        },
+        {
+          prompt: "Listen and arrange:",
+          audioUrl: "audio/wo-sp2-03.mp3",
+          words: ["Probaron", "frutas", "tropicales", "en", "el", "mercado."],
+          answer: ["Probaron", "frutas", "tropicales", "en", "el", "mercado."],
+          translation: "They tried tropical fruits at the market."
+        },
+        {
+          prompt: "Listen and arrange:",
+          audioUrl: "audio/wo-sp2-04.mp3",
+          words: ["Los", "niños", "oyeron", "músicos", "tocar", "vallenato."],
+          answer: ["Los", "niños", "oyeron", "músicos", "tocar", "vallenato."],
+          translation: "The children heard musicians play vallenato."
+        },
+        {
+          prompt: "Listen and arrange:",
+          audioUrl: "audio/wo-sp2-05.mp3",
+          words: ["Fue", "uno", "de", "los", "mejores", "días."],
+          answer: ["Fue", "uno", "de", "los", "mejores", "días."],
+          translation: "It was one of the best days."
+        }
+      ]
+    },
+
     // ─── LISTENING ACTIVITIES ──────────────────────────────────────────────────
     // Replace YOUTUBE_ID below with the actual YouTube video ID (the part after ?v= in the URL)
     "sp2-listening-vallenato": {
@@ -1827,6 +2002,191 @@ window.unitSite = {
       resultTitle: "Comprensión",
       resultIntro: "Submit your answers after watching the video.",
       submitLabel: "Check Answers"
+    },
+
+    // ─── PODCAST ACTIVITIES — Duolingo Spanish Podcast ───────────────────────────
+    "sp2-podcast-duo-01": {
+      type: "podcast",
+      title: "Mi héroe, mi amigo",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 25,
+      description: "Listen to a true story told in Spanish with English narration. Use what you know about the preterite to follow along.",
+      instructions: "Press play and listen. Pay attention to past-tense verbs in the Spanish sections — how many can you catch?",
+      objectives: [
+        "Listen to authentic Spanish storytelling with preterite narration",
+        "Identify familiar past-tense verbs in a longer narrative",
+        "Build listening stamina with a real-world podcast"
+      ],
+      spotifyId: "0HQ27yBUHuPhgsea1MWbfC",
+      podcastName: "Duolingo Spanish Podcast",
+      episodeNumber: "1",
+      level: "Intermediate",
+      tip: "Listen for preterite forms you know: fue, dijo, hizo, viajó. How many can you count?"
+    },
+    "sp2-podcast-duo-02": {
+      type: "podcast",
+      title: "Sin miedo",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 25,
+      description: "A woman overcomes fear to start a new chapter. The narrator uses past tense throughout.",
+      instructions: "Search for Episode 2: 'Sin miedo' in the Duolingo Spanish Podcast player below. Listen for preterite verbs.",
+      objectives: [
+        "Practice listening to natural past-tense narration",
+        "Identify cognates and preterite forms in context"
+      ],
+      spotifyShowId: "2uDEXRSkpRdCmZUw8qt5fh",
+      podcastName: "Duolingo Spanish Podcast",
+      episodeNumber: "2",
+      level: "Intermediate",
+      tip: "Try listening once all the way through, then go back and pause at the Spanish sections to catch more past-tense verbs."
+    },
+    "sp2-podcast-duo-03": {
+      type: "podcast",
+      title: "Memorias y milanesas",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 25,
+      description: "A story about family traditions and the food that connects generations across borders.",
+      instructions: "Listen and write down 5 preterite verbs you hear in the Spanish sections.",
+      objectives: [
+        "Connect food and family vocabulary to a real narrative",
+        "Identify preterite forms in sustained storytelling"
+      ],
+      spotifyId: "4hLZhgx0UfuY8f6Z4jwuEJ",
+      podcastName: "Duolingo Spanish Podcast",
+      episodeNumber: "3",
+      level: "Intermediate",
+      tip: "This episode mentions cooking and family — listen for verbs like preparó, cocinó, recordó."
+    },
+    "sp2-podcast-duo-04": {
+      type: "podcast",
+      title: "Una chilena en China",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 25,
+      description: "A Chilean woman navigates culture shock halfway around the world. Told bilingually.",
+      instructions: "Search for Episode 4: 'Una chilena en China' in the Duolingo Spanish Podcast player below.",
+      objectives: [
+        "Follow a bilingual narrative about cultural experiences",
+        "Identify travel and culture vocabulary in the preterite"
+      ],
+      spotifyShowId: "2uDEXRSkpRdCmZUw8qt5fh",
+      podcastName: "Duolingo Spanish Podcast",
+      episodeNumber: "4",
+      level: "Intermediate",
+      tip: "This episode connects to our unit — traveling, experiencing culture, and telling about it in the past tense."
+    },
+    "sp2-podcast-duo-05": {
+      type: "podcast",
+      title: "Helen Brown",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 25,
+      description: "An unexpected name leads to a story about identity and belonging.",
+      instructions: "Listen and think: what preterite verbs does the speaker use to tell their story?",
+      objectives: [
+        "Practice listening for the main idea of a past-tense narrative",
+        "Build confidence with longer audio in Spanish"
+      ],
+      spotifyId: "30ohnXaaCnme94C7kbT0L7",
+      podcastName: "Duolingo Spanish Podcast",
+      episodeNumber: "5",
+      level: "Intermediate",
+      tip: "If the Spanish feels fast, focus on the preterite verbs — they anchor the timeline of the story."
+    },
+
+    // ─── PODCAST ACTIVITIES — Garbanzo Spanish Podcast ───────────────────────────
+    "sp2-podcast-garb-01": {
+      type: "podcast",
+      title: "¿Qué dicen los animales?",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 15,
+      description: "What sounds do animals make in Spanish? A fun, accessible podcast episode.",
+      instructions: "Listen and try to repeat the animal sounds in Spanish!",
+      objectives: [
+        "Review animal vocabulary and onomatopoeia in Spanish",
+        "Practice listening to slow, clear Spanish"
+      ],
+      spotifyId: "3N9fFa0IQdK66V4lFUwc3K",
+      podcastName: "Garbanzo Spanish Podcast",
+      episodeNumber: "1",
+      level: "Beginner–Intermediate",
+      tip: "Garbanzo episodes are shorter and slower — a great warm-up for listening practice."
+    },
+    "sp2-podcast-garb-02": {
+      type: "podcast",
+      title: "Los pollitos dicen",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 15,
+      description: "Learn the classic Spanish children's song and the vocabulary behind it.",
+      instructions: "Listen to the episode. Can you identify all the vocabulary from the song?",
+      objectives: [
+        "Learn a classic Spanish children's song",
+        "Identify animal and nature vocabulary"
+      ],
+      spotifyId: "5wwCFsQqVAOd5qUFiNwG81",
+      podcastName: "Garbanzo Spanish Podcast",
+      episodeNumber: "2",
+      level: "Beginner–Intermediate",
+      tip: "Try to learn the chorus — it uses simple, repetitive vocabulary that's great for memorization."
+    },
+    "sp2-podcast-garb-03": {
+      type: "podcast",
+      title: "La canguro Catrina",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 15,
+      description: "A babysitter kangaroo teaches everyday Spanish through storytelling.",
+      instructions: "Listen to the story. Write down any new words you hear.",
+      objectives: [
+        "Follow a simple narrative in Spanish",
+        "Identify everyday vocabulary in a story context"
+      ],
+      spotifyId: "3apq4WBL781P6QYlrkmJpC",
+      podcastName: "Garbanzo Spanish Podcast",
+      episodeNumber: "3",
+      level: "Beginner–Intermediate",
+      tip: "Stories help your brain learn language naturally — just enjoy the story and let the Spanish wash over you."
+    },
+    "sp2-podcast-garb-04": {
+      type: "podcast",
+      title: "Penelope y el gigante",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 15,
+      description: "A brave girl faces a giant in this fairy-tale listening activity.",
+      instructions: "Listen and think about the story. What does Penelope do that is brave?",
+      objectives: [
+        "Follow a fairy-tale narrative in Spanish",
+        "Practice listening for character actions and descriptions"
+      ],
+      spotifyId: "6wTqBxJRAB6kmZ7PXoqAX6",
+      podcastName: "Garbanzo Spanish Podcast",
+      episodeNumber: "4",
+      level: "Beginner–Intermediate",
+      tip: "Fairy tales use patterns and repetition — notice which phrases come back again and again."
+    },
+    "sp2-podcast-garb-05": {
+      type: "podcast",
+      title: "No puedes pasar",
+      dayLabel: "Bonus",
+      kindLabel: "Podcast",
+      minutes: 15,
+      description: "A story about boundaries, negotiation, and creative problem solving.",
+      instructions: "Listen to the episode. How does the character solve the problem?",
+      objectives: [
+        "Practice listening for problem and solution in a story",
+        "Build vocabulary around negotiation and daily interactions"
+      ],
+      spotifyId: "5VOzwR3cxlLGLZ19B4CsDF",
+      podcastName: "Garbanzo Spanish Podcast",
+      episodeNumber: "5",
+      level: "Beginner–Intermediate",
+      tip: "Listen for the words 'no' and 'sí' — they help you follow the negotiation in the story."
     }
   }
 };
