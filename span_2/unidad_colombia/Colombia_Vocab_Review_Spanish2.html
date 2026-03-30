@@ -9,6 +9,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0%,#003893 50%,#CE1126 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px}
 
+/* Header */
 .app-header{text-align:center;margin-bottom:20px}
 .app-header h1{font-family:'Fredoka One',cursive;color:#fff;font-size:2rem;text-shadow:2px 2px 6px rgba(0,0,0,.4);margin-bottom:4px}
 .app-header .subtitle{color:#ffffffcc;font-size:1rem;font-style:italic}
@@ -20,6 +21,7 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 }
 .home-link:hover{transform:translateY(-1px)}
 
+/* Navigation */
 .nav-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px}
 .nav-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:.85rem;padding:8px 16px;border:none;border-radius:20px;cursor:pointer;transition:all .25s;color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.2)}
 .nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
@@ -31,14 +33,20 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 .cat-4{background:#D4AC0D}.cat-4.active{background:#b8960b}
 .cat-5{background:#2C3E50}.cat-5.active{background:#1a252f}
 
+/* Stats bar */
 .stats-bar{display:flex;gap:20px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
 .stat{background:rgba(255,255,255,.9);padding:6px 14px;border-radius:12px;font-weight:700;font-size:.85rem;color:#333;box-shadow:0 2px 6px rgba(0,0,0,.15)}
 .stat span{color:#003893}
 
-.mode-bar{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
-.mode-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:.8rem;padding:6px 14px;border:2px solid #fff;border-radius:16px;cursor:pointer;background:transparent;color:#fff;transition:all .2s}
+/* Mode selector - scrollable */
+.mode-bar{display:flex;gap:6px;align-items:center;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:4px 8px;white-space:nowrap;max-width:95vw}
+.mode-bar::-webkit-scrollbar{display:none}
+.mode-bar{-ms-overflow-style:none;scrollbar-width:none}
+.mode-section{font-size:.55rem;font-weight:800;color:rgba(255,255,255,.55);padding:0 3px;text-transform:uppercase;flex-shrink:0;letter-spacing:.05em;pointer-events:none}
+.mode-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:.7rem;padding:5px 10px;border:2px solid #fff;border-radius:16px;cursor:pointer;background:transparent;color:#fff;transition:all .2s;flex-shrink:0;white-space:nowrap}
 .mode-btn:hover,.mode-btn.active{background:#fff;color:#003893}
 
+/* Card container */
 .card-container{perspective:1000px;width:340px;height:220px;margin:0 auto 16px auto;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .card-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
 .card-container.flipped .card-inner{transform:rotateY(180deg)}
@@ -50,11 +58,11 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 .card-back .card-word{color:#333}
 .card-hint{font-size:.8rem;color:#666;margin-top:8px;font-style:italic}
 .tap-hint{font-size:.75rem;color:#999;margin-top:auto}
-/* Speaker button */
 .speak-btn{position:absolute;top:10px;right:10px;background:rgba(0,56,147,.12);border:none;border-radius:50%;width:34px;height:34px;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:2}
 .speak-btn:hover{background:rgba(0,56,147,.25)}
 .speak-btn.playing{background:rgba(30,132,73,.2)}
 
+/* Controls */
 .controls{display:flex;gap:12px;justify-content:center;align-items:center;margin-bottom:12px;flex-wrap:wrap}
 .ctrl-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:.9rem;padding:10px 20px;border:none;border-radius:12px;cursor:pointer;transition:all .2s;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.2)}
 .ctrl-btn:hover{transform:translateY(-1px)}
@@ -62,12 +70,14 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 .ctrl-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .card-counter{font-weight:700;color:#fff;font-size:1rem;min-width:70px;text-align:center;text-shadow:1px 1px 3px rgba(0,0,0,.3)}
 
+/* Progress bar */
 .progress-wrap{width:340px;margin:0 auto 20px auto}
 .progress-track{height:8px;background:rgba(255,255,255,.3);border-radius:4px;overflow:hidden}
 .progress-fill{height:100%;background:#1E8449;border-radius:4px;transition:width .3s}
 
+/* Quiz mode */
 .quiz-area{background:rgba(255,255,255,.95);border-radius:16px;padding:24px;width:360px;box-shadow:0 8px 28px rgba(0,0,0,.2);margin-bottom:16px;text-align:center}
-.quiz-prompt{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#003893;margin-bottom:16px}
+.quiz-prompt{font-family:'Fredoka One',cursive;font-size:1.4rem;color:#003893;margin-bottom:16px}
 .quiz-options{display:flex;flex-direction:column;gap:8px}
 .quiz-opt{font-family:'Nunito',sans-serif;font-weight:600;font-size:1rem;padding:12px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:all .2s;text-align:left}
 .quiz-opt:hover{border-color:#003893;background:#f0f4ff}
@@ -79,10 +89,11 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 .quiz-feedback.wrong-fb{color:#CE1126}
 .quiz-score{font-size:.9rem;color:#555;margin-top:8px}
 
+/* Matching mode */
 .match-area{background:rgba(255,255,255,.95);border-radius:16px;padding:24px;width:380px;box-shadow:0 8px 28px rgba(0,0,0,.2);margin-bottom:16px}
 .match-title{font-family:'Fredoka One',cursive;font-size:1.1rem;color:#003893;text-align:center;margin-bottom:12px}
 .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.match-tile{font-family:'Nunito',sans-serif;font-weight:600;font-size:.82rem;padding:10px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;transition:all .2s;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center}
+.match-tile{font-family:'Nunito',sans-serif;font-weight:600;font-size:.85rem;padding:10px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;transition:all .2s;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center}
 .match-tile:hover{border-color:#003893;background:#f0f4ff}
 .match-tile.selected{border-color:#003893;background:#d6eaf8;box-shadow:0 0 0 2px #003893}
 .match-tile.matched{border-color:#1E8449;background:#d5f5e3;color:#1E8449;cursor:default;opacity:.7}
@@ -90,17 +101,152 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 .match-timer{text-align:center;font-weight:700;color:#555;margin-top:10px}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 
-.complete-screen{background:rgba(255,255,255,.95);border-radius:16px;padding:32px;width:360px;box-shadow:0 8px 28px rgba(0,0,0,.2);text-align:center}
+/* Completion screen */
+.complete-screen{background:rgba(255,255,255,.95);border-radius:16px;padding:32px;width:360px;box-shadow:0 8px 28px rgba(0,0,0,.2);text-align:center;max-width:95vw}
 .complete-screen h2{font-family:'Fredoka One',cursive;color:#003893;font-size:1.6rem;margin-bottom:8px}
 .complete-screen p{color:#555;margin-bottom:16px}
 .complete-screen .big-stat{font-size:2.5rem;font-weight:800;color:#1E8449;margin:8px 0}
 
+/* ═══════════════════════════════════════════════ */
+/* NEW GAME MODE STYLES                            */
+/* ═══════════════════════════════════════════════ */
+
+/* Shared game card */
+.game-card{background:rgba(255,255,255,.95);border-radius:16px;padding:24px;width:380px;max-width:95vw;box-shadow:0 8px 28px rgba(0,0,0,.2);margin:0 auto 16px}
+.game-title{font-family:'Fredoka One',cursive;font-size:1.2rem;color:#003893;text-align:center;margin-bottom:12px}
+.game-subtitle{color:#666;font-size:.85rem;text-align:center;margin-bottom:10px}
+
+/* Shared input */
+.game-input{font-family:'Nunito',sans-serif;font-size:1rem;padding:10px 14px;border:2px solid #ddd;border-radius:10px;width:100%;max-width:300px;text-align:center;transition:border-color .2s}
+.game-input:focus{border-color:#003893;outline:none}
+
+/* Letter tiles (scramble) */
+.letter-box{display:inline-flex;align-items:center;justify-content:center;width:32px;height:38px;border:2px solid #003893;border-radius:6px;font-family:'Fredoka One';font-size:1.1rem;color:#003893;margin:2px;background:#f0f4ff}
+.letter-box.filled{background:#d6eaf8;border-color:#1E8449}
+.letter-tile{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:40px;border:2px solid #003893;border-radius:8px;font-family:'Fredoka One';font-size:1.1rem;color:#fff;background:#003893;cursor:pointer;padding:0 8px;transition:all .2s}
+.letter-tile:hover:not(.used){background:#002a6e;transform:translateY(-2px)}
+.letter-tile.used{opacity:.25;cursor:default;transform:none}
+
+/* Hangman keyboard */
+.hangman-key{width:30px;height:34px;border:2px solid #ddd;border-radius:6px;font-weight:700;font-size:.75rem;background:#fff;cursor:pointer;transition:all .2s;color:#333}
+.hangman-key:hover:not(.used){background:#f0f4ff;border-color:#003893}
+.hangman-key.used{opacity:.3;background:#eee;cursor:default}
+
+/* Whack-a-mole */
+.mole-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:300px;margin:0 auto}
+.mole-hole{height:70px;border-radius:12px;background:#e8e0d0;border:3px solid #c4b89a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;color:transparent;cursor:pointer;transition:all .15s;text-align:center;padding:4px;overflow:hidden;word-break:break-word}
+.mole-hole.active{background:#FCD116;color:#333;border-color:#D4AC0D;box-shadow:0 2px 8px rgba(0,0,0,.2);transform:scale(1.05)}
+.mole-hole.mole-hit{background:#d5f5e3;border-color:#1E8449;color:#1E8449}
+.mole-hole.mole-miss{background:#fadbd8;border-color:#CE1126;color:#CE1126}
+
+/* Memory grid */
+.mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:340px;margin:0 auto}
+.mem-card{height:65px;cursor:pointer;position:relative;transform-style:preserve-3d;perspective:600px}
+.mem-card .mem-front,.mem-card .mem-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;padding:3px;text-align:center;transition:transform .35s}
+.mem-card .mem-front{background:#003893;color:#fff;transform:rotateY(0deg)}
+.mem-card .mem-back{background:#fff;border:2px solid #003893;color:#003893;transform:rotateY(180deg)}
+.mem-card.mem-flipped .mem-front{transform:rotateY(180deg)}
+.mem-card.mem-flipped .mem-back{transform:rotateY(0deg)}
+.mem-card.mem-matched .mem-front{transform:rotateY(180deg)}
+.mem-card.mem-matched .mem-back{transform:rotateY(0deg);background:#d5f5e3;border-color:#1E8449;color:#1E8449}
+
+/* Word search */
+.ws-wrap{text-align:center}
+.ws-grid{display:inline-block;user-select:none;-webkit-user-select:none;touch-action:none}
+.ws-row{display:flex}
+.ws-cell{width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;border:1px solid #ddd;cursor:pointer;background:#fff;transition:background .1s}
+.ws-cell.ws-hl{background:#d6eaf8}
+.ws-cell.ws-found{background:#d5f5e3;color:#1E8449}
+.ws-word{font-size:.78rem;font-weight:600;color:#333;padding:2px 6px;border-radius:4px;background:#f0f4ff;display:inline-block;margin:2px}
+.ws-word.ws-word-found{text-decoration:line-through;opacity:.5;background:#d5f5e3}
+
+/* Crossword */
+.cw-wrap{text-align:center}
+.cw-grid{display:inline-grid;gap:1px;background:#333}
+.cw-cell{width:30px;height:30px;position:relative;background:#fff}
+.cw-cell input{width:100%;height:100%;border:1px solid #ddd;text-align:center;font-weight:700;font-size:.8rem;text-transform:uppercase;padding:0;background:transparent}
+.cw-cell input:focus{border-color:#003893;outline:none;background:#f0f4ff}
+.cw-cell.cw-correct input{background:#d5f5e3}
+.cw-cell.cw-wrong input{background:#fadbd8}
+.cw-num{position:absolute;top:1px;left:2px;font-size:.45rem;color:#888;z-index:1;line-height:1}
+.cw-black{background:#333!important}
+
+/* Gender rush buttons */
+.gender-btn{font-family:'Fredoka One';font-size:2rem;padding:20px 40px;border:none;border-radius:16px;cursor:pointer;color:#fff;transition:all .2s;min-width:110px}
+.gender-btn:hover{transform:translateY(-3px)}
+.gender-el{background:#003893}.gender-la{background:#CE1126}
+
+/* Race timer bar */
+.race-bar{width:100%;height:8px;background:#eee;border-radius:4px;overflow:hidden;margin:8px 0}
+.race-fill{height:100%;background:#FCD116;border-radius:4px;transition:width .05s linear}
+.race-fill.low{background:#CE1126}
+
+/* Sort zones */
+.sort-zones{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.sort-zone{min-height:100px;border:3px dashed #ccc;border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;align-content:flex-start;gap:4px}
+.sort-zone-title{font-weight:800;text-align:center;margin-bottom:4px;font-size:.85rem;color:#003893;width:100%}
+.sort-tile{display:inline-block;background:#003893;color:#fff;padding:5px 10px;border-radius:8px;margin:2px;font-weight:600;font-size:.78rem;cursor:pointer;transition:all .15s}
+.sort-tile:hover{background:#002a6e;transform:translateY(-1px)}
+.sort-tile.sort-correct{background:#1E8449!important}
+.sort-tile.sort-wrong{background:#CE1126!important;animation:shake .4s}
+
+/* Dialogue lines */
+.dial-line{background:#fff;border:2px solid #ddd;border-radius:8px;padding:10px 14px;margin:4px 0;cursor:pointer;font-size:.88rem;transition:all .2s;user-select:none}
+.dial-line:hover{border-color:#003893;background:#f0f4ff}
+.dial-line.dial-selected{border-color:#003893;background:#d6eaf8}
+.dial-line.dial-correct{border-color:#1E8449;background:#d5f5e3}
+.dial-line.dial-wrong{border-color:#CE1126;background:#fadbd8}
+
+/* Falling words */
+.falling-area{width:360px;max-width:95vw;height:400px;position:relative;background:rgba(0,0,0,.08);border-radius:12px;overflow:hidden;margin:0 auto 8px}
+
+/* Build-a-sentence */
+.bs-tile{display:inline-block;background:#fff;border:2px solid #003893;color:#003893;padding:5px 11px;border-radius:8px;margin:3px;font-weight:700;cursor:pointer;transition:all .15s;font-size:.88rem}
+.bs-tile:hover:not(.used){background:#f0f4ff;transform:translateY(-1px)}
+.bs-tile.used{opacity:.25;cursor:default}
+.bs-sentence{min-height:48px;border:2px dashed #ccc;border-radius:8px;padding:8px;margin:8px 0;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.bs-placed{display:inline-block;background:#003893;color:#fff;padding:4px 10px;border-radius:6px;font-weight:600;cursor:pointer;font-size:.88rem}
+
+/* Echo recording */
+.echo-btn{width:60px;height:60px;border-radius:50%;border:none;font-size:1.5rem;cursor:pointer;transition:all .2s}
+.echo-btn:hover{transform:scale(1.1)}
+.echo-record{background:#CE1126;color:#fff}
+.echo-record.recording{animation:pulse-rec 1s infinite}
+@keyframes pulse-rec{0%,100%{box-shadow:0 0 0 0 rgba(206,17,38,.4)}50%{box-shadow:0 0 0 12px rgba(206,17,38,0)}}
+.echo-play{background:#003893;color:#fff}
+
+/* Boss battle */
+.boss-char{font-size:4rem;display:inline-block;animation:boss-idle 1s ease-in-out infinite}
+@keyframes boss-idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes boss-attack{0%{transform:translateX(0) scale(1)}25%{transform:translateX(-20px) scale(1.2)}50%{transform:translateX(20px) scale(1.1)}100%{transform:translateX(0) scale(1)}}
+.boss-attack-anim{animation:boss-attack .5s ease-in-out!important}
+.hp-bar{width:180px;height:14px;background:#eee;border-radius:7px;overflow:hidden;margin:4px auto;display:inline-block}
+.hp-fill{height:100%;border-radius:7px;transition:width .3s}
+.hp-boss{background:#CE1126}.hp-player{background:#1E8449}
+
+/* Confetti */
+.confetti-wrap{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden}
+@keyframes confetti-fall{0%{transform:translateY(-10px) rotate(0deg)}100%{transform:translateY(105vh) rotate(720deg)}}
+
+/* Toast notification */
+.game-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 24px;border-radius:12px;font-weight:700;z-index:9998;animation:toast-in .3s ease-out;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+@keyframes toast-in{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* Stars */
+.stars{font-size:2rem;margin:8px 0}
+
 @media(max-width:420px){
   .card-container{width:290px;height:190px}
   .card-word{font-size:1.2rem}
-  .quiz-area,.match-area,.complete-screen{width:95vw}
+  .quiz-area,.match-area,.complete-screen,.game-card{width:95vw}
   .app-header h1{font-size:1.5rem}
   .progress-wrap{width:290px}
+  .mole-hole{height:56px;font-size:.65rem}
+  .mem-card{height:55px}
+  .ws-cell{width:24px;height:24px;font-size:.6rem}
+  .falling-area{height:300px;width:95vw}
+  .gender-btn{font-size:1.4rem;padding:14px 28px;min-width:90px}
+  .cw-cell{width:26px;height:26px}
 }
 </style>
 </head>
@@ -117,10 +263,40 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 
 <div class="nav-bar" id="navBar"></div>
 
-<div class="mode-bar">
-  <button class="mode-btn active" onclick="setMode('flashcard')">📇 Flashcards</button>
-  <button class="mode-btn" onclick="setMode('quiz')">❓ Quiz</button>
-  <button class="mode-btn" onclick="setMode('match')">🔗 Match</button>
+<div class="mode-bar" id="modeBar">
+  <span class="mode-section">VOCAB</span>
+  <button class="mode-btn active" data-mode="flashcard" onclick="setMode('flashcard')">📇 Flash</button>
+  <button class="mode-btn" data-mode="quiz" onclick="setMode('quiz')">❓ Quiz</button>
+  <button class="mode-btn" data-mode="match" onclick="setMode('match')">🔗 Match</button>
+  <button class="mode-btn" data-mode="scramble" onclick="setMode('scramble')">🔤 Scramble</button>
+  <button class="mode-btn" data-mode="hangman" onclick="setMode('hangman')">💀 Hangman</button>
+  <button class="mode-btn" data-mode="mole" onclick="setMode('mole')">🔨 Whack</button>
+  <button class="mode-btn" data-mode="memory" onclick="setMode('memory')">🧠 Memory</button>
+  <button class="mode-btn" data-mode="wordsearch" onclick="setMode('wordsearch')">🔍 Search</button>
+  <button class="mode-btn" data-mode="crossword" onclick="setMode('crossword')">✏️ Cross</button>
+  <button class="mode-btn" data-mode="chain" onclick="setMode('chain')">⛓️ Chain</button>
+  <span class="mode-section">LISTEN</span>
+  <button class="mode-btn" data-mode="listen" onclick="setMode('listen')">👂 Listen</button>
+  <button class="mode-btn" data-mode="echo" onclick="setMode('echo')">🎤 Echo</button>
+  <button class="mode-btn" data-mode="oddone" onclick="setMode('oddone')">🎧 Odd One</button>
+  <span class="mode-section">READ</span>
+  <button class="mode-btn" data-mode="fillblank" onclick="setMode('fillblank')">📝 Fill</button>
+  <button class="mode-btn" data-mode="truefalse" onclick="setMode('truefalse')">✔️ T/F</button>
+  <span class="mode-section">GRAMMAR</span>
+  <button class="mode-btn" data-mode="conjugation" onclick="setMode('conjugation')">🔀 Conj.</button>
+  <button class="mode-btn" data-mode="sortit" onclick="setMode('sortit')">🗂️ Sort</button>
+  <button class="mode-btn" data-mode="buildsentence" onclick="setMode('buildsentence')">🏗️ Build</button>
+  <button class="mode-btn" data-mode="gender" onclick="setMode('gender')">⚡ Gender</button>
+  <span class="mode-section">WRITE</span>
+  <button class="mode-btn" data-mode="translation" onclick="setMode('translation')">🔁 Translate</button>
+  <button class="mode-btn" data-mode="promptresponse" onclick="setMode('promptresponse')">💬 Prompt</button>
+  <button class="mode-btn" data-mode="madlibs" onclick="setMode('madlibs')">😂 Mad Libs</button>
+  <span class="mode-section">ARCADE</span>
+  <button class="mode-btn" data-mode="falling" onclick="setMode('falling')">⬇️ Falling</button>
+  <button class="mode-btn" data-mode="quizrace" onclick="setMode('quizrace')">🏁 Race</button>
+  <button class="mode-btn" data-mode="boss" onclick="setMode('boss')">👾 Boss</button>
+  <span class="mode-section">CULTURE</span>
+  <button class="mode-btn" data-mode="dialogue" onclick="setMode('dialogue')">🗣️ Dialogue</button>
 </div>
 
 <div class="stats-bar">
@@ -175,144 +351,169 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
   </div>
 </div>
 
+<!-- New Game Mode Containers -->
+<div id="scrambleMode" style="display:none"></div>
+<div id="hangmanMode" style="display:none"></div>
+<div id="moleMode" style="display:none"></div>
+<div id="memoryMode" style="display:none"></div>
+<div id="wordsearchMode" style="display:none"></div>
+<div id="crosswordMode" style="display:none"></div>
+<div id="chainMode" style="display:none"></div>
+<div id="listenMode" style="display:none"></div>
+<div id="echoMode" style="display:none"></div>
+<div id="oddoneMode" style="display:none"></div>
+<div id="fillblankMode" style="display:none"></div>
+<div id="truefalseMode" style="display:none"></div>
+<div id="conjugationMode" style="display:none"></div>
+<div id="sortitMode" style="display:none"></div>
+<div id="buildsentenceMode" style="display:none"></div>
+<div id="genderMode" style="display:none"></div>
+<div id="translationMode" style="display:none"></div>
+<div id="promptresponseMode" style="display:none"></div>
+<div id="madlibsMode" style="display:none"></div>
+<div id="fallingMode" style="display:none"></div>
+<div id="quizraceMode" style="display:none"></div>
+<div id="bossMode" style="display:none"></div>
+<div id="dialogueMode" style="display:none"></div>
+
 <!-- Completion -->
 <div id="completeMode" style="display:none"></div>
 
 <script>
 // ═══════════════════════════════════════════════
-// VOCABULARY DATA — Spanish 2 Colombia Unit
+// VOCABULARY DATA — Spanish 1 Colombia Unit
 // ═══════════════════════════════════════════════
 const categories = [
   {
     name: "Colombia & Travel",
     color: "cat-0",
     words: [
-      {es:"Colombia",en:"Colombia"},
-      {es:"Bogotá",en:"Bogotá (capital city)"},
-      {es:"Cartagena",en:"Cartagena (coastal city)"},
-      {es:"Medellín",en:"Medellín (city of eternal spring)"},
-      {es:"viajar",en:"to travel"},
-      {es:"el viaje",en:"the trip"},
-      {es:"el vuelo",en:"the flight"},
-      {es:"el aeropuerto",en:"the airport"},
-      {es:"el equipaje",en:"the luggage / baggage"},
-      {es:"la maleta",en:"the suitcase"},
-      {es:"el pasaporte",en:"the passport"},
-      {es:"el boleto / el billete",en:"the ticket"},
-      {es:"el hotel",en:"the hotel"},
-      {es:"la playa",en:"the beach"},
-      {es:"el mercado",en:"the market"},
-      {es:"tomar fotos",en:"to take photos"}
+      {es:"el aeropuerto",en:"airport"},
+      {es:"el avión",en:"airplane"},
+      {es:"el equipaje",en:"luggage / baggage"},
+      {es:"la maleta",en:"suitcase"},
+      {es:"el pasaporte",en:"passport"},
+      {es:"el boleto",en:"ticket"},
+      {es:"el hotel",en:"hotel"},
+      {es:"la habitación",en:"room (hotel)"},
+      {es:"el viaje",en:"trip / travel"},
+      {es:"el vuelo",en:"flight"},
+      {es:"la aduana",en:"customs"},
+      {es:"la playa",en:"beach"},
+      {es:"el mercado",en:"market"},
+      {es:"el museo",en:"museum"},
+      {es:"la guía",en:"guide / guidebook"},
+      {es:"el recuerdo",en:"souvenir / memory"}
     ]
   },
   {
     name: "Preterite -AR Regular",
     color: "cat-1",
     words: [
-      {es:"yo hablé",en:"I spoke / talked"},
-      {es:"tú hablaste",en:"you spoke / talked"},
-      {es:"él/ella habló",en:"he/she spoke / talked"},
-      {es:"nosotros hablamos",en:"we spoke / talked"},
-      {es:"ellos hablaron",en:"they spoke / talked"},
-      {es:"yo viajé",en:"I traveled"},
-      {es:"tú viajaste",en:"you traveled"},
-      {es:"yo compré",en:"I bought"},
-      {es:"ella visitó",en:"she visited"},
-      {es:"nosotros caminamos",en:"we walked"},
-      {es:"ellos bailaron",en:"they danced"},
-      {es:"yo tomé",en:"I took / drank"},
-      {es:"tú llegaste",en:"you arrived"},
-      {es:"ella preparó",en:"she prepared"},
-      {es:"yo nadé",en:"I swam"},
-      {es:"ellos cantaron",en:"they sang"}
+      {es:"hablar → hablé",en:"I spoke"},
+      {es:"hablar → hablaste",en:"you spoke"},
+      {es:"hablar → habló",en:"he/she spoke"},
+      {es:"hablar → hablamos",en:"we spoke"},
+      {es:"hablar → hablaron",en:"they spoke"},
+      {es:"comprar",en:"to buy"},
+      {es:"viajar",en:"to travel"},
+      {es:"llegar",en:"to arrive"},
+      {es:"caminar",en:"to walk"},
+      {es:"visitar",en:"to visit"},
+      {es:"nadar",en:"to swim"},
+      {es:"bailar",en:"to dance"},
+      {es:"cocinar",en:"to cook"},
+      {es:"tomar",en:"to take / to drink"},
+      {es:"descansar",en:"to rest"},
+      {es:"pasear",en:"to stroll / walk around"}
     ]
   },
   {
     name: "-CAR / -GAR / -ZAR",
     color: "cat-2",
     words: [
-      {es:"buscar → yo busqué",en:"to search → I searched"},
-      {es:"tocar → yo toqué",en:"to touch/play → I touched/played"},
-      {es:"sacar → yo saqué",en:"to take out → I took out"},
-      {es:"practicar → yo practiqué",en:"to practice → I practiced"},
-      {es:"explicar → yo expliqué",en:"to explain → I explained"},
-      {es:"llegar → yo llegué",en:"to arrive → I arrived"},
-      {es:"jugar → yo jugué",en:"to play → I played"},
-      {es:"pagar → yo pagué",en:"to pay → I paid"},
-      {es:"navegar → yo navegué",en:"to navigate → I navigated"},
-      {es:"empezar → yo empecé",en:"to begin → I began"},
-      {es:"almorzar → yo almorcé",en:"to eat lunch → I ate lunch"},
-      {es:"comenzar → yo comencé",en:"to start → I started"},
-      {es:"cruzar → yo crucé",en:"to cross → I crossed"},
-      {es:"abrazar → yo abracé",en:"to hug → I hugged"},
-      {es:"-car → c → qu (yo)",en:"spelling change in yo form"},
-      {es:"-gar → g → gu (yo)",en:"spelling change in yo form"}
+      {es:"buscar → busqué",en:"I looked for"},
+      {es:"tocar → toqué",en:"I touched / played"},
+      {es:"sacar → saqué",en:"I took out"},
+      {es:"practicar → practiqué",en:"I practiced"},
+      {es:"explicar → expliqué",en:"I explained"},
+      {es:"llegar → llegué",en:"I arrived"},
+      {es:"pagar → pagué",en:"I paid"},
+      {es:"jugar → jugué",en:"I played"},
+      {es:"navegar → navegué",en:"I navigated / sailed"},
+      {es:"almorzar → almorcé",en:"I ate lunch"},
+      {es:"empezar → empecé",en:"I began"},
+      {es:"comenzar → comencé",en:"I started"},
+      {es:"abrazar → abracé",en:"I hugged"},
+      {es:"cruzar → crucé",en:"I crossed"},
+      {es:"organizar → organicé",en:"I organized"},
+      {es:"utilizar → utilicé",en:"I used / utilized"}
     ]
   },
   {
     name: "Y-Verbs Preterite",
     color: "cat-3",
     words: [
-      {es:"leer → leyó / leyeron",en:"to read → he read / they read"},
-      {es:"yo leí",en:"I read (past)"},
-      {es:"creer → creyó / creyeron",en:"to believe → he believed / they believed"},
-      {es:"yo creí",en:"I believed"},
-      {es:"oír → oyó / oyeron",en:"to hear → he heard / they heard"},
-      {es:"yo oí",en:"I heard"},
-      {es:"caer → cayó / cayeron",en:"to fall → he fell / they fell"},
-      {es:"yo caí",en:"I fell"},
-      {es:"construir → construyó",en:"to build → he/she built"},
-      {es:"yo construí",en:"I built"},
-      {es:"destruir → destruyó",en:"to destroy → he/she destroyed"},
-      {es:"incluir → incluyó",en:"to include → he/she included"},
-      {es:"huir → huyó",en:"to flee → he/she fled"},
-      {es:"i → y (él/ellos)",en:"spelling change: i changes to y between vowels"},
-      {es:"contribuir → contribuyó",en:"to contribute → he/she contributed"},
-      {es:"sustituir → sustituyó",en:"to substitute → he/she substituted"}
+      {es:"leer → leyó",en:"he/she read"},
+      {es:"leer → leyeron",en:"they read"},
+      {es:"creer → creyó",en:"he/she believed"},
+      {es:"creer → creyeron",en:"they believed"},
+      {es:"oír → oyó",en:"he/she heard"},
+      {es:"oír → oyeron",en:"they heard"},
+      {es:"caer → cayó",en:"he/she fell"},
+      {es:"caer → cayeron",en:"they fell"},
+      {es:"construir → construyó",en:"he/she built"},
+      {es:"construir → construyeron",en:"they built"},
+      {es:"destruir → destruyó",en:"he/she destroyed"},
+      {es:"destruir → destruyeron",en:"they destroyed"},
+      {es:"incluir → incluyó",en:"he/she included"},
+      {es:"incluir → incluyeron",en:"they included"},
+      {es:"contribuir → contribuyó",en:"he/she contributed"},
+      {es:"contribuir → contribuyeron",en:"they contributed"}
     ]
   },
   {
     name: "Stem-Change -IR Pret.",
     color: "cat-4",
     words: [
-      {es:"dormir → durmió / durmieron",en:"to sleep → he slept / they slept"},
-      {es:"morir → murió / murieron",en:"to die → he died / they died"},
-      {es:"pedir → pidió / pidieron",en:"to ask for → he asked / they asked"},
-      {es:"servir → sirvió / sirvieron",en:"to serve → he served / they served"},
-      {es:"preferir → prefirió",en:"to prefer → he/she preferred"},
-      {es:"sentir → sintió / sintieron",en:"to feel → he felt / they felt"},
-      {es:"repetir → repitió",en:"to repeat → he/she repeated"},
-      {es:"seguir → siguió / siguieron",en:"to follow → he followed / they followed"},
-      {es:"vestirse → se vistió",en:"to get dressed → he/she got dressed"},
-      {es:"mentir → mintió",en:"to lie → he/she lied"},
-      {es:"divertirse → se divirtió",en:"to have fun → he/she had fun"},
-      {es:"conseguir → consiguió",en:"to get/obtain → he/she obtained"},
-      {es:"o → u (él/ellos)",en:"stem change: o→u in 3rd person preterite"},
-      {es:"e → i (él/ellos)",en:"stem change: e→i in 3rd person preterite"},
-      {es:"yo dormí",en:"I slept"},
-      {es:"yo pedí",en:"I asked for / ordered"}
+      {es:"dormir → durmió",en:"he/she slept"},
+      {es:"dormir → durmieron",en:"they slept"},
+      {es:"morir → murió",en:"he/she died"},
+      {es:"morir → murieron",en:"they died"},
+      {es:"pedir → pidió",en:"he/she asked for"},
+      {es:"pedir → pidieron",en:"they asked for"},
+      {es:"servir → sirvió",en:"he/she served"},
+      {es:"servir → sirvieron",en:"they served"},
+      {es:"repetir → repitió",en:"he/she repeated"},
+      {es:"repetir → repitieron",en:"they repeated"},
+      {es:"preferir → prefirió",en:"he/she preferred"},
+      {es:"preferir → prefirieron",en:"they preferred"},
+      {es:"sentir → sintió",en:"he/she felt"},
+      {es:"sentir → sintieron",en:"they felt"},
+      {es:"vestirse → se vistió",en:"he/she got dressed"},
+      {es:"vestirse → se vistieron",en:"they got dressed"}
     ]
   },
   {
     name: "Irregular Preterite",
     color: "cat-5",
     words: [
-      {es:"decir → dije, dijo, dijeron",en:"to say/tell → I said, he said, they said"},
-      {es:"traer → traje, trajo, trajeron",en:"to bring → I brought, he brought, they brought"},
-      {es:"venir → vine, vino, vinieron",en:"to come → I came, he came, they came"},
-      {es:"dar → di, dio, dieron",en:"to give → I gave, he gave, they gave"},
-      {es:"ver → vi, vio, vieron",en:"to see → I saw, he saw, they saw"},
-      {es:"hacer → hice, hizo, hicieron",en:"to do/make → I did, he did, they did"},
-      {es:"ir → fui, fue, fueron",en:"to go → I went, he went, they went"},
-      {es:"ser → fui, fue, fueron",en:"to be → I was, he was, they were"},
-      {es:"tener → tuve, tuvo, tuvieron",en:"to have → I had, he had, they had"},
-      {es:"estar → estuve, estuvo",en:"to be → I was, he/she was"},
-      {es:"poder → pude, pudo, pudieron",en:"to be able → I could, he could, they could"},
-      {es:"poner → puse, puso, pusieron",en:"to put → I put, he put, they put"},
-      {es:"saber → supe, supo, supieron",en:"to know → I found out, he found out"},
-      {es:"querer → quise, quiso",en:"to want → I wanted, he/she wanted"},
-      {es:"hay → hubo",en:"there is/are → there was/were"},
-      {es:"no hay acentos",en:"irregular preterite stems have no accents"}
+      {es:"ir → fui",en:"I went"},
+      {es:"ir → fue",en:"he/she went"},
+      {es:"ir → fueron",en:"they went"},
+      {es:"ser → fui",en:"I was"},
+      {es:"hacer → hice",en:"I did / made"},
+      {es:"hacer → hizo",en:"he/she did / made"},
+      {es:"tener → tuve",en:"I had"},
+      {es:"estar → estuve",en:"I was (location)"},
+      {es:"poder → pude",en:"I was able to"},
+      {es:"poner → puse",en:"I put"},
+      {es:"saber → supe",en:"I found out"},
+      {es:"querer → quise",en:"I wanted / tried"},
+      {es:"venir → vine",en:"I came"},
+      {es:"decir → dije",en:"I said"},
+      {es:"traer → traje",en:"I brought"},
+      {es:"dar → di",en:"I gave"}
     ]
   }
 ];
@@ -326,277 +527,1898 @@ let deck = [];
 let known = new Set();
 let streak = 0;
 let mode = 'flashcard';
-let quizScore = 0;
-let quizTotal = 0;
-let quizCurrent = null;
-let matchSelected = null;
-let matchPairs = 0;
-let matchStart = 0;
+let quizScore = 0, quizTotal = 0, quizCurrent = null;
+let matchSelected = null, matchPairs = 0, matchStart = 0;
 
-function init(){
+// Timer/animation tracking for cleanup
+let _moleTimer, _chainTimer, _genderTimer, _raceTimer, _fallingRAF, _bossTimer;
+let _echoRecorder = null;
+let _activeIntervals = [];
+
+const ANTHROPIC_API_KEY = '';  // Fill in to enable Build-a-Sentence and Prompt Response AI validation
+
+const ALL_MODES = ['flashcard','quiz','match','scramble','hangman','mole','memory',
+  'wordsearch','crossword','chain','listen','echo','oddone','fillblank','truefalse',
+  'conjugation','sortit','buildsentence','gender','translation','promptresponse',
+  'madlibs','falling','quizrace','boss','dialogue'];
+
+// ═══════════════════════════════════
+// SHARED HELPERS
+// ═══════════════════════════════════
+function getRandItems(arr, n) {
+  const a = [...arr].sort(() => Math.random() - .5);
+  return a.slice(0, Math.min(n, a.length));
+}
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function normalizeText(s) {
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+}
+
+function stripArticle(es) {
+  return es.replace(/^(el|la|los|las|un|una)\s+/i, '');
+}
+
+function speakES(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text.replace(/\//g, ' ').replace(/…/g, '').replace(/\+/g, ''));
+  u.lang = 'es-MX'; u.rate = 0.82;
+  window.speechSynthesis.speak(u);
+}
+
+function showToast(msg, duration) {
+  const t = document.createElement('div');
+  t.className = 'game-toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), duration || 2500);
+}
+
+function addInterval(fn, ms) {
+  const id = setInterval(fn, ms);
+  _activeIntervals.push(id);
+  return id;
+}
+
+function cleanupActiveMode() {
+  clearTimeout(_moleTimer); clearTimeout(_chainTimer); clearTimeout(_genderTimer);
+  clearTimeout(_raceTimer); clearTimeout(_bossTimer);
+  _activeIntervals.forEach(clearInterval);
+  _activeIntervals = [];
+  if (_fallingRAF) { cancelAnimationFrame(_fallingRAF); _fallingRAF = null; }
+  if (_echoRecorder && _echoRecorder.state === 'recording') {
+    try { _echoRecorder.stop(); } catch(e) {}
+  }
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  // Remove any lingering event listeners on document
+  document.removeEventListener('keydown', _fallingKeyHandler);
+}
+
+// ═══════════════════════════════════
+// INIT & NAVIGATION
+// ═══════════════════════════════════
+function init() {
   renderNav();
   selectCategory(0);
 }
 
-function renderNav(){
+function renderNav() {
   const bar = document.getElementById('navBar');
-  bar.innerHTML = categories.map((c,i) =>
-    `<button class="nav-btn ${c.color}${i===currentCat?' active':''}" onclick="selectCategory(${i})">${c.name}</button>`
+  bar.innerHTML = categories.map((c, i) =>
+    `<button class="nav-btn ${c.color}${i === currentCat ? ' active' : ''}" onclick="selectCategory(${i})">${c.name}</button>`
   ).join('');
 }
 
-function selectCategory(idx){
+function selectCategory(idx) {
   currentCat = idx;
   currentIdx = 0;
   deck = [...categories[idx].words];
   known = new Set();
+  streak = 0;
   renderNav();
   updateStats();
-  if(mode==='flashcard') showCard();
-  else if(mode==='quiz') startQuiz();
-  else if(mode==='match') startMatch();
+  setMode(mode);
 }
 
-function setMode(m){
+// ═══════════════════════════════════
+// MODE SWITCHING (dynamic)
+// ═══════════════════════════════════
+function setMode(m) {
   mode = m;
-  document.querySelectorAll('.mode-btn').forEach((b,i) => {
-    b.classList.toggle('active', ['flashcard','quiz','match'][i] === m);
+  cleanupActiveMode();
+  ALL_MODES.forEach(id => {
+    const el = document.getElementById(id + 'Mode');
+    if (el) el.style.display = (id === m) ? '' : 'none';
   });
-  document.getElementById('flashcardMode').style.display = m==='flashcard'?'':'none';
-  document.getElementById('quizMode').style.display = m==='quiz'?'':'none';
-  document.getElementById('matchMode').style.display = m==='match'?'':'none';
   document.getElementById('completeMode').style.display = 'none';
-  if(m==='flashcard'){currentIdx=0;showCard();}
-  else if(m==='quiz'){quizScore=0;quizTotal=0;startQuiz();}
-  else if(m==='match') startMatch();
+  document.querySelectorAll('.mode-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.mode === m);
+  });
+  const inits = {
+    flashcard: () => { currentIdx = 0; showCard(); },
+    quiz: () => { quizScore = 0; quizTotal = 0; startQuiz(); },
+    match: startMatch,
+    scramble: initScramble, hangman: initHangman, mole: initMole,
+    memory: initMemory, wordsearch: initWordSearch, crossword: initCrossword,
+    chain: initChain, listen: initListen, echo: initEcho, oddone: initOddOne,
+    fillblank: initFillBlank, truefalse: initTrueFalse, conjugation: initConjugation,
+    sortit: initSortIt, buildsentence: initBuildSentence, gender: initGender,
+    translation: initTranslation, promptresponse: initPromptResponse, madlibs: initMadLibs,
+    falling: initFalling, quizrace: initQuizRace, boss: initBoss, dialogue: initDialogue
+  };
+  if (inits[m]) inits[m]();
 }
 
-// ── Audio pronunciation ──────────────────────────────────────────────────────
-function vocabSlug(text){
+// ═══════════════════════════════════
+// AUDIO PRONUNCIATION
+// ═══════════════════════════════════
+function vocabSlug(text) {
   return text
     .toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')  // strip accents
-    .replace(/[¿?!¡…\/]/g,'')                         // strip punctuation
-    .replace(/\s*\+\s*/g,'-')                          // + → dash
-    .replace(/\s*\(([^)]+)\)/g,'-$1')                 // (de) → -de
-    .replace(/\/[a-z]/g,'')                            // /a → remove
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[¿?!¡…\/]/g, '')
+    .replace(/\s*\+\s*/g, '-')
+    .replace(/\s*\(([^)]+)\)/g, '-$1')
+    .replace(/\/[a-z]/g, '')
     .trim()
-    .replace(/[\s]+/g,'-')                             // spaces → dashes
-    .replace(/-+/g,'-')
-    .replace(/^-|-$/g,'');
+    .replace(/[\s]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
 }
 var _currentAudio = null;
-function speakWord(){
-  if(deck.length===0) return;
+function speakWord() {
+  if (deck.length === 0) return;
   var w = deck[currentIdx % deck.length];
   var btn = document.getElementById('speakBtn');
-  // stop any playing audio
-  if(_currentAudio){ _currentAudio.pause(); _currentAudio.currentTime=0; }
+  if (_currentAudio) { _currentAudio.pause(); _currentAudio.currentTime = 0; }
   var slug = vocabSlug(w.es);
-  var mp3  = 'audio/vocab-sp2-' + slug + '.mp3';
+  var mp3 = 'audio/vocab-sp2-' + slug + '.mp3';
   var audio = new Audio(mp3);
   _currentAudio = audio;
-  btn.classList.add('playing');
-  audio.addEventListener('ended', function(){ btn.classList.remove('playing'); });
-  audio.onerror = function(){
-    btn.classList.remove('playing');
-    // fallback: Web Speech API
-    if(window.speechSynthesis){
-      var u = new SpeechSynthesisUtterance(w.es.replace('/a','').replace('…',''));
-      u.lang='es-MX'; u.rate=0.82;
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(u);
-    }
+  if (btn) btn.classList.add('playing');
+  audio.addEventListener('ended', function() { if (btn) btn.classList.remove('playing'); });
+  audio.onerror = function() {
+    if (btn) btn.classList.remove('playing');
+    speakES(w.es);
   };
-  audio.play().catch(function(){ audio.onerror(); });
+  audio.play().catch(function() { audio.onerror(); });
 }
 
-// FLASHCARD MODE
-function showCard(){
+// ═══════════════════════════════════
+// FLASHCARD MODE (existing)
+// ═══════════════════════════════════
+function showCard() {
   const c = document.getElementById('cardContainer');
   c.classList.remove('flipped');
-  if(deck.length === 0){showComplete();return;}
+  if (deck.length === 0) { showComplete(); return; }
   const w = deck[currentIdx % deck.length];
   document.getElementById('frontWord').textContent = w.es;
   document.getElementById('backWord').textContent = w.en;
   document.getElementById('frontHint').textContent = '';
-  document.getElementById('cardCounter').textContent = `${currentIdx+1} / ${deck.length}`;
+  document.getElementById('cardCounter').textContent = `${currentIdx + 1} / ${deck.length}`;
   const pct = deck.length > 0 ? (known.size / (known.size + deck.length)) * 100 : 100;
   document.getElementById('progressFill').style.width = pct + '%';
 }
-
-function flipCard(){document.getElementById('cardContainer').classList.toggle('flipped');}
-function nextCard(){if(deck.length===0)return;currentIdx=(currentIdx+1)%deck.length;showCard();}
-function prevCard(){if(deck.length===0)return;currentIdx=(currentIdx-1+deck.length)%deck.length;showCard();}
-
-function markKnow(){
-  if(deck.length===0) return;
-  const w = deck.splice(currentIdx,1)[0];
-  known.add(w.es);
-  streak++;
-  if(currentIdx >= deck.length) currentIdx = 0;
-  updateStats();
-  showCard();
+function flipCard() { document.getElementById('cardContainer').classList.toggle('flipped'); }
+function nextCard() { if (!deck.length) return; currentIdx = (currentIdx + 1) % deck.length; showCard(); }
+function prevCard() { if (!deck.length) return; currentIdx = (currentIdx - 1 + deck.length) % deck.length; showCard(); }
+function markKnow() {
+  if (!deck.length) return;
+  const w = deck.splice(currentIdx, 1)[0];
+  known.add(w.es); streak++;
+  if (currentIdx >= deck.length) currentIdx = 0;
+  updateStats(); checkStreakBonus(); showCard();
 }
+function markStudy() { if (!deck.length) return; streak = 0; nextCard(); updateStats(); }
+function shuffleDeck() { shuffleArray(deck); currentIdx = 0; showCard(); }
 
-function markStudy(){
-  if(deck.length===0) return;
-  streak = 0;
-  nextCard();
-  updateStats();
-}
-
-function shuffleDeck(){
-  for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
-  currentIdx=0;
-  showCard();
-}
-
-function showComplete(){
-  document.getElementById('flashcardMode').style.display='none';
-  document.getElementById('quizMode').style.display='none';
-  document.getElementById('matchMode').style.display='none';
-  const el=document.getElementById('completeMode');
-  el.style.display='';
-  el.innerHTML=`<div class="complete-screen">
+function showComplete() {
+  ALL_MODES.forEach(id => { const el = document.getElementById(id + 'Mode'); if (el) el.style.display = 'none'; });
+  const el = document.getElementById('completeMode');
+  el.style.display = '';
+  el.innerHTML = `<div class="complete-screen">
     <h2>🎉 ¡Excelente!</h2>
     <p>You've reviewed all cards in <strong>${categories[currentCat].name}</strong>!</p>
     <div class="big-stat">${known.size} / ${categories[currentCat].words.length}</div>
     <p>Words marked as known</p>
     <button class="ctrl-btn btn-next" onclick="resetCategory()" style="margin-top:12px">🔄 Study Again</button>
+    <button class="ctrl-btn" style="background:#8E44AD;margin-top:8px" onclick="setMode('boss')">👾 Boss Battle!</button>
   </div>`;
 }
+function resetCategory() { selectCategory(currentCat); }
 
-function resetCategory(){selectCategory(currentCat);setMode(mode);}
-
-// QUIZ MODE
-function startQuiz(){quizScore=0;quizTotal=0;nextQuiz();}
-
-function nextQuiz(){
+// ═══════════════════════════════════
+// QUIZ MODE (existing)
+// ═══════════════════════════════════
+function startQuiz() { quizScore = 0; quizTotal = 0; nextQuiz(); }
+function nextQuiz() {
   const words = categories[currentCat].words;
-  if(words.length < 4) return;
-  const idx = Math.floor(Math.random()*words.length);
-  const correct = words[idx];
-  const dir = Math.random()>.5 ? 'es2en' : 'en2es';
+  if (words.length < 4) return;
+  const correct = words[Math.floor(Math.random() * words.length)];
+  const dir = Math.random() > .5 ? 'es2en' : 'en2es';
   let opts = [correct];
-  while(opts.length<4){
-    const r = words[Math.floor(Math.random()*words.length)];
-    if(!opts.includes(r)) opts.push(r);
-  }
-  opts.sort(()=>Math.random()-.5);
-  quizCurrent = {correct, dir, answered:false};
+  while (opts.length < 4) { const r = words[Math.floor(Math.random() * words.length)]; if (!opts.includes(r)) opts.push(r); }
+  shuffleArray(opts);
+  quizCurrent = { correct, dir, answered: false };
   const area = document.getElementById('quizArea');
-  const prompt = dir==='es2en' ? correct.es : correct.en;
-  const qLabel = dir==='es2en' ? 'What does this mean in English?' : '¿Cómo se dice en español?';
+  const prompt = dir === 'es2en' ? correct.es : correct.en;
+  const qLabel = dir === 'es2en' ? 'What does this mean in English?' : '¿Cómo se dice en español?';
   area.innerHTML = `
     <div class="quiz-prompt">${prompt}</div>
     <p style="color:#666;margin-bottom:12px;font-size:.9rem">${qLabel}</p>
     <div class="quiz-options">
-      ${opts.map((o,i) => {
-        const display = dir==='es2en' ? o.en : o.es;
-        return `<button class="quiz-opt" data-idx="${i}" onclick="answerQuiz(this,${o===correct})">${display}</button>`;
+      ${opts.map((o, i) => {
+        const display = dir === 'es2en' ? o.en : o.es;
+        return `<button class="quiz-opt" data-idx="${i}" onclick="answerQuiz(this,${o === correct})">${display}</button>`;
       }).join('')}
     </div>
     <div class="quiz-feedback" id="quizFeedback"></div>
-    <div class="quiz-score">Score: ${quizScore} / ${quizTotal}</div>
-  `;
+    <div class="quiz-score">Score: ${quizScore} / ${quizTotal}</div>`;
 }
-
-function answerQuiz(btn, isCorrect){
-  if(quizCurrent.answered) return;
-  quizCurrent.answered = true;
-  quizTotal++;
+function answerQuiz(btn, isCorrect) {
+  if (quizCurrent.answered) return;
+  quizCurrent.answered = true; quizTotal++;
   const fb = document.getElementById('quizFeedback');
-  if(isCorrect){
-    btn.classList.add('correct');
-    quizScore++;
-    streak++;
-    fb.className='quiz-feedback correct-fb';
-    fb.textContent='✅ ¡Correcto!';
+  if (isCorrect) {
+    btn.classList.add('correct'); quizScore++; streak++;
+    fb.className = 'quiz-feedback correct-fb'; fb.textContent = '✅ ¡Correcto!';
+    checkStreakBonus();
   } else {
-    btn.classList.add('wrong');
-    streak=0;
-    fb.className='quiz-feedback wrong-fb';
-    fb.textContent='❌ Not quite…';
-    const dir = quizCurrent.dir;
-    const correctText = dir==='es2en' ? quizCurrent.correct.en : quizCurrent.correct.es;
-    document.querySelectorAll('.quiz-opt').forEach(b => {
-      if(b.textContent === correctText) b.classList.add('reveal');
-    });
+    btn.classList.add('wrong'); streak = 0;
+    fb.className = 'quiz-feedback wrong-fb'; fb.textContent = '❌ Not quite…';
+    const correctText = quizCurrent.dir === 'es2en' ? quizCurrent.correct.en : quizCurrent.correct.es;
+    document.querySelectorAll('.quiz-opt').forEach(b => { if (b.textContent === correctText) b.classList.add('reveal'); });
   }
   updateStats();
 }
 
-// MATCH MODE
-function startMatch(){
+// ═══════════════════════════════════
+// MATCH MODE (existing)
+// ═══════════════════════════════════
+function startMatch() {
   const words = categories[currentCat].words;
   const count = Math.min(6, words.length);
-  const shuffled = [...words].sort(()=>Math.random()-.5).slice(0,count);
+  const shuffled = getRandItems(words, count);
   const tiles = [];
   shuffled.forEach(w => {
-    tiles.push({text:w.es, pairId:w.es, type:'es'});
-    tiles.push({text:w.en, pairId:w.es, type:'en'});
+    tiles.push({ text: w.es, pairId: w.es, type: 'es' });
+    tiles.push({ text: w.en, pairId: w.es, type: 'en' });
   });
-  tiles.sort(()=>Math.random()-.5);
-  matchPairs = 0;
-  matchSelected = null;
-  matchStart = Date.now();
+  shuffleArray(tiles);
+  matchPairs = 0; matchSelected = null; matchStart = Date.now();
   const area = document.getElementById('matchArea');
   area.innerHTML = `
     <div class="match-title">Match Spanish ↔ English (${count} pairs)</div>
     <div class="match-grid">
-      ${tiles.map((t,i) => `<div class="match-tile" data-pair="${t.pairId}" data-type="${t.type}" data-idx="${i}" onclick="matchTap(this)">${t.text}</div>`).join('')}
+      ${tiles.map((t, i) => `<div class="match-tile" data-pair="${t.pairId}" data-type="${t.type}" data-idx="${i}" onclick="matchTap(this)">${t.text}</div>`).join('')}
     </div>
-    <div class="match-timer" id="matchTimer">Pairs found: 0 / ${count}</div>
-  `;
+    <div class="match-timer" id="matchTimer">Pairs found: 0 / ${count}</div>`;
 }
-
-function matchTap(tile){
-  if(tile.classList.contains('matched')) return;
-  if(matchSelected && matchSelected === tile){
-    tile.classList.remove('selected');
-    matchSelected = null;
-    return;
-  }
-  if(!matchSelected){
-    tile.classList.add('selected');
-    matchSelected = tile;
-    return;
-  }
-  const pair1 = matchSelected.dataset.pair;
-  const pair2 = tile.dataset.pair;
-  const type1 = matchSelected.dataset.type;
-  const type2 = tile.dataset.type;
-  if(pair1 === pair2 && type1 !== type2){
-    matchSelected.classList.remove('selected');
-    matchSelected.classList.add('matched');
-    tile.classList.add('matched');
-    matchPairs++;
-    streak++;
+function matchTap(tile) {
+  if (tile.classList.contains('matched')) return;
+  if (matchSelected && matchSelected === tile) { tile.classList.remove('selected'); matchSelected = null; return; }
+  if (!matchSelected) { tile.classList.add('selected'); matchSelected = tile; return; }
+  const pair1 = matchSelected.dataset.pair, pair2 = tile.dataset.pair;
+  const type1 = matchSelected.dataset.type, type2 = tile.dataset.type;
+  if (pair1 === pair2 && type1 !== type2) {
+    matchSelected.classList.remove('selected'); matchSelected.classList.add('matched');
+    tile.classList.add('matched'); matchPairs++; streak++;
     const total = document.querySelectorAll('.match-tile').length / 2;
     document.getElementById('matchTimer').textContent = `Pairs found: ${matchPairs} / ${total}`;
-    if(matchPairs === total){
-      const elapsed = ((Date.now()-matchStart)/1000).toFixed(1);
+    if (matchPairs === total) {
+      const elapsed = ((Date.now() - matchStart) / 1000).toFixed(1);
       document.getElementById('matchTimer').innerHTML = `<strong>🎉 All matched in ${elapsed}s!</strong>`;
     }
+    checkStreakBonus();
   } else {
     matchSelected.classList.remove('selected');
-    matchSelected.classList.add('wrong-match');
-    tile.classList.add('wrong-match');
+    matchSelected.classList.add('wrong-match'); tile.classList.add('wrong-match');
     streak = 0;
-    const s1=matchSelected, s2=tile;
-    setTimeout(()=>{s1.classList.remove('wrong-match');s2.classList.remove('wrong-match');},500);
+    const s1 = matchSelected, s2 = tile;
+    setTimeout(() => { s1.classList.remove('wrong-match'); s2.classList.remove('wrong-match'); }, 500);
   }
-  matchSelected = null;
-  updateStats();
+  matchSelected = null; updateStats();
 }
 
-function updateStats(){
+// ═══════════════════════════════════
+// STATS & STREAK BUILDER
+// ═══════════════════════════════════
+function updateStats() {
   document.getElementById('learnedCount').textContent = known.size;
   document.getElementById('totalCount').textContent = categories[currentCat].words.length;
   document.getElementById('streak').textContent = streak;
 }
 
+function checkStreakBonus() {
+  if (streak > 0 && streak % 5 === 0) {
+    showToast('🔥 ' + streak + ' streak! Bonus Round unlocked!', 3000);
+  }
+}
+
+// ═══════════════════════════════════════════════
+// 1. WORD SCRAMBLE
+// ═══════════════════════════════════════════════
+let scrambleWord, scrambleLetters, scrambleGuess;
+
+function initScramble() {
+  const words = categories[currentCat].words;
+  scrambleWord = words[Math.floor(Math.random() * words.length)];
+  const chars = [...scrambleWord.es].map((c, i) => ({ char: c, id: i, used: false }));
+  shuffleArray(chars);
+  scrambleLetters = chars;
+  scrambleGuess = [];
+  renderScramble();
+}
+
+function renderScramble() {
+  const target = [...scrambleWord.es];
+  const guessChars = scrambleGuess.map(i => scrambleLetters[i].char);
+  const el = document.getElementById('scrambleMode');
+  el.innerHTML = `<div class="game-card">
+    <div class="game-title">🔤 Word Scramble</div>
+    <p class="game-subtitle">Click letters to spell the Spanish word</p>
+    <button class="ctrl-btn btn-study" style="font-size:.72rem;padding:4px 10px;margin-bottom:8px"
+      onclick="this.style.display='none';document.getElementById('scrHint').style.display=''">💡 Show Hint</button>
+    <div id="scrHint" style="display:none;color:#555;margin-bottom:8px;font-style:italic">${scrambleWord.en}</div>
+    <div style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center;margin:10px 0;min-height:44px">
+      ${target.map((_, i) => `<span class="letter-box${guessChars[i] ? ' filled' : ''}">${guessChars[i] || '&nbsp;'}</span>`).join('')}
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:10px 0">
+      ${scrambleLetters.map((l, i) => `<button class="letter-tile${l.used ? ' used' : ''}" onclick="scramblePick(${i})" ${l.used ? 'disabled' : ''}>${l.char}</button>`).join('')}
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button class="ctrl-btn btn-study" onclick="scrambleBack()">⌫ Back</button>
+      <button class="ctrl-btn btn-next" onclick="initScramble()">⏭ New Word</button>
+    </div>
+  </div>`;
+}
+
+function scramblePick(idx) {
+  if (scrambleLetters[idx].used) return;
+  const target = [...scrambleWord.es];
+  if (scrambleGuess.length >= target.length) return;
+  scrambleLetters[idx].used = true;
+  scrambleGuess.push(idx);
+  if (scrambleGuess.length === target.length) {
+    const guess = scrambleGuess.map(i => scrambleLetters[i].char).join('');
+    if (guess === scrambleWord.es) {
+      streak++;
+      updateStats();
+      document.getElementById('scrambleMode').innerHTML = `<div class="game-card" style="text-align:center">
+        <div style="font-size:3rem">🎉</div>
+        <div style="font-family:'Fredoka One';font-size:1.4rem;color:#1E8449;margin:8px 0">¡Correcto!</div>
+        <div style="font-size:1.1rem;color:#003893">${scrambleWord.es}</div>
+        <div style="color:#555;margin:4px 0">${scrambleWord.en}</div>
+        <button class="ctrl-btn btn-next" style="margin-top:12px" onclick="initScramble()">Next Word ▶</button>
+      </div>`;
+      return;
+    } else {
+      streak = 0; updateStats();
+      showToast('Not quite! Try again.', 1500);
+      setTimeout(() => { scrambleGuess = []; scrambleLetters.forEach(l => l.used = false); shuffleArray(scrambleLetters); renderScramble(); }, 800);
+      return;
+    }
+  }
+  renderScramble();
+}
+
+function scrambleBack() {
+  if (!scrambleGuess.length) return;
+  const last = scrambleGuess.pop();
+  scrambleLetters[last].used = false;
+  renderScramble();
+}
+
+// ═══════════════════════════════════════════════
+// 2. HANGMAN
+// ═══════════════════════════════════════════════
+let hmWord, hmGuesses, hmWrong;
+const HM_MAX = 6;
+const HM_PARTS = [
+  '<circle cx="100" cy="30" r="12" stroke="#333" stroke-width="3" fill="none"/>',
+  '<line x1="100" y1="42" x2="100" y2="85" stroke="#333" stroke-width="3"/>',
+  '<line x1="100" y1="55" x2="75" y2="75" stroke="#333" stroke-width="3"/>',
+  '<line x1="100" y1="55" x2="125" y2="75" stroke="#333" stroke-width="3"/>',
+  '<line x1="100" y1="85" x2="75" y2="115" stroke="#333" stroke-width="3"/>',
+  '<line x1="100" y1="85" x2="125" y2="115" stroke="#333" stroke-width="3"/>'
+];
+
+function initHangman() {
+  hmWord = categories[currentCat].words[Math.floor(Math.random() * categories[currentCat].words.length)];
+  hmGuesses = new Set();
+  hmWrong = 0;
+  renderHangman();
+}
+
+function renderHangman() {
+  const word = hmWord.es.toUpperCase();
+  const letters = [...word];
+  const allRevealed = letters.every(c => c === ' ' || !/[A-ZÁÉÍÓÚÑÜ]/i.test(c) || isHmGuessed(c));
+  const wordDisplay = letters.map(c => {
+    if (c === ' ') return '<span style="width:16px;display:inline-block"></span>';
+    if (!/[A-ZÁÉÍÓÚÑÜ]/i.test(c)) return `<span class="letter-box filled">${c}</span>`;
+    return `<span class="letter-box${isHmGuessed(c) ? ' filled' : ''}">${isHmGuessed(c) ? c : ''}</span>`;
+  }).join('');
+
+  const kb = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('').map(c =>
+    `<button class="hangman-key${hmGuesses.has(c) ? ' used' : ''}" onclick="hmGuess('${c}')" ${hmGuesses.has(c) ? 'disabled' : ''}>${c}</button>`
+  ).join('');
+
+  const el = document.getElementById('hangmanMode');
+  el.innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">💀 Hangman</div>
+    <p style="color:#555;margin-bottom:6px">Clue: <strong>${hmWord.en}</strong></p>
+    <svg width="160" height="130" style="display:block;margin:0 auto">
+      <line x1="20" y1="125" x2="140" y2="125" stroke="#555" stroke-width="3"/>
+      <line x1="60" y1="125" x2="60" y2="8" stroke="#555" stroke-width="3"/>
+      <line x1="60" y1="8" x2="100" y2="8" stroke="#555" stroke-width="3"/>
+      <line x1="100" y1="8" x2="100" y2="18" stroke="#555" stroke-width="3"/>
+      ${HM_PARTS.slice(0, hmWrong).join('')}
+    </svg>
+    <div style="font-size:.85rem;color:#CE1126;margin:4px 0">${HM_MAX - hmWrong} guesses left</div>
+    <div style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center;margin:10px 0">${wordDisplay}</div>
+    ${allRevealed ? `<div style="color:#1E8449;font-weight:700;font-size:1.1rem;margin:8px 0">🎉 ¡Ganaste!</div>
+      <button class="ctrl-btn btn-next" onclick="initHangman()">Next Word ▶</button>`
+     : hmWrong >= HM_MAX ? `<div style="color:#CE1126;font-weight:700;margin:8px 0">💀 Answer: <strong>${hmWord.es}</strong></div>
+      <button class="ctrl-btn btn-next" onclick="initHangman()">Try Again ▶</button>`
+     : `<div style="display:flex;flex-wrap:wrap;gap:3px;justify-content:center;max-width:310px;margin:0 auto">${kb}</div>`}
+  </div>`;
+}
+
+function isHmGuessed(c) {
+  const n = c.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
+  return hmGuesses.has(c.toUpperCase()) || hmGuesses.has(n);
+}
+
+function hmGuess(letter) {
+  if (hmGuesses.has(letter)) return;
+  hmGuesses.add(letter);
+  const word = hmWord.es.toUpperCase();
+  const inWord = [...word].some(c => {
+    const cn = c.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
+    return c === letter || cn === letter;
+  });
+  if (!inWord) hmWrong++;
+  renderHangman();
+}
+
+// ═══════════════════════════════════════════════
+// 3. WHACK-A-MOLE
+// ═══════════════════════════════════════════════
+let moleScore, moleRound, moleTarget, moleActive;
+
+function initMole() {
+  moleScore = 0; moleRound = 0; moleTarget = null; moleActive = false;
+  startMoleRound();
+}
+
+function startMoleRound() {
+  if (moleRound >= 10) { endMole(); return; }
+  moleRound++;
+  const words = categories[currentCat].words;
+  moleTarget = words[Math.floor(Math.random() * words.length)];
+  const others = words.filter(w => w !== moleTarget);
+  shuffleArray(others);
+  const pool = shuffleArray([moleTarget, ...others.slice(0, Math.min(4, others.length))]);
+
+  const el = document.getElementById('moleMode');
+  el.innerHTML = `<div class="game-card">
+    <div class="game-title">🔨 Whack-a-Mole</div>
+    <div style="color:#555;margin-bottom:6px">Find: <strong style="color:#003893;font-size:1.05rem">${moleTarget.en}</strong></div>
+    <div style="color:#666;font-size:.8rem;margin-bottom:10px">Round ${moleRound}/10 | Score: ${moleScore}</div>
+    <div class="mole-grid">${Array(9).fill(0).map((_, i) => {
+      const w = pool[i % pool.length];
+      return `<div class="mole-hole${i < pool.length ? ' active' : ''}" data-es="${w ? w.es : ''}" onclick="moleTap(this)">${i < pool.length ? w.es : ''}</div>`;
+    }).join('')}</div>
+  </div>`;
+  moleActive = true;
+  _moleTimer = setTimeout(() => { moleActive = false; showToast('⏱ Too slow!', 800); _moleTimer = setTimeout(() => { if (mode === 'mole') startMoleRound(); }, 1000); }, 1500);
+}
+
+function moleTap(hole) {
+  if (!moleActive) return;
+  moleActive = false;
+  clearTimeout(_moleTimer);
+  if (hole.dataset.es === moleTarget.es) {
+    moleScore++; streak++; hole.classList.add('mole-hit');
+  } else {
+    streak = 0; hole.classList.add('mole-miss');
+  }
+  updateStats();
+  _moleTimer = setTimeout(() => { if (mode === 'mole') startMoleRound(); }, 600);
+}
+
+function endMole() {
+  const stars = moleScore >= 8 ? '⭐⭐⭐' : moleScore >= 5 ? '⭐⭐' : '⭐';
+  document.getElementById('moleMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="stars">${stars}</div>
+    <div class="game-title">Game Over!</div>
+    <div style="font-size:1.2rem;margin:8px 0">Score: <strong>${moleScore}/10</strong></div>
+    <button class="ctrl-btn btn-next" style="margin-top:12px" onclick="initMole()">Play Again</button>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// 4. MEMORY / CONCENTRATION
+// ═══════════════════════════════════════════════
+let memCards, memFlipped, memMatched, memMoves, memLocked;
+
+function initMemory() {
+  const words = getRandItems(categories[currentCat].words, 8);
+  const pairs = [];
+  words.forEach((w, i) => {
+    pairs.push({ id: i, type: 'es', text: w.es, paired: false });
+    pairs.push({ id: i, type: 'en', text: w.en, paired: false });
+  });
+  memCards = shuffleArray(pairs);
+  memFlipped = []; memMatched = 0; memMoves = 0; memLocked = false;
+  renderMemory();
+}
+
+function renderMemory() {
+  const el = document.getElementById('memoryMode');
+  el.innerHTML = `<div class="game-card">
+    <div class="game-title">🧠 Memory</div>
+    <div style="color:#666;font-size:.82rem;margin-bottom:10px;text-align:center">Moves: ${memMoves} | Pairs: ${memMatched}/8</div>
+    <div class="mem-grid">${memCards.map((c, i) => `
+      <div class="mem-card${c.paired ? ' mem-matched' : memFlipped.includes(i) ? ' mem-flipped' : ''}" onclick="memFlip(${i})">
+        <div class="mem-front">?</div>
+        <div class="mem-back">${c.text}</div>
+      </div>`).join('')}
+    </div>
+    ${memMatched === 8 ? `<div style="text-align:center;margin-top:12px">
+      <div style="color:#1E8449;font-weight:700;font-size:1.1rem">🎉 Complete in ${memMoves} moves!</div>
+      <button class="ctrl-btn btn-next" style="margin-top:8px" onclick="initMemory()">Play Again</button>
+    </div>` : ''}
+  </div>`;
+}
+
+function memFlip(idx) {
+  if (memLocked || memFlipped.includes(idx) || memCards[idx].paired || memFlipped.length >= 2) return;
+  memFlipped.push(idx);
+  renderMemory();
+  if (memFlipped.length === 2) {
+    memMoves++; memLocked = true;
+    const [a, b] = memFlipped;
+    if (memCards[a].id === memCards[b].id && memCards[a].type !== memCards[b].type) {
+      memCards[a].paired = true; memCards[b].paired = true; memMatched++;
+      memFlipped = []; memLocked = false; streak++;
+      updateStats(); renderMemory();
+    } else {
+      streak = 0; updateStats();
+      setTimeout(() => { memFlipped = []; memLocked = false; renderMemory(); }, 900);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════
+// 5. WORD SEARCH
+// ═══════════════════════════════════════════════
+let wsGrid, wsWords, wsDragStart, wsCurrent;
+const WS_SIZE = 12;
+
+function initWordSearch() {
+  const words = categories[currentCat].words;
+  const candidates = words.map(w => ({
+    original: w,
+    clean: stripArticle(w.es).replace(/[^a-záéíóúñü]/gi, '').toUpperCase().slice(0, 10)
+  })).filter(w => w.clean.length >= 3);
+  shuffleArray(candidates);
+
+  if (candidates.length < 6) {
+    document.getElementById('wordsearchMode').innerHTML = `<div class="game-card"><div class="game-title">🔍 Word Search</div><p style="color:#666;text-align:center">Not enough suitable words (need 6+).</p></div>`;
+    return;
+  }
+
+  wsGrid = Array(WS_SIZE).fill(0).map(() => Array(WS_SIZE).fill(''));
+  wsWords = []; wsDragStart = null; wsCurrent = [];
+
+  for (const c of candidates) {
+    if (wsWords.length >= 8) break;
+    if (wsPlaceWord(c.clean)) wsWords.push({ clean: c.clean, original: c.original, found: false });
+  }
+
+  const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  for (let r = 0; r < WS_SIZE; r++)
+    for (let c = 0; c < WS_SIZE; c++)
+      if (!wsGrid[r][c]) wsGrid[r][c] = alpha[Math.floor(Math.random() * 26)];
+
+  renderWordSearch();
+}
+
+function wsPlaceWord(word) {
+  const dirs = [{ dr: 0, dc: 1 }, { dr: 1, dc: 0 }];
+  for (let attempt = 0; attempt < 60; attempt++) {
+    const dir = dirs[Math.floor(Math.random() * 2)];
+    const maxR = dir.dr === 0 ? WS_SIZE : WS_SIZE - word.length;
+    const maxC = dir.dc === 0 ? WS_SIZE : WS_SIZE - word.length;
+    const r = Math.floor(Math.random() * (maxR + 1));
+    const c = Math.floor(Math.random() * (maxC + 1));
+    let ok = true;
+    for (let i = 0; i < word.length; i++) {
+      const nr = r + dir.dr * i, nc = c + dir.dc * i;
+      if (nr >= WS_SIZE || nc >= WS_SIZE) { ok = false; break; }
+      if (wsGrid[nr][nc] && wsGrid[nr][nc] !== word[i]) { ok = false; break; }
+    }
+    if (ok) {
+      for (let i = 0; i < word.length; i++) wsGrid[r + dir.dr * i][c + dir.dc * i] = word[i];
+      return true;
+    }
+  }
+  return false;
+}
+
+function renderWordSearch() {
+  const el = document.getElementById('wordsearchMode');
+  el.innerHTML = `<div class="game-card" style="padding:14px">
+    <div class="game-title">🔍 Word Search</div>
+    <p class="game-subtitle">Click & drag to find words</p>
+    <div class="ws-wrap"><div class="ws-grid" id="wsGrid"
+      onmouseleave="wsEnd()" ontouchend="wsEnd()" ontouchcancel="wsEnd()">
+      ${wsGrid.map((row, r) => `<div class="ws-row">${row.map((cell, c) => {
+        const hl = wsCurrent.some(([rr, cc]) => rr === r && cc === c);
+        const found = wsWords.some(w => w.found && wsCellInWord(r, c, w));
+        return `<div class="ws-cell${hl ? ' ws-hl' : ''}${found ? ' ws-found' : ''}"
+          data-r="${r}" data-c="${c}"
+          onmousedown="wsStart(${r},${c})" onmouseover="wsDrag(${r},${c})" onmouseup="wsEnd()"
+          ontouchstart="wsStart(${r},${c})">${cell}</div>`;
+      }).join('')}</div>`).join('')}
+    </div></div>
+    <div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:10px">
+      ${wsWords.map(w => `<span class="ws-word${w.found ? ' ws-word-found' : ''}">${w.original.es}</span>`).join('')}
+    </div>
+    ${wsWords.every(w => w.found) ? `<div style="text-align:center;margin-top:10px"><div style="color:#1E8449;font-weight:700">🎉 All found!</div>
+      <button class="ctrl-btn btn-next" style="margin-top:8px" onclick="initWordSearch()">New Puzzle</button></div>` : ''}
+  </div>`;
+}
+
+function wsCellInWord(r, c, w) {
+  // Store placed positions during generation would be better, but approximate here
+  const word = w.clean;
+  // check horizontal
+  for (let sc = Math.max(0, c - word.length + 1); sc <= Math.min(c, WS_SIZE - word.length); sc++) {
+    let match = true;
+    for (let i = 0; i < word.length; i++) if (wsGrid[r][sc + i] !== word[i]) { match = false; break; }
+    if (match && c >= sc && c < sc + word.length) return true;
+  }
+  // check vertical
+  for (let sr = Math.max(0, r - word.length + 1); sr <= Math.min(r, WS_SIZE - word.length); sr++) {
+    let match = true;
+    for (let i = 0; i < word.length; i++) if (wsGrid[sr + i][c] !== word[i]) { match = false; break; }
+    if (match && r >= sr && r < sr + word.length) return true;
+  }
+  return false;
+}
+
+function wsStart(r, c) { wsDragStart = [r, c]; wsCurrent = [[r, c]]; renderWordSearch(); }
+function wsDrag(r, c) {
+  if (!wsDragStart) return;
+  const [sr, sc] = wsDragStart;
+  const cells = [];
+  if (r === sr) { const mn = Math.min(c, sc), mx = Math.max(c, sc); for (let i = mn; i <= mx; i++) cells.push([r, i]); }
+  else if (c === sc) { const mn = Math.min(r, sr), mx = Math.max(r, sr); for (let i = mn; i <= mx; i++) cells.push([i, c]); }
+  else return;
+  wsCurrent = cells; renderWordSearch();
+}
+function wsEnd() {
+  if (!wsDragStart || wsCurrent.length < 2) { wsDragStart = null; wsCurrent = []; return; }
+  const sel = wsCurrent.map(([r, c]) => wsGrid[r][c]).join('');
+  const selRev = sel.split('').reverse().join('');
+  wsWords.forEach(w => { if (!w.found && (w.clean === sel || w.clean === selRev)) w.found = true; });
+  wsDragStart = null; wsCurrent = [];
+  renderWordSearch();
+}
+
+// ═══════════════════════════════════════════════
+// 6. CROSSWORD
+// ═══════════════════════════════════════════════
+let cwGrid, cwWords, cwSize;
+
+function initCrossword() {
+  cwSize = 15;
+  cwGrid = Array(cwSize).fill(0).map(() => Array(cwSize).fill(null));
+  cwWords = [];
+
+  const words = getRandItems(categories[currentCat].words, 10);
+  const candidates = words.map(w => ({
+    word: stripArticle(w.es).replace(/[^a-záéíóúñü]/gi, '').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
+    clue: w.en, original: w.es
+  })).filter(w => w.word.length >= 3 && w.word.length <= 12).sort((a, b) => b.word.length - a.word.length);
+
+  if (candidates.length < 3) { cwError(); return; }
+
+  // Place first word horizontally centered
+  const first = candidates[0];
+  const startC = Math.floor((cwSize - first.word.length) / 2);
+  const midR = Math.floor(cwSize / 2);
+  cwPlace(first.word, midR, startC, 'across', first.clue, first.original);
+
+  for (let i = 1; i < candidates.length && cwWords.length < 8; i++) cwTryPlace(candidates[i]);
+
+  if (cwWords.length < 2) { cwError(); return; }
+  renderCrossword();
+}
+
+function cwPlace(word, r, c, dir, clue, original) {
+  const dr = dir === 'down' ? 1 : 0, dc = dir === 'across' ? 1 : 0;
+  for (let i = 0; i < word.length; i++) cwGrid[r + dr * i][c + dc * i] = word[i];
+  cwWords.push({ word, r, c, dir, clue, original, num: cwWords.length + 1 });
+}
+
+function cwTryPlace(cand) {
+  for (const placed of cwWords) {
+    for (let ni = 0; ni < cand.word.length; ni++) {
+      for (let pi = 0; pi < placed.word.length; pi++) {
+        if (cand.word[ni] !== placed.word[pi]) continue;
+        const newDir = placed.dir === 'across' ? 'down' : 'across';
+        let r, c;
+        if (newDir === 'down') { r = placed.r - ni; c = placed.c + pi; }
+        else { r = placed.r + pi; c = placed.c - ni; }
+        const dr = newDir === 'down' ? 1 : 0, dc = newDir === 'across' ? 1 : 0;
+        if (r < 0 || c < 0 || r + dr * (cand.word.length - 1) >= cwSize || c + dc * (cand.word.length - 1) >= cwSize) continue;
+        let ok = true;
+        for (let i = 0; i < cand.word.length; i++) {
+          const nr = r + dr * i, nc = c + dc * i;
+          if (cwGrid[nr][nc] !== null && cwGrid[nr][nc] !== cand.word[i]) { ok = false; break; }
+        }
+        if (ok) { cwPlace(cand.word, r, c, newDir, cand.clue, cand.original); return; }
+      }
+    }
+  }
+}
+
+function cwError() {
+  document.getElementById('crosswordMode').innerHTML = `<div class="game-card"><div class="game-title">✏️ Crossword</div>
+    <p style="color:#666;text-align:center">Not enough intersecting words for this category. Try another!</p></div>`;
+}
+
+function renderCrossword() {
+  // Find bounding box
+  let minR = cwSize, maxR = 0, minC = cwSize, maxC = 0;
+  for (let r = 0; r < cwSize; r++) for (let c = 0; c < cwSize; c++) {
+    if (cwGrid[r][c] !== null) { minR = Math.min(minR, r); maxR = Math.max(maxR, r); minC = Math.min(minC, c); maxC = Math.max(maxC, c); }
+  }
+  const rows = maxR - minR + 1, cols = maxC - minC + 1;
+
+  // Build number map
+  const numMap = {};
+  cwWords.forEach(w => { numMap[w.r + ',' + w.c] = numMap[w.r + ',' + w.c] || w.num; });
+
+  let gridHTML = '';
+  for (let r = minR; r <= maxR; r++) {
+    for (let c = minC; c <= maxC; c++) {
+      const val = cwGrid[r][c];
+      const key = r + ',' + c;
+      if (val === null) {
+        gridHTML += `<div class="cw-cell cw-black"></div>`;
+      } else {
+        gridHTML += `<div class="cw-cell" data-r="${r}" data-c="${c}">
+          ${numMap[key] ? `<span class="cw-num">${numMap[key]}</span>` : ''}
+          <input maxlength="1" data-answer="${val}" oninput="this.value=this.value.toUpperCase()"/>
+        </div>`;
+      }
+    }
+  }
+
+  const cluesAcross = cwWords.filter(w => w.dir === 'across').map(w => `<div><strong>${w.num}.</strong> ${w.clue}</div>`).join('');
+  const cluesDown = cwWords.filter(w => w.dir === 'down').map(w => `<div><strong>${w.num}.</strong> ${w.clue}</div>`).join('');
+
+  document.getElementById('crosswordMode').innerHTML = `<div class="game-card" style="padding:14px">
+    <div class="game-title">✏️ Crossword</div>
+    <div class="cw-wrap"><div class="cw-grid" style="grid-template-columns:repeat(${cols},30px)">${gridHTML}</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;font-size:.8rem;text-align:left">
+      <div><strong style="color:#003893">Across</strong>${cluesAcross || '<div>—</div>'}</div>
+      <div><strong style="color:#003893">Down</strong>${cluesDown || '<div>—</div>'}</div>
+    </div>
+    <div style="text-align:center;margin-top:12px">
+      <button class="ctrl-btn btn-know" onclick="cwCheck()">✅ Check</button>
+      <button class="ctrl-btn btn-next" onclick="initCrossword()" style="margin-left:8px">🔄 New</button>
+    </div>
+  </div>`;
+}
+
+function cwCheck() {
+  document.querySelectorAll('.cw-cell[data-r]').forEach(cell => {
+    const input = cell.querySelector('input');
+    const answer = input.dataset.answer;
+    cell.classList.remove('cw-correct', 'cw-wrong');
+    if (input.value.toUpperCase() === answer) cell.classList.add('cw-correct');
+    else cell.classList.add('cw-wrong');
+  });
+}
+
+// ═══════════════════════════════════════════════
+// 7. WORD ASSOCIATION CHAIN
+// ═══════════════════════════════════════════════
+let chainUsed, chainCurrent, chainScore, chainTimeLeft;
+
+function initChain() {
+  chainUsed = new Set(); chainScore = 0; chainTimeLeft = 10;
+  chainCurrent = categories[currentCat].words[Math.floor(Math.random() * categories[currentCat].words.length)];
+  chainUsed.add(normalizeText(chainCurrent.es));
+  renderChain();
+  startChainTimer();
+}
+
+function renderChain() {
+  const el = document.getElementById('chainMode');
+  el.innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">⛓️ Word Chain</div>
+    <p class="game-subtitle">Type any other vocab word from this category within ${chainTimeLeft}s!</p>
+    <div style="font-family:'Fredoka One';font-size:1.3rem;color:#003893;margin:12px 0">${chainCurrent.es}</div>
+    <div style="color:#666;font-size:.85rem;margin-bottom:10px">(${chainCurrent.en})</div>
+    <div style="margin-bottom:8px">Chain: <strong>${chainScore}</strong></div>
+    <div style="color:#CE1126;font-weight:700;font-size:1.2rem" id="chainCountdown">${chainTimeLeft}</div>
+    <input class="game-input" id="chainInput" placeholder="Type a Spanish word…"
+      onkeydown="if(event.key==='Enter')chainSubmit()" autofocus style="margin-top:8px"/>
+    <button class="ctrl-btn btn-next" style="margin-top:8px" onclick="chainSubmit()">Submit</button>
+  </div>`;
+  const inp = document.getElementById('chainInput');
+  if (inp) setTimeout(() => inp.focus(), 50);
+}
+
+function startChainTimer() {
+  chainTimeLeft = 10;
+  clearInterval(_chainTimer);
+  _chainTimer = addInterval(() => {
+    chainTimeLeft--;
+    const cd = document.getElementById('chainCountdown');
+    if (cd) cd.textContent = chainTimeLeft;
+    if (chainTimeLeft <= 0) { clearInterval(_chainTimer); endChain(); }
+  }, 1000);
+}
+
+function chainSubmit() {
+  const inp = document.getElementById('chainInput');
+  if (!inp) return;
+  const val = normalizeText(inp.value);
+  if (!val) return;
+  const allWords = categories[currentCat].words;
+  const match = allWords.find(w => normalizeText(w.es) === val);
+  if (!match) { showToast('Not in this category!', 1500); inp.value = ''; return; }
+  if (chainUsed.has(val)) { showToast('Already used!', 1500); inp.value = ''; return; }
+  chainUsed.add(val);
+  chainScore++; streak++; updateStats();
+  chainCurrent = match;
+  renderChain();
+  startChainTimer();
+}
+
+function endChain() {
+  clearInterval(_chainTimer);
+  document.getElementById('chainMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div style="font-size:2.5rem">⛓️</div>
+    <div class="game-title">Chain Over!</div>
+    <div style="font-size:1.2rem;margin:8px 0">You chained <strong>${chainScore}</strong> words!</div>
+    <button class="ctrl-btn btn-next" style="margin-top:12px" onclick="initChain()">Play Again</button>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// 8. LISTEN & CHOOSE
+// ═══════════════════════════════════════════════
+let listenWord, listenScore, listenTotal;
+
+function initListen() {
+  listenScore = 0; listenTotal = 0;
+  nextListen();
+}
+
+function nextListen() {
+  const words = categories[currentCat].words;
+  if (words.length < 4) return;
+  listenWord = words[Math.floor(Math.random() * words.length)];
+  let opts = [listenWord];
+  while (opts.length < 4) { const r = words[Math.floor(Math.random() * words.length)]; if (!opts.includes(r)) opts.push(r); }
+  shuffleArray(opts);
+  listenTotal++;
+
+  const el = document.getElementById('listenMode');
+  el.innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">👂 Listen & Choose</div>
+    <p class="game-subtitle">Listen to the Spanish word, then choose the English meaning</p>
+    <button class="ctrl-btn" style="background:#8E44AD;font-size:1.5rem;margin:12px 0;padding:14px 28px" onclick="speakES('${listenWord.es.replace(/'/g, "\\'")}')">🔊 Play</button>
+    ${!window.speechSynthesis ? `<p style="color:#CE1126;font-size:.8rem">Audio not available. Word: <strong>${listenWord.es}</strong></p>` : ''}
+    <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+      ${opts.map(o => `<button class="quiz-opt" onclick="listenAnswer(this,'${o.en.replace(/'/g, "\\'")}')">${o.en}</button>`).join('')}
+    </div>
+    <div id="listenFb" style="margin-top:8px;font-weight:700"></div>
+    <div style="color:#666;font-size:.85rem;margin-top:4px">Score: ${listenScore}/${listenTotal - 1}</div>
+  </div>`;
+  speakES(listenWord.es);
+}
+
+function listenAnswer(btn, answer) {
+  if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+  const fb = document.getElementById('listenFb');
+  if (answer === listenWord.en) {
+    btn.classList.add('correct'); listenScore++; streak++;
+    fb.innerHTML = '<span style="color:#1E8449">✅ ¡Correcto!</span>';
+  } else {
+    btn.classList.add('wrong'); streak = 0;
+    fb.innerHTML = `<span style="color:#CE1126">❌ It was: ${listenWord.en}</span>`;
+  }
+  updateStats();
+  setTimeout(() => { if (mode === 'listen') nextListen(); }, 1500);
+}
+
+// ═══════════════════════════════════════════════
+// 9. ECHO CHALLENGE
+// ═══════════════════════════════════════════════
+let echoWord, echoBlob;
+
+function initEcho() {
+  echoWord = categories[currentCat].words[Math.floor(Math.random() * categories[currentCat].words.length)];
+  echoBlob = null;
+  renderEcho();
+}
+
+function renderEcho() {
+  const el = document.getElementById('echoMode');
+  const hasMedia = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+  el.innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">🎤 Echo Challenge</div>
+    <p class="game-subtitle">Listen to the model, then record yourself!</p>
+    <div style="font-family:'Fredoka One';font-size:1.3rem;color:#003893;margin:10px 0">${echoWord.es}</div>
+    <div style="color:#666;margin-bottom:12px">${echoWord.en}</div>
+    <div style="display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap">
+      <div>
+        <button class="echo-btn echo-play" onclick="speakES('${echoWord.es.replace(/'/g, "\\'")}')">🔊</button>
+        <div style="font-size:.7rem;color:#666;margin-top:4px">Model</div>
+      </div>
+      ${hasMedia ? `<div>
+        <button class="echo-btn echo-record" id="echoRecBtn" onclick="echoToggleRec()">🎙️</button>
+        <div style="font-size:.7rem;color:#666;margin-top:4px" id="echoRecLabel">Record</div>
+      </div>` : '<p style="color:#CE1126;font-size:.8rem">Microphone not available</p>'}
+      ${echoBlob ? `<div>
+        <button class="echo-btn echo-play" onclick="echoPlayback()">🔁</button>
+        <div style="font-size:.7rem;color:#666;margin-top:4px">Yours</div>
+      </div>` : ''}
+    </div>
+    <button class="ctrl-btn btn-next" style="margin-top:16px" onclick="initEcho()">Next Word ▶</button>
+  </div>`;
+}
+
+function echoToggleRec() {
+  const btn = document.getElementById('echoRecBtn');
+  if (_echoRecorder && _echoRecorder.state === 'recording') {
+    _echoRecorder.stop();
+    btn.classList.remove('recording');
+    document.getElementById('echoRecLabel').textContent = 'Record';
+    return;
+  }
+  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+    const chunks = [];
+    _echoRecorder = new MediaRecorder(stream);
+    _echoRecorder.ondataavailable = e => chunks.push(e.data);
+    _echoRecorder.onstop = () => {
+      echoBlob = new Blob(chunks, { type: 'audio/webm' });
+      stream.getTracks().forEach(t => t.stop());
+      renderEcho();
+    };
+    _echoRecorder.start();
+    btn.classList.add('recording');
+    document.getElementById('echoRecLabel').textContent = 'Stop';
+  }).catch(() => showToast('Microphone access denied', 2000));
+}
+
+function echoPlayback() {
+  if (!echoBlob) return;
+  new Audio(URL.createObjectURL(echoBlob)).play();
+}
+
+// ═══════════════════════════════════════════════
+// 10. ODD ONE OUT (AUDIO)
+// ═══════════════════════════════════════════════
+let oddWords, oddCorrectIdx;
+
+function initOddOne() {
+  const cats = categories;
+  if (cats.length < 2) { document.getElementById('oddoneMode').innerHTML = `<div class="game-card"><div class="game-title">🎧 Odd One Out</div><p style="color:#666;text-align:center">Need more categories.</p></div>`; return; }
+  const sameCat = cats[currentCat].words;
+  const otherCats = cats.filter((_, i) => i !== currentCat);
+  const otherCat = otherCats[Math.floor(Math.random() * otherCats.length)];
+  const three = getRandItems(sameCat, 3);
+  const odd = otherCat.words[Math.floor(Math.random() * otherCat.words.length)];
+  oddWords = [...three, odd];
+  shuffleArray(oddWords);
+  oddCorrectIdx = oddWords.indexOf(odd);
+
+  const el = document.getElementById('oddoneMode');
+  el.innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">🎧 Odd One Out</div>
+    <p class="game-subtitle">3 words are from <strong>${cats[currentCat].name}</strong>. Tap the odd one out!</p>
+    <button class="ctrl-btn" style="background:#8E44AD;margin:10px 0" onclick="oddPlayAll()">🔊 Play All Words</button>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+      ${oddWords.map((w, i) => `<button class="quiz-opt" style="text-align:center" onclick="oddAnswer(this,${i})">${w.es}</button>`).join('')}
+    </div>
+    <div id="oddFb" style="margin-top:8px;font-weight:700"></div>
+  </div>`;
+  oddPlayAll();
+}
+
+function oddPlayAll() {
+  let delay = 0;
+  oddWords.forEach((w, i) => {
+    setTimeout(() => speakES(w.es), delay);
+    delay += 1500;
+  });
+}
+
+function oddAnswer(btn, idx) {
+  if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+  const fb = document.getElementById('oddFb');
+  if (idx === oddCorrectIdx) {
+    btn.classList.add('correct'); streak++; updateStats();
+    fb.innerHTML = '<span style="color:#1E8449">✅ Correct! That word is from a different category.</span>';
+  } else {
+    btn.classList.add('wrong'); streak = 0; updateStats();
+    fb.innerHTML = `<span style="color:#CE1126">❌ The odd one was: <strong>${oddWords[oddCorrectIdx].es}</strong></span>`;
+    document.querySelectorAll('#oddoneMode .quiz-opt')[oddCorrectIdx].classList.add('reveal');
+  }
+  setTimeout(() => { if (mode === 'oddone') initOddOne(); }, 2500);
+}
+
+// ═══════════════════════════════════════════════
+// 11. FILL IN THE BLANK
+// ═══════════════════════════════════════════════
+const FILL_FRAMES = [
+  "En Colombia, ___ es muy importante.",
+  "A mí me gusta ___ mucho.",
+  "Mi profesor dice: '___' es interesante.",
+  "Yo quiero aprender sobre ___.",
+  "En Bogotá, ___ es popular."
+];
+
+function initFillBlank() {
+  const words = categories[currentCat].words;
+  const correct = words[Math.floor(Math.random() * words.length)];
+  const frame = FILL_FRAMES[Math.floor(Math.random() * FILL_FRAMES.length)];
+  const sentence = frame.replace('___', `<strong style="color:#CE1126;text-decoration:underline">___</strong>`);
+  let opts = [correct];
+  while (opts.length < 3) { const r = words[Math.floor(Math.random() * words.length)]; if (!opts.includes(r)) opts.push(r); }
+  shuffleArray(opts);
+
+  document.getElementById('fillblankMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">📝 Fill in the Blank</div>
+    <div style="font-size:1.1rem;color:#333;margin:12px 0;line-height:1.6">${sentence}</div>
+    <p style="color:#666;font-size:.85rem;margin-bottom:10px">Which word fits? (${correct.en})</p>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      ${opts.map(o => `<button class="quiz-opt" style="text-align:center" onclick="fillAnswer(this,'${o.es.replace(/'/g, "\\'")}','${correct.es.replace(/'/g, "\\'")}')">${o.es}</button>`).join('')}
+    </div>
+    <div id="fillFb" style="margin-top:8px;font-weight:700"></div>
+  </div>`;
+}
+
+function fillAnswer(btn, chosen, correct) {
+  if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+  const fb = document.getElementById('fillFb');
+  if (chosen === correct) {
+    btn.classList.add('correct'); streak++; updateStats();
+    fb.innerHTML = '<span style="color:#1E8449">✅ ¡Correcto!</span>';
+  } else {
+    btn.classList.add('wrong'); streak = 0; updateStats();
+    fb.innerHTML = `<span style="color:#CE1126">❌ Answer: ${correct}</span>`;
+  }
+  setTimeout(() => { if (mode === 'fillblank') initFillBlank(); }, 1800);
+}
+
+// ═══════════════════════════════════════════════
+// 12. TRUE / FALSE
+// ═══════════════════════════════════════════════
+let tfRound, tfScore;
+
+function initTrueFalse() { tfRound = 0; tfScore = 0; nextTF(); }
+
+function nextTF() {
+  if (tfRound >= 10) {
+    const stars = tfScore >= 8 ? '⭐⭐⭐' : tfScore >= 5 ? '⭐⭐' : '⭐';
+    document.getElementById('truefalseMode').innerHTML = `<div class="game-card" style="text-align:center">
+      <div class="stars">${stars}</div><div class="game-title">True/False Complete!</div>
+      <div style="font-size:1.2rem;margin:8px 0">Score: <strong>${tfScore}/10</strong></div>
+      <button class="ctrl-btn btn-next" style="margin-top:12px" onclick="initTrueFalse()">Play Again</button>
+    </div>`; return;
+  }
+  tfRound++;
+  const words = categories[currentCat].words;
+  const w = words[Math.floor(Math.random() * words.length)];
+  const isTrue = Math.random() > .5;
+  let shownEn = w.en;
+  if (!isTrue) {
+    const other = words.filter(x => x !== w);
+    shownEn = other[Math.floor(Math.random() * other.length)].en;
+  }
+
+  document.getElementById('truefalseMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">✔️ True or False?</div>
+    <div style="color:#666;font-size:.82rem;margin-bottom:8px">Round ${tfRound}/10 | Score: ${tfScore}</div>
+    <div style="font-size:1.1rem;margin:16px 0;line-height:1.5;color:#333">
+      <strong>"${w.es}"</strong> means<br/><strong>"${shownEn}"</strong>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center">
+      <button class="ctrl-btn btn-know" style="font-size:1.1rem;padding:14px 32px" onclick="tfAnswer(true,${isTrue})">TRUE</button>
+      <button class="ctrl-btn btn-shuffle" style="font-size:1.1rem;padding:14px 32px" onclick="tfAnswer(false,${isTrue})">FALSE</button>
+    </div>
+    <div id="tfFb" style="margin-top:10px;font-weight:700"></div>
+  </div>`;
+}
+
+function tfAnswer(chosen, actual) {
+  const fb = document.getElementById('tfFb');
+  if (fb.textContent) return; // already answered
+  if (chosen === actual) {
+    tfScore++; streak++; fb.innerHTML = '<span style="color:#1E8449">✅ Correct!</span>';
+  } else {
+    streak = 0; fb.innerHTML = '<span style="color:#CE1126">❌ Wrong!</span>';
+  }
+  updateStats();
+  setTimeout(() => { if (mode === 'truefalse') nextTF(); }, 1200);
+}
+
+// ═══════════════════════════════════════════════
+// 13. CONJUGATION BLITZ (Preterite)
+// ═══════════════════════════════════════════════
+const PRONOUNS_PRET = ['yo', 'tú', 'él/ella', 'nosotros', 'ellos'];
+const PRET_AR = { 'yo': 'é', 'tú': 'aste', 'él/ella': 'ó', 'nosotros': 'amos', 'ellos': 'aron' };
+const PRET_ER = { 'yo': 'í', 'tú': 'iste', 'él/ella': 'ió', 'nosotros': 'imos', 'ellos': 'ieron' };
+const PRET_IR = { 'yo': 'í', 'tú': 'iste', 'él/ella': 'ió', 'nosotros': 'imos', 'ellos': 'ieron' };
+
+function conjugatePreterite(inf, pronoun) {
+  let stem, endings;
+  const clean = inf.replace(/\s*a$/, '');
+  if (clean.endsWith('ar')) { stem = clean.slice(0, -2); endings = PRET_AR; }
+  else if (clean.endsWith('er')) { stem = clean.slice(0, -2); endings = PRET_ER; }
+  else if (clean.endsWith('ir')) { stem = clean.slice(0, -2); endings = PRET_IR; }
+  else return null;
+  return stem + endings[pronoun];
+}
+
+function initConjugation() {
+  const words = categories[currentCat].words;
+  // Check for → entries first (pre-conjugated forms)
+  const arrowEntries = words.filter(w => w.es.includes('→'));
+  if (arrowEntries.length > 0) {
+    const entry = arrowEntries[Math.floor(Math.random() * arrowEntries.length)];
+    const parts = entry.es.split('→').map(s => s.trim());
+    const verb = parts[0];
+    const answer = parts[1];
+    showConjQuestion(verb, '(given)', answer);
+    return;
+  }
+  // Fall back to pure infinitives
+  const verbs = words.filter(w => /^[a-záéíóúñü]+[aei]r(\s|$)/i.test(w.es.replace(/\s*a$/, '')));
+  if (verbs.length === 0) {
+    document.getElementById('conjugationMode').innerHTML = `<div class="game-card"><div class="game-title">🔀 Conjugation Blitz</div>
+      <p style="color:#666;text-align:center">No verbs in this category. Try <strong>Preterite -AR Regular</strong>!</p></div>`;
+    return;
+  }
+  const verb = verbs[Math.floor(Math.random() * verbs.length)];
+  const pronoun = PRONOUNS_PRET[Math.floor(Math.random() * PRONOUNS_PRET.length)];
+  const answer = conjugatePreterite(verb.es, pronoun);
+  if (!answer) { initConjugation(); return; }
+  showConjQuestion(verb.es, pronoun, answer);
+}
+
+function showConjQuestion(verb, pronoun, answer) {
+  document.getElementById('conjugationMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">🔀 Conjugation Blitz</div>
+    <p class="game-subtitle">Conjugate in the preterite tense!</p>
+    <div style="font-family:'Fredoka One';font-size:1.2rem;color:#003893;margin:12px 0">${verb}</div>
+    <div style="font-size:1.1rem;color:#8E44AD;font-weight:700;margin-bottom:12px">${pronoun}</div>
+    <input class="game-input" id="conjInput" placeholder="Type conjugation…" onkeydown="if(event.key==='Enter')conjCheck('${answer}')" autofocus/>
+    <div style="margin-top:8px">
+      <button class="ctrl-btn btn-next" onclick="conjCheck('${answer}')">Check</button>
+    </div>
+    <div id="conjFb" style="margin-top:8px;font-weight:700"></div>
+  </div>`;
+  setTimeout(() => { const inp = document.getElementById('conjInput'); if (inp) inp.focus(); }, 50);
+}
+
+function conjCheck(answer) {
+  const inp = document.getElementById('conjInput');
+  const fb = document.getElementById('conjFb');
+  if (!inp || fb.textContent) return;
+  if (normalizeText(inp.value) === normalizeText(answer)) {
+    streak++; updateStats();
+    fb.innerHTML = `<span style="color:#1E8449">✅ ¡Correcto! ${answer}</span>`;
+  } else {
+    streak = 0; updateStats();
+    fb.innerHTML = `<span style="color:#CE1126">❌ Answer: <strong>${answer}</strong></span>`;
+  }
+  setTimeout(() => { if (mode === 'conjugation') initConjugation(); }, 2000);
+}
+
+// ═══════════════════════════════════════════════
+// 14. SORT IT
+// ═══════════════════════════════════════════════
+let sortCat1, sortCat2, sortItems, sortZone1, sortZone2;
+
+function initSortIt() {
+  const cats = categories;
+  if (cats.length < 2) { document.getElementById('sortitMode').innerHTML = `<div class="game-card"><p style="color:#666">Need 2+ categories.</p></div>`; return; }
+  const idx1 = currentCat;
+  let idx2 = (currentCat + 1) % cats.length;
+  sortCat1 = cats[idx1]; sortCat2 = cats[idx2];
+  const w1 = getRandItems(sortCat1.words, 4).map(w => ({ ...w, cat: 0 }));
+  const w2 = getRandItems(sortCat2.words, 4).map(w => ({ ...w, cat: 1 }));
+  sortItems = shuffleArray([...w1, ...w2]);
+  sortZone1 = []; sortZone2 = [];
+  renderSortIt();
+}
+
+function renderSortIt() {
+  const remaining = sortItems.filter(w => !sortZone1.includes(w) && !sortZone2.includes(w));
+  const allPlaced = remaining.length === 0;
+  let checked = false;
+
+  const el = document.getElementById('sortitMode');
+  el.innerHTML = `<div class="game-card">
+    <div class="game-title">🗂️ Sort It</div>
+    <p class="game-subtitle">Tap a word, then tap the correct category</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0;min-height:40px" id="sortPool">
+      ${remaining.map((w, i) => `<span class="sort-tile" onclick="sortSelect(this,${sortItems.indexOf(w)})">${w.es}</span>`).join('')}
+    </div>
+    <div class="sort-zones">
+      <div class="sort-zone" onclick="sortPlace(0)">
+        <div class="sort-zone-title">${sortCat1.name}</div>
+        ${sortZone1.map(w => `<span class="sort-tile">${w.es}</span>`).join('')}
+      </div>
+      <div class="sort-zone" onclick="sortPlace(1)">
+        <div class="sort-zone-title">${sortCat2.name}</div>
+        ${sortZone2.map(w => `<span class="sort-tile">${w.es}</span>`).join('')}
+      </div>
+    </div>
+    ${allPlaced ? `<div style="text-align:center;margin-top:12px">
+      <button class="ctrl-btn btn-know" onclick="sortCheck()">✅ Check</button>
+      <button class="ctrl-btn btn-next" style="margin-left:8px" onclick="initSortIt()">🔄 New</button>
+    </div>` : ''}
+    <div id="sortFb" style="text-align:center;margin-top:8px;font-weight:700"></div>
+  </div>`;
+}
+
+let _sortSelected = null;
+function sortSelect(el, idx) {
+  document.querySelectorAll('#sortPool .sort-tile').forEach(t => t.style.outline = '');
+  el.style.outline = '3px solid #003893';
+  _sortSelected = idx;
+}
+
+function sortPlace(zone) {
+  if (_sortSelected === null) return;
+  const item = sortItems[_sortSelected];
+  if (zone === 0) sortZone1.push(item);
+  else sortZone2.push(item);
+  _sortSelected = null;
+  renderSortIt();
+}
+
+function sortCheck() {
+  let correct = 0, total = sortItems.length;
+  sortZone1.forEach(w => { if (w.cat === 0) correct++; });
+  sortZone2.forEach(w => { if (w.cat === 1) correct++; });
+  const fb = document.getElementById('sortFb');
+  if (correct === total) {
+    streak += total; updateStats();
+    fb.innerHTML = `<span style="color:#1E8449">🎉 All correct! ${correct}/${total}</span>`;
+  } else {
+    streak = 0; updateStats();
+    fb.innerHTML = `<span style="color:#CE1126">Got ${correct}/${total} right. Try again!</span>`;
+  }
+}
+
+// ═══════════════════════════════════════════════
+// 15. BUILD-A-SENTENCE
+// ═══════════════════════════════════════════════
+const FUNCTION_WORDS = ['es', 'en', 'de', 'la', 'el', 'un', 'una', 'muy', 'y', 'no'];
+let bsTiles, bsSentence;
+
+function initBuildSentence() {
+  const words = getRandItems(categories[currentCat].words, 3);
+  const vocabTiles = words.map(w => stripArticle(w.es).split(' ')[0].toLowerCase());
+  const funcTiles = getRandItems(FUNCTION_WORDS, 4);
+  bsTiles = shuffleArray([...new Set([...vocabTiles, ...funcTiles])]).map((t, i) => ({ text: t, id: i, used: false }));
+  bsSentence = [];
+  renderBuildSentence();
+}
+
+function renderBuildSentence() {
+  const el = document.getElementById('buildsentenceMode');
+  el.innerHTML = `<div class="game-card">
+    <div class="game-title">🏗️ Build-a-Sentence</div>
+    <p class="game-subtitle">Arrange words into a valid Spanish sentence</p>
+    <div class="bs-sentence">${bsSentence.map((id, i) =>
+      `<span class="bs-placed" onclick="bsRemove(${i})">${bsTiles[id].text}</span>`
+    ).join('') || '<span style="color:#999;font-style:italic">Click words below…</span>'}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0">
+      ${bsTiles.map(t => `<span class="bs-tile${t.used ? ' used' : ''}" onclick="bsAdd(${t.id})">${t.text}</span>`).join('')}
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button class="ctrl-btn btn-study" onclick="bsClear()">🗑️ Clear</button>
+      <button class="ctrl-btn btn-know" onclick="bsValidate()">✅ Check</button>
+      <button class="ctrl-btn btn-next" onclick="initBuildSentence()">🔄 New</button>
+    </div>
+    ${!ANTHROPIC_API_KEY ? '<p style="color:#D4AC0D;font-size:.75rem;margin-top:6px;text-align:center">⚠️ Add API key for AI validation</p>' : ''}
+    <div id="bsFb" style="text-align:center;margin-top:8px;font-weight:700"></div>
+  </div>`;
+}
+
+function bsAdd(id) { if (bsTiles[id].used) return; bsTiles[id].used = true; bsSentence.push(id); renderBuildSentence(); }
+function bsRemove(idx) { const id = bsSentence.splice(idx, 1)[0]; bsTiles[id].used = false; renderBuildSentence(); }
+function bsClear() { bsSentence = []; bsTiles.forEach(t => t.used = false); renderBuildSentence(); }
+
+async function bsValidate() {
+  const sentence = bsSentence.map(id => bsTiles[id].text).join(' ');
+  if (!sentence) return;
+  const fb = document.getElementById('bsFb');
+  if (!ANTHROPIC_API_KEY) { fb.innerHTML = `<span style="color:#555">Your sentence: "${sentence}" — add API key for validation</span>`; return; }
+  fb.textContent = 'Checking…';
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-api-key': ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 10,
+        messages: [{ role: 'user', content: `Is this a grammatically valid simple Spanish sentence? Reply only YES or NO: ${sentence}` }] })
+    });
+    const data = await res.json();
+    const answer = data.content[0].text.trim().toUpperCase();
+    if (answer.includes('YES')) { fb.innerHTML = '<span style="color:#1E8449">✅ Valid sentence!</span>'; streak++; updateStats(); }
+    else fb.innerHTML = '<span style="color:#CE1126">❌ Not quite valid. Try rearranging!</span>';
+  } catch(e) { fb.innerHTML = '<span style="color:#CE1126">API error. Check your key.</span>'; }
+}
+
+// ═══════════════════════════════════════════════
+// 16. GENDER RUSH
+// ═══════════════════════════════════════════════
+let grNouns, grIdx, grScore, grTimeLeft;
+
+function initGender() {
+  const words = categories[currentCat].words;
+  grNouns = words.filter(w => /^(el|la)\s/i.test(w.es)).map(w => ({
+    noun: w.es.replace(/^(el|la)\s+/i, ''), gender: w.es.match(/^(el|la)/i)[0].toLowerCase(), en: w.en
+  }));
+  if (grNouns.length < 3) {
+    document.getElementById('genderMode').innerHTML = `<div class="game-card"><div class="game-title">⚡ Gender Rush</div>
+      <p style="color:#666;text-align:center">Not enough gendered nouns in this category. Try <strong>Colombia & Culture</strong>!</p></div>`;
+    return;
+  }
+  shuffleArray(grNouns); grIdx = 0; grScore = 0; grTimeLeft = 60;
+  renderGender();
+  _genderTimer = addInterval(() => {
+    grTimeLeft--;
+    const t = document.getElementById('grTimer');
+    if (t) t.textContent = grTimeLeft;
+    if (grTimeLeft <= 0) endGender();
+  }, 1000);
+}
+
+function renderGender() {
+  if (grIdx >= grNouns.length) { shuffleArray(grNouns); grIdx = 0; }
+  const noun = grNouns[grIdx];
+  document.getElementById('genderMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">⚡ Gender Rush</div>
+    <div style="color:#CE1126;font-weight:700;font-size:1.3rem;margin:4px 0">⏱ <span id="grTimer">${grTimeLeft}</span>s</div>
+    <div style="color:#666;font-size:.85rem">Score: <strong>${grScore}</strong></div>
+    <div style="font-family:'Fredoka One';font-size:1.6rem;color:#333;margin:20px 0">${noun.noun}</div>
+    <div style="display:flex;gap:16px;justify-content:center">
+      <button class="gender-btn gender-el" onclick="grAnswer('el')">EL</button>
+      <button class="gender-btn gender-la" onclick="grAnswer('la')">LA</button>
+    </div>
+    <div id="grFb" style="margin-top:10px;font-weight:700"></div>
+  </div>`;
+}
+
+function grAnswer(choice) {
+  const fb = document.getElementById('grFb');
+  if (fb.textContent) return;
+  if (choice === grNouns[grIdx].gender) {
+    grScore++; streak++; updateStats();
+    fb.innerHTML = `<span style="color:#1E8449">✅ ¡Sí! ${choice} ${grNouns[grIdx].noun}</span>`;
+  } else {
+    streak = 0; updateStats();
+    fb.innerHTML = `<span style="color:#CE1126">❌ It's ${grNouns[grIdx].gender} ${grNouns[grIdx].noun}</span>`;
+  }
+  grIdx++;
+  setTimeout(() => { if (mode === 'gender') renderGender(); }, 800);
+}
+
+function endGender() {
+  _activeIntervals.forEach(clearInterval); _activeIntervals = [];
+  const stars = grScore >= 12 ? '⭐⭐⭐' : grScore >= 7 ? '⭐⭐' : '⭐';
+  document.getElementById('genderMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="stars">${stars}</div><div class="game-title">Time's Up!</div>
+    <div style="font-size:1.2rem;margin:8px 0">Score: <strong>${grScore}</strong> correct in 60s</div>
+    <button class="ctrl-btn btn-next" style="margin-top:12px" onclick="initGender()">Play Again</button>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// 17. TRANSLATION CHALLENGE
+// ═══════════════════════════════════════════════
+let transRound, transScore;
+
+function initTranslation() { transRound = 0; transScore = 0; nextTrans(); }
+
+function nextTrans() {
+  if (transRound >= 10) {
+    const stars = transScore >= 8 ? '⭐⭐⭐' : transScore >= 5 ? '⭐⭐' : '⭐';
+    document.getElementById('translationMode').innerHTML = `<div class="game-card" style="text-align:center">
+      <div class="stars">${stars}</div><div class="game-title">Translation Complete!</div>
+      <div style="font-size:1.2rem;margin:8px 0">Score: <strong>${transScore}/10</strong></div>
+      <button class="ctrl-btn btn-next" style="margin-top:12px" onclick="initTranslation()">Play Again</button>
+    </div>`; return;
+  }
+  transRound++;
+  const words = categories[currentCat].words;
+  const w = words[Math.floor(Math.random() * words.length)];
+
+  document.getElementById('translationMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">🔁 Translation Challenge</div>
+    <div style="color:#666;font-size:.82rem;margin-bottom:6px">Round ${transRound}/10 | Score: ${transScore}</div>
+    <div style="font-size:1.1rem;color:#333;margin:12px 0">Translate to Spanish:</div>
+    <div style="font-family:'Fredoka One';font-size:1.2rem;color:#003893;margin-bottom:12px">${w.en}</div>
+    <input class="game-input" id="transInput" placeholder="Type in Spanish…"
+      onkeydown="if(event.key==='Enter')transCheck('${w.es.replace(/'/g, "\\'")}')" autofocus/>
+    <button class="ctrl-btn btn-next" style="margin-top:8px" onclick="transCheck('${w.es.replace(/'/g, "\\'")}')">Check</button>
+    <div id="transFb" style="margin-top:8px;font-weight:700"></div>
+  </div>`;
+  setTimeout(() => { const inp = document.getElementById('transInput'); if (inp) inp.focus(); }, 50);
+}
+
+function transCheck(answer) {
+  const inp = document.getElementById('transInput');
+  const fb = document.getElementById('transFb');
+  if (!inp || fb.textContent) return;
+  if (normalizeText(inp.value) === normalizeText(answer)) {
+    transScore++; streak++; updateStats();
+    fb.innerHTML = `<span style="color:#1E8449">✅ ¡Correcto!</span>`;
+  } else {
+    streak = 0; updateStats();
+    fb.innerHTML = `<span style="color:#CE1126">❌ Answer: <strong>${answer}</strong></span>`;
+  }
+  setTimeout(() => { if (mode === 'translation') nextTrans(); }, 1800);
+}
+
+// ═══════════════════════════════════════════════
+// 18. PROMPT RESPONSE
+// ═══════════════════════════════════════════════
+const PROMPTS_SP2 = [
+  "You just arrived at the airport in Bogotá. Describe your trip using the preterite tense.",
+  "Tell your friend about the souvenirs you bought at the market in Cartagena.",
+  "Describe what you did on your last day of vacation in Colombia — where did you go and what did you eat?"
+];
+
+function initPromptResponse() {
+  const prompt = PROMPTS_SP2[Math.floor(Math.random() * PROMPTS_SP2.length)];
+  document.getElementById('promptresponseMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">💬 Prompt Response</div>
+    <div style="background:#f0f4ff;padding:12px;border-radius:10px;margin:10px 0;color:#333;line-height:1.5">${prompt}</div>
+    <textarea class="game-input" id="prInput" rows="3" placeholder="Write your response in Spanish…" style="text-align:left;max-width:100%;width:100%"></textarea>
+    <button class="ctrl-btn btn-know" style="margin-top:8px" onclick="prCheck('${prompt.replace(/'/g, "\\'")}')">Submit</button>
+    ${!ANTHROPIC_API_KEY ? '<p style="color:#D4AC0D;font-size:.75rem;margin-top:6px">⚠️ Add API key for AI feedback</p>' : ''}
+    <div id="prFb" style="margin-top:10px;font-weight:700"></div>
+  </div>`;
+}
+
+async function prCheck(prompt) {
+  const inp = document.getElementById('prInput');
+  const fb = document.getElementById('prFb');
+  if (!inp || !inp.value.trim()) return;
+  const response = inp.value.trim();
+  if (!ANTHROPIC_API_KEY) { fb.innerHTML = `<span style="color:#555">Your response: "${response}" — Nice try! Add API key for AI feedback.</span>`; return; }
+  fb.textContent = 'Evaluating…';
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-api-key': ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 20,
+        messages: [{ role: 'user', content: `The student is a Spanish learner responding to this prompt: ${prompt}. Their response was: ${response}. Is this a reasonable attempt? Reply only: CORRECT, PARTIAL, or INCORRECT.` }] })
+    });
+    const data = await res.json();
+    const answer = data.content[0].text.trim().toUpperCase();
+    if (answer.includes('CORRECT') && !answer.includes('INCORRECT')) {
+      fb.innerHTML = '<span style="color:#1E8449">🎉 Great response!</span>'; streak++; updateStats();
+    } else if (answer.includes('PARTIAL')) {
+      fb.innerHTML = '<span style="color:#D4AC0D">👍 Good attempt! Keep practicing.</span>';
+    } else {
+      fb.innerHTML = '<span style="color:#CE1126">Try again — check your vocabulary!</span>';
+    }
+  } catch(e) { fb.innerHTML = '<span style="color:#CE1126">API error.</span>'; }
+}
+
+// ═══════════════════════════════════════════════
+// 19. MAD LIBS
+// ═══════════════════════════════════════════════
+const MADLIBS_SP2 = [
+  { title: "Mi viaje a Cartagena", story: "Ayer {VERB_PRET} al {PLACE}. Compré un {NOUN} y {VERB2_PRET} por la playa. ¡El viaje fue {ADJ}!",
+    blanks: [{id:'VERB_PRET',label:'past tense verb'},{id:'PLACE',label:'a place'},{id:'NOUN',label:'a noun'},{id:'VERB2_PRET',label:'another past verb'},{id:'ADJ',label:'an adjective'}] },
+  { title: "En la playa colombiana", story: "El vuelo {VERB_PRET} a las ocho. En la playa, {VERB2_PRET} y {VERB3_PRET}. El hotel fue {ADJ}. Traje un {NOUN} de recuerdo.",
+    blanks: [{id:'VERB_PRET',label:'past tense verb'},{id:'VERB2_PRET',label:'past verb'},{id:'VERB3_PRET',label:'past verb'},{id:'ADJ',label:'an adjective'},{id:'NOUN',label:'a souvenir'}] },
+  { title: "El hotel en Medellín", story: "Llegué al {PLACE} con mi {NOUN}. La habitación fue {ADJ}. {VERB_PRET} toda la noche y {VERB2_PRET} comida colombiana.",
+    blanks: [{id:'PLACE',label:'a place'},{id:'NOUN',label:'luggage item'},{id:'ADJ',label:'an adjective'},{id:'VERB_PRET',label:'past verb'},{id:'VERB2_PRET',label:'past verb'}] }
+];
+let mlTemplate, mlAnswers;
+
+function initMadLibs() {
+  mlTemplate = MADLIBS_SP2[Math.floor(Math.random() * MADLIBS_SP2.length)];
+  mlAnswers = {};
+  renderMadLibs();
+}
+
+function renderMadLibs() {
+  const allFilled = mlTemplate.blanks.every(b => mlAnswers[b.id]);
+  document.getElementById('madlibsMode').innerHTML = `<div class="game-card">
+    <div class="game-title">😂 Mad Libs: ${mlTemplate.title}</div>
+    <p class="game-subtitle">Fill in the blanks, then see your silly story!</p>
+    <div style="display:flex;flex-direction:column;gap:8px;margin:10px 0">
+      ${mlTemplate.blanks.map(b => `<div style="display:flex;align-items:center;gap:8px">
+        <span style="font-weight:700;font-size:.82rem;min-width:100px;text-align:right;color:#003893">${b.label}:</span>
+        <input class="game-input" style="max-width:180px;text-align:left" value="${mlAnswers[b.id] || ''}"
+          oninput="mlAnswers['${b.id}']=this.value" placeholder="type or use vocab…"/>
+      </div>`).join('')}
+    </div>
+    ${allFilled ? `<div style="background:#FCD116;padding:14px;border-radius:10px;margin:12px 0;line-height:1.6;font-size:1rem;color:#333">
+      ${mlTemplate.story.replace(/\{(\w+)\}/g, (_, id) => `<strong style="color:#003893">${mlAnswers[id]}</strong>`)}
+    </div>` : ''}
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button class="ctrl-btn btn-know" onclick="renderMadLibs()">📖 Show Story</button>
+      <button class="ctrl-btn btn-next" onclick="initMadLibs()">🔄 New Template</button>
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// 20. FALLING WORDS
+// ═══════════════════════════════════════════════
+let fwLives, fwScore, fwSpeed, fwWord, fwY, fwX, fwInput, fwCanvas, fwCtx, fwActive;
+
+function _fallingKeyHandler(e) {
+  if (mode !== 'falling' || !fwActive) return;
+  const inp = document.getElementById('fwInput');
+  if (inp && document.activeElement !== inp) inp.focus();
+}
+document.addEventListener('keydown', _fallingKeyHandler);
+
+function initFalling() {
+  fwLives = 3; fwScore = 0; fwSpeed = 1; fwActive = true;
+  pickFallingWord();
+  const el = document.getElementById('fallingMode');
+  el.innerHTML = `<div class="game-card" style="padding:12px;text-align:center">
+    <div class="game-title">⬇️ Falling Words</div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:.85rem;font-weight:700">
+      <span>❤️ ${fwLives}</span>
+      <span>Find: <span id="fwClue" style="color:#003893">${fwWord.en}</span></span>
+      <span>Score: <span id="fwScoreEl">${fwScore}</span></span>
+    </div>
+    <div class="falling-area"><canvas id="fwCanvas" width="360" height="400"></canvas></div>
+    <input class="game-input" id="fwInput" placeholder="Type the Spanish word…" autocomplete="off" autofocus
+      onkeydown="if(event.key==='Enter')fwCheck()" style="margin-top:8px"/>
+  </div>`;
+  fwCanvas = document.getElementById('fwCanvas');
+  fwCtx = fwCanvas.getContext('2d');
+  fwCanvas.width = fwCanvas.parentElement.clientWidth;
+  fwCanvas.height = fwCanvas.parentElement.clientHeight;
+  fwY = 0; fwX = Math.random() * (fwCanvas.width - 100) + 10;
+  fwLoop();
+  setTimeout(() => { const inp = document.getElementById('fwInput'); if (inp) inp.focus(); }, 100);
+}
+
+function pickFallingWord() {
+  const words = categories[currentCat].words;
+  fwWord = words[Math.floor(Math.random() * words.length)];
+  fwY = 0; if (fwCanvas) fwX = Math.random() * (fwCanvas.width - 100) + 10;
+}
+
+function fwLoop() {
+  if (!fwActive || mode !== 'falling') return;
+  fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+  fwY += fwSpeed;
+  fwCtx.font = 'bold 18px Nunito';
+  fwCtx.fillStyle = '#003893';
+  fwCtx.fillText(fwWord.es, fwX, fwY);
+
+  if (fwY > fwCanvas.height) {
+    fwLives--;
+    if (fwLives <= 0) { endFalling(); return; }
+    pickFallingWord();
+    updateFallingUI();
+  }
+  _fallingRAF = requestAnimationFrame(fwLoop);
+}
+
+function fwCheck() {
+  const inp = document.getElementById('fwInput');
+  if (!inp) return;
+  if (normalizeText(inp.value) === normalizeText(fwWord.es)) {
+    fwScore++; streak++; fwSpeed += 0.15;
+    pickFallingWord();
+    updateFallingUI();
+    updateStats();
+  }
+  inp.value = '';
+}
+
+function updateFallingUI() {
+  const hearts = document.querySelector('#fallingMode .game-title')?.parentElement;
+  if (!hearts) return;
+  const clue = document.getElementById('fwClue');
+  const score = document.getElementById('fwScoreEl');
+  if (clue) clue.textContent = fwWord.en;
+  if (score) score.textContent = fwScore;
+  const livesEl = hearts.querySelector('span');
+  if (livesEl) livesEl.textContent = '❤️ ' + fwLives;
+}
+
+function endFalling() {
+  fwActive = false;
+  const stars = fwScore >= 15 ? '⭐⭐⭐' : fwScore >= 8 ? '⭐⭐' : '⭐';
+  document.getElementById('fallingMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="stars">${stars}</div><div class="game-title">Game Over!</div>
+    <div style="font-size:1.2rem;margin:8px 0">Score: <strong>${fwScore}</strong></div>
+    <button class="ctrl-btn btn-next" style="margin-top:12px" onclick="initFalling()">Play Again</button>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// 21. QUIZ RACE
+// ═══════════════════════════════════════════════
+let raceScore, raceRound, raceTimeLeft, raceCorrect;
+
+function initQuizRace() { raceScore = 0; raceRound = 0; nextRace(); }
+
+function nextRace() {
+  if (raceRound >= 10) {
+    const stars = raceScore >= 25 ? '⭐⭐⭐' : raceScore >= 15 ? '⭐⭐' : '⭐';
+    document.getElementById('quizraceMode').innerHTML = `<div class="game-card" style="text-align:center">
+      <div class="stars">${stars}</div><div class="game-title">Race Complete!</div>
+      <div style="font-size:1.2rem;margin:8px 0">Score: <strong>${raceScore}</strong> points</div>
+      <button class="ctrl-btn btn-next" style="margin-top:12px" onclick="initQuizRace()">Play Again</button>
+    </div>`; return;
+  }
+  raceRound++;
+  const words = categories[currentCat].words;
+  raceCorrect = words[Math.floor(Math.random() * words.length)];
+  let opts = [raceCorrect];
+  while (opts.length < 4) { const r = words[Math.floor(Math.random() * words.length)]; if (!opts.includes(r)) opts.push(r); }
+  shuffleArray(opts);
+  raceTimeLeft = 800; // 8 seconds in tenths
+  clearInterval(_raceTimer);
+
+  document.getElementById('quizraceMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">🏁 Quiz Race</div>
+    <div style="color:#666;font-size:.82rem;margin-bottom:6px">Round ${raceRound}/10 | Score: ${raceScore}</div>
+    <div class="race-bar"><div class="race-fill" id="raceFill" style="width:100%"></div></div>
+    <div style="font-family:'Fredoka One';font-size:1.2rem;color:#003893;margin:10px 0">${raceCorrect.es}</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      ${opts.map(o => `<button class="quiz-opt" style="text-align:center" onclick="raceAnswer(this,${o === raceCorrect})">${o.en}</button>`).join('')}
+    </div>
+    <div id="raceFb" style="margin-top:8px;font-weight:700"></div>
+  </div>`;
+
+  _raceTimer = addInterval(() => {
+    raceTimeLeft -= 5;
+    const fill = document.getElementById('raceFill');
+    if (fill) {
+      fill.style.width = (raceTimeLeft / 800 * 100) + '%';
+      fill.classList.toggle('low', raceTimeLeft < 200);
+    }
+    if (raceTimeLeft <= 0) {
+      clearInterval(_raceTimer);
+      streak = 0; updateStats();
+      const fb = document.getElementById('raceFb');
+      if (fb) fb.innerHTML = `<span style="color:#CE1126">⏱ Time's up! Answer: ${raceCorrect.en}</span>`;
+      setTimeout(() => { if (mode === 'quizrace') nextRace(); }, 1500);
+    }
+  }, 50);
+}
+
+function raceAnswer(btn, isCorrect) {
+  clearInterval(_raceTimer);
+  const fb = document.getElementById('raceFb');
+  if (fb.textContent) return;
+  if (isCorrect) {
+    const bonus = Math.ceil(raceTimeLeft / 100); // 1-8 points based on speed
+    raceScore += bonus; streak++; updateStats();
+    btn.classList.add('correct');
+    fb.innerHTML = `<span style="color:#1E8449">✅ +${bonus} points!</span>`;
+  } else {
+    streak = 0; updateStats();
+    btn.classList.add('wrong');
+    fb.innerHTML = `<span style="color:#CE1126">❌ Answer: ${raceCorrect.en}</span>`;
+  }
+  setTimeout(() => { if (mode === 'quizrace') nextRace(); }, 1500);
+}
+
+// ═══════════════════════════════════════════════
+// 22. BOSS BATTLE
+// ═══════════════════════════════════════════════
+let bossHP, playerHP, bossRound, bossWord;
+
+function initBoss() {
+  bossHP = 5; playerHP = 3; bossRound = 0;
+  nextBossRound();
+}
+
+function nextBossRound() {
+  if (bossHP <= 0) { bossVictory(); return; }
+  if (playerHP <= 0) { bossDefeat(); return; }
+  bossRound++;
+  const words = categories[currentCat].words;
+  bossWord = words[Math.floor(Math.random() * words.length)];
+  let opts = [bossWord];
+  while (opts.length < 4) { const r = words[Math.floor(Math.random() * words.length)]; if (!opts.includes(r)) opts.push(r); }
+  shuffleArray(opts);
+
+  document.getElementById('bossMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div class="game-title">👾 Boss Battle!</div>
+    <div class="boss-char" id="bossChar">🦜</div>
+    <div style="margin:8px 0">
+      <div style="font-size:.75rem;font-weight:700;color:#CE1126">Boss HP</div>
+      <div class="hp-bar"><div class="hp-fill hp-boss" style="width:${bossHP * 20}%"></div></div>
+    </div>
+    <div style="margin-bottom:8px">
+      <div style="font-size:.75rem;font-weight:700;color:#1E8449">Your HP</div>
+      <div class="hp-bar"><div class="hp-fill hp-player" style="width:${playerHP * 33.3}%"></div></div>
+    </div>
+    <div style="font-family:'Fredoka One';font-size:1.1rem;color:#003893;margin:10px 0">${bossWord.es}</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      ${opts.map(o => `<button class="quiz-opt" style="text-align:center" onclick="bossAnswer(this,${o === bossWord})">${o.en}</button>`).join('')}
+    </div>
+  </div>`;
+}
+
+function bossAnswer(btn, isCorrect) {
+  if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+  if (isCorrect) {
+    btn.classList.add('correct'); bossHP--;
+    showToast('💥 Hit! Boss takes damage!', 1000);
+  } else {
+    btn.classList.add('wrong'); playerHP--;
+    const boss = document.getElementById('bossChar');
+    if (boss) { boss.classList.add('boss-attack-anim'); setTimeout(() => boss.classList.remove('boss-attack-anim'), 600); }
+    showToast('🦜 Boss attacks!', 1000);
+  }
+  _bossTimer = setTimeout(nextBossRound, 1200);
+}
+
+function bossVictory() {
+  document.getElementById('bossMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div style="font-size:3rem">🏆</div>
+    <div class="game-title" style="color:#1E8449">¡Victoria!</div>
+    <div style="font-size:1.1rem;margin:8px 0">You defeated the boss!</div>
+    <button class="ctrl-btn btn-next" style="margin-top:12px" onclick="initBoss()">Battle Again</button>
+  </div>`;
+  spawnConfetti();
+}
+
+function bossDefeat() {
+  document.getElementById('bossMode').innerHTML = `<div class="game-card" style="text-align:center">
+    <div style="font-size:3rem">💀</div>
+    <div class="game-title" style="color:#CE1126">Defeated!</div>
+    <div style="font-size:1.1rem;margin:8px 0">The boss won this time…</div>
+    <button class="ctrl-btn btn-next" style="margin-top:12px" onclick="initBoss()">Try Again</button>
+  </div>`;
+}
+
+function spawnConfetti() {
+  const wrap = document.createElement('div');
+  wrap.className = 'confetti-wrap';
+  const colors = ['#FCD116', '#003893', '#CE1126', '#1E8449', '#8E44AD', '#D4AC0D'];
+  for (let i = 0; i < 60; i++) {
+    const piece = document.createElement('div');
+    piece.style.cssText = `position:absolute;width:${6 + Math.random() * 8}px;height:${6 + Math.random() * 8}px;
+      background:${colors[Math.floor(Math.random() * colors.length)]};
+      left:${Math.random() * 100}%;top:-10px;border-radius:${Math.random() > .5 ? '50%' : '2px'};
+      animation:confetti-fall ${2 + Math.random() * 2}s ease-in ${Math.random() * .5}s forwards`;
+    wrap.appendChild(piece);
+  }
+  document.body.appendChild(wrap);
+  setTimeout(() => wrap.remove(), 5000);
+}
+
+// ═══════════════════════════════════════════════
+// 23. DIALOGUE JUMBLE
+// ═══════════════════════════════════════════════
+const DIALOGUES_SP2 = [
+  { title: "En el aeropuerto", lines: [
+    "Ana: ¡Llegamos a Bogotá! ¿Dónde está el equipaje?",
+    "Carlos: Busqué las maletas pero no las encontré.",
+    "Ana: ¿Hablaste con la persona en la aduana?",
+    "Carlos: Sí, me dijo que llegaron en otro vuelo.",
+    "Ana: ¡Qué problema! Vamos al hotel sin ellas.",
+    "Carlos: Buena idea. Compré lo necesario ayer."
+  ]},
+  { title: "En el hotel de Medellín", lines: [
+    "María: ¿Reservaste la habitación?",
+    "Pedro: Sí, pagué por dos noches.",
+    "María: ¿Visitaste el museo ayer?",
+    "Pedro: No, pero caminé por el mercado y compré recuerdos.",
+    "María: ¡Yo también! Almorcé en un restaurante increíble."
+  ]},
+  { title: "Después del viaje", lines: [
+    "Profe: ¿Qué hicieron en Colombia?",
+    "Luis: Fui a Cartagena y nadé en la playa.",
+    "Sara: Yo viajé a Bogotá y visité el museo.",
+    "Profe: ¡Excelente! ¿Trajeron recuerdos?",
+    "Luis: Sí, traje café colombiano para todos."
+  ]}
+];
+let dialCorrect, dialOrder, dialSelected;
+
+function initDialogue() {
+  const d = DIALOGUES_SP2[Math.floor(Math.random() * DIALOGUES_SP2.length)];
+  dialCorrect = [...d.lines];
+  dialOrder = shuffleArray([...d.lines]);
+  dialSelected = null;
+  renderDialogue(d.title);
+}
+
+function renderDialogue(title) {
+  const el = document.getElementById('dialogueMode');
+  el.innerHTML = `<div class="game-card">
+    <div class="game-title">🗣️ Dialogue Jumble: ${title || ''}</div>
+    <p class="game-subtitle">Click two lines to swap them into the correct order</p>
+    <div id="dialLines">${dialOrder.map((line, i) =>
+      `<div class="dial-line${dialSelected === i ? ' dial-selected' : ''}" onclick="dialTap(${i})">${line}</div>`
+    ).join('')}</div>
+    <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+      <button class="ctrl-btn btn-know" onclick="dialCheck()">✅ Check</button>
+      <button class="ctrl-btn btn-next" onclick="initDialogue()">🔄 New</button>
+    </div>
+  </div>`;
+}
+
+function dialTap(idx) {
+  if (dialSelected === null) {
+    dialSelected = idx;
+  } else {
+    // Swap
+    [dialOrder[dialSelected], dialOrder[idx]] = [dialOrder[idx], dialOrder[dialSelected]];
+    dialSelected = null;
+  }
+  renderDialogue();
+}
+
+function dialCheck() {
+  const lines = document.querySelectorAll('#dialLines .dial-line');
+  let allCorrect = true;
+  dialOrder.forEach((line, i) => {
+    if (line === dialCorrect[i]) lines[i].classList.add('dial-correct');
+    else { lines[i].classList.add('dial-wrong'); allCorrect = false; }
+  });
+  if (allCorrect) {
+    streak += dialCorrect.length; updateStats();
+    showToast('🎉 ¡Perfecto!', 2000);
+  }
+}
+
+// ═══════════════════════════════════════════════
+// PASS STUBS (modes not feasible with current data)
+// ═══════════════════════════════════════════════
+/*
+ * PASS — Dictation Drop: No sentence data in vocab set
+ * PASS — Minimal Pairs: Requires curated phonological pair data
+ * PASS — Sentence Unscramble: No sentence data in vocab set
+ * PASS — Cloze Passage: Requires a curated reading passage
+ * PASS — Story Sequencing: Requires narrative sentence data
+ * PASS — Error Hunt: No sentence data available
+ * PASS — Word Duel (PvP): Requires backend/WebSocket (static site)
+ * PASS — Photo Caption Match: Requires image assets tied to vocab
+ * PASS — Idiom Decoder: Requires idiom data not in standard vocab
+ * PASS — Regional Variety Spotter: Requires regional audio recordings
+ * PASS — Synonym Swap: Requires synonym data not in basic vocab list
+ */
+
+// ═══════════════════════════════════
+// INITIALIZE
+// ═══════════════════════════════════
 init();
 </script>
 </body>

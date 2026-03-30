@@ -43,13 +43,13 @@ window.unitSite = {
           icon: "📚"
         },
         {
-          title: "Vocabulary Flashcards",
-          description: "Flashcard, quiz mode, and matching game for all Spanish 1 Colombia vocabulary.",
+          title: "Vocabulary Game Suite",
+          description: "25+ game modes: flashcards, quiz, word scramble, hangman, falling words, memory, crossword, word search, and more!",
           route: "../Colombia_Vocab_Review_Spanish1.html",
           releaseDate: "",
           status: "Ready",
-          kindLabel: "Flashcards",
-          minutes: 10,
+          kindLabel: "Game Suite",
+          minutes: 15,
           dayLabel: "Bonus",
           icon: "📇"
         }

@@ -43,13 +43,13 @@ window.unitSite = {
           icon: "✈️"
         },
         {
-          title: "Vocabulary Flashcards",
-          description: "Review travel and preterite vocabulary with flashcards, quiz mode, and matching mode.",
+          title: "Vocabulary Game Suite",
+          description: "25+ game modes: flashcards, quiz, word scramble, hangman, falling words, memory, crossword, word search, and more!",
           route: "../Colombia_Vocab_Review_Spanish2.html",
           releaseDate: "",
           status: "Ready",
-          kindLabel: "Flashcards",
-          minutes: 10,
+          kindLabel: "Game Suite",
+          minutes: 15,
           dayLabel: "Bonus",
           icon: "📇"
         }
