@@ -29,6 +29,7 @@ window.LESSON_DATA = {
         },
         {
           type: "questions",
+          markCompleteLabel: "Save warm-up (mark this section done)",
           questions: [
             { prompt: "Write what you shared with your partner:", type: "textarea", placeholder: "I remembered that...", rows: 2 }
           ]

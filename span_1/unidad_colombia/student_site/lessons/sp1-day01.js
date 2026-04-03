@@ -51,7 +51,8 @@ window.LESSON_DATA = {
       components: [
         {
           type: "video",
-          placeholder: "Your teacher will share the video link — Introducción a Colombia (~15 min)",
+          videoTitle: "Introducción a Colombia",
+          placeholder: "Your teacher will share the video link — Introducción a Colombia (~15 min). If they give a YouTube link, add youtubeId + externalVideoUrl in this lesson file for embed + new-tab button.",
           instructions: "Mientras ves: Escucha con atención. Take notes in Spanish or English as you watch."
         },
         {
@@ -61,6 +62,18 @@ window.LESSON_DATA = {
         },
         {
           type: "questions",
+          selfRubric: {
+            id: "video-comp",
+            title: "Before you leave this section, honestly check:",
+            items: [
+              "I used complete sentences or clear bullet ideas.",
+              "My answers use information from the video (not only guesses).",
+              "I used Spanish where I could; English is OK for harder ideas."
+            ],
+            completeSectionWhenAllChecked: true
+          },
+          exemplarHtml: "<p><strong>Sample ideas (yours can differ):</strong> Three natural features might include the <em>Andes</em>, the <em>Caribbean coast</em>, and the <em>Amazon</em> region. For tourism, Colombia used to be less known internationally; the government invested in safety, infrastructure, and promoting destinations.</p>",
+          exemplarButtonLabel: "Show sample ideas (after your own answers)",
           questions: [
             {
               prompt: "Name three different kinds of places/natural features mentioned (coasts, mountains, forests, etc.)",

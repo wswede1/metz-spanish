@@ -1,0 +1,160 @@
+/* Client-side progress for Colombia student sites (localStorage). */
+(function (global) {
+  'use strict';
+
+  var PREFIX = 'metz-colombia-';
+
+  function safeGet(key) {
+    try {
+      return global.localStorage.getItem(key);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function safeSet(key, val) {
+    try {
+      global.localStorage.setItem(key, val);
+    } catch (e) {}
+  }
+
+  function safeJSONParse(s, fallback) {
+    if (s == null || s === '') return fallback;
+    try {
+      return JSON.parse(s);
+    } catch (e) {
+      return fallback;
+    }
+  }
+
+  function lessonPrefix(course, day) {
+    return PREFIX + course + '-lesson-' + day + '-';
+  }
+
+  var ColombiaProgress = {
+    PREFIX: PREFIX,
+
+    lessonDraftKey: function (course, day, key) {
+      return lessonPrefix(course, day) + key;
+    },
+
+    getLessonDraft: function (course, day, key) {
+      return safeGet(this.lessonDraftKey(course, day, key)) || '';
+    },
+
+    setLessonDraft: function (course, day, key, value) {
+      safeSet(this.lessonDraftKey(course, day, key), String(value));
+    },
+
+    getLessonSections: function (course, day) {
+      var raw = safeGet(this.lessonDraftKey(course, day, 'sections'));
+      var obj = safeJSONParse(raw, {});
+      return obj && typeof obj === 'object' ? obj : {};
+    },
+
+    setLessonSections: function (course, day, map) {
+      safeSet(this.lessonDraftKey(course, day, 'sections'), JSON.stringify(map || {}));
+    },
+
+    /** Merge { sectionId: true } into stored section completion. */
+    mergeLessonSection: function (course, day, sectionId, done) {
+      var m = this.getLessonSections(course, day);
+      m[sectionId] = !!done;
+      this.setLessonSections(course, day, m);
+    },
+
+    getLessonRubric: function (course, day, rubricId) {
+      var raw = safeGet(this.lessonDraftKey(course, day, 'rubric-' + rubricId));
+      return safeJSONParse(raw, null);
+    },
+
+    setLessonRubric: function (course, day, rubricId, arr) {
+      safeSet(this.lessonDraftKey(course, day, 'rubric-' + rubricId), JSON.stringify(arr));
+    },
+
+    recordActivityVisit: function (course, activityId, meta) {
+      meta = meta || {};
+      var payload = JSON.stringify({
+        id: activityId,
+        title: meta.title || '',
+        href: meta.href || '',
+        at: Date.now()
+      });
+      safeSet(PREFIX + course + '-last-activity', payload);
+      var setKey = PREFIX + course + '-activities-explored';
+      var raw = safeGet(setKey);
+      var setObj = safeJSONParse(raw, {});
+      if (!setObj || typeof setObj !== 'object') setObj = {};
+      setObj[activityId] = true;
+      safeSet(setKey, JSON.stringify(setObj));
+    },
+
+    getLastActivity: function (course) {
+      var raw = safeGet(PREFIX + course + '-last-activity');
+      return safeJSONParse(raw, null);
+    },
+
+    recordLessonVisit: function (course, day, meta) {
+      meta = meta || {};
+      var payload = JSON.stringify({
+        day: day,
+        title: meta.title || '',
+        href: meta.href || '',
+        at: Date.now()
+      });
+      safeSet(PREFIX + course + '-last-lesson', payload);
+    },
+
+    getLastLesson: function (course) {
+      var raw = safeGet(PREFIX + course + '-last-lesson');
+      return safeJSONParse(raw, null);
+    },
+
+    /** Prefer the more recent of last activity vs last lesson. */
+    getResume: function (course) {
+      var a = this.getLastActivity(course);
+      var l = this.getLastLesson(course);
+      if (!a && !l) return null;
+      if (!a) return { type: 'lesson', label: l.title || ('Day ' + l.day), href: l.href, at: l.at };
+      if (!l) return { type: 'activity', label: a.title || 'Last activity', href: a.href, at: a.at };
+      if ((a.at || 0) >= (l.at || 0)) {
+        return { type: 'activity', label: a.title || 'Last activity', href: a.href, at: a.at };
+      }
+      return { type: 'lesson', label: l.title || ('Day ' + l.day), href: l.href, at: l.at };
+    },
+
+    addCompletedLessonDay: function (course, day) {
+      var raw = safeGet(PREFIX + course + '-lesson-days-done');
+      var arr = safeJSONParse(raw, []);
+      if (!Array.isArray(arr)) arr = [];
+      if (arr.indexOf(day) === -1) {
+        arr.push(day);
+        arr.sort();
+        safeSet(PREFIX + course + '-lesson-days-done', JSON.stringify(arr));
+      }
+    },
+
+    getCompletedLessonDays: function (course) {
+      var raw = safeGet(PREFIX + course + '-lesson-days-done');
+      var arr = safeJSONParse(raw, []);
+      return Array.isArray(arr) ? arr : [];
+    },
+
+    getExploredActivityCount: function (course) {
+      var raw = safeGet(PREFIX + course + '-activities-explored');
+      var setObj = safeJSONParse(raw, {});
+      if (!setObj || typeof setObj !== 'object') return 0;
+      return Object.keys(setObj).length;
+    },
+
+    countHubCards: function (site) {
+      var n = 0;
+      (site.sections || []).forEach(function (sec) {
+        n += (sec.cards || []).length;
+      });
+      return n;
+    }
+  };
+
+  global.ColombiaProgress = ColombiaProgress;
+})(window);
