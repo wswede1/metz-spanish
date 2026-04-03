@@ -1097,3 +1097,70 @@ a {
 .wo-feedback { font-weight: 700; font-size: 0.9rem; margin-top: 8px; min-height: 1.3em; }
 .wo-feedback.correct { color: var(--col-green); }
 .wo-feedback.wrong { color: var(--col-red); }
+
+/* Hub: card wrap + full lesson link + tier + resume */
+.activity-card-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 220px;
+}
+.activity-card-wrap .activity-card {
+  flex: 1;
+}
+.card-lesson-row {
+  text-align: center;
+  padding-bottom: 4px;
+}
+.card-lesson-link {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--col-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.card-lesson-link:hover {
+  color: var(--col-red);
+}
+.card-tier-badge {
+  display: block;
+  align-self: flex-start;
+  margin: 8px 0 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.card-tier-l2 {
+  background: rgba(0, 56, 147, 0.1);
+  color: var(--col-blue);
+}
+.card-tier-heritage {
+  background: rgba(212, 172, 13, 0.28);
+  color: #5c4d00;
+}
+
+.resume-bar {
+  margin: 0 0 18px;
+}
+.resume-bar[hidden] {
+  display: none !important;
+}
+.resume-bar-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  padding: 14px 18px;
+  background: var(--card-bg);
+  border-radius: 18px;
+  border: 1px solid rgba(0, 56, 147, 0.1);
+  box-shadow: 0 8px 24px rgba(22, 39, 61, 0.06);
+}
+.resume-progress-hint {
+  font-size: 0.84rem;
+  color: var(--muted);
+  font-weight: 700;
+}

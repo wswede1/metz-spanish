@@ -114,6 +114,8 @@
         span.className = 'word-token word-gloss';
         span.setAttribute('data-gloss', gloss);
         span.setAttribute('tabindex', '0');
+        span.setAttribute('role', 'button');
+        span.setAttribute('aria-label', word + ': show translation and play audio');
       }
       span.addEventListener('click', function () { speakSpanish(word); });
       p.appendChild(span);
@@ -168,7 +170,17 @@
       byId('overviewText').textContent = site.overviewText;
     }
     if (byId('overviewMeta')) {
-      renderMiniMeta(byId('overviewMeta'), site.overviewMeta || []);
+      var pills = (site.overviewMeta || []).slice();
+      if (window.ColombiaProgress) {
+        var ck = site.courseKey || 'sp1';
+        pills.push(
+          ColombiaProgress.getCompletedLessonDays(ck).length + '/' + (site.totalUnitLessonDays || 14) + ' lesson days'
+        );
+        pills.push(
+          ColombiaProgress.getExploredActivityCount(ck) + '/' + ColombiaProgress.countHubCards(site) + ' activities opened'
+        );
+      }
+      renderMiniMeta(byId('overviewMeta'), pills);
     }
 
     var mount = byId('hubSections');
@@ -215,6 +227,12 @@
           div.appendChild(meta);
           grid.appendChild(div);
         } else {
+          var lessonHref = card.lessonHref;
+          if (!lessonHref && card.lessonDay !== undefined && card.lessonDay !== null && String(card.lessonDay).trim() !== '') {
+            lessonHref = 'lessons/lesson.html?day=' + parseInt(String(card.lessonDay), 10);
+          }
+
+          var wrap = el('div', 'activity-card-wrap');
           var link = el('a', 'activity-card');
           link.href = card.route;
           var badgeClass = card.status === 'New' ? 'badge-new' : card.status === 'Study' ? 'badge-study' : 'badge-ready';
@@ -230,10 +248,24 @@
           });
           link.appendChild(badge);
           link.appendChild(cardIcon);
+          if (card.tier === 'l2') {
+            link.appendChild(el('span', 'card-tier-badge card-tier-l2', 'Language learner'));
+          } else if (card.tier === 'heritage') {
+            link.appendChild(el('span', 'card-tier-badge card-tier-heritage', 'Heritage track'));
+          }
           link.appendChild(cardTitle);
           link.appendChild(cardDesc);
           link.appendChild(cardMeta);
-          grid.appendChild(link);
+          wrap.appendChild(link);
+          if (lessonHref) {
+            var subRow = el('div', 'card-lesson-row');
+            var lessonA = el('a', 'card-lesson-link');
+            lessonA.href = lessonHref;
+            lessonA.textContent = 'Full lesson';
+            subRow.appendChild(lessonA);
+            wrap.appendChild(subRow);
+          }
+          grid.appendChild(wrap);
         }
       });
 
@@ -1097,6 +1129,12 @@
       return;
     }
     setHero(site, activity);
+    if (window.ColombiaProgress && site.courseKey && activityId) {
+      ColombiaProgress.recordActivityVisit(site.courseKey, activityId, {
+        title: activity.title,
+        href: 'activity.html?activity=' + encodeURIComponent(activityId)
+      });
+    }
     if (activity.type === 'reading') {
       renderReading(mount, activity);
     } else if (activity.type === 'resource') {
@@ -1110,6 +1148,12 @@
     } else {
       renderPractice(mount, activity);
     }
+  }
+
+  function positionWordTipNear(el, tip) {
+    var r = el.getBoundingClientRect();
+    tip.style.left = window.scrollX + r.left + 14 + 'px';
+    tip.style.top = window.scrollY + r.top - 8 + 'px';
   }
 
   function initTooltip() {
@@ -1130,11 +1174,60 @@
       }
     });
     document.addEventListener('mousemove', function (e) {
-      if (tip.classList.contains('visible')) {
+      if (tip.classList.contains('visible') && e.target.classList && e.target.classList.contains('word-gloss')) {
         tip.style.left = (e.clientX + 14) + 'px';
         tip.style.top = (e.clientY - 40) + 'px';
       }
     });
+    document.addEventListener('focusin', function (e) {
+      var t = e.target;
+      if (t.classList && t.classList.contains('word-gloss')) {
+        tip.textContent = t.getAttribute('data-gloss');
+        tip.classList.add('visible');
+        positionWordTipNear(t, tip);
+      }
+    });
+    document.addEventListener('focusout', function (e) {
+      if (e.target.classList && e.target.classList.contains('word-gloss')) {
+        tip.classList.remove('visible');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      var t = e.target;
+      if (!t.classList || !t.classList.contains('word-gloss')) return;
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        speakSpanish(t.textContent);
+        tip.textContent = t.getAttribute('data-gloss');
+        tip.classList.add('visible');
+        positionWordTipNear(t, tip);
+      }
+    });
+  }
+
+  function renderResumeBar(site) {
+    var bar = byId('resumeBar');
+    if (!bar || !window.ColombiaProgress) return;
+    var course = site.courseKey || 'sp1';
+    var resume = ColombiaProgress.getResume(course);
+    bar.innerHTML = '';
+    if (!resume || !resume.href) {
+      bar.hidden = true;
+      return;
+    }
+    bar.hidden = false;
+    var inner = el('div', 'resume-bar-inner');
+    var a = el('a', 'resume-link primary-btn', 'Resume: ' + (resume.label || 'Continue'));
+    a.href = resume.href;
+    inner.appendChild(a);
+    var done = ColombiaProgress.getCompletedLessonDays(course).length;
+    var totalL = site.totalUnitLessonDays || 14;
+    var explored = ColombiaProgress.getExploredActivityCount(course);
+    var cardTotal = ColombiaProgress.countHubCards(site);
+    inner.appendChild(
+      el('span', 'resume-progress-hint', done + '/' + totalL + ' lesson days · ' + explored + '/' + cardTotal + ' activities opened')
+    );
+    bar.appendChild(inner);
   }
 
   function init() {
@@ -1144,6 +1237,7 @@
     initTooltip();
     if (byId('hubSections')) {
       renderHub(window.unitSite);
+      renderResumeBar(window.unitSite);
     }
     if (byId('activityMount')) {
       renderActivity(window.unitSite);

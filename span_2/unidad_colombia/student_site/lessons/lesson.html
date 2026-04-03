@@ -10,7 +10,7 @@
 <div id="lessonRoot"></div>
 <script src="../../../unidad_colombia/student_site_assets/colombia-progress.js"></script>
 <script>
-  window.METZ_LESSON_COURSE = 'sp1';
+  window.METZ_LESSON_COURSE = 'sp2';
   (function () {
     var params = new URLSearchParams(window.location.search);
     var day = params.get('day') || '1';
@@ -24,7 +24,7 @@
   var params = new URLSearchParams(window.location.search);
   var day = params.get('day') || '1';
   var script = document.createElement('script');
-  script.src = 'sp1-day' + day.padStart(2, '0') + '.js';
+  script.src = 'sp2-day' + day.padStart(2, '0') + '.js';
   script.onload = function() {
     if (window.LESSON_DATA && window.LessonEngine) {
       document.title = window.LESSON_DATA.title + ' — Colombia Unit';

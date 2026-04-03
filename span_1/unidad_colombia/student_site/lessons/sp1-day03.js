@@ -84,6 +84,18 @@ window.LESSON_DATA = {
       components: [
         {
           type: "questions",
+          selfRubric: {
+            id: "quiz-short-rubric",
+            title: "Self-check (honor system):",
+            items: [
+              "I answered each prompt in Spanish where asked.",
+              "My place name matches something we studied (map or Day 1).",
+              "My sentence about the libro includes a location phrase (en la mochila, en la mesa, etc.)."
+            ],
+            completeSectionWhenAllChecked: true
+          },
+          exemplarHtml: "<p><strong>Sample:</strong> Medellín / la mesa / El libro está en la mochila.</p>",
+          exemplarButtonLabel: "Show sample answers",
           questions: [
             { prompt: "Name one place in Colombia (city or region) from Day 1.", placeholder: "A city or region..." },
             { prompt: "Name one classroom object in Spanish.", placeholder: "Un objeto de la clase..." },
