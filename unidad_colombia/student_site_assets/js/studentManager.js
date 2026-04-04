@@ -176,28 +176,38 @@ export async function getOrCreateStudent(displayName, learnerTrack = 'auto') {
 
   const studentId = hashStudentId(name);
   const existing = await students.where('studentId').equals(studentId).first();
+  let out;
   if (existing) {
-    return existing;
+    out = existing;
+  } else {
+    let track = learnerTrack;
+    if (track === 'auto') {
+      track = await runLearnerTrackDiagnostic();
+    }
+
+    const now = Date.now();
+    const row = {
+      studentId,
+      displayName: name,
+      learnerTrack: track,
+      createdAt: now,
+      lastActive: now,
+      totalSessions: 0,
+      streakDays: 0,
+      lastSessionDate: null,
+    };
+    const id = await students.add(row);
+    out = { ...row, id };
   }
 
-  let track = learnerTrack;
-  if (track === 'auto') {
-    track = await runLearnerTrackDiagnostic();
+  try {
+    const m = await import('./supabaseSync.js');
+    await m.syncFromSupabase(studentId);
+    m.scheduleSyncToSupabase(studentId);
+  } catch (e) {
+    console.warn('[SUPABASE SYNC]', e?.message || e);
   }
-
-  const now = Date.now();
-  const row = {
-    studentId,
-    displayName: name,
-    learnerTrack: track,
-    createdAt: now,
-    lastActive: now,
-    totalSessions: 0,
-    streakDays: 0,
-    lastSessionDate: null,
-  };
-  const id = await students.add(row);
-  return { ...row, id };
+  return out;
 }
 
 /**

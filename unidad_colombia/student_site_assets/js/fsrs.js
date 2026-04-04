@@ -233,6 +233,9 @@ export function scheduleCard(card, rating, reviewTime = Date.now()) {
 
 export async function saveCard(card) {
   await fsrsCards.put(card);
+  import('./supabaseSync.js')
+    .then((m) => m.scheduleSyncToSupabase(card.studentId))
+    .catch(() => {});
   return card;
 }
 

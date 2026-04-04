@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metz Spanish — Supabase sync settings</title>
+  <script src="https://unpkg.com/dexie@3/dist/dexie.min.js"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 24px auto; padding: 0 16px; line-height: 1.45; }
+    .warn { background: #fff3cd; border: 1px solid #ffc107; padding: 12px 14px; border-radius: 8px; margin-bottom: 20px; }
+    label { display: block; font-weight: 600; margin-top: 14px; }
+    input { width: 100%; box-sizing: border-box; padding: 10px 12px; margin-top: 6px; border-radius: 8px; border: 1px solid #ccc; font-size: 0.95rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    button { padding: 10px 18px; border-radius: 8px; border: none; background: #003893; color: #fff; font-weight: 700; cursor: pointer; font-size: 0.9rem; }
+    button.secondary { background: #6b7280; }
+    .status { margin-top: 14px; font-size: 0.95rem; }
+    .meta { margin-top: 10px; color: #555; font-size: 0.88rem; }
+    a { color: #003893; }
+    code { background: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+  </style>
+</head>
+<body>
+  <h1>Supabase sync settings</h1>
+  <p>Teacher / setup only. Keeps a cloud copy of adaptive-learning data that lives in this browser’s IndexedDB (<code>MetzSpanishDB</code>).</p>
+
+  <div class="warn">
+    <strong>Security:</strong> Use only the <strong>publishable</strong> Supabase API key in this page. Never paste the <strong>secret</strong> (service_role) key into a website. If a secret key was exposed, rotate it in the Supabase dashboard under Project Settings → API.
+  </div>
+
+  <p>1. In Supabase, open <strong>SQL Editor</strong> and run the script <code>supabase-schema.sql</code> from this folder.<br>
+     2. Project URL is usually <code>https://&lt;project-ref&gt;.supabase.co</code>.<br>
+     3. Paste the publishable key from <strong>Project Settings → API</strong>.</p>
+
+  <label for="sbUrl">Supabase project URL</label>
+  <input type="url" id="sbUrl" placeholder="https://kcgtsirrzgqdvvoemqll.supabase.co" autocomplete="off">
+
+  <label for="sbKey">Publishable API key</label>
+  <input type="password" id="sbKey" placeholder="sb_publishable_… or anon JWT" autocomplete="off">
+
+  <div class="actions">
+    <button type="button" id="sbSave">Save locally</button>
+    <button type="button" class="secondary" id="sbTest">Test connection</button>
+    <button type="button" id="sbSyncAll">Sync all students now</button>
+  </div>
+
+  <p class="status" id="sbStatus" aria-live="polite"></p>
+  <p class="meta">Last successful sync: <span id="sbLastSync">—</span></p>
+  <p class="meta"><a href="../../span_1/unidad_colombia/student_site/index.html">← Spanish 1 student hub</a> · <a href="../../span_2/unidad_colombia/student_site/index.html">Spanish 2 student hub</a></p>
+
+  <script type="module" src="./js/supabase-sync-settings-ui.js"></script>
+</body>
+</html>

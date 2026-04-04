@@ -69,7 +69,11 @@ export async function logResponse(payload) {
     difficulty: String(payload.difficulty),
     sessionId: payload.sessionId,
   };
-  return itemResponses.add(row);
+  const newId = await itemResponses.add(row);
+  import('./supabaseSync.js')
+    .then((m) => m.scheduleSyncToSupabase(payload.studentId))
+    .catch(() => {});
+  return newId;
 }
 
 /**
