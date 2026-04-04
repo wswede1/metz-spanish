@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>🇨🇴 Colombia Vocabulary Review — Spanish 1</title>
+<script src="https://unpkg.com/dexie@3/dist/dexie.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -495,16 +496,30 @@ const categories = [
   }
 ];
 
+window.__METZ_COLOMBIA_SP1 = { categories, vocabSlug };
+
 // ═══════════════════════════════════
 // APP STATE
 // ═══════════════════════════════════
 let currentCat = 0;
 let currentIdx = 0;
 let deck = [];
+/** Adaptive learning: replace flashcard deck from session engine (see adaptiveColombiaVocabBridge.js). */
+window.__METZ_PATCH_FLASH_DECK = (words, idx) => {
+  deck = [...words];
+  currentIdx = idx || 0;
+  known = new Set();
+  streak = 0;
+  updateStats();
+  if (mode === 'flashcard') showCard();
+};
+/** ES module bridge reads current flashcard word (let deck is not on window). */
+window.__METZ_PEEK_FLASH_WORD = () => (!deck.length ? null : deck[currentIdx % deck.length]);
 let known = new Set();
 let streak = 0;
 let mode = 'flashcard';
 let quizScore = 0, quizTotal = 0, quizCurrent = null;
+window.__METZ_PEEK_QUIZ = () => quizCurrent;
 let matchSelected = null, matchPairs = 0, matchStart = 0;
 
 // Timer/animation tracking for cleanup
@@ -717,6 +732,7 @@ function resetCategory() { selectCategory(currentCat); }
 // ═══════════════════════════════════
 function startQuiz() { quizScore = 0; quizTotal = 0; nextQuiz(); }
 function nextQuiz() {
+  window.__metzQuizT0 = Date.now();
   const words = categories[currentCat].words;
   if (words.length < 4) return;
   const correct = words[Math.floor(Math.random() * words.length)];
@@ -2384,5 +2400,6 @@ function dialCheck() {
 // ═══════════════════════════════════
 init();
 </script>
+<script type="module" src="../../unidad_colombia/student_site_assets/js/adaptiveColombiaVocabBridge.js"></script>
 </body>
 </html>
