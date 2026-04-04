@@ -8,7 +8,7 @@ export function hashStudentId(displayName) {
   const s = String(displayName || '').trim().toLowerCase();
   let hash = 5381;
   for (let i = 0; i < s.length; i += 1) {
-    hash = (hash * 33 + s.charCodeAt(i)) | 0;
+    hash = ((hash << 5) + hash + s.charCodeAt(i)) | 0;
   }
   return `u${(hash >>> 0).toString(16)}`;
 }
