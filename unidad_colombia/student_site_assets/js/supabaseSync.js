@@ -2,10 +2,12 @@
  * Optional Supabase cloud mirror for MetzSpanishDB (Dexie).
  * Loads @supabase/supabase-js via dynamic import (ESM CDN) on first use, unless
  * globalThis.supabase.createClient is already set (optional script tag).
- * Credentials: localStorage only (never commit keys). Use the publishable key in the browser — never the service secret.
+ * Credentials: localStorage overrides defaults from metzSupabasePublicConfig.js (publishable key only — never service secret).
  */
 
 import { students, sessions, itemResponses, fsrsCards, bktSkills } from './db.js';
+import { getResolvedSupabaseUrl, getResolvedSupabaseKey } from './metzSupabasePublicConfig.js';
+import { resetLiteSupabaseClient } from './activityCompletionsSync.js';
 
 export const LS_URL = 'metz-supabase-url';
 export const LS_KEY = 'metz-supabase-publishable-key';
@@ -21,6 +23,7 @@ let clientPromise = null;
 
 export function resetSupabaseClient() {
   clientPromise = null;
+  resetLiteSupabaseClient();
 }
 
 async function resolveCreateClient() {
@@ -33,19 +36,11 @@ async function resolveCreateClient() {
 }
 
 export function getSavedSupabaseUrl() {
-  try {
-    return localStorage.getItem(LS_URL)?.trim() || '';
-  } catch {
-    return '';
-  }
+  return getResolvedSupabaseUrl();
 }
 
 export function getSavedSupabaseKey() {
-  try {
-    return localStorage.getItem(LS_KEY)?.trim() || '';
-  } catch {
-    return '';
-  }
+  return getResolvedSupabaseKey();
 }
 
 export function saveSupabaseSettings(url, publishableKey) {
@@ -64,7 +59,11 @@ export async function getSupabaseClient() {
       clientPromise = (async () => {
         const createClient = await resolveCreateClient();
         return createClient(url, key, {
-          auth: { persistSession: false, autoRefreshToken: false },
+          auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true,
+          },
         });
       })();
     }
@@ -98,8 +97,8 @@ export function setLastSyncTime(ts = Date.now()) {
   }
 }
 
-function studentToPg(row) {
-  return {
+function studentToPg(row, authUserId) {
+  const o = {
     student_id: row.studentId,
     display_name: row.displayName,
     learner_track: row.learnerTrack,
@@ -109,6 +108,8 @@ function studentToPg(row) {
     streak_days: row.streakDays ?? 0,
     last_session_date: row.lastSessionDate ?? null,
   };
+  if (authUserId) o.auth_user_id = authUserId;
+  return o;
 }
 
 function studentFromPg(row) {
@@ -133,19 +134,58 @@ async function upsertBatches(client, table, rows, onConflict) {
   }
 }
 
+/** @returns {Promise<string | null>} */
+export async function getSupabaseAuthUserId(client) {
+  const { data } = await client.auth.getSession();
+  return data.session?.user?.id ?? null;
+}
+
 /**
- * Push all local rows for one student to Supabase (upsert).
+ * Upsert public.students so auth_user_id matches the signed-in user (links Dexie profile to cloud).
+ * @returns {Promise<{ ok: boolean, message?: string }>}
+ */
+export async function linkActiveStudentToSupabaseAuth() {
+  const client = await getSupabaseClient();
+  if (!client) return { ok: false, message: 'Supabase URL and publishable key not saved' };
+  const uid = await getSupabaseAuthUserId(client);
+  if (!uid) return { ok: false, message: 'Sign in first' };
+  let sid;
+  try {
+    sid = localStorage.getItem('metz-active-student-id');
+  } catch {
+    sid = null;
+  }
+  if (!sid) return { ok: false, message: 'No active student — use profile setup' };
+  const srow = await students.where('studentId').equals(sid).first();
+  if (!srow) return { ok: false, message: 'Local profile missing' };
+  const { error } = await client
+    .from('students')
+    .upsert([studentToPg(srow, uid)], { onConflict: 'student_id' });
+  if (error) return { ok: false, message: error.message };
+  try {
+    await syncFromSupabase(sid);
+  } catch (e) {
+    console.warn('[SUPABASE SYNC]', e?.message || e);
+  }
+  return { ok: true };
+}
+
+/**
+ * Push all local rows for one student to Supabase (upsert). No-op when not signed in.
  */
 export async function syncToSupabase(studentId) {
   const client = await getSupabaseClient();
   if (!client || !studentId) return;
+
+  const uid = await getSupabaseAuthUserId(client);
+  if (!uid) return;
 
   const srow = await students.where('studentId').equals(studentId).first();
   if (!srow) return;
 
   const { error: e0 } = await client
     .from('students')
-    .upsert([studentToPg(srow)], { onConflict: 'student_id' });
+    .upsert([studentToPg(srow, uid)], { onConflict: 'student_id' });
   if (e0) throw e0;
 
   const [sess, items, cards, skills] = await Promise.all([
@@ -242,6 +282,9 @@ export async function syncToSupabase(studentId) {
 export async function syncFromSupabase(studentId) {
   const client = await getSupabaseClient();
   if (!client || !studentId) return;
+
+  const uid = await getSupabaseAuthUserId(client);
+  if (!uid) return;
 
   const { data: sRemote, error: eS } = await client
     .from('students')
@@ -381,8 +424,32 @@ export function scheduleSyncToSupabase(studentId) {
 }
 
 export async function syncAllLocalStudentsToSupabase() {
+  const client = await getSupabaseClient();
+  if (!client) throw new Error('Configure Supabase URL and publishable key first.');
+  const uid = await getSupabaseAuthUserId(client);
+  if (!uid) throw new Error('Sign in with Google first (cloud sync requires an account).');
+
   const rows = await students.toArray();
-  for (const r of rows) {
+  let pref;
+  try {
+    pref = localStorage.getItem('metz-active-student-id');
+  } catch {
+    pref = null;
+  }
+  let toSync;
+  if (pref) {
+    toSync = rows.filter((r) => r.studentId === pref);
+  } else if (rows.length === 1) {
+    toSync = rows;
+  } else {
+    throw new Error(
+      'Multiple local profiles: open student profile setup or the hub so an active student is chosen, then try again.'
+    );
+  }
+  if (!toSync.length) {
+    throw new Error('No local student profile to sync — complete profile setup first.');
+  }
+  for (const r of toSync) {
     await syncToSupabase(r.studentId);
   }
   setLastSyncTime(Date.now());
@@ -391,6 +458,10 @@ export async function syncAllLocalStudentsToSupabase() {
 export async function testSupabaseConnection() {
   const client = await getSupabaseClient();
   if (!client) return { ok: false, message: 'Not configured (URL + publishable key)' };
+  const uid = await getSupabaseAuthUserId(client);
+  if (!uid) {
+    return { ok: false, message: 'Sign in with Google to verify access (RLS requires a session).' };
+  }
   const { error } = await client.from('students').select('student_id').limit(1);
   if (error) return { ok: false, message: error.message };
   return { ok: true, message: 'OK' };

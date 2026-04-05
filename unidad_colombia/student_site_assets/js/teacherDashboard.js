@@ -22,6 +22,7 @@ const CLUSTER_LABELS = {
   greetings_and_phrases: 'Greetings',
   emotions: 'Emotions',
   general: 'General',
+  colombia_sp2_vocab: 'Sp2 Colombia vocab',
 };
 
 function clusterTitle(id) {
@@ -78,6 +79,10 @@ export async function renderClassOverview(container) {
   heatHtml += '</tr></thead><tbody>';
 
   const clusterTotals = Object.fromEntries(SKILL_CLUSTERS.map((c) => [c, { sum: 0, n: 0 }]));
+
+  if (!allStudents.length) {
+    heatHtml += `<tr><td class="sticky-name" colspan="${1 + SKILL_CLUSTERS.length}">No student profiles in this browser. Students should use <em>Set up my Spanish profile</em> first, or sync from Supabase on this machine.</td></tr>`;
+  }
 
   for (const st of allStudents) {
     heatHtml += `<tr><td class="sticky-name">${names.get(st.studentId) || st.studentId}</td>`;

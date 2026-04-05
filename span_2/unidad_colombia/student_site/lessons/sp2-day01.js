@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can identify preterite verbs in context",
     "I can gather new information from a video about Colombia's history"
   ],
+  vocabCategory: "all",
   sections: [
     // ──────────────────────────────────────────────────
     // 1. KWL Chart

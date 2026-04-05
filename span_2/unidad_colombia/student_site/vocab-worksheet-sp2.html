@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocabulario — Unidad Colombia (Spanish 2)</title>
+  <script src="../../../unidad_colombia/student_site_assets/data/colombia-vocab-sp2.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Fredoka+One&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+      font-size: 11pt;
+      line-height: 1.4;
+      color: #333;
+      background: #e8ecf2;
+    }
+
+    .no-print {
+      max-width: 8.5in;
+      margin: 16px auto;
+      padding: 0 12px;
+      font-size: 10pt;
+      color: #5a6a85;
+    }
+
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      padding: 0.5in;
+      margin: 0 auto 24px;
+      background: #fff;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 2pt solid #003893;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+
+    .header-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 18pt;
+      color: #003893;
+      line-height: 1.15;
+    }
+
+    .header-subtitle {
+      font-size: 10pt;
+      color: #666;
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    .header-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 10pt;
+    }
+
+    .header-field {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-field label { font-weight: 700; color: #222; }
+
+    .header-field .line {
+      border-bottom: 1pt solid #333;
+      width: 110px;
+      height: 18px;
+    }
+
+    .header-field .line.short { width: 56px; }
+
+    .instructions {
+      font-size: 10pt;
+      color: #555;
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      background: #f0f4fb;
+      border-radius: 6px;
+      border-left: 3pt solid #003893;
+    }
+
+    .instructions em {
+      display: block;
+      margin-top: 6px;
+      color: #666;
+      font-style: italic;
+    }
+
+    .section-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 11.5pt;
+      color: #fff;
+      padding: 7px 14px;
+      border-radius: 6px;
+      margin: 14px 0 8px 0;
+      background: linear-gradient(135deg, #003893, #1a5cc8);
+    }
+
+    .section-title.sec-1 { background: linear-gradient(135deg, #0d7377, #14a3a8); }
+    .section-title.sec-2 { background: linear-gradient(135deg, #6b4c9a, #8e6bc9); }
+    .section-title.sec-3 { background: linear-gradient(135deg, #c45c08, #e67e22); }
+    .section-title.sec-4 { background: linear-gradient(135deg, #b71c1c, #d32f2f); }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 16px;
+      font-size: 10.5pt;
+    }
+
+    .vocab-table th {
+      background: #34495e;
+      color: #fff;
+      padding: 6px 12px;
+      text-align: left;
+      font-weight: 700;
+      border: 1pt solid #2c3e50;
+    }
+
+    .vocab-table td {
+      border: 1pt solid #bdc3c7;
+      padding: 6px 12px;
+      vertical-align: middle;
+    }
+
+    .vocab-table tr:nth-child(even) { background: #f8f9fa; }
+
+    .vocab-table .spanish { font-weight: 600; }
+
+    .vocab-table .english-col {
+      min-height: 1.6em;
+      border-bottom: 1pt dashed #95a5a6;
+      background: #fff;
+    }
+
+    .page-footer {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1pt solid #ddd;
+      font-size: 9pt;
+      color: #888;
+      text-align: center;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .no-print { display: none !important; }
+      .page {
+        margin: 0;
+        padding: 0.5in;
+        box-shadow: none;
+        width: 100%;
+        min-height: 0;
+      }
+      .section-title, .vocab-table th {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <p class="no-print">
+    <strong>Tip:</strong> Use <strong>Print → Save as PDF</strong> to share the file. Answers align with the unit flashcards (<code>colombia-vocab-sp2.js</code>).
+  </p>
+
+  <div class="page" id="worksheetPage">
+    <div class="header">
+      <div>
+        <div class="header-title">Vocabulario — Unidad Colombia</div>
+        <div class="header-subtitle">Spanish 2 · Pretérito focus · Core vocabulary (themes match flashcard categories)</div>
+      </div>
+      <div class="header-info">
+        <div class="header-field"><label>Nombre:</label><div class="line"></div></div>
+        <div class="header-field"><label>Clase:</label><div class="line short"></div></div>
+        <div class="header-field"><label>Fecha:</label><div class="line short"></div></div>
+      </div>
+    </div>
+
+    <div class="instructions">
+      Escribe el significado en inglés de cada forma o frase (muchas son formas del pretérito). Puedes usar las tarjetas del sitio o tu libro de texto.
+      <em>Write the English meaning of each word or phrase (many are preterite forms). You may use the site flashcards or your textbook.</em>
+    </div>
+
+    <div id="sectionsRoot"></div>
+
+    <div class="page-footer">Unidad Colombia · Vocabulario · Spanish 2</div>
+  </div>
+
+  <script>
+    (function () {
+      var d = window.__METZ_COLOMBIA_VOCAB_DATA_SP2;
+      var root = document.getElementById('sectionsRoot');
+      if (!d || !d.themes || !d.themes.length) {
+        root.innerHTML = '<p>Could not load vocabulary data.</p>';
+        return;
+      }
+
+      d.themes.forEach(function (theme, i) {
+        var sec = document.createElement('div');
+        sec.className = 'section-title sec-' + i;
+        sec.textContent = theme.name || ('Theme ' + (i + 1));
+
+        var table = document.createElement('table');
+        table.className = 'vocab-table';
+        var thead = document.createElement('thead');
+        thead.innerHTML = '<tr><th style="width:42%">Español</th><th style="width:58%">English</th></tr>';
+        table.appendChild(thead);
+        var tbody = document.createElement('tbody');
+        (theme.words || []).forEach(function (w) {
+          var tr = document.createElement('tr');
+          var tdEs = document.createElement('td');
+          tdEs.className = 'spanish';
+          tdEs.textContent = w.es || '';
+          var tdEn = document.createElement('td');
+          tdEn.className = 'english-col';
+          tdEn.innerHTML = '&nbsp;';
+          tr.appendChild(tdEs);
+          tr.appendChild(tdEn);
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+
+        root.appendChild(sec);
+        root.appendChild(table);
+      });
+    })();
+  </script>
+</body>
+</html>

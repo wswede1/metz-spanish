@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can use regular -AR preterite forms in sentences",
     "I can read a travel story written entirely in the past tense"
   ],
+  vocabCategory: 1,
   sections: [
     // ──────────────────────────────────────────────────
     // 1. Warm-Up

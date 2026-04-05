@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can explain how Colombian culture connects to what I've learned",
     "I can choose and begin planning a project topic"
   ],
+  vocabCategory: 1,
   sections: [
     {
       id: "station1",
@@ -20,7 +21,17 @@ window.LESSON_DATA = {
       components: [
         {
           type: "reading",
-          text: "Colombia es uno de los mayores productores de café del mundo. El café <span class=\"verb-highlight\">crece</span> en la Zona Cafetera — una región montañosa con clima perfecto. Las familias <span class=\"verb-highlight\">trabajan</span> en fincas pequeñas. Muchas familias <span class=\"verb-highlight\">cosechan</span> el café a mano. El café colombiano <span class=\"verb-highlight\">es</span> famoso por su sabor suave. La economía de muchos pueblos <span class=\"verb-highlight\">depende</span> del café. En 2011, la UNESCO declaró el Paisaje Cultural Cafetero como Patrimonio de la Humanidad.",
+          plain: "Colombia es uno de los mayores productores de café del mundo. El café crece en la Zona Cafetera — una región montañosa con clima perfecto. Las familias trabajan en fincas pequeñas. Muchas familias cosechan el café a mano. El café colombiano es famoso por su sabor suave. La economía de muchos pueblos depende del café. En 2011, la UNESCO declaró el Paisaje Cultural Cafetero como Patrimonio de la Humanidad.",
+          glossary: [
+            "café=coffee",
+            "fincas=small farms",
+            "cosechan=they harvest",
+            "economía=economy",
+            "pueblos=towns",
+            "Patrimonio=heritage (Patrimonio de la Humanidad = World Heritage)",
+            "declaró=declared",
+            "montañosa=mountainous"
+          ],
           instructions: "This reading describes the importance of coffee to Colombian communities."
         },
         {

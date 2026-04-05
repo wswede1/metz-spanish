@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can identify the -CAR/-GAR/-ZAR yo spelling changes in the preterite",
     "I can apply the spelling change pattern in sentences"
   ],
+  vocabCategory: "all",
   sections: [
     // ──────────────────────────────────────────────────
     // 1. Vocab Quiz — Section A: Matching
@@ -190,6 +191,18 @@ window.LESSON_DATA = {
               ]
             }
           ]
+        },
+        {
+          type: "matching",
+          wordBank: true,
+          instructions: "Match travel words and key <strong>yo</strong> preterite forms (-CAR / -GAR / -ZAR).",
+          pairs: [
+            { es: "el aeropuerto", en: "airport" },
+            { es: "el hotel", en: "hotel" },
+            { es: "la maleta", en: "suitcase" },
+            { es: "llegué", en: "I arrived" },
+            { es: "busqué", en: "I looked for" }
+          ]
         }
       ]
     },
@@ -267,6 +280,12 @@ window.LESSON_DATA = {
               answer: "c"
             }
           ]
+        },
+        {
+          type: "sentence-order",
+          prompt: "<strong>Put the words in order</strong> (Spanish): <em>I looked for my suitcase at the airport.</em>",
+          tokens: ["Yo", "busqué", "mi maleta", "en", "el", "aeropuerto."],
+          correctOrder: [0, 1, 2, 3, 4, 5]
         }
       ]
     },

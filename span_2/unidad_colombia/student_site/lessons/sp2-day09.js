@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can give and receive constructive peer feedback",
     "I can deliver a clear 30-second opening in Spanish using the preterite"
   ],
+  vocabCategory: "all",
   sections: [
     {
       id: "progress",

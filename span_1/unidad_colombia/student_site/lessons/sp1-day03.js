@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can identify -ER and -IR verb endings by analyzing sentences",
     "I can use gustar + infinitive to express likes"
   ],
+  vocabCategory: "all",
   sections: [
     // ──────────────────────────────────────────────────
     // 1. Vocabulary Quiz — Section A: Matching
@@ -157,6 +158,18 @@ window.LESSON_DATA = {
               ]
             }
           ]
+        },
+        {
+          type: "matching",
+          wordBank: true,
+          instructions: "Match each Spanish verb to its English meaning.",
+          pairs: [
+            { es: "comer", en: "to eat" },
+            { es: "vivir", en: "to live" },
+            { es: "leer", en: "to read" },
+            { es: "escribir", en: "to write" },
+            { es: "aprender", en: "to learn" }
+          ]
         }
       ]
     },
@@ -195,6 +208,12 @@ window.LESSON_DATA = {
             { text: "Me gusta ___ en el cuaderno.", answer: "escribir" },
             { text: "¿Te gusta ___ en el parque?", answer: "correr" }
           ]
+        },
+        {
+          type: "sentence-order",
+          prompt: "<strong>Put the words in order</strong> (Spanish): <em>I like to eat arepas.</em>",
+          tokens: ["Me", "gusta", "comer", "arepas."],
+          correctOrder: [0, 1, 2, 3]
         }
       ]
     },
@@ -217,8 +236,20 @@ window.LESSON_DATA = {
         },
         {
           type: "reading",
-          text: "Sofía <span class=\"verb-highlight\">vive</span> en Cartagena, Colombia. Tiene la clase de español a las ocho. Sofía <span class=\"verb-highlight\">come</span> el desayuno en la cafetería. <span class=\"gustar-highlight\">Le gusta estudiar</span> ciencias. <span class=\"verb-highlight\">Escribe</span> en el cuaderno en la clase de historia. A Sofía <span class=\"gustar-highlight\">le gusta bailar</span>. Los fines de semana <span class=\"verb-highlight\">come</span> arepas con su familia.",
-          instructions: "Click any highlighted verb to hear it spoken!"
+          plain: "Sofía vive en Cartagena, Colombia. Tiene la clase de español a las ocho. Sofía come el desayuno en la cafetería. Le gusta estudiar ciencias. Escribe en el cuaderno en la clase de historia. A Sofía le gusta bailar. Los fines de semana come arepas con su familia.",
+          glossary: [
+            "Cartagena=Cartagena (city in Colombia)",
+            "vive=she lives",
+            "come=she eats / eats",
+            "cafetería=cafeteria",
+            "estudiar=to study",
+            "ciencias=science",
+            "cuaderno=notebook",
+            "bailar=to dance",
+            "arepas=arepas (corn flatbread)",
+            "fines=ends (fines de semana = weekends)"
+          ],
+          instructions: "Use the dotted words: single click (or Enter) for an English hint; double click (or Space) to hear the Spanish word."
         },
         {
           type: "questions",

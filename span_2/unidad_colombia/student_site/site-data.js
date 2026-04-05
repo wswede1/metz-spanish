@@ -7,13 +7,23 @@
 
 window.unitSite = {
   courseKey: "sp2",
+  roadmap: {
+    enabled: true,
+    day: 1,
+    courseKey: "sp2",
+    objectives: [
+      "Locate key Colombia regions on the unit map",
+      "Use preterite frames to report what you learned or did",
+      "Set goals for accurate past-tense communication this unit"
+    ]
+  },
   totalUnitLessonDays: 14,
   title: "Spanish 2 — ¡Conoce a Colombia!",
   subtitle: "Use these student-safe pages for travel vocabulary, preterite practice, culture readings, projects, film reflection, and review.",
   eyebrow: "Spanish 2 Student Site",
   overviewTitle: "Spanish 2 Colombia Student Hub",
   overviewText: "Each card matches the Colombia unit pacing. Focus on the preterite — report what happened, what you learned, what you saw.",
-  overviewMeta: ["Parallel 14-day unit", "Preterite focus", "Project + film + review support"],
+  overviewMeta: [],
   footerText: "Spanish 2 Colombia Unit | Student-safe website pages and review tools",
 
   sections: [
@@ -23,7 +33,7 @@ window.unitSite = {
       description: "Launch the unit, review travel vocabulary, and keep the flashcards close by.",
       cards: [
         {
-          title: "Day 1 Launch Recap",
+          title: "Unit introduction",
           description: "Reset the Colombia launch day, map anchors, and preterite reporting goals before station work.",
           route: "activity.html?activity=sp2-day-01-launch",
           lessonDay: 1,
@@ -35,7 +45,7 @@ window.unitSite = {
           icon: "🗺️"
         },
         {
-          title: "Day 2 Travel Vocab Check",
+          title: "Travel vocab check",
           description: "Practice the unit travel vocabulary in short past-tense contexts before the classroom packet.",
           route: "activity.html?activity=sp2-day-02-vocab",
           lessonDay: 2,
@@ -61,6 +71,7 @@ window.unitSite = {
     },
     {
       title: "Daily Warm-Ups",
+      hidden: true,
       icon: "☀️",
       description: "Start each class with a 3–5 minute review of the previous day's key grammar or vocabulary.",
       cards: [
@@ -85,7 +96,7 @@ window.unitSite = {
       description: "Practice the new Colombia unit preterite targets in a sequence that mirrors class.",
       cards: [
         {
-          title: "Day 3 — -CAR/-GAR/-ZAR Check",
+          title: "-CAR/-GAR/-ZAR Check",
           description: "Check your spelling-change preterite forms in airport, hotel, and market contexts.",
           route: "activity.html?activity=sp2-day-03-cargarzar",
           lessonDay: 3,
@@ -97,7 +108,7 @@ window.unitSite = {
           icon: "🔤"
         },
         {
-          title: "Day 3 — Spelling Change Drill",
+          title: "Spelling Change Drill",
           description: "Drill the yo-form spelling changes: saqué, pagué, empecé. 3 lives. Instant feedback.",
           route: "activity.html?activity=sp2-day-03-drill",
           lessonDay: 3,
@@ -109,9 +120,10 @@ window.unitSite = {
           icon: "⚡"
         },
         {
-          title: "Day 4 — Reading: Language Learner",
+          title: "Reading: Language Learner",
           description: "Read a preterite travel narrative about Cartagena with glossary support and scaffolded questions.",
           route: "activity.html?activity=sp2-day-04-reading-l2",
+          lessonDay: 4,
           tier: "l2",
           releaseDate: "",
           status: "Ready",
@@ -121,9 +133,10 @@ window.unitSite = {
           icon: "📖"
         },
         {
-          title: "Day 4 — Reading: Heritage Track",
+          title: "Reading: Heritage Track",
           description: "An analytical reading on Cartagena's history and cultural identity — deeper vocabulary, critical questions.",
           route: "activity.html?activity=sp2-day-04-reading-heritage",
+          lessonDay: 4,
           tier: "heritage",
           releaseDate: "",
           status: "Ready",
@@ -133,9 +146,10 @@ window.unitSite = {
           icon: "⭐"
         },
         {
-          title: "Day 5 — Stem-Change -IR Practice",
+          title: "Stem-Change -IR Practice",
           description: "Practice pedir, dormir, and preferir in third-person-heavy Colombia travel sentences.",
           route: "activity.html?activity=sp2-day-05-stem-change",
+          lessonDay: 5,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Practice",
@@ -144,9 +158,10 @@ window.unitSite = {
           icon: "🔀"
         },
         {
-          title: "Day 5 — Stem-Change Drill",
+          title: "Stem-Change Drill",
           description: "Type the preterite stem-change form for each prompt. 3 lives, instant feedback.",
           route: "activity.html?activity=sp2-day-05-drill",
+          lessonDay: 5,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Drill",
@@ -155,9 +170,10 @@ window.unitSite = {
           icon: "⚡"
         },
         {
-          title: "Day 6 — Irregular Preterite Practice",
+          title: "Irregular Preterite Practice",
           description: "Use the high-frequency irregulars decir, traer, venir in past-tense dialogue.",
           route: "activity.html?activity=sp2-day-06-irregulars",
+          lessonDay: 6,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Practice",
@@ -166,9 +182,10 @@ window.unitSite = {
           icon: "💬"
         },
         {
-          title: "Day 6 — Irregular Preterite Drill",
+          title: "Irregular Preterite Drill",
           description: "Drill the stems dij-, traj-, vin- across all subjects. Watch out — no accent marks on these stems!",
           route: "activity.html?activity=sp2-day-06-drill",
+          lessonDay: 6,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Drill",
@@ -184,9 +201,10 @@ window.unitSite = {
       description: "Culture readings, project work, presentations, and the Encanto film sequence.",
       cards: [
         {
-          title: "Day 7 — Culture Reading: Language Learner",
+          title: "Culture Reading: Language Learner",
           description: "Read a past-tense culture passage about Colombian music and community with glossary support.",
           route: "activity.html?activity=sp2-day-07-culture-l2",
+          lessonDay: 7,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Reading",
@@ -195,9 +213,10 @@ window.unitSite = {
           icon: "🎵"
         },
         {
-          title: "Day 7 — Culture Reading: Heritage Track",
+          title: "Culture Reading: Heritage Track",
           description: "An analytical reading on vallenato as cultural patrimony — tradition, globalization, and identity.",
           route: "activity.html?activity=sp2-day-07-culture-heritage",
+          lessonDay: 7,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Reading",
@@ -206,9 +225,10 @@ window.unitSite = {
           icon: "⭐"
         },
         {
-          title: "Day 8 — Project Launch",
+          title: "Project Launch",
           description: "Choose a clear Colombia topic and map out how your group will use the preterite accurately.",
           route: "activity.html?activity=sp2-day-08-project-launch",
+          lessonDay: 8,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Project",
@@ -217,9 +237,10 @@ window.unitSite = {
           icon: "📝"
         },
         {
-          title: "Day 9 — Project Checkpoint",
+          title: "Project Checkpoint",
           description: "Peer-check the past-tense script, visuals, and grammar requirements before presenting.",
           route: "activity.html?activity=sp2-day-09-project-checkpoint",
+          lessonDay: 9,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Project",
@@ -228,20 +249,10 @@ window.unitSite = {
           icon: "✅"
         },
         {
-          title: "Day 10 — Audience Reflection",
-          description: "Stay active during presentations by listening for content, grammar, and one strong takeaway.",
-          route: "activity.html?activity=sp2-day-10-presentations",
-          releaseDate: "",
-          status: "Ready",
-          kindLabel: "Presentation",
-          minutes: 10,
-          dayLabel: "Day 10",
-          icon: "🎤"
-        },
-        {
-          title: "Day 11 — Encanto Part 1",
+          title: "Encanto Part 1",
           description: "Track verbs, character actions, and setting details during Part 1 of Encanto.",
           route: "activity.html?activity=sp2-day-11-encanto-1",
+          lessonDay: 11,
           releaseDate: "",
           status: "New",
           kindLabel: "Film",
@@ -250,9 +261,10 @@ window.unitSite = {
           icon: "🎬"
         },
         {
-          title: "Day 12 — Encanto Part 2",
+          title: "Encanto Part 2",
           description: "Retell key events and compare the film to your unit learning — in the preterite.",
           route: "activity.html?activity=sp2-day-12-encanto-2",
+          lessonDay: 12,
           releaseDate: "",
           status: "New",
           kindLabel: "Film",
@@ -271,6 +283,7 @@ window.unitSite = {
           title: "Productos Culturales",
           description: "Research and analyze tangible and intangible cultural products from Colombia — music, food, art, and more.",
           route: "activity.html?activity=sp2-3p-productos",
+          lessonDay: 7,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Culture",
@@ -282,6 +295,7 @@ window.unitSite = {
           title: "Prácticas Culturales",
           description: "Examine everyday customs, rituals, and social practices that define Colombian daily life.",
           route: "activity.html?activity=sp2-3p-practicas",
+          lessonDay: 7,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Culture",
@@ -293,6 +307,7 @@ window.unitSite = {
           title: "Perspectivas Culturales",
           description: "Uncover the values, beliefs, and attitudes that explain why Colombians do what they do.",
           route: "activity.html?activity=sp2-3p-perspectivas",
+          lessonDay: 7,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Culture",
@@ -308,9 +323,10 @@ window.unitSite = {
       description: "Use these pages to check the full preterite sequence before the review stations and exam.",
       cards: [
         {
-          title: "Day 13 — Preterite Review",
+          title: "Preterite Review",
           description: "Mixed review of regular, spelling-change, stem-change, and irregular preterite forms.",
           route: "activity.html?activity=sp2-day-13-review",
+          lessonDay: 13,
           releaseDate: "",
           status: "New",
           kindLabel: "Review",
@@ -319,9 +335,10 @@ window.unitSite = {
           icon: "🔁"
         },
         {
-          title: "Day 14 — Study Guide Check",
+          title: "Study Guide Check",
           description: "Final preterite study support before the unit exam. Review, not a test.",
           route: "activity.html?activity=sp2-day-14-study",
+          lessonDay: 14,
           releaseDate: "",
           status: "Study",
           kindLabel: "Study Guide",
@@ -340,6 +357,7 @@ window.unitSite = {
           title: "El Vallenato — Music Listening",
           description: "Watch a vallenato performance and answer comprehension questions about Colombian musical heritage.",
           route: "activity.html?activity=sp2-listening-vallenato",
+          lessonDay: 7,
           releaseDate: "",
           status: "New",
           kindLabel: "Listening",
@@ -348,9 +366,10 @@ window.unitSite = {
           icon: "🎵"
         },
         {
-          title: "Day 4 — Word Order",
+          title: "Word Order",
           description: "Listen to preterite sentences about Cartagena and arrange the words in the correct order.",
           route: "activity.html?activity=sp2-word-order-day04",
+          lessonDay: 4,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Word Order",

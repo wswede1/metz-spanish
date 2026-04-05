@@ -1,6 +1,11 @@
 /**
- * Optional adaptive layer for Colombia_Vocab_Review_Spanish1.html — Phase 4 integration.
- * Patches flashcard + quiz when a student row exists in IndexedDB.
+ * Optional adaptive layer for Colombia vocab review (both courses):
+ *   span_1/unidad_colombia/Colombia_Vocab_Review_Spanish1.html
+ *   span_2/unidad_colombia/Colombia_Vocab_Review_Spanish2.html
+ *
+ * Each page sets window.__METZ_VOCAB_CATEGORY_INDEX in selectCategory().
+ * Flashcard deck override (adaptive queue) runs only when that index === 0 (All unit);
+ * themed categories keep their own deck from colombia-vocab-sp*.js.
  */
 
 import { students } from './db.js';
@@ -8,6 +13,14 @@ import { AdaptiveSession } from './sessionEngine.js';
 import { itemIdForSpanish, getItemMeta } from './vocabularyMap.js';
 
 let activeSession = null;
+
+function colombiaVocabContext() {
+  return window.__METZ_COLOMBIA_SP1 || window.__METZ_COLOMBIA_SP2 || null;
+}
+
+function adaptiveUnitId() {
+  return window.__METZ_ADAPTIVE_UNIT_ID || 'colombia_sp1';
+}
 
 async function resolveStudentRow() {
   const all = await students.toArray();
@@ -19,12 +32,15 @@ async function resolveStudentRow() {
 }
 
 async function maybeApplyAdaptiveFlashDeck() {
-  if (!window.__METZ_PATCH_FLASH_DECK || !window.__METZ_COLOMBIA_SP1) return;
+  if (!window.__METZ_PATCH_FLASH_DECK || !colombiaVocabContext()) return;
+  // Themed category buttons (index > 0) must keep that category's deck. Only "All unit"
+  // (index 0) uses the adaptive queue for flashcards.
+  if (window.__METZ_VOCAB_CATEGORY_INDEX !== 0) return;
   const st = await resolveStudentRow();
   if (!st) return;
 
   try {
-    activeSession = new AdaptiveSession(st.studentId, st.learnerTrack, 'colombia_sp1');
+    activeSession = new AdaptiveSession(st.studentId, st.learnerTrack, adaptiveUnitId());
     await activeSession.init();
     const words = activeSession.queue.map((q) => q.word).filter(Boolean);
     if (words.length >= 3) {

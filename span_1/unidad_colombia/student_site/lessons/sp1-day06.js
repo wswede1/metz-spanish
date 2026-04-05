@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can say where I'm going using ir + a + place",
     "I can express future plans with ir + a + infinitive"
   ],
+  vocabCategory: 5,
   sections: [
     {
       id: "review",
@@ -124,6 +125,24 @@ window.LESSON_DATA = {
             { prompt: "¿Adónde va primero? ¿Y después?", type: "textarea", placeholder: "Primero va a... Después va a...", rows: 2 },
             { prompt: "¿Qué va a hacer el sábado?", placeholder: "Va a...", answer: "bailar" }
           ]
+        },
+        {
+          type: "matching",
+          wordBank: true,
+          instructions: "Match <em>ir</em>, feelings, and places to their English meanings.",
+          pairs: [
+            { es: "ir", en: "to go" },
+            { es: "voy", en: "I go" },
+            { es: "contento/a", en: "happy" },
+            { es: "triste", en: "sad" },
+            { es: "el parque", en: "the park" }
+          ]
+        },
+        {
+          type: "sentence-order",
+          prompt: "<strong>Put the words in order</strong> (Spanish): <em>Camila goes to the park.</em>",
+          tokens: ["Camila", "va", "al", "parque."],
+          correctOrder: [0, 1, 2, 3]
         }
       ]
     },

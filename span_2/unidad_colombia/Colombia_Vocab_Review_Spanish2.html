@@ -4,6 +4,8 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>🇨🇴 Colombia Vocabulary Review — Spanish 2</title>
+<script>window.__METZ_VOCAB_ITEM_PREFIX='sp2-co';window.__METZ_ADAPTIVE_UNIT_ID='colombia_sp2';</script>
+<script src="https://unpkg.com/dexie@3/dist/dexie.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -32,6 +34,7 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 .cat-3{background:#8E44AD}.cat-3.active{background:#6f3488}
 .cat-4{background:#D4AC0D}.cat-4.active{background:#b8960b}
 .cat-5{background:#2C3E50}.cat-5.active{background:#1a252f}
+.cat-all{background:#34495e}.cat-all.active{background:#2c3e50}
 
 /* Stats bar */
 .stats-bar{display:flex;gap:20px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
@@ -379,155 +382,33 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 <!-- Completion -->
 <div id="completeMode" style="display:none"></div>
 
+<script src="../../unidad_colombia/student_site_assets/data/colombia-vocab-sp2.js"></script>
 <script>
 // ═══════════════════════════════════════════════
-// VOCABULARY DATA — Spanish 1 Colombia Unit
+// VOCABULARY DATA — Spanish 2 (see colombia-vocab-sp2.js)
 // ═══════════════════════════════════════════════
-const categories = [
-  {
-    name: "Colombia & Travel",
-    color: "cat-0",
-    words: [
-      {es:"el aeropuerto",en:"airport"},
-      {es:"el avión",en:"airplane"},
-      {es:"el equipaje",en:"luggage / baggage"},
-      {es:"la maleta",en:"suitcase"},
-      {es:"el pasaporte",en:"passport"},
-      {es:"el boleto",en:"ticket"},
-      {es:"el hotel",en:"hotel"},
-      {es:"la habitación",en:"room (hotel)"},
-      {es:"el viaje",en:"trip / travel"},
-      {es:"el vuelo",en:"flight"},
-      {es:"la aduana",en:"customs"},
-      {es:"la playa",en:"beach"},
-      {es:"el mercado",en:"market"},
-      {es:"el museo",en:"museum"},
-      {es:"la guía",en:"guide / guidebook"},
-      {es:"el recuerdo",en:"souvenir / memory"}
-    ]
-  },
-  {
-    name: "Preterite -AR Regular",
-    color: "cat-1",
-    words: [
-      {es:"hablar → hablé",en:"I spoke"},
-      {es:"hablar → hablaste",en:"you spoke"},
-      {es:"hablar → habló",en:"he/she spoke"},
-      {es:"hablar → hablamos",en:"we spoke"},
-      {es:"hablar → hablaron",en:"they spoke"},
-      {es:"comprar",en:"to buy"},
-      {es:"viajar",en:"to travel"},
-      {es:"llegar",en:"to arrive"},
-      {es:"caminar",en:"to walk"},
-      {es:"visitar",en:"to visit"},
-      {es:"nadar",en:"to swim"},
-      {es:"bailar",en:"to dance"},
-      {es:"cocinar",en:"to cook"},
-      {es:"tomar",en:"to take / to drink"},
-      {es:"descansar",en:"to rest"},
-      {es:"pasear",en:"to stroll / walk around"}
-    ]
-  },
-  {
-    name: "-CAR / -GAR / -ZAR",
-    color: "cat-2",
-    words: [
-      {es:"buscar → busqué",en:"I looked for"},
-      {es:"tocar → toqué",en:"I touched / played"},
-      {es:"sacar → saqué",en:"I took out"},
-      {es:"practicar → practiqué",en:"I practiced"},
-      {es:"explicar → expliqué",en:"I explained"},
-      {es:"llegar → llegué",en:"I arrived"},
-      {es:"pagar → pagué",en:"I paid"},
-      {es:"jugar → jugué",en:"I played"},
-      {es:"navegar → navegué",en:"I navigated / sailed"},
-      {es:"almorzar → almorcé",en:"I ate lunch"},
-      {es:"empezar → empecé",en:"I began"},
-      {es:"comenzar → comencé",en:"I started"},
-      {es:"abrazar → abracé",en:"I hugged"},
-      {es:"cruzar → crucé",en:"I crossed"},
-      {es:"organizar → organicé",en:"I organized"},
-      {es:"utilizar → utilicé",en:"I used / utilized"}
-    ]
-  },
-  {
-    name: "Y-Verbs Preterite",
-    color: "cat-3",
-    words: [
-      {es:"leer → leyó",en:"he/she read"},
-      {es:"leer → leyeron",en:"they read"},
-      {es:"creer → creyó",en:"he/she believed"},
-      {es:"creer → creyeron",en:"they believed"},
-      {es:"oír → oyó",en:"he/she heard"},
-      {es:"oír → oyeron",en:"they heard"},
-      {es:"caer → cayó",en:"he/she fell"},
-      {es:"caer → cayeron",en:"they fell"},
-      {es:"construir → construyó",en:"he/she built"},
-      {es:"construir → construyeron",en:"they built"},
-      {es:"destruir → destruyó",en:"he/she destroyed"},
-      {es:"destruir → destruyeron",en:"they destroyed"},
-      {es:"incluir → incluyó",en:"he/she included"},
-      {es:"incluir → incluyeron",en:"they included"},
-      {es:"contribuir → contribuyó",en:"he/she contributed"},
-      {es:"contribuir → contribuyeron",en:"they contributed"}
-    ]
-  },
-  {
-    name: "Stem-Change -IR Pret.",
-    color: "cat-4",
-    words: [
-      {es:"dormir → durmió",en:"he/she slept"},
-      {es:"dormir → durmieron",en:"they slept"},
-      {es:"morir → murió",en:"he/she died"},
-      {es:"morir → murieron",en:"they died"},
-      {es:"pedir → pidió",en:"he/she asked for"},
-      {es:"pedir → pidieron",en:"they asked for"},
-      {es:"servir → sirvió",en:"he/she served"},
-      {es:"servir → sirvieron",en:"they served"},
-      {es:"repetir → repitió",en:"he/she repeated"},
-      {es:"repetir → repitieron",en:"they repeated"},
-      {es:"preferir → prefirió",en:"he/she preferred"},
-      {es:"preferir → prefirieron",en:"they preferred"},
-      {es:"sentir → sintió",en:"he/she felt"},
-      {es:"sentir → sintieron",en:"they felt"},
-      {es:"vestirse → se vistió",en:"he/she got dressed"},
-      {es:"vestirse → se vistieron",en:"they got dressed"}
-    ]
-  },
-  {
-    name: "Irregular Preterite",
-    color: "cat-5",
-    words: [
-      {es:"ir → fui",en:"I went"},
-      {es:"ir → fue",en:"he/she went"},
-      {es:"ir → fueron",en:"they went"},
-      {es:"ser → fui",en:"I was"},
-      {es:"hacer → hice",en:"I did / made"},
-      {es:"hacer → hizo",en:"he/she did / made"},
-      {es:"tener → tuve",en:"I had"},
-      {es:"estar → estuve",en:"I was (location)"},
-      {es:"poder → pude",en:"I was able to"},
-      {es:"poner → puse",en:"I put"},
-      {es:"saber → supe",en:"I found out"},
-      {es:"querer → quise",en:"I wanted / tried"},
-      {es:"venir → vine",en:"I came"},
-      {es:"decir → dije",en:"I said"},
-      {es:"traer → traje",en:"I brought"},
-      {es:"dar → di",en:"I gave"}
-    ]
-  }
-];
+const categories = window.__METZ_COLOMBIA_VOCAB_DATA_SP2.categories;
 
 // ═══════════════════════════════════
 // APP STATE
-// ═══════════════════════════════════
+
 let currentCat = 0;
 let currentIdx = 0;
 let deck = [];
+window.__METZ_PATCH_FLASH_DECK = (words, idx) => {
+  deck = [...words];
+  currentIdx = idx || 0;
+  known = new Set();
+  streak = 0;
+  updateStats();
+  if (mode === 'flashcard') showCard();
+};
+window.__METZ_PEEK_FLASH_WORD = () => (!deck.length ? null : deck[currentIdx % deck.length]);
 let known = new Set();
 let streak = 0;
 let mode = 'flashcard';
 let quizScore = 0, quizTotal = 0, quizCurrent = null;
+window.__METZ_PEEK_QUIZ = () => quizCurrent;
 let matchSelected = null, matchPairs = 0, matchStart = 0;
 
 // Timer/animation tracking for cleanup
@@ -605,9 +486,16 @@ function cleanupActiveMode() {
 // ═══════════════════════════════════
 // INIT & NAVIGATION
 // ═══════════════════════════════════
+function getInitialCategoryIndex() {
+  var raw = new URLSearchParams(window.location.search).get('cat');
+  if (raw === 'all') return 0;
+  var n = parseInt(raw, 10);
+  if (!isNaN(n) && n >= 1 && n < categories.length) return n;
+  return 1;
+}
 function init() {
   renderNav();
-  selectCategory(0);
+  selectCategory(getInitialCategoryIndex());
 }
 
 function renderNav() {
@@ -619,6 +507,7 @@ function renderNav() {
 
 function selectCategory(idx) {
   currentCat = idx;
+  window.__METZ_VOCAB_CATEGORY_INDEX = idx;
   currentIdx = 0;
   deck = [...categories[idx].words];
   known = new Set();
@@ -673,6 +562,8 @@ function vocabSlug(text) {
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
 }
+window.__METZ_COLOMBIA_SP2 = { categories: categories, vocabSlug: vocabSlug };
+
 var _currentAudio = null;
 function speakWord() {
   if (deck.length === 0) return;
@@ -740,6 +631,7 @@ function resetCategory() { selectCategory(currentCat); }
 // ═══════════════════════════════════
 function startQuiz() { quizScore = 0; quizTotal = 0; nextQuiz(); }
 function nextQuiz() {
+  window.__metzQuizT0 = Date.now();
   const words = categories[currentCat].words;
   if (words.length < 4) return;
   const correct = words[Math.floor(Math.random() * words.length)];
@@ -2421,5 +2313,6 @@ function dialCheck() {
 // ═══════════════════════════════════
 init();
 </script>
+<script type="module" src="../../unidad_colombia/student_site_assets/js/adaptiveColombiaVocabBridge.js"></script>
 </body>
 </html>

@@ -5,6 +5,14 @@
 
 const PREFIX = 'sp1-co';
 
+function runtimeItemPrefix() {
+  if (typeof globalThis !== 'undefined' && globalThis.__METZ_VOCAB_ITEM_PREFIX) {
+    const p = String(globalThis.__METZ_VOCAB_ITEM_PREFIX).replace(/[^a-zA-Z0-9-]/g, '');
+    return p || PREFIX;
+  }
+  return PREFIX;
+}
+
 export function vocabSlug(text) {
   return String(text)
     .toLowerCase()
@@ -20,8 +28,14 @@ export function vocabSlug(text) {
     .replace(/^-|-$/g, '');
 }
 
-export function itemIdForSpanish(es) {
+/** Stable Sp1 pack ids (IndexedDB / maps); do not use runtime prefix. */
+function sp1PackItemId(es) {
   return `${PREFIX}-${vocabSlug(es)}`;
+}
+
+/** Current page prefix (sp1-co default; Sp2 vocab page sets sp2-co on window). */
+export function itemIdForSpanish(es) {
+  return `${runtimeItemPrefix()}-${vocabSlug(es)}`;
 }
 
 /** @type {{ es: string, en: string, cluster: string }[]} */
@@ -119,19 +133,27 @@ export const VOCABULARY_MAP = {};
 export const ITEM_META = {};
 
 for (const e of ENTRIES) {
-  const id = itemIdForSpanish(e.es);
+  const id = sp1PackItemId(e.es);
   VOCABULARY_MAP[id] = e.cluster;
   ITEM_META[id] = { es: e.es, en: e.en, skillCluster: e.cluster };
 }
 
-export const SKILL_CLUSTERS = [...new Set(Object.values(VOCABULARY_MAP))].sort();
+export const SKILL_CLUSTERS = [...new Set([...Object.values(VOCABULARY_MAP), 'colombia_sp2_vocab'])].sort();
 
 export function getCluster(itemId) {
+  if (!itemId || typeof itemId !== 'string') return 'general';
+  if (itemId.startsWith('sp2-co-')) return 'colombia_sp2_vocab';
   return VOCABULARY_MAP[itemId] || 'general';
 }
 
 export function getItemMeta(itemId) {
-  return ITEM_META[itemId] || null;
+  if (!itemId) return null;
+  if (ITEM_META[itemId]) return ITEM_META[itemId];
+  if (itemId.startsWith('sp2-co-')) {
+    const slug = itemId.slice('sp2-co-'.length);
+    return { es: slug.replace(/-/g, ' '), en: '', skillCluster: 'colombia_sp2_vocab' };
+  }
+  return null;
 }
 
 /** All item ids for Colombia Sp1 pack */

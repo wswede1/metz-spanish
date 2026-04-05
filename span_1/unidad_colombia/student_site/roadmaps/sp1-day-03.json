@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "courseKey": "sp1",
+  "day": 3,
+  "dayLabel": "Day 3",
+  "title": "Daily roadmap — Day 3",
+  "subtitle": "-ER / -IR verbs, gustar, and Colombia context",
+  "hearts": 5,
+  "objectives": [
+    "Recognize present-tense -ER and -IR verb endings",
+    "Use gustar + infinitive in short sentences about likes",
+    "Connect grammar to Colombia-themed examples"
+  ],
+  "canDo": [
+    "I can conjugate common -ER/-IR verbs in the present tense",
+    "I can say what I like to do using gustar + infinitive"
+  ],
+  "deliverables": [
+    {
+      "id": "notebook",
+      "title": "Grammar notes",
+      "instructionsHtml": "Add today's -ER/-IR chart and two <strong>gustar + infinitive</strong> examples to your notebook."
+    },
+    {
+      "id": "classroom",
+      "title": "Submit in Google Classroom",
+      "instructionsHtml": "Turn in a photo or PDF of your warm-up and reading answers if your teacher assigned it.",
+      "turnInUrl": ""
+    }
+  ],
+  "warmup": {
+    "title": "Day 3 warm-up",
+    "description": "Quick review of geography and map anchors from Day 1.",
+    "href": "activity.html?activity=sp1-warmup-day03"
+  },
+  "grammarReading": {
+    "title": "Grammar through reading",
+    "description": "Day 3 grammar check uses Colombia-style examples. Optional: add the Sofía reading for more input.",
+    "href": "activity.html?activity=sp1-day-03-grammar",
+    "secondaryHref": "activity.html?activity=sp1-day-04-reading-l2",
+    "secondaryLabel": "Optional reading: Sofía en Medellín (Day 4)"
+  },
+  "comprehension": {
+    "skillCluster": "verb_conjugation",
+    "steps": [
+      {
+        "type": "mcq",
+        "prompt": "Which ending goes with <em>nosotros</em> for <strong>comer</strong>?",
+        "choices": ["-o", "-emos", "-en", "-e"],
+        "correctIndex": 1
+      },
+      {
+        "type": "mcq",
+        "prompt": "Which form matches <em>ellos</em> for <strong>vivir</strong>?",
+        "choices": ["vivo", "vives", "vive", "viven"],
+        "correctIndex": 3
+      },
+      {
+        "type": "mcq",
+        "prompt": "Choose the best match: <strong>Me gusta…</strong>",
+        "choices": ["I like (one thing)", "I like (many things)", "You like", "We like"],
+        "correctIndex": 0
+      },
+      {
+        "type": "arrange",
+        "prompt": "Put the words in order: <em>I like to read.</em>",
+        "tokens": ["leer", "Me", "gusta"],
+        "correctOrder": [1, 2, 0]
+      }
+    ]
+  },
+  "culture": {
+    "title": "Culture connection",
+    "description": "Optional: explore the vocabulary game suite for Colombia-themed words.",
+    "href": "../Colombia_Vocab_Review_Spanish1.html"
+  }
+}

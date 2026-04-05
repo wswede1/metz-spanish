@@ -45,7 +45,7 @@ document.getElementById('sbTest').addEventListener('click', async () => {
 document.getElementById('sbSyncAll').addEventListener('click', async () => {
   saveSupabaseSettings(urlInput.value, keyInput.value);
   resetSupabaseClient();
-  statusEl.textContent = 'Syncing all local students…';
+  statusEl.textContent = 'Syncing (active profile; sign in with Google if asked)…';
   try {
     await syncAllLocalStudentsToSupabase();
     statusEl.textContent = 'Sync finished.';

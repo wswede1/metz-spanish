@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can conjugate -ER/-IR verbs and use gustar correctly",
     "I can write sentences with estar + location/emotion and ir + place/infinitive"
   ],
+  vocabCategory: "all",
   sections: [
     {
       id: "station1",

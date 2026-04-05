@@ -7,13 +7,24 @@
 
 window.unitSite = {
   courseKey: "sp1",
+  /** Daily roadmap: set `day` to match [roadmaps/sp1-day-{day}.json](roadmaps/sp1-day-03.json); disable when not in use. */
+  roadmap: {
+    enabled: true,
+    day: 3,
+    courseKey: "sp1",
+    objectives: [
+      "Recognize present-tense -ER and -IR verb endings",
+      "Use gustar + infinitive in short sentences about likes",
+      "Connect grammar to Colombia-themed examples"
+    ]
+  },
   totalUnitLessonDays: 14,
   title: "Spanish 1 — ¡Conoce a Colombia!",
   subtitle: "Use these student-safe pages for launch work, grammar practice, readings, projects, film reflection, and review.",
   eyebrow: "Spanish 1 Student Site",
   overviewTitle: "Spanish 1 Colombia Student Hub",
   overviewText: "Choose the card that matches today's class or your independent practice goal.",
-  overviewMeta: ["14-day unit", "Student-safe pages only", "Colombia contexts all unit"],
+  overviewMeta: [],
   footerText: "Spanish 1 Colombia Unit | Student-safe website pages and practice tools",
 
   sections: [
@@ -23,7 +34,7 @@ window.unitSite = {
       description: "Launch the unit, learn the core vocabulary, and keep the flashcards nearby for review.",
       cards: [
         {
-          title: "Day 1 Launch Recap",
+          title: "Unit introduction",
           description: "Review the Colombia map anchors, station choices, and first-slide expectations.",
           route: "activity.html?activity=sp1-day-01-launch",
           lessonDay: 1,
@@ -35,7 +46,7 @@ window.unitSite = {
           icon: "🗺️"
         },
         {
-          title: "Day 2 Vocab Check",
+          title: "Vocab check",
           description: "Practice school and place vocabulary in Colombia-specific sentences.",
           route: "activity.html?activity=sp1-day-02-vocab",
           lessonDay: 2,
@@ -61,6 +72,7 @@ window.unitSite = {
     },
     {
       title: "Daily Warm-Ups",
+      hidden: true,
       icon: "☀️",
       description: "Start each class with a quick 5-minute review of yesterday's language. Pick the card that matches today's day number.",
       cards: [
@@ -85,7 +97,7 @@ window.unitSite = {
       description: "Practice the unit grammar in short, self-checking pages that match the classroom pacing.",
       cards: [
         {
-          title: "Day 3 — -ER/-IR + gustar Check",
+          title: "-ER/-IR + gustar Check",
           description: "Quick check for present-tense -ER/-IR forms and gustar + infinitive in a Colombia context.",
           route: "activity.html?activity=sp1-day-03-grammar",
           lessonDay: 3,
@@ -97,7 +109,7 @@ window.unitSite = {
           icon: "💬"
         },
         {
-          title: "Day 3 — Conjugation Drill",
+          title: "Conjugation Drill",
           description: "Earn a perfect score by conjugating -ER and -IR verbs across all subjects. 3 lives.",
           route: "activity.html?activity=sp1-day-03-drill",
           lessonDay: 3,
@@ -109,9 +121,10 @@ window.unitSite = {
           icon: "⚡"
         },
         {
-          title: "Day 4 — Reading: Language Learner",
+          title: "Reading: Language Learner",
           description: "Read about Sofía's life in Medellín — with a glossary and scaffolded questions.",
           route: "activity.html?activity=sp1-day-04-reading-l2",
+          lessonDay: 4,
           tier: "l2",
           releaseDate: "",
           status: "Ready",
@@ -121,9 +134,10 @@ window.unitSite = {
           icon: "📖"
         },
         {
-          title: "Day 4 — Reading: Heritage Track",
+          title: "Reading: Heritage Track",
           description: "A richer look at student life in Medellín — deeper vocabulary and analysis questions.",
           route: "activity.html?activity=sp1-day-04-reading-heritage",
+          lessonDay: 4,
           tier: "heritage",
           releaseDate: "",
           status: "Ready",
@@ -133,9 +147,10 @@ window.unitSite = {
           icon: "⭐"
         },
         {
-          title: "Day 4 — Gustar Practice",
+          title: "Gustar Practice",
           description: "Fill in the blank with gustar phrases using Colombian contexts. Instant feedback.",
           route: "activity.html?activity=sp1-day-04-gustar",
+          lessonDay: 4,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Practice",
@@ -144,9 +159,10 @@ window.unitSite = {
           icon: "❤️"
         },
         {
-          title: "Day 5 — Estar + Location Practice",
+          title: "Estar + Location Practice",
           description: "Describe where classroom objects are in a Colombian classroom using prepositions and estar.",
           route: "activity.html?activity=sp1-day-05-location",
+          lessonDay: 5,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Practice",
@@ -155,9 +171,10 @@ window.unitSite = {
           icon: "📍"
         },
         {
-          title: "Day 5 — Estar Drill",
+          title: "Estar Drill",
           description: "Drill all estar forms and prepositions of place. Uses lives and instant feedback.",
           route: "activity.html?activity=sp1-day-05-drill",
+          lessonDay: 5,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Drill",
@@ -166,9 +183,10 @@ window.unitSite = {
           icon: "⚡"
         },
         {
-          title: "Day 6 — Emotions + ir Practice",
+          title: "Emotions + ir Practice",
           description: "Practice estar + emotions and ir + a + place in a Colombia context.",
           route: "activity.html?activity=sp1-day-06-emotions-ir",
+          lessonDay: 6,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Practice",
@@ -184,9 +202,10 @@ window.unitSite = {
       description: "Culture readings, project work, presentations, and the Encanto film sequence.",
       cards: [
         {
-          title: "Day 7 — Culture Reading: Language Learner",
+          title: "Culture Reading: Language Learner",
           description: "Read about Colombian coffee and community with glossary support and comprehension questions.",
           route: "activity.html?activity=sp1-day-07-culture-l2",
+          lessonDay: 7,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Reading",
@@ -195,9 +214,10 @@ window.unitSite = {
           icon: "☕"
         },
         {
-          title: "Day 7 — Culture Reading: Heritage Track",
+          title: "Culture Reading: Heritage Track",
           description: "An analytical look at coffee's role in Colombian economy and cultural identity.",
           route: "activity.html?activity=sp1-day-07-culture-heritage",
+          lessonDay: 7,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Reading",
@@ -206,9 +226,10 @@ window.unitSite = {
           icon: "⭐"
         },
         {
-          title: "Day 8 — Project Launch",
+          title: "Project Launch",
           description: "Choose your topic, set language goals, and gather evidence for your group project.",
           route: "activity.html?activity=sp1-day-08-project-launch",
+          lessonDay: 8,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Project",
@@ -217,9 +238,10 @@ window.unitSite = {
           icon: "📝"
         },
         {
-          title: "Day 9 — Project Checkpoint",
+          title: "Project Checkpoint",
           description: "Make sure your draft is complete before rehearsal day.",
           route: "activity.html?activity=sp1-day-09-project-checkpoint",
+          lessonDay: 9,
           releaseDate: "",
           status: "Ready",
           kindLabel: "Project",
@@ -228,20 +250,10 @@ window.unitSite = {
           icon: "✅"
         },
         {
-          title: "Day 10 — Audience Reflection",
-          description: "Stay active as an audience member during group presentations.",
-          route: "activity.html?activity=sp1-day-10-presentations",
-          releaseDate: "",
-          status: "Ready",
-          kindLabel: "Presentation",
-          minutes: 10,
-          dayLabel: "Day 10",
-          icon: "🎤"
-        },
-        {
-          title: "Day 11 — Encanto Part 1",
+          title: "Encanto Part 1",
           description: "Track setting, characters, and emotional language from Part 1 of Encanto.",
           route: "activity.html?activity=sp1-day-11-encanto-1",
+          lessonDay: 11,
           releaseDate: "",
           status: "New",
           kindLabel: "Film",
@@ -250,9 +262,10 @@ window.unitSite = {
           icon: "🎬"
         },
         {
-          title: "Day 12 — Encanto Discussion",
+          title: "Encanto Discussion",
           description: "Discussion stems and writing prompts after finishing Encanto.",
           route: "activity.html?activity=sp1-day-12-encanto-2",
+          lessonDay: 12,
           releaseDate: "",
           status: "New",
           kindLabel: "Film",
@@ -271,6 +284,7 @@ window.unitSite = {
           title: "Productos Culturales",
           description: "Investigate tangible and intangible cultural products — music, food, crafts, and art from Colombia.",
           route: "activity.html?activity=sp1-3p-productos",
+          lessonDay: 7,
           releaseDate: "",
           status: "New",
           kindLabel: "Culture",
@@ -282,6 +296,7 @@ window.unitSite = {
           title: "Prácticas Culturales",
           description: "Explore Colombian daily routines, traditions, rituals, and celebrations.",
           route: "activity.html?activity=sp1-3p-practicas",
+          lessonDay: 7,
           releaseDate: "",
           status: "New",
           kindLabel: "Culture",
@@ -293,6 +308,7 @@ window.unitSite = {
           title: "Perspectivas Culturales",
           description: "Dig into the values and beliefs that explain why Colombian products and practices exist.",
           route: "activity.html?activity=sp1-3p-perspectivas",
+          lessonDay: 7,
           releaseDate: "",
           status: "New",
           kindLabel: "Culture",
@@ -308,9 +324,10 @@ window.unitSite = {
       description: "Mixed review and exam prep — use your mistakes to choose what to study.",
       cards: [
         {
-          title: "Day 13 — Review Challenge",
+          title: "Review Challenge",
           description: "Mixed review covering vocabulary, -ER/-IR verbs, gustar, estar, and ir.",
           route: "activity.html?activity=sp1-day-13-review",
+          lessonDay: 13,
           releaseDate: "",
           status: "New",
           kindLabel: "Review",
@@ -319,9 +336,10 @@ window.unitSite = {
           icon: "🔁"
         },
         {
-          title: "Day 14 — Study Guide Check",
+          title: "Study Guide Check",
           description: "Final check-in before the exam. If you miss one, review that day's card.",
           route: "activity.html?activity=sp1-day-14-study",
+          lessonDay: 14,
           releaseDate: "",
           status: "Study",
           kindLabel: "Study Guide",
@@ -340,14 +358,14 @@ window.unitSite = {
           title: "La Cumbia — Music Listening",
           description: "Watch a cumbia performance and answer comprehension questions about Colombian musical culture.",
           route: "activity.html?activity=sp1-listening-cumbia",
+          lessonDay: 7,
           releaseDate: "",
           status: "New",
           kindLabel: "Listening",
           minutes: 10,
           dayLabel: "Bonus",
           icon: "🎵"
-        },
-        { id: "sp1-word-order-day04", label: "Day 4", sub: "Arrange the sentence" }
+        }
       ]
     },
     {

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>🇨🇴 Colombia Vocabulary Review — Spanish 1</title>
 <script src="https://unpkg.com/dexie@3/dist/dexie.min.js"></script>
+<script>window.__METZ_ADAPTIVE_UNIT_ID='colombia_sp1';</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -32,6 +33,7 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 .cat-2{background:#1E8449}.cat-2.active{background:#166b3a}
 .cat-3{background:#8E44AD}.cat-3.active{background:#6f3488}
 .cat-4{background:#D4AC0D}.cat-4.active{background:#b8960b}
+.cat-all{background:#34495e}.cat-all.active{background:#2c3e50}
 
 /* Stats bar */
 .stats-bar{display:flex;gap:20px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
@@ -379,124 +381,12 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 <!-- Completion -->
 <div id="completeMode" style="display:none"></div>
 
+<script src="../../unidad_colombia/student_site_assets/data/colombia-vocab-sp1.js"></script>
 <script>
 // ═══════════════════════════════════════════════
-// VOCABULARY DATA — Spanish 1 Colombia Unit
+// VOCABULARY DATA — Spanish 1 (see colombia-vocab-sp1.js)
 // ═══════════════════════════════════════════════
-const categories = [
-  {
-    name: "Colombia & Culture",
-    color: "cat-0",
-    words: [
-      {es:"Colombia",en:"Colombia (South American country)"},
-      {es:"Bogotá",en:"Bogotá (capital city)"},
-      {es:"el café",en:"coffee"},
-      {es:"la cumbia",en:"cumbia (Colombian music/dance)"},
-      {es:"la arepa",en:"arepa (corn flatbread)"},
-      {es:"el vallenato",en:"vallenato (Colombian folk music)"},
-      {es:"la selva",en:"jungle / rainforest"},
-      {es:"la costa",en:"coast"},
-      {es:"la montaña",en:"mountain"},
-      {es:"la ciudad",en:"city"},
-      {es:"el pueblo",en:"town / village"},
-      {es:"la bandera",en:"flag"},
-      {es:"el país",en:"country"},
-      {es:"bonito/a",en:"beautiful / pretty"},
-      {es:"famoso/a",en:"famous"},
-      {es:"colombiano/a",en:"Colombian"}
-    ]
-  },
-  {
-    name: "-ER / -IR Verbs",
-    color: "cat-1",
-    words: [
-      {es:"comer",en:"to eat"},
-      {es:"beber",en:"to drink"},
-      {es:"leer",en:"to read"},
-      {es:"correr",en:"to run"},
-      {es:"aprender",en:"to learn"},
-      {es:"comprender",en:"to understand"},
-      {es:"creer",en:"to believe"},
-      {es:"vender",en:"to sell"},
-      {es:"escribir",en:"to write"},
-      {es:"vivir",en:"to live"},
-      {es:"abrir",en:"to open"},
-      {es:"recibir",en:"to receive"},
-      {es:"compartir",en:"to share"},
-      {es:"decidir",en:"to decide"},
-      {es:"describir",en:"to describe"},
-      {es:"asistir a",en:"to attend"}
-    ]
-  },
-  {
-    name: "Gustar & Opinions",
-    color: "cat-2",
-    words: [
-      {es:"me gusta",en:"I like (singular)"},
-      {es:"me gustan",en:"I like (plural)"},
-      {es:"te gusta",en:"you like (singular)"},
-      {es:"le gusta",en:"he/she likes (singular)"},
-      {es:"nos gusta",en:"we like (singular)"},
-      {es:"me encanta",en:"I love (singular)"},
-      {es:"no me gusta",en:"I don't like"},
-      {es:"me gusta mucho",en:"I like a lot"},
-      {es:"¿Te gusta…?",en:"Do you like…?"},
-      {es:"también",en:"also / too"},
-      {es:"tampoco",en:"neither / either"},
-      {es:"más",en:"more"},
-      {es:"menos",en:"less"},
-      {es:"mejor",en:"better / best"},
-      {es:"peor",en:"worse / worst"},
-      {es:"favorito/a",en:"favorite"}
-    ]
-  },
-  {
-    name: "Estar & Location",
-    color: "cat-3",
-    words: [
-      {es:"estar",en:"to be (location/feeling)"},
-      {es:"estoy",en:"I am (location/feeling)"},
-      {es:"estás",en:"you are (location/feeling)"},
-      {es:"está",en:"he/she/it is (location/feeling)"},
-      {es:"estamos",en:"we are (location/feeling)"},
-      {es:"están",en:"they are (location/feeling)"},
-      {es:"aquí",en:"here"},
-      {es:"allí / allá",en:"there / over there"},
-      {es:"cerca (de)",en:"near / close (to)"},
-      {es:"lejos (de)",en:"far (from)"},
-      {es:"delante (de)",en:"in front (of)"},
-      {es:"detrás (de)",en:"behind"},
-      {es:"al lado (de)",en:"next to / beside"},
-      {es:"encima (de)",en:"on top (of)"},
-      {es:"debajo (de)",en:"under / below"},
-      {es:"entre",en:"between"}
-    ]
-  },
-  {
-    name: "Ir, Emotions & Places",
-    color: "cat-4",
-    words: [
-      {es:"ir",en:"to go"},
-      {es:"voy",en:"I go"},
-      {es:"vas",en:"you go"},
-      {es:"va",en:"he/she goes"},
-      {es:"vamos",en:"we go"},
-      {es:"van",en:"they go"},
-      {es:"ir a + infinitivo",en:"going to (do something)"},
-      {es:"contento/a",en:"happy / content"},
-      {es:"triste",en:"sad"},
-      {es:"enojado/a",en:"angry"},
-      {es:"cansado/a",en:"tired"},
-      {es:"nervioso/a",en:"nervous"},
-      {es:"enfermo/a",en:"sick"},
-      {es:"ocupado/a",en:"busy"},
-      {es:"el parque",en:"the park"},
-      {es:"el centro comercial",en:"the mall / shopping center"}
-    ]
-  }
-];
-
-window.__METZ_COLOMBIA_SP1 = { categories, vocabSlug };
+const categories = window.__METZ_COLOMBIA_VOCAB_DATA_SP1.categories;
 
 // ═══════════════════════════════════
 // APP STATE
@@ -597,9 +487,16 @@ function cleanupActiveMode() {
 // ═══════════════════════════════════
 // INIT & NAVIGATION
 // ═══════════════════════════════════
+function getInitialCategoryIndex() {
+  var raw = new URLSearchParams(window.location.search).get('cat');
+  if (raw === 'all') return 0;
+  var n = parseInt(raw, 10);
+  if (!isNaN(n) && n >= 1 && n < categories.length) return n;
+  return 1;
+}
 function init() {
   renderNav();
-  selectCategory(0);
+  selectCategory(getInitialCategoryIndex());
 }
 
 function renderNav() {
@@ -611,6 +508,7 @@ function renderNav() {
 
 function selectCategory(idx) {
   currentCat = idx;
+  window.__METZ_VOCAB_CATEGORY_INDEX = idx;
   currentIdx = 0;
   deck = [...categories[idx].words];
   known = new Set();
@@ -665,6 +563,8 @@ function vocabSlug(text) {
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
 }
+window.__METZ_COLOMBIA_SP1 = { categories: categories, vocabSlug: vocabSlug };
+
 var _currentAudio = null;
 function speakWord() {
   if (deck.length === 0) return;

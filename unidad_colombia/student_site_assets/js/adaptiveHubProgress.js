@@ -15,7 +15,7 @@ async function mount() {
     const all = await students.toArray();
     if (!all.length) {
       root.innerHTML =
-        '<p class="metz-dash-hint">Open the learner setup on this site to create a profile; then your progress will show here.</p>';
+        '<p class="metz-dash-hint">First time here? <a href="../../../unidad_colombia/student_site_assets/student-profile-setup.html">Set up my Spanish profile</a> (one minute). Then come back to this page.</p>';
       return;
     }
     const pref = localStorage.getItem('metz-active-student-id');

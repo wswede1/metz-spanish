@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can connect the film to what we learned about Colombia in this unit",
     "I can write a reflection paragraph using at least 2 preterite verbs"
   ],
+  vocabCategory: 1,
   sections: [
     {
       id: "discussion-notes",

@@ -27,6 +27,20 @@
     return value === undefined || value === null || value === '' ? fallback : value;
   }
 
+  /** Optional cloud row in activity_completions when signed in (ESM; no-op if import fails). */
+  function tryRecordActivityCloudCompletion(courseKey, activityId, meta) {
+    var script = document.querySelector('script[src*="colombia-student.js"]');
+    var src = script && script.getAttribute('src');
+    if (!src) return;
+    var modUrl = src.replace(/\/colombia-student\.js(\?[^#]*)?$/i, '/js/activityCompletionsSync.js$1');
+    if (modUrl === src) return;
+    import(modUrl).then(function (m) {
+      if (typeof m.recordActivityCompletionIfSignedIn === 'function') {
+        m.recordActivityCompletionIfSignedIn(courseKey, activityId, meta || {});
+      }
+    }).catch(function () {});
+  }
+
   // ── Glossary helpers ────────────────────────────────────────────────────────
 
   function buildGlossMap(glossary) {
@@ -139,6 +153,126 @@
     return months[parseInt(parts[1], 10) - 1] + ' ' + parseInt(parts[2], 10);
   }
 
+  function sectionIsTresP(section) {
+    return !!(section.title && String(section.title).indexOf('Las 3 P') !== -1);
+  }
+
+  function hubPracticeLinkLabel(card) {
+    if (card.practiceLinkLabel) {
+      return card.practiceLinkLabel;
+    }
+    var r = String(card.route || '');
+    if (r.indexOf('Colombia_Vocab_Review') !== -1) {
+      return 'Open game suite';
+    }
+    if (r.indexOf('podcast') !== -1) {
+      return 'Open episode';
+    }
+    if (r.indexOf('listening') !== -1) {
+      return 'Open listening';
+    }
+    return 'Open practice';
+  }
+
+  function renderTresPHubTracker(site, sectionWrap) {
+    if (!window.ColombiaProgress) {
+      return;
+    }
+    var ck = site.courseKey || 'sp1';
+    var items = [
+      { key: 'productos', activityId: ck + '-3p-productos', label: 'I explored Productos', stamp: '🎨' },
+      { key: 'practicas', activityId: ck + '-3p-practicas', label: 'I explored Prácticas', stamp: '🤝' },
+      { key: 'perspectivas', activityId: ck + '-3p-perspectivas', label: 'I explored Perspectivas', stamp: '💡' }
+    ];
+    var progress = ColombiaProgress.getTresPChecklist(ck);
+    var checked = progress.checked || {};
+    var nCheck = items.filter(function (it) {
+      return checked[it.key];
+    }).length;
+
+    var box = el('div', 'tres-p-hub-tracker');
+    var progLine = el('p', 'tres-p-hub-prog', nCheck + '/3 explored');
+    box.appendChild(progLine);
+
+    var checklist = el('div', 'tres-p-checklist');
+    items.forEach(function (it) {
+      var row = el('label', 'tres-p-check-row');
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.className = 'tres-p-cb';
+      cb.checked = !!checked[it.key];
+      cb.addEventListener('change', function () {
+        ColombiaProgress.setTresPChecklistItem(ck, it.key, cb.checked);
+        var o = ColombiaProgress.getTresPChecklist(ck);
+        var n = items.filter(function (x) {
+          return o.checked[x.key];
+        }).length;
+        progLine.textContent = n + '/3 explored';
+      });
+      row.appendChild(cb);
+      row.appendChild(document.createTextNode(' '));
+      row.appendChild(el('span', null, it.label));
+      checklist.appendChild(row);
+    });
+    box.appendChild(checklist);
+
+    var stampRow = el('div', 'tres-p-stamps');
+    stampRow.appendChild(el('span', 'tres-p-stamps-label', 'Visit stamps: '));
+    items.forEach(function (it) {
+      var on = ColombiaProgress.hasExploredActivity(ck, it.activityId);
+      var s = el(
+        'span',
+        'tres-p-stamp' + (on ? ' tres-p-stamp-on' : ' tres-p-stamp-off'),
+        on ? it.stamp : '○'
+      );
+      s.setAttribute('title', it.label.replace(/^I explored /, ''));
+      stampRow.appendChild(s);
+    });
+    box.appendChild(stampRow);
+
+    var refl = el('details', 'tres-p-reflect-details');
+    var summ = el('summary', 'tres-p-reflect-summary', 'Quick reflections (saved on this device)');
+    refl.appendChild(summ);
+    var reflWrap = el('div', 'tres-p-reflect-wrap');
+    var reflectData = ColombiaProgress.getTresPReflections(ck);
+    var reflectFields = [
+      { key: 'productos', label: 'Productos — one takeaway' },
+      { key: 'practicas', label: 'Prácticas — one example' },
+      { key: 'perspectivas', label: 'Perspectivas — one value or belief' }
+    ];
+    reflectFields.forEach(function (rf) {
+      reflWrap.appendChild(el('label', 'tres-p-reflect-label', rf.label));
+      var ta = document.createElement('textarea');
+      ta.className = 'tres-p-reflect-ta';
+      ta.rows = 2;
+      ta.value = reflectData[rf.key] || '';
+      ta.addEventListener('change', function () {
+        ColombiaProgress.setTresPReflection(ck, rf.key, ta.value);
+      });
+      reflWrap.appendChild(ta);
+    });
+    var saveBtn = el('button', 'secondary-btn tres-p-reflect-save', 'Save reflections');
+    saveBtn.type = 'button';
+    saveBtn.addEventListener('click', function () {
+      reflectFields.forEach(function (rf, i) {
+        var nodes = reflWrap.querySelectorAll('textarea.tres-p-reflect-ta');
+        var node = nodes[i];
+        if (node) {
+          ColombiaProgress.setTresPReflection(ck, rf.key, node.value);
+        }
+      });
+      saveBtn.textContent = 'Saved ✓';
+      setTimeout(function () {
+        saveBtn.textContent = 'Save reflections';
+      }, 1600);
+    });
+    reflWrap.appendChild(saveBtn);
+    refl.appendChild(reflWrap);
+    box.appendChild(refl);
+
+    sectionWrap.appendChild(box);
+  }
+
   function setHero(site, activity) {
     if (byId('eyebrow')) {
       byId('eyebrow').textContent = activity ? first(activity.kindLabel, 'Student Activity') : first(site.eyebrow, 'Student Site');
@@ -189,7 +323,33 @@
     }
     mount.innerHTML = '';
 
+    if (site.roadmap && site.roadmap.enabled && site.roadmap.day) {
+      var rDay = parseInt(String(site.roadmap.day), 10);
+      var rCourse = site.roadmap.courseKey || site.courseKey || 'sp1';
+      if (!isNaN(rDay) && rDay > 0) {
+        var rb = el('section', 'roadmap-hub-banner');
+        var rInner = el('div', 'roadmap-hub-banner-inner');
+        rInner.appendChild(el('h2', 'roadmap-hub-title', "Today's path"));
+        var rObjs = site.roadmap.objectives;
+        if (rObjs && rObjs.length) {
+          var rUl = el('ul', 'roadmap-hub-objectives');
+          rObjs.forEach(function (t) {
+            rUl.appendChild(el('li', null, t));
+          });
+          rInner.appendChild(rUl);
+        }
+        var rA = el('a', 'primary-btn roadmap-hub-cta', 'Start Day ' + rDay);
+        rA.href = 'daily-roadmap.html?day=' + encodeURIComponent(String(rDay)) + '&course=' + encodeURIComponent(rCourse);
+        rInner.appendChild(rA);
+        rb.appendChild(rInner);
+        mount.appendChild(rb);
+      }
+    }
+
     site.sections.forEach(function (section) {
+      if (section.hidden) {
+        return;
+      }
       var wrap = el('section', 'section-wrap');
       var header = el('div', 'section-title');
       var icon = el('div', null, section.icon || '📘');
@@ -203,9 +363,14 @@
       header.appendChild(textWrap);
       wrap.appendChild(header);
 
+      if (sectionIsTresP(section)) {
+        renderTresPHubTracker(site, wrap);
+      }
+
       var grid = el('div', 'section-grid');
       section.cards.forEach(function (card) {
         var locked = isLocked(card);
+        var showHubPills = card.showHubPills === true;
 
         if (locked) {
           // Render as a non-clickable locked card
@@ -215,11 +380,13 @@
           var title = el('h4', 'card-title', card.title);
           var lockDateEl = el('span', 'lock-date', 'Available ' + formatReleaseDate(card.releaseDate));
           var meta = el('div', 'card-meta');
-          [card.kindLabel, card.dayLabel].forEach(function (value) {
-            if (value) {
-              meta.appendChild(el('span', 'meta-pill', value));
-            }
-          });
+          if (showHubPills) {
+            [card.kindLabel, card.dayLabel].forEach(function (value) {
+              if (value) {
+                meta.appendChild(el('span', 'meta-pill', value));
+              }
+            });
+          }
           div.appendChild(lockIcon);
           div.appendChild(iconNode);
           div.appendChild(title);
@@ -241,12 +408,14 @@
           var cardTitle = el('h4', 'card-title', card.title);
           var cardDesc = el('p', 'card-desc', card.description);
           var cardMeta = el('div', 'card-meta');
-          [card.kindLabel, card.minutes ? card.minutes + ' min' : null, card.dayLabel].forEach(function (value) {
-            if (value) {
-              cardMeta.appendChild(el('span', 'meta-pill', value));
-            }
-          });
-          link.appendChild(badge);
+          if (showHubPills) {
+            [card.kindLabel, card.minutes ? card.minutes + ' min' : null, card.dayLabel].forEach(function (value) {
+              if (value) {
+                cardMeta.appendChild(el('span', 'meta-pill', value));
+              }
+            });
+            link.appendChild(badge);
+          }
           link.appendChild(cardIcon);
           if (card.tier === 'l2') {
             link.appendChild(el('span', 'card-tier-badge card-tier-l2', 'Language learner'));
@@ -257,14 +426,17 @@
           link.appendChild(cardDesc);
           link.appendChild(cardMeta);
           wrap.appendChild(link);
+          var actionsRow = el('div', 'card-actions-row');
+          var practiceA = el('a', 'card-action-link card-practice-link', hubPracticeLinkLabel(card));
+          practiceA.href = card.route;
+          actionsRow.appendChild(practiceA);
           if (lessonHref) {
-            var subRow = el('div', 'card-lesson-row');
-            var lessonA = el('a', 'card-lesson-link');
+            actionsRow.appendChild(el('span', 'card-action-sep', '·'));
+            var lessonA = el('a', 'card-action-link card-lesson-link', 'Full lesson');
             lessonA.href = lessonHref;
-            lessonA.textContent = 'Full lesson';
-            subRow.appendChild(lessonA);
-            wrap.appendChild(subRow);
+            actionsRow.appendChild(lessonA);
           }
+          wrap.appendChild(actionsRow);
           grid.appendChild(wrap);
         }
       });
@@ -1130,10 +1302,12 @@
     }
     setHero(site, activity);
     if (window.ColombiaProgress && site.courseKey && activityId) {
-      ColombiaProgress.recordActivityVisit(site.courseKey, activityId, {
+      var actMeta = {
         title: activity.title,
         href: 'activity.html?activity=' + encodeURIComponent(activityId)
-      });
+      };
+      ColombiaProgress.recordActivityVisit(site.courseKey, activityId, actMeta);
+      tryRecordActivityCloudCompletion(site.courseKey, activityId, actMeta);
     }
     if (activity.type === 'reading') {
       renderReading(mount, activity);

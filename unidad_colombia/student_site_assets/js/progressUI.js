@@ -22,6 +22,7 @@ const CLUSTER_LABELS = {
   greetings_and_phrases: 'Greetings & phrases',
   emotions: 'Emotions',
   general: 'General',
+  colombia_sp2_vocab: 'Sp2 Colombia vocab',
 };
 
 function clusterTitle(id) {

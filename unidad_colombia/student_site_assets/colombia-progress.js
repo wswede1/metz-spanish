@@ -150,9 +150,48 @@
     countHubCards: function (site) {
       var n = 0;
       (site.sections || []).forEach(function (sec) {
+        if (sec.hidden) return;
         n += (sec.cards || []).length;
       });
       return n;
+    },
+
+    /** @returns {{ checked: Record<string, boolean> }} */
+    getTresPChecklist: function (course) {
+      var raw = safeGet(PREFIX + course + '-tres-p-check');
+      var o = safeJSONParse(raw, { checked: {} });
+      return o && typeof o === 'object' ? o : { checked: {} };
+    },
+
+    setTresPChecklistItem: function (course, key, done) {
+      var o = this.getTresPChecklist(course);
+      o.checked = o.checked || {};
+      o.checked[key] = !!done;
+      safeSet(PREFIX + course + '-tres-p-check', JSON.stringify(o));
+    },
+
+    hasExploredActivity: function (course, activityId) {
+      var raw = safeGet(PREFIX + course + '-activities-explored');
+      var setObj = safeJSONParse(raw, {});
+      return !!(setObj && setObj[activityId]);
+    },
+
+    getTresPReflections: function (course) {
+      var raw = safeGet(PREFIX + course + '-tres-p-reflect');
+      var o = safeJSONParse(raw, {});
+      return {
+        productos: typeof o.productos === 'string' ? o.productos : '',
+        practicas: typeof o.practicas === 'string' ? o.practicas : '',
+        perspectivas: typeof o.perspectivas === 'string' ? o.perspectivas : ''
+      };
+    },
+
+    setTresPReflection: function (course, key, text) {
+      var o = this.getTresPReflections(course);
+      if (key === 'productos' || key === 'practicas' || key === 'perspectivas') {
+        o[key] = String(text || '');
+        safeSet(PREFIX + course + '-tres-p-reflect', JSON.stringify(o));
+      }
     }
   };
 

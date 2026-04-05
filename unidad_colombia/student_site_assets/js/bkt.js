@@ -18,6 +18,7 @@ const CLUSTER_OVERRIDES = {
   verb_conjugation: { pL0: 0.1, pT: 0.15 },
   colombia_geography: { pL0: 0.15, heritagePL0: 0.35 },
   colombia_culture: { pL0: 0.2, heritagePL0: 0.45 },
+  colombia_sp2_vocab: { pL0: 0.15, heritagePL0: 0.4, pT: 0.22 },
 };
 
 function clamp(x, lo, hi) {

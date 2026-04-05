@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set up my Spanish profile</title>
+  <script src="https://unpkg.com/dexie@3/dist/dexie.min.js"></script>
+  <link rel="stylesheet" href="colombia-student.css">
+  <style>
+    .metz-setup-page { max-width: 520px; margin: 0 auto; padding: 28px 20px 48px; }
+    .metz-setup-page h1 { color: var(--col-blue); margin-top: 0; font-size: 1.35rem; }
+    .metz-setup-page p { line-height: 1.5; color: var(--text); }
+    .metz-setup-form label { display: block; font-weight: 700; margin-top: 16px; color: var(--text); }
+    .metz-setup-form input[type="text"] {
+      width: 100%; box-sizing: border-box; padding: 12px 14px; margin-top: 6px;
+      border-radius: 12px; border: 1px solid rgba(0, 56, 147, 0.25); font-size: 1rem; font-family: inherit;
+    }
+    .metz-setup-tracks { margin-top: 14px; }
+    .metz-setup-tracks label { font-weight: 600; margin-top: 10px; }
+    .metz-setup-tracks input { margin-right: 8px; }
+    .metz-setup-submit { margin-top: 22px; padding: 12px 22px; border-radius: 999px; border: none;
+      background: var(--col-blue); color: #fff; font-weight: 800; font-size: 1rem; cursor: pointer; font-family: inherit; }
+    .metz-setup-status { margin-top: 14px; min-height: 1.4em; font-weight: 600; }
+    .metz-setup-result { margin-top: 20px; padding: 16px 18px; border-radius: 16px; background: var(--card-bg);
+      border: 1px solid rgba(0, 56, 147, 0.12); }
+    .metz-setup-meta { font-size: 0.9rem; color: var(--muted); }
+    .metz-setup-result a { color: var(--col-blue); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="metz-setup-page">
+    <h1>Set up my Spanish profile</h1>
+    <p>This is a <strong>one-time setup</strong> on <strong>this device</strong> (for example, your Chromebook). It lets the Colombia unit site save your vocabulary practice and progress.</p>
+    <p class="metz-setup-meta">You are not creating a password. Do not use a secret password as your name—use the name your teacher uses for you in class.</p>
+
+    <form class="metz-setup-form" id="metzProfileForm">
+      <label for="metzDisplayName">Your first and last name</label>
+      <input type="text" id="metzDisplayName" name="displayName" autocomplete="name" required maxlength="80" placeholder="e.g. Jordan Smith">
+
+      <div class="metz-setup-tracks">
+        <span class="metz-setup-meta">How do you use Spanish at home? (Pick one.)</span>
+        <label><input type="radio" name="learnerTrack" value="auto" checked> Let the site ask me 5 quick questions</label>
+        <label><input type="radio" name="learnerTrack" value="L2"> I am mainly learning Spanish at school</label>
+        <label><input type="radio" name="learnerTrack" value="heritage"> I hear or speak Spanish at home sometimes</label>
+      </div>
+
+      <button type="submit" class="metz-setup-submit">Save my profile</button>
+      <p class="metz-setup-status" id="metzProfileStatus" aria-live="polite"></p>
+    </form>
+
+    <div id="metzProfileResult" class="metz-setup-result" hidden></div>
+
+    <p class="metz-setup-meta" style="margin-top:28px">
+      <a href="../../span_1/unidad_colombia/student_site/index.html">← Spanish 1 hub</a>
+      ·
+      <a href="../../span_2/unidad_colombia/student_site/index.html">Spanish 2 hub</a>
+    </p>
+  </div>
+  <script type="module" src="./js/studentProfileSetup.js"></script>
+</body>
+</html>

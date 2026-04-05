@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can connect the film to what I've learned about Colombia",
     "I can write a short reflection about family, place, and identity"
   ],
+  vocabCategory: 1,
   sections: [
     {
       id: "discussion",

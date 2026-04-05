@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can match vocabulary to real-world Colombia sentences",
     "I can write 5 new words from today's lesson"
   ],
+  vocabCategory: 1,
   sections: [
     // ──────────────────────────────────────────────────
     // 1. Warm-Up

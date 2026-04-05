@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can notice setting details that connect to Colombia",
     "I can use emotion vocabulary to describe what I observe"
   ],
+  vocabCategory: 1,
   sections: [
     {
       id: "context",
