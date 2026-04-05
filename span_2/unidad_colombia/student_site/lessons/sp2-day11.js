@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can notice Colombia-inspired settings and cultural details in the film",
     "I can track preterite verbs used in the film dialogue"
   ],
+  vocabCategory: 1,
   sections: [
     {
       id: "context",

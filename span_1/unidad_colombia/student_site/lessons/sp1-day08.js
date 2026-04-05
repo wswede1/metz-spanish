@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can find 3+ facts from reliable sources",
     "I can draft 4 Spanish sentences using unit grammar"
   ],
+  vocabCategory: "all",
   sections: [
     {
       id: "focus",

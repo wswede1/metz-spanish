@@ -9,6 +9,7 @@ window.LESSON_DATA = {
     "I can conjugate verbs and use gustar, estar, and ir correctly",
     "I can write original sentences using all unit grammar"
   ],
+  vocabCategory: "all",
   sections: [
     {
       id: "listening",

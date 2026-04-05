@@ -9,6 +9,7 @@ window.LESSON_DATA = {
     "I can conjugate all preterite patterns: regular, -CAR/-GAR/-ZAR, Y-verbs, stem-changers, and irregulars",
     "I can write original sentences using a variety of preterite verb forms"
   ],
+  vocabCategory: "all",
   sections: [
     {
       id: "listening",

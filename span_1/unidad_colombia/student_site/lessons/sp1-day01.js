@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can identify key geographic features on a map",
     "I can gather new information from a video about Colombia"
   ],
+  vocabCategory: "all",
   sections: [
     // ──────────────────────────────────────────────────
     // 1. KWL Chart

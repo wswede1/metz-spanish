@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can use prepositions of place (en, debajo de, encima de, al lado de, entre)",
     "I can describe where classroom objects are located"
   ],
+  vocabCategory: 4,
   sections: [
     {
       id: "grammar-estar",
@@ -123,6 +124,24 @@ window.LESSON_DATA = {
             { text: "El lápiz ___ ___ el cuaderno y el libro.", answer: "está|entre" },
             { text: "Yo ___ ___ la ventana.", answer: "estoy|al lado de" }
           ]
+        },
+        {
+          type: "matching",
+          wordBank: true,
+          instructions: "Match location words and forms of <em>estar</em> to their English meanings.",
+          pairs: [
+            { es: "estar", en: "to be (location/feeling)" },
+            { es: "está", en: "he/she is (location)" },
+            { es: "aquí", en: "here" },
+            { es: "al lado (de)", en: "next to" },
+            { es: "encima (de)", en: "on top (of)" }
+          ]
+        },
+        {
+          type: "sentence-order",
+          prompt: "<strong>Put the words in order</strong> (Spanish): <em>The book is on top of the table.</em>",
+          tokens: ["El libro", "está", "encima de", "la mesa."],
+          correctOrder: [0, 1, 2, 3]
         }
       ]
     },

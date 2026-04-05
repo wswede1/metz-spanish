@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can listen for key facts in classmates' presentations",
     "I can ask respectful questions and give compliments in Spanish"
   ],
+  vocabCategory: "all",
   sections: [
     {
       id: "instructions",

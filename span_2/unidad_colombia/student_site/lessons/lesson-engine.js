@@ -40,12 +40,20 @@
   }
 
   // ── TTS ──────────────────────────────────────────────
-  function speak(text) {
+  function speak(text, onEnd) {
+    if (window.MetzSpanishTTS && typeof window.MetzSpanishTTS.speak === 'function') {
+      window.MetzSpanishTTS.speak(text, onEnd);
+      return;
+    }
     if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
     var utt = new SpeechSynthesisUtterance(text);
     utt.lang = 'es-MX';
     utt.rate = 0.88;
+    if (onEnd) {
+      utt.onend = onEnd;
+      utt.onerror = onEnd;
+    }
     window.speechSynthesis.speak(utt);
   }
 
@@ -59,6 +67,20 @@
   }
   function getLessonDay() {
     return window.METZ_LESSON_DAY || '01';
+  }
+
+  function vocabReviewHref(lesson) {
+    if (!lesson || lesson.vocabCategory === undefined || lesson.vocabCategory === null) {
+      return null;
+    }
+    var course = getLessonCourse();
+    var base = course === 'sp2' ? '../Colombia_Vocab_Review_Spanish2.html' : '../Colombia_Vocab_Review_Spanish1.html';
+    var vc = lesson.vocabCategory;
+    var catParam = vc === 'all' || vc === 0 ? 'all' : String(parseInt(vc, 10));
+    if (catParam !== 'all' && (catParam === 'NaN' || parseInt(catParam, 10) < 1)) {
+      return null;
+    }
+    return base + '?cat=' + encodeURIComponent(catParam);
   }
 
   function markSectionComplete(id) {
@@ -431,6 +453,90 @@
     return wrap;
   }
 
+  // ── Sentence order (tap pool → build line; same schema as roadmap arrange) ──
+  function renderSentenceOrder(data, sectionId) {
+    var wrap = el('div', 'sentence-order-wrap');
+    var tokens = (data.tokens || []).slice();
+    var order = data.correctOrder && data.correctOrder.length
+      ? data.correctOrder.slice()
+      : tokens.map(function(_, i) { return i; });
+    if (!tokens.length || order.length !== tokens.length) {
+      wrap.appendChild(el('p', null, '[sentence-order: need tokens[] and correctOrder[] of same length]'));
+      return wrap;
+    }
+    if (data.prompt) {
+      var pr = el('div', 'sentence-order-prompt');
+      pr.innerHTML = data.prompt;
+      wrap.appendChild(pr);
+    }
+    wrap.appendChild(renderCallout({
+      style: 'info',
+      text: data.instructions || 'Tap each word in the correct order. Tap a word in your sentence to put it back. Use the Check button when finished.'
+    }));
+
+    var displayIdx = shuffleArray(tokens.map(function(_, i) { return i; }));
+    var picked = [];
+    var poolMap = {};
+
+    var pool = el('div', 'sentence-order-pool');
+    pool.setAttribute('role', 'group');
+    pool.setAttribute('aria-label', 'Word bank');
+
+    var built = el('div', 'sentence-order-built');
+    built.setAttribute('role', 'status');
+    built.setAttribute('aria-live', 'polite');
+    built.setAttribute('aria-atomic', 'true');
+
+    function paintBuilt() {
+      built.innerHTML = '';
+      picked.forEach(function(tokIdx, si) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'sentence-order-token sentence-order-token-picked';
+        b.textContent = tokens[tokIdx];
+        b.setAttribute('aria-label', 'Remove: ' + tokens[tokIdx]);
+        b.addEventListener('click', function() {
+          picked.splice(si, 1);
+          if (poolMap[tokIdx]) poolMap[tokIdx].style.display = '';
+          paintBuilt();
+        });
+        built.appendChild(b);
+      });
+    }
+
+    displayIdx.forEach(function(tokIdx) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sentence-order-token';
+      b.textContent = tokens[tokIdx];
+      poolMap[tokIdx] = b;
+      b.addEventListener('click', function() {
+        if (b.style.display === 'none') return;
+        picked.push(tokIdx);
+        b.style.display = 'none';
+        paintBuilt();
+      });
+      pool.appendChild(b);
+    });
+
+    wrap.appendChild(pool);
+    wrap.appendChild(el('div', 'sentence-order-label', 'Your sentence:'));
+    wrap.appendChild(built);
+
+    var check = el('button', 'check-btn btn-blue', '✓ Check order');
+    check.type = 'button';
+    check.style.marginTop = '14px';
+    check.addEventListener('click', function() {
+      var target = order.map(function(i) { return tokens[i]; }).join(' ');
+      var got = picked.map(function(i) { return tokens[i]; }).join(' ');
+      var ok = got === target;
+      showToast(ok ? 'Perfect order!' : 'Not quite — tap words in your sentence to fix the order.', ok ? 'success' : 'retry');
+      if (ok) markSectionComplete(sectionId);
+    });
+    wrap.appendChild(check);
+    return wrap;
+  }
+
   // ── Fill-in-the-Blank ────────────────────────────────
   function renderFillBlanks(data, sectionId) {
     var wrap = el('div');
@@ -613,20 +719,166 @@
   }
 
   // ── Reading Block ────────────────────────────────────
+  function buildReadingGlossMap(glossary) {
+    var map = {};
+    (glossary || []).forEach(function (entry) {
+      if (typeof entry === 'string') {
+        var idx = entry.indexOf('=');
+        if (idx !== -1) {
+          map[normalize(entry.slice(0, idx).trim())] = entry.slice(idx + 1).trim();
+        }
+      } else if (entry && entry.es) {
+        map[normalize(String(entry.es))] = String(entry.en || '');
+      }
+    });
+    return map;
+  }
+
+  function renderReadingPlain(card, data) {
+    var glossMap = buildReadingGlossMap(data.glossary);
+    var textDiv = el('div', 'reading-text reading-text-plain');
+    var pop = el('div', 'reading-gloss-popover');
+    pop.setAttribute('role', 'tooltip');
+    pop.hidden = true;
+    pop.id = 'rg-' + Math.random().toString(36).slice(2);
+    var plain = String(data.plain || '');
+    var parts = plain.split(/(\s+)/);
+    var clickTimer = null;
+    var openSpan = null;
+
+    function hidePop() {
+      pop.hidden = true;
+      pop.textContent = '';
+      if (openSpan) {
+        openSpan.removeAttribute('aria-describedby');
+        openSpan = null;
+      }
+    }
+
+    function showPop(span, gloss) {
+      if (openSpan === span && !pop.hidden) {
+        hidePop();
+        return;
+      }
+      if (openSpan && openSpan !== span) {
+        hidePop();
+      }
+      openSpan = span;
+      pop.textContent = gloss;
+      pop.hidden = false;
+      var r = span.getBoundingClientRect();
+      var left = Math.max(8, Math.min(r.left, window.innerWidth - 228));
+      pop.style.left = left + 'px';
+      pop.style.top = (r.bottom + window.scrollY + 6) + 'px';
+      span.setAttribute('aria-describedby', pop.id);
+    }
+
+    parts.forEach(function (token) {
+      if (/^\s+$/.test(token)) {
+        textDiv.appendChild(document.createTextNode(token));
+        return;
+      }
+      var m = token.match(/^([^A-Za-z\u00C0-\u024F'-]*)([A-Za-z\u00C0-\u024F'-]+)([^A-Za-z\u00C0-\u024F'-]*)$/);
+      if (!m) {
+        textDiv.appendChild(document.createTextNode(token));
+        return;
+      }
+      if (m[1]) {
+        textDiv.appendChild(document.createTextNode(m[1]));
+      }
+      var word = m[2];
+      var gloss = glossMap[normalize(word)];
+      if (gloss) {
+        var span = document.createElement('span');
+        span.textContent = word;
+        span.className = 'reading-gloss-word';
+        span.setAttribute('tabindex', '0');
+        span.setAttribute('role', 'button');
+        span.setAttribute('aria-label', word + '. Single click: English. Double click: hear Spanish.');
+        var last = 0;
+        span.addEventListener('click', function () {
+          var now = Date.now();
+          if (now - last < 400) {
+            return;
+          }
+          last = now;
+          clearTimeout(clickTimer);
+          clickTimer = setTimeout(function () {
+            if (Date.now() - last >= 350) {
+              showPop(span, gloss);
+            }
+          }, 320);
+        });
+        span.addEventListener('dblclick', function (e) {
+          e.preventDefault();
+          clearTimeout(clickTimer);
+          last = 0;
+          hidePop();
+          speak(word);
+        });
+        span.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') {
+            ev.preventDefault();
+            showPop(span, gloss);
+          }
+          if (ev.key === ' ') {
+            ev.preventDefault();
+            speak(word);
+          }
+        });
+        textDiv.appendChild(span);
+      } else {
+        textDiv.appendChild(document.createTextNode(word));
+      }
+      if (m[3]) {
+        textDiv.appendChild(document.createTextNode(m[3]));
+      }
+    });
+
+    card.appendChild(textDiv);
+    card.appendChild(pop);
+
+    return card;
+  }
+
   function renderReading(data) {
     var card = el('div', 'reading-card');
-    var text = html('div', 'reading-text', data.text);
-    // Add click-to-speak on highlighted words
-    card.appendChild(text);
-    setTimeout(function() {
-      $$('.verb-highlight, .gustar-highlight', card).forEach(function(span) {
-        span.addEventListener('click', function() { speak(span.textContent); });
-      });
-    }, 0);
+    if (data.plain) {
+      renderReadingPlain(card, data);
+    } else {
+      var text = html('div', 'reading-text', data.text || '');
+      card.appendChild(text);
+      setTimeout(function () {
+        $$('.verb-highlight, .gustar-highlight', card).forEach(function (span) {
+          var t = span.textContent;
+          span.setAttribute('tabindex', '0');
+          span.setAttribute('role', 'button');
+          span.setAttribute('aria-label', t + '. Click or Enter to hear Spanish.');
+          span.addEventListener('click', function () {
+            speak(t);
+          });
+          span.addEventListener('keydown', function (ev) {
+            if (ev.key === 'Enter' || ev.key === ' ') {
+              ev.preventDefault();
+              speak(t);
+            }
+          });
+        });
+      }, 0);
+    }
     if (data.instructions) {
       var inst = el('p', null, data.instructions);
       inst.style.cssText = 'font-size:0.82rem;color:var(--text-muted);margin-top:10px;font-style:italic';
       card.appendChild(inst);
+    }
+    var hint = el('p', null, '');
+    hint.style.cssText = 'font-size:0.78rem;color:var(--text-muted);margin-top:6px';
+    if (data.plain && data.glossary && data.glossary.length) {
+      hint.textContent = 'Glossary words: single click (or Enter) = English hint; double click (or Space) = hear Spanish.';
+      card.appendChild(hint);
+    } else if (!data.plain) {
+      hint.textContent = 'Highlighted verbs / gustar: click or press Enter to hear Spanish.';
+      card.appendChild(hint);
     }
     return card;
   }
@@ -690,12 +942,35 @@
   // ── Map Labels ───────────────────────────────────────
   function renderMapLabels(data) {
     var wrap = el('div');
-    // Map visual placeholder
     var mapArea = el('div', 'map-area');
-    var ph = el('div', 'map-placeholder');
-    ph.appendChild(el('div', 'map-icon', '🗺️'));
-    ph.appendChild(el('div', null, data.mapHint || 'Use the printed map from class'));
-    mapArea.appendChild(ph);
+    if (data.mapImage) {
+      var img = document.createElement('img');
+      img.className = 'map-embed-image';
+      img.src = data.mapImage;
+      img.alt = data.mapAlt || 'Map of Colombia';
+      mapArea.appendChild(img);
+      if (data.mapHint) {
+        var cap = el('p', 'map-embed-caption', data.mapHint);
+        mapArea.appendChild(cap);
+      }
+    } else if (data.mapPdf) {
+      var pdfRow = el('div', 'map-pdf-row');
+      var pdfA = html('a', 'map-pdf-link', data.mapPdfLabel || 'Open map (PDF)');
+      pdfA.href = data.mapPdf;
+      pdfA.target = '_blank';
+      pdfA.rel = 'noopener noreferrer';
+      pdfRow.appendChild(pdfA);
+      mapArea.appendChild(pdfRow);
+      var ph = el('div', 'map-placeholder map-placeholder-below');
+      ph.appendChild(el('div', 'map-icon', '🗺️'));
+      ph.appendChild(el('div', null, data.mapHint || 'Use the PDF above or the printed map from class'));
+      mapArea.appendChild(ph);
+    } else {
+      var ph0 = el('div', 'map-placeholder');
+      ph0.appendChild(el('div', 'map-icon', '🗺️'));
+      ph0.appendChild(el('div', null, data.mapHint || 'Use the printed map from class'));
+      mapArea.appendChild(ph0);
+    }
     wrap.appendChild(mapArea);
 
     // Label grid
@@ -894,6 +1169,7 @@
     video: function(d) { return renderVideo(d); },
     questions: renderQuestions,
     matching: renderMatching,
+    'sentence-order': renderSentenceOrder,
     'fill-blanks': renderFillBlanks,
     'flip-gallery': function(d) { return renderFlipGallery(d); },
     discovery: function(d) { return renderDiscovery(d); },
@@ -954,6 +1230,13 @@
     var hubA = html('a', 'lesson-hub-link', '← Back to Hub');
     hubA.href = '../index.html';
     nav.appendChild(hubA);
+    var vr = vocabReviewHref(lesson);
+    if (vr) {
+      var vocabA = html('a', 'lesson-vocab-link', '📇 Unit flashcards & games');
+      vocabA.href = vr;
+      vocabA.setAttribute('target', '_self');
+      nav.appendChild(vocabA);
+    }
     heroInner.appendChild(nav);
     hero.appendChild(heroInner);
     root.appendChild(hero);

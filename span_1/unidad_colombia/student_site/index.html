@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spanish 1 Colombia Student Site</title>
+  <script src="https://unpkg.com/dexie@3/dist/dexie.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../../../unidad_colombia/student_site_assets/colombia-student.css?v=202604031200">
@@ -31,6 +32,8 @@
 
     <div id="resumeBar" class="resume-bar" hidden></div>
 
+    <div id="metz-supabase-auth-root" class="metz-auth-mount" aria-label="Cloud sign-in"></div>
+
     <section class="overview-card">
       <div class="overview-icon">🎯</div>
       <div>
@@ -42,11 +45,23 @@
 
     <div id="hubSections"></div>
 
+    <section class="metz-adaptive-section" aria-labelledby="metzAdaptiveHeading">
+      <h2 id="metzAdaptiveHeading">Your progress</h2>
+      <div id="metz-adaptive-dashboard-root"></div>
+    </section>
+
     <div class="footer" id="footerText"></div>
+    <p class="teacher-tools" style="text-align:center;font-size:0.75rem;margin:12px 0 24px;opacity:0.65">
+      <a href="../../../teacher.html" rel="nofollow">Teacher view</a>
+      ·
+      <a href="../../../unidad_colombia/student_site_assets/supabase-sync-settings.html" rel="nofollow">Sync settings</a>
+    </p>
   </main>
 
   <script src="../../../unidad_colombia/student_site_assets/colombia-progress.js?v=202604031200"></script>
   <script src="site-data.js?v=202604031200"></script>
   <script src="../../../unidad_colombia/student_site_assets/colombia-student.js?v=202604031200"></script>
+  <script type="module" src="../../../unidad_colombia/student_site_assets/js/adaptiveHubProgress.js"></script>
+  <script type="module" src="../../../unidad_colombia/student_site_assets/js/supabaseAuthUi.js"></script>
 </body>
 </html>

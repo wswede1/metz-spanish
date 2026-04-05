@@ -1,0 +1,37 @@
+[
+  {
+    "itemId": "diag-abuela",
+    "promptEs": "abuela",
+    "question": "What does \"abuela\" mean in English?",
+    "skillCluster": "family",
+    "acceptableAnswers": ["grandmother", "grandma"]
+  },
+  {
+    "itemId": "diag-hermano",
+    "promptEs": "hermano",
+    "question": "What does \"hermano\" mean in English?",
+    "skillCluster": "family",
+    "acceptableAnswers": ["brother"]
+  },
+  {
+    "itemId": "diag-comer",
+    "promptEs": "comer",
+    "question": "What does \"comer\" mean in English?",
+    "skillCluster": "verbs_basic",
+    "acceptableAnswers": ["to eat", "eat", "eating"]
+  },
+  {
+    "itemId": "diag-casa",
+    "promptEs": "casa",
+    "question": "What does \"casa\" mean in English?",
+    "skillCluster": "home",
+    "acceptableAnswers": ["house", "home"]
+  },
+  {
+    "itemId": "diag-trabajar",
+    "promptEs": "trabajar",
+    "question": "What does \"trabajar\" mean in English?",
+    "skillCluster": "verbs_basic",
+    "acceptableAnswers": ["to work", "work", "working"]
+  }
+]

@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can use gustar + infinitive and gustar + noun",
     "I can read a passage and identify verbs and preferences"
   ],
+  vocabCategory: "all",
   sections: [
     {
       id: "warmup",
@@ -60,6 +61,24 @@ window.LESSON_DATA = {
             { prompt: "What does Andrés do at school? (Name 2 actions)", type: "textarea", placeholder: "Andrés escribe... y lee...", rows: 2 },
             { prompt: "Where does he go on weekends?", placeholder: "Va al...", answer: "mercado" }
           ]
+        },
+        {
+          type: "matching",
+          wordBank: true,
+          instructions: "Match each Spanish phrase to its English meaning.",
+          pairs: [
+            { es: "me gusta", en: "I like (singular)" },
+            { es: "me gustan", en: "I like (plural)" },
+            { es: "¿Te gusta…?", en: "Do you like…?" },
+            { es: "favorito/a", en: "favorite" },
+            { es: "el parque", en: "the park" }
+          ]
+        },
+        {
+          type: "sentence-order",
+          prompt: "<strong>Put the words in order</strong> (Spanish): <em>I like to read in the park.</em>",
+          tokens: ["Me", "gusta", "leer", "en", "el", "parque."],
+          correctOrder: [0, 1, 2, 3, 4, 5]
         }
       ]
     },

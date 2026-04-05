@@ -8,6 +8,7 @@ window.LESSON_DATA = {
     "I can conjugate leer, creer, and oír in the preterite",
     "I can read a passage with Y-verbs and understand it"
   ],
+  vocabCategory: 4,
   sections: [
     // ──────────────────────────────────────────────────
     // 1. Warm-Up — Preterite Recall
@@ -239,6 +240,24 @@ window.LESSON_DATA = {
             { prompt: "Find and write ALL the Y-verbs (i→y) from the reading:", type: "textarea", placeholder: "1) oyeron 2) creyeron 3) ...", rows: 2 },
             { prompt: "¿Encontraron los españoles El Dorado? ¿Qué existe hoy en Bogotá?", type: "textarea", placeholder: "No, los españoles no... Hoy en Bogotá existe...", rows: 2 }
           ]
+        },
+        {
+          type: "matching",
+          wordBank: true,
+          instructions: "Match Y-verb preterite forms to their English meanings.",
+          pairs: [
+            { es: "leyó", en: "he/she read" },
+            { es: "leyeron", en: "they read" },
+            { es: "oyó", en: "he/she heard" },
+            { es: "oyeron", en: "they heard" },
+            { es: "creyeron", en: "they believed" }
+          ]
+        },
+        {
+          type: "sentence-order",
+          prompt: "<strong>Put the words in order</strong> (Spanish): <em>They read the legend in class.</em>",
+          tokens: ["Ellos", "leyeron", "la leyenda", "en", "clase."],
+          correctOrder: [0, 1, 2, 3, 4]
         }
       ]
     },

@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "courseKey": "sp2",
+  "day": 1,
+  "dayLabel": "Day 1",
+  "title": "Daily roadmap — Day 1",
+  "subtitle": "Colombia launch, map anchors, and preterite reporting",
+  "hearts": 5,
+  "objectives": [
+    "Locate key Colombia regions on the unit map",
+    "Use preterite frames to report what you learned or did",
+    "Set goals for accurate past-tense communication this unit"
+  ],
+  "canDo": [
+    "I can name major Colombia regions from the unit map",
+    "I can use a simple preterite frame to report past classroom learning"
+  ],
+  "deliverables": [
+    {
+      "id": "notebook",
+      "title": "Launch notes",
+      "instructionsHtml": "Write one <strong>preterite</strong> sentence about something you learned today and one question you still have."
+    },
+    {
+      "id": "classroom",
+      "title": "Submit in Google Classroom",
+      "instructionsHtml": "Turn in a photo or PDF if your teacher assigned the launch reflection.",
+      "turnInUrl": ""
+    }
+  ],
+  "warmup": {
+    "title": "Day 1 launch",
+    "description": "Review the Colombia launch recap, map anchors, and preterite reporting goals.",
+    "href": "activity.html?activity=sp2-day-01-launch"
+  },
+  "grammarReading": {
+    "title": "Travel vocabulary (optional)",
+    "description": "Preview travel vocabulary in short past-tense contexts before the classroom packet.",
+    "href": "activity.html?activity=sp2-day-02-vocab"
+  },
+  "comprehension": {
+    "skillCluster": "preterite_basics",
+    "steps": [
+      {
+        "type": "mcq",
+        "prompt": "Which form is the <em>yo</em> preterite of <strong>ir</strong>?",
+        "choices": ["iba", "fui", "fue", "voy"],
+        "correctIndex": 1
+      },
+      {
+        "type": "mcq",
+        "prompt": "Which sentence reports something that <strong>already happened</strong>?",
+        "choices": [
+          "Ayer aprendí tres palabras nuevas.",
+          "Mañana voy al mercado.",
+          "Hoy quiero practicar más.",
+          "Siempre me gusta Colombia."
+        ],
+        "correctIndex": 0
+      },
+      {
+        "type": "arrange",
+        "prompt": "Put the words in order: <em>Yesterday I learned.</em>",
+        "tokens": ["aprendí", "Ayer", "yo"],
+        "correctOrder": [1, 2, 0]
+      }
+    ]
+  },
+  "culture": {
+    "title": "Culture connection",
+    "description": "Optional: explore the Spanish 2 Colombia vocabulary game suite.",
+    "href": "../Colombia_Vocab_Review_Spanish2.html"
+  }
+}
