@@ -151,7 +151,9 @@
       var n = 0;
       (site.sections || []).forEach(function (sec) {
         if (sec.hidden) return;
-        n += (sec.cards || []).length;
+        (sec.cards || []).forEach(function (card) {
+          if (!card.hidden) n += 1;
+        });
       });
       return n;
     },

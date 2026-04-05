@@ -323,14 +323,17 @@
     }
     mount.innerHTML = '';
 
-    if (site.roadmap && site.roadmap.enabled && site.roadmap.day) {
-      var rDay = parseInt(String(site.roadmap.day), 10);
-      var rCourse = site.roadmap.courseKey || site.courseKey || 'sp1';
-      if (!isNaN(rDay) && rDay > 0) {
+    if (site.roadmap && site.roadmap.enabled) {
+      var road = site.roadmap;
+      var rDay = parseInt(String(road.day), 10);
+      var rCourse = road.courseKey || site.courseKey || 'sp1';
+      var hasCtaHref = !!(road.ctaHref && String(road.ctaHref).trim());
+      var hasDay = !isNaN(rDay) && rDay > 0;
+      if (hasCtaHref || hasDay) {
         var rb = el('section', 'roadmap-hub-banner');
         var rInner = el('div', 'roadmap-hub-banner-inner');
         rInner.appendChild(el('h2', 'roadmap-hub-title', "Today's path"));
-        var rObjs = site.roadmap.objectives;
+        var rObjs = road.objectives;
         if (rObjs && rObjs.length) {
           var rUl = el('ul', 'roadmap-hub-objectives');
           rObjs.forEach(function (t) {
@@ -338,8 +341,14 @@
           });
           rInner.appendChild(rUl);
         }
-        var rA = el('a', 'primary-btn roadmap-hub-cta', 'Start Day ' + rDay);
-        rA.href = 'daily-roadmap.html?day=' + encodeURIComponent(String(rDay)) + '&course=' + encodeURIComponent(rCourse);
+        var ctaLabel = road.ctaLabel && String(road.ctaLabel).trim()
+          ? String(road.ctaLabel).trim()
+          : 'Vamos!/Get started';
+        var ctaHref = hasCtaHref
+          ? String(road.ctaHref).trim()
+          : 'daily-roadmap.html?day=' + encodeURIComponent(String(rDay)) + '&course=' + encodeURIComponent(rCourse);
+        var rA = el('a', 'primary-btn roadmap-hub-cta', ctaLabel);
+        rA.href = ctaHref;
         rInner.appendChild(rA);
         rb.appendChild(rInner);
         mount.appendChild(rb);
@@ -369,6 +378,9 @@
 
       var grid = el('div', 'section-grid');
       section.cards.forEach(function (card) {
+        if (card.hidden) {
+          return;
+        }
         var locked = isLocked(card);
         var showHubPills = card.showHubPills === true;
 

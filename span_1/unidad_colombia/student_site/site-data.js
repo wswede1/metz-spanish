@@ -7,16 +7,16 @@
 
 window.unitSite = {
   courseKey: "sp1",
-  /** Daily roadmap: set `day` to match [roadmaps/sp1-day-{day}.json](roadmaps/sp1-day-03.json); disable when not in use. */
+  /** Hub "Today's path": objectives + CTA; use `ctaHref` for a direct link, or `day` + daily-roadmap.html. */
   roadmap: {
     enabled: true,
-    day: 3,
+    day: 2,
     courseKey: "sp1",
     objectives: [
-      "Recognize present-tense -ER and -IR verb endings",
-      "Use gustar + infinitive in short sentences about likes",
-      "Connect grammar to Colombia-themed examples"
-    ]
+      "I can recognize school and place words in context.",
+      "I can match a Colombia sentence to the correct vocabulary word."
+    ],
+    ctaHref: "activity.html?activity=sp1-day-02-vocab"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 1 — ¡Conoce a Colombia!",
@@ -43,7 +43,8 @@ window.unitSite = {
           kindLabel: "Launch",
           minutes: 15,
           dayLabel: "Day 1",
-          icon: "🗺️"
+          icon: "🗺️",
+          hidden: true
         },
         {
           title: "Vocab check",

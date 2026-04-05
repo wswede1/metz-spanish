@@ -9,13 +9,13 @@ window.unitSite = {
   courseKey: "sp2",
   roadmap: {
     enabled: true,
-    day: 1,
+    day: 2,
     courseKey: "sp2",
     objectives: [
-      "Locate key Colombia regions on the unit map",
-      "Use preterite frames to report what you learned or did",
-      "Set goals for accurate past-tense communication this unit"
-    ]
+      "I can recognize travel vocabulary in context.",
+      "I can use a travel word in a simple past-tense sentence."
+    ],
+    ctaHref: "activity.html?activity=sp2-day-02-vocab"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 2 — ¡Conoce a Colombia!",
@@ -42,7 +42,8 @@ window.unitSite = {
           kindLabel: "Launch",
           minutes: 15,
           dayLabel: "Day 1",
-          icon: "🗺️"
+          icon: "🗺️",
+          hidden: true
         },
         {
           title: "Travel vocab check",
