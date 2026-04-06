@@ -4,8 +4,12 @@
  *   span_2/unidad_colombia/Colombia_Vocab_Review_Spanish2.html
  *
  * Each page sets window.__METZ_VOCAB_CATEGORY_INDEX in selectCategory().
- * Flashcard deck override (adaptive queue) runs only when that index === 0 (All unit);
- * themed categories keep their own deck from colombia-vocab-sp*.js.
+ * Flashcard deck override (adaptive queue) runs only when:
+ *   - category index === 0 (All unit), AND
+ *   - URL has ?adaptive=1 (opt-in), AND
+ *   - a Dexie student row exists with a queue of 3+ words.
+ * Otherwise the full All unit deck from colombia-vocab-sp*.js stays visible.
+ * Themed categories (index > 0) never use the adaptive queue.
  */
 
 import { students } from './db.js';
@@ -33,6 +37,12 @@ async function resolveStudentRow() {
 
 async function maybeApplyAdaptiveFlashDeck() {
   if (!window.__METZ_PATCH_FLASH_DECK || !colombiaVocabContext()) return;
+  try {
+    var ap = new URLSearchParams(window.location.search).get('adaptive');
+    if (ap !== '1' && ap !== 'true') return;
+  } catch {
+    return;
+  }
   // Themed category buttons (index > 0) must keep that category's deck. Only "All unit"
   // (index 0) uses the adaptive queue for flashcards.
   if (window.__METZ_VOCAB_CATEGORY_INDEX !== 0) return;
