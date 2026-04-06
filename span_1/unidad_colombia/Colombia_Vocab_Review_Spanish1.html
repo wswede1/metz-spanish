@@ -492,7 +492,7 @@ function getInitialCategoryIndex() {
   if (raw === 'all') return 0;
   var n = parseInt(raw, 10);
   if (!isNaN(n) && n >= 1 && n < categories.length) return n;
-  return 1;
+  return 0;
 }
 function init() {
   renderNav();

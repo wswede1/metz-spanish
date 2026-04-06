@@ -15,7 +15,7 @@ window.unitSite = {
       "I can recognize travel vocabulary in context.",
       "I can use a travel word in a simple past-tense sentence."
     ],
-    ctaHref: "activity.html?activity=sp2-day-02-vocab"
+    ctaHref: "lessons/lesson.html?day=2"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 2 — ¡Conoce a Colombia!",
@@ -394,7 +394,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 25,
           dayLabel: "Bonus",
-          icon: "🟢"
+          icon: "🟢",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Mi+h%C3%A9roe+mi+amigo"
         },
         {
           title: "Sin miedo",
@@ -405,7 +406,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 25,
           dayLabel: "Bonus",
-          icon: "🟢"
+          icon: "🟢",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Sin+miedo"
         },
         {
           title: "Memorias y milanesas",
@@ -416,7 +418,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 25,
           dayLabel: "Bonus",
-          icon: "🟢"
+          icon: "🟢",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Memorias+y+milanesas"
         },
         {
           title: "Una chilena en China",
@@ -427,7 +430,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 25,
           dayLabel: "Bonus",
-          icon: "🟢"
+          icon: "🟢",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Una+chilena+en+China"
         },
         {
           title: "Helen Brown",
@@ -438,7 +442,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 25,
           dayLabel: "Bonus",
-          icon: "🟢"
+          icon: "🟢",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Helen+Brown"
         },
         {
           title: "¿Qué dicen los animales?",
@@ -449,7 +454,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 15,
           dayLabel: "Bonus",
-          icon: "🫘"
+          icon: "🫘",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+animales"
         },
         {
           title: "Los pollitos dicen",
@@ -460,7 +466,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 15,
           dayLabel: "Bonus",
-          icon: "🫘"
+          icon: "🫘",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+Los+pollitos+dicen"
         },
         {
           title: "La canguro Catrina",
@@ -471,7 +478,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 15,
           dayLabel: "Bonus",
-          icon: "🫘"
+          icon: "🫘",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+canguro+Catrina"
         },
         {
           title: "Penelope y el gigante",
@@ -482,7 +490,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 15,
           dayLabel: "Bonus",
-          icon: "🫘"
+          icon: "🫘",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+Penelope+gigante"
         },
         {
           title: "No puedes pasar",
@@ -493,7 +502,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 15,
           dayLabel: "Bonus",
-          icon: "🫘"
+          icon: "🫘",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+No+puedes+pasar"
         }
       ]
     }
@@ -561,6 +571,11 @@ window.unitSite = {
         "I can recognize travel vocabulary in context.",
         "I can use a travel word in a simple past-tense sentence."
       ],
+      summaryParagraphs: [
+        "Travel set: airport, flight, luggage, hotel, and trip vocabulary appear in short past-tense frames.",
+        "Match the Spanish word to the English gloss or the sentence that makes sense in Colombia travel contexts."
+      ],
+      summaryMnemonics: "Equipaje = luggage (equipment you pack). Vuelo = flight (think volar). Aeropuerto = airport (aero + puerto).",
       questions: [
         {
           type: "mc",
@@ -623,6 +638,10 @@ window.unitSite = {
         "I can use the yo-form spelling changes in the preterite.",
         "I can connect the form to a travel sentence."
       ],
+      summaryParagraphs: [
+        "In yo preterite, -CAR, -GAR, and -ZAR verbs change spelling so pronunciation stays the same: busqué, pagué, empecé."
+      ],
+      summaryMnemonics: "-CAR → -qué (saqué). -GAR → -gué (pagué). -ZAR → -cé (empecé). Other persons stay regular preterite.",
       questions: [
         {
           type: "mc",
@@ -686,6 +705,10 @@ window.unitSite = {
         "I can produce the correct yo-form spelling-change preterite without notes.",
         "I can apply the rule consistently across verbs."
       ],
+      summaryParagraphs: [
+        "Focus on yo forms with spelling fixes; él/ellos lines test that you do not over-apply the rule."
+      ],
+      summaryMnemonics: "Only yo changes: -car → qu + é; -gar → gu + é; -zar → c + é. Él/ella uses regular preterite (llegó, empezaron).",
       items: [
         { prompt: "yo — sacar (preterite)", answer: "saque", hint: "-CAR → -QUÉ: saqué" },
         { prompt: "yo — pagar (preterite)", answer: "pague", hint: "-GAR → -GUÉ: pagué" },
@@ -859,6 +882,10 @@ window.unitSite = {
         "I can use pidió, durmió, and prefirió correctly in context.",
         "I can recognize where the stem change does and does not happen."
       ],
+      summaryParagraphs: [
+        "Stem-changing -IR verbs in preterite: e→i and o→u happen in él/ella and ellos/ellas (and usted/ustedes). Yo, tú, nosotros use the regular preterite stem."
+      ],
+      summaryMnemonics: "pedir → pidió / pidieron; dormir → durmió / durmieron; preferir → prefirió. Nosotros = no stem change (preferimos, dormimos).",
       questions: [
         {
           type: "mc",
@@ -922,6 +949,10 @@ window.unitSite = {
         "I can produce the stem-change preterite form accurately.",
         "I can recognize which subjects trigger the change."
       ],
+      summaryParagraphs: [
+        "Check the subject first: only third persons flip the stem vowel in this preterite set."
+      ],
+      summaryMnemonics: "3rd person stem twist (e→i, o→u); yo/tú/nosotros = regular endings on the infinitive stem.",
       items: [
         { prompt: "ella — pedir (preterite)", answer: "pidio", hint: "e→i in ella: pidió" },
         { prompt: "ellos — dormir (preterite)", answer: "durmieron", hint: "o→u in ellos: durmieron" },
@@ -949,6 +980,10 @@ window.unitSite = {
         "I can use dije, traje, and vine in context.",
         "I can recognize the plural endings of these irregulars."
       ],
+      summaryParagraphs: [
+        "decir, traer, and venir use special stems in preterite: dij-, traj-, vin- plus regular preterite endings (watch dijeron, trajeron, vinieron)."
+      ],
+      summaryMnemonics: "No accents on dije/traje/vine stems. Plural -eron: dijeron, trajeron, vinieron.",
       questions: [
         {
           type: "mc",
@@ -1012,6 +1047,10 @@ window.unitSite = {
         "I can produce the stems dij-, traj-, and vin- correctly.",
         "I can apply all six subjects without notes."
       ],
+      summaryParagraphs: [
+        "These verbs do not use the regular preterite stem; swap to dij-, traj-, or vin- and add the usual endings for each subject."
+      ],
+      summaryMnemonics: "decir → dije/dijo/dijimos/dijeron; traer → traje/trajo/trajimos/trajeron; venir → vine/vino/vinimos/vinieron.",
       items: [
         { prompt: "yo — decir (preterite)", answer: "dije", hint: "decir stem: dij- → dije" },
         { prompt: "él — decir (preterite)", answer: "dijo", hint: "decir stem: dij- → dijo" },
@@ -2050,7 +2089,8 @@ window.unitSite = {
       podcastName: "Duolingo Spanish Podcast",
       episodeNumber: "1",
       level: "Intermediate",
-      tip: "Listen for preterite forms you know: fue, dijo, hizo, viajó. How many can you count?"
+      tip: "Listen for preterite forms you know: fue, dijo, hizo, viajó. How many can you count?",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Mi+h%C3%A9roe+mi+amigo"
     },
     "sp2-podcast-duo-02": {
       type: "podcast",
@@ -2068,7 +2108,8 @@ window.unitSite = {
       podcastName: "Duolingo Spanish Podcast",
       episodeNumber: "2",
       level: "Intermediate",
-      tip: "Try listening once all the way through, then go back and pause at the Spanish sections to catch more past-tense verbs."
+      tip: "Try listening once all the way through, then go back and pause at the Spanish sections to catch more past-tense verbs.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Sin+miedo"
     },
     "sp2-podcast-duo-03": {
       type: "podcast",
@@ -2086,7 +2127,8 @@ window.unitSite = {
       podcastName: "Duolingo Spanish Podcast",
       episodeNumber: "3",
       level: "Intermediate",
-      tip: "This episode mentions cooking and family — listen for verbs like preparó, cocinó, recordó."
+      tip: "This episode mentions cooking and family — listen for verbs like preparó, cocinó, recordó.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Memorias+y+milanesas"
     },
     "sp2-podcast-duo-04": {
       type: "podcast",
@@ -2104,7 +2146,8 @@ window.unitSite = {
       podcastName: "Duolingo Spanish Podcast",
       episodeNumber: "4",
       level: "Intermediate",
-      tip: "This episode connects to our unit — traveling, experiencing culture, and telling about it in the past tense."
+      tip: "This episode connects to our unit — traveling, experiencing culture, and telling about it in the past tense.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Una+chilena+en+China"
     },
     "sp2-podcast-duo-05": {
       type: "podcast",
@@ -2122,7 +2165,8 @@ window.unitSite = {
       podcastName: "Duolingo Spanish Podcast",
       episodeNumber: "5",
       level: "Intermediate",
-      tip: "If the Spanish feels fast, focus on the preterite verbs — they anchor the timeline of the story."
+      tip: "If the Spanish feels fast, focus on the preterite verbs — they anchor the timeline of the story.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Helen+Brown"
     },
 
     // ─── PODCAST ACTIVITIES — Garbanzo Spanish Podcast ───────────────────────────
@@ -2142,7 +2186,8 @@ window.unitSite = {
       podcastName: "Garbanzo Spanish Podcast",
       episodeNumber: "1",
       level: "Beginner–Intermediate",
-      tip: "Garbanzo episodes are shorter and slower — a great warm-up for listening practice."
+      tip: "Garbanzo episodes are shorter and slower — a great warm-up for listening practice.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+animales"
     },
     "sp2-podcast-garb-02": {
       type: "podcast",
@@ -2160,7 +2205,8 @@ window.unitSite = {
       podcastName: "Garbanzo Spanish Podcast",
       episodeNumber: "2",
       level: "Beginner–Intermediate",
-      tip: "Try to learn the chorus — it uses simple, repetitive vocabulary that's great for memorization."
+      tip: "Try to learn the chorus — it uses simple, repetitive vocabulary that's great for memorization.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+Los+pollitos+dicen"
     },
     "sp2-podcast-garb-03": {
       type: "podcast",
@@ -2178,7 +2224,8 @@ window.unitSite = {
       podcastName: "Garbanzo Spanish Podcast",
       episodeNumber: "3",
       level: "Beginner–Intermediate",
-      tip: "Stories help your brain learn language naturally — just enjoy the story and let the Spanish wash over you."
+      tip: "Stories help your brain learn language naturally — just enjoy the story and let the Spanish wash over you.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+canguro+Catrina"
     },
     "sp2-podcast-garb-04": {
       type: "podcast",
@@ -2196,7 +2243,8 @@ window.unitSite = {
       podcastName: "Garbanzo Spanish Podcast",
       episodeNumber: "4",
       level: "Beginner–Intermediate",
-      tip: "Fairy tales use patterns and repetition — notice which phrases come back again and again."
+      tip: "Fairy tales use patterns and repetition — notice which phrases come back again and again.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+Penelope+gigante"
     },
     "sp2-podcast-garb-05": {
       type: "podcast",
@@ -2214,7 +2262,8 @@ window.unitSite = {
       podcastName: "Garbanzo Spanish Podcast",
       episodeNumber: "5",
       level: "Beginner–Intermediate",
-      tip: "Listen for the words 'no' and 'sí' — they help you follow the negotiation in the story."
+      tip: "Listen for the words 'no' and 'sí' — they help you follow the negotiation in the story.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+No+puedes+pasar"
     }
   }
 };

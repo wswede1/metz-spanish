@@ -16,7 +16,7 @@ window.unitSite = {
       "I can recognize school and place words in context.",
       "I can match a Colombia sentence to the correct vocabulary word."
     ],
-    ctaHref: "activity.html?activity=sp1-day-02-vocab"
+    ctaHref: "lessons/lesson.html?day=2"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 1 — ¡Conoce a Colombia!",
@@ -383,7 +383,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 25,
           dayLabel: "Bonus",
-          icon: "🟢"
+          icon: "🟢",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Mi+h%C3%A9roe+mi+amigo"
         },
         {
           title: "Sin miedo",
@@ -394,7 +395,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 25,
           dayLabel: "Bonus",
-          icon: "🟢"
+          icon: "🟢",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Sin+miedo"
         },
         {
           title: "Memorias y milanesas",
@@ -405,7 +407,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 25,
           dayLabel: "Bonus",
-          icon: "🟢"
+          icon: "🟢",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Memorias+y+milanesas"
         },
         {
           title: "Una chilena en China",
@@ -416,7 +419,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 25,
           dayLabel: "Bonus",
-          icon: "🟢"
+          icon: "🟢",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Una+chilena+en+China"
         },
         {
           title: "Helen Brown",
@@ -427,7 +431,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 25,
           dayLabel: "Bonus",
-          icon: "🟢"
+          icon: "🟢",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Helen+Brown"
         },
         {
           title: "¿Qué dicen los animales?",
@@ -438,7 +443,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 15,
           dayLabel: "Bonus",
-          icon: "🫘"
+          icon: "🫘",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+animales"
         },
         {
           title: "Los pollitos dicen",
@@ -449,7 +455,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 15,
           dayLabel: "Bonus",
-          icon: "🫘"
+          icon: "🫘",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+Los+pollitos+dicen"
         },
         {
           title: "La canguro Catrina",
@@ -460,7 +467,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 15,
           dayLabel: "Bonus",
-          icon: "🫘"
+          icon: "🫘",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+canguro+Catrina"
         },
         {
           title: "Penelope y el gigante",
@@ -471,7 +479,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 15,
           dayLabel: "Bonus",
-          icon: "🫘"
+          icon: "🫘",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+Penelope+gigante"
         },
         {
           title: "No puedes pasar",
@@ -482,7 +491,8 @@ window.unitSite = {
           kindLabel: "Podcast",
           minutes: 15,
           dayLabel: "Bonus",
-          icon: "🫘"
+          icon: "🫘",
+          youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+No+puedes+pasar"
         }
       ]
     }
@@ -556,6 +566,11 @@ window.unitSite = {
         "I can recognize school and place words in context.",
         "I can match a Colombia sentence to the correct vocabulary word."
       ],
+      summaryParagraphs: [
+        "This check focuses on school and place words you use to describe a day in Colombia: classroom items, buildings, and market vocabulary.",
+        "Read the Spanish in each question and decide which word fits the meaning or the blank."
+      ],
+      summaryMnemonics: "Colegio = school (think college without the -ge sound). Mercado = market (like merchandise). Puerta = door; ventana = window.",
       questions: [
         {
           type: "mc",
@@ -619,6 +634,11 @@ window.unitSite = {
         "I can identify the correct -ER or -IR ending in context.",
         "I can use gusta with an infinitive."
       ],
+      summaryParagraphs: [
+        "Present tense: regular -ER and -IR verbs share the same endings except for nosotros (-emos vs -imos) and vosotros (Spain).",
+        "With gustar, the thing you like is the subject: use me gusta + singular thing or infinitive; me gustan + plural things."
+      ],
+      summaryMnemonics: "-ER: yo -o, tú -es, él -e, nosotros -emos, ellos -en. -IR: swap -emos → -imos. Gustar + infinitive: always gusta (one activity).",
       questions: [
         {
           type: "mc",
@@ -683,6 +703,10 @@ window.unitSite = {
         "I can conjugate -ER and -IR verbs in the present tense for all subjects.",
         "I can apply the correct ending without notes."
       ],
+      summaryParagraphs: [
+        "Type the full verb form for the subject given. Stay in the present tense unless the prompt says otherwise."
+      ],
+      summaryMnemonics: "Match the subject to the ending first, then spell the stem. -ER/-IR él/ella forms both end in -e; nosotros is the giveaway (-emos vs -imos).",
       items: [
         { prompt: "yo — comer", answer: "como", hint: "-ER verb: yo → -o" },
         { prompt: "tú — beber", answer: "bebes", hint: "-ER verb: tú → -es" },
@@ -856,6 +880,11 @@ window.unitSite = {
         "I can use gustan with a plural noun.",
         "I can use me, te, le, nos, and les with the correct form."
       ],
+      summaryParagraphs: [
+        "The thing that is liked is the grammatical subject: plural noun → gustan; singular noun or infinitive verb phrase → gusta.",
+        "Match the person who likes something to the indirect object (me, te, le, nos, les) before gusta/gustan."
+      ],
+      summaryMnemonics: "Count the thing you like: one activity (infinitive) = gusta. Many arepas = gustan. Question to a friend: ¿Te gusta…?",
       questions: [
         {
           type: "mc",
@@ -921,6 +950,10 @@ window.unitSite = {
         "I can say where classroom objects are with estar.",
         "I can use prepositions like al lado de, debajo de, and encima de."
       ],
+      summaryParagraphs: [
+        "Use estar (not ser) for where something is right now. Combine estar + location phrase with de + article + noun (del = de + el)."
+      ],
+      summaryMnemonics: "Location = estar. encima de = on top; debajo de = under; al lado de = next to. ¿Dónde está…? asks where something is.",
       questions: [
         {
           type: "mc",
@@ -984,6 +1017,10 @@ window.unitSite = {
         "I can conjugate estar correctly for all six subjects.",
         "I can identify prepositions of place in context."
       ],
+      summaryParagraphs: [
+        "Estar is irregular in the yo form (estoy). Other forms follow a predictable pattern; watch accents on está and están."
+      ],
+      summaryMnemonics: "Estar locations: estoy, estás, está, estamos, están. Prepositions often end with de (encima de, debajo de).",
       items: [
         { prompt: "yo — estar", answer: "estoy", hint: "estar is irregular — memorize estoy" },
         { prompt: "tú — estar", answer: "estas", hint: "estar: tú → estás" },
@@ -1009,6 +1046,10 @@ window.unitSite = {
         "I can describe how someone feels with estar + adjective.",
         "I can use ir + a + place and ir a + infinitive."
       ],
+      summaryParagraphs: [
+        "Feelings and conditions use estar + adjective (agreement with the subject). Going somewhere uses ir a + place; ir a + infinitive = going to do something."
+      ],
+      summaryMnemonics: "Emotion/state → estar + adj. Destination → voy/vas/va… + a + el/la… Future plan → ir a + infinitive.",
       questions: [
         {
           type: "mc",
@@ -1994,7 +2035,8 @@ window.unitSite = {
       podcastName: "Duolingo Spanish Podcast",
       episodeNumber: "1",
       level: "Beginner–Intermediate",
-      tip: "Don't worry about understanding every word. Listen for the main idea and any words you recognize from class."
+      tip: "Don't worry about understanding every word. Listen for the main idea and any words you recognize from class.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Mi+h%C3%A9roe+mi+amigo"
     },
     "sp1-podcast-duo-02": {
       type: "podcast",
@@ -2012,7 +2054,8 @@ window.unitSite = {
       podcastName: "Duolingo Spanish Podcast",
       episodeNumber: "2",
       level: "Beginner–Intermediate",
-      tip: "Try listening once all the way through, then go back and pause at the Spanish sections to catch more details."
+      tip: "Try listening once all the way through, then go back and pause at the Spanish sections to catch more details.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Sin+miedo"
     },
     "sp1-podcast-duo-03": {
       type: "podcast",
@@ -2030,7 +2073,8 @@ window.unitSite = {
       podcastName: "Duolingo Spanish Podcast",
       episodeNumber: "3",
       level: "Beginner–Intermediate",
-      tip: "This episode mentions food — listen for any words related to cooking or family meals."
+      tip: "This episode mentions food — listen for any words related to cooking or family meals.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Memorias+y+milanesas"
     },
     "sp1-podcast-duo-04": {
       type: "podcast",
@@ -2048,7 +2092,8 @@ window.unitSite = {
       podcastName: "Duolingo Spanish Podcast",
       episodeNumber: "4",
       level: "Beginner–Intermediate",
-      tip: "This episode connects to our unit themes — living in a new place and experiencing a different culture."
+      tip: "This episode connects to our unit themes — living in a new place and experiencing a different culture.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Una+chilena+en+China"
     },
     "sp1-podcast-duo-05": {
       type: "podcast",
@@ -2066,7 +2111,8 @@ window.unitSite = {
       podcastName: "Duolingo Spanish Podcast",
       episodeNumber: "5",
       level: "Beginner–Intermediate",
-      tip: "If the Spanish feels fast, that's normal! Focus on the emotions and the story arc, not every single word."
+      tip: "If the Spanish feels fast, that's normal! Focus on the emotions and the story arc, not every single word.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Duolingo+Spanish+Podcast+Helen+Brown"
     },
 
     // ─── PODCAST ACTIVITIES — Garbanzo Spanish Podcast ───────────────────────────
@@ -2086,7 +2132,8 @@ window.unitSite = {
       podcastName: "Garbanzo Spanish Podcast",
       episodeNumber: "1",
       level: "Beginner",
-      tip: "Garbanzo episodes are shorter and slower — perfect for building confidence with listening."
+      tip: "Garbanzo episodes are shorter and slower — perfect for building confidence with listening.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+animales"
     },
     "sp1-podcast-garb-02": {
       type: "podcast",
@@ -2104,7 +2151,8 @@ window.unitSite = {
       podcastName: "Garbanzo Spanish Podcast",
       episodeNumber: "2",
       level: "Beginner",
-      tip: "Try to learn the chorus — it uses simple, repetitive vocabulary that's great for memorization."
+      tip: "Try to learn the chorus — it uses simple, repetitive vocabulary that's great for memorization.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+Los+pollitos+dicen"
     },
     "sp1-podcast-garb-03": {
       type: "podcast",
@@ -2122,7 +2170,8 @@ window.unitSite = {
       podcastName: "Garbanzo Spanish Podcast",
       episodeNumber: "3",
       level: "Beginner",
-      tip: "Stories help your brain learn language naturally — just enjoy the story and let the Spanish wash over you."
+      tip: "Stories help your brain learn language naturally — just enjoy the story and let the Spanish wash over you.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+canguro+Catrina"
     },
     "sp1-podcast-garb-04": {
       type: "podcast",
@@ -2140,7 +2189,8 @@ window.unitSite = {
       podcastName: "Garbanzo Spanish Podcast",
       episodeNumber: "4",
       level: "Beginner",
-      tip: "Fairy tales use patterns and repetition — notice which phrases come back again and again."
+      tip: "Fairy tales use patterns and repetition — notice which phrases come back again and again.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+Penelope+gigante"
     },
     "sp1-podcast-garb-05": {
       type: "podcast",
@@ -2158,7 +2208,8 @@ window.unitSite = {
       podcastName: "Garbanzo Spanish Podcast",
       episodeNumber: "5",
       level: "Beginner",
-      tip: "Listen for the words 'no' and 'sí' — they help you follow the negotiation in the story."
+      tip: "Listen for the words 'no' and 'sí' — they help you follow the negotiation in the story.",
+      youtubeWatchUrl: "https://www.youtube.com/results?search_query=Garbanzo+Spanish+Podcast+No+puedes+pasar"
     }
   }
 };

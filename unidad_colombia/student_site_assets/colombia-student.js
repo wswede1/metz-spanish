@@ -157,7 +157,15 @@
     return !!(section.title && String(section.title).indexOf('Las 3 P') !== -1);
   }
 
+  function isHubActivityRoute(route) {
+    var r = String(route || '');
+    return r.indexOf('activity.html') !== -1;
+  }
+
   function hubPracticeLinkLabel(card) {
+    if (card.summaryPracticeLabel) {
+      return card.summaryPracticeLabel;
+    }
     if (card.practiceLinkLabel) {
       return card.practiceLinkLabel;
     }
@@ -170,6 +178,9 @@
     }
     if (r.indexOf('listening') !== -1) {
       return 'Open listening';
+    }
+    if (isHubActivityRoute(r)) {
+      return 'Summary and practice';
     }
     return 'Open practice';
   }
@@ -413,7 +424,8 @@
 
           var wrap = el('div', 'activity-card-wrap');
           var link = el('a', 'activity-card');
-          link.href = card.route;
+          var primaryHref = lessonHref || card.route;
+          link.href = primaryHref;
           var badgeClass = card.status === 'New' ? 'badge-new' : card.status === 'Study' ? 'badge-study' : 'badge-ready';
           var badge = el('span', 'card-badge ' + badgeClass, card.status || 'Ready');
           var cardIcon = el('div', 'card-icon', card.icon || '📘');
@@ -442,11 +454,13 @@
           var practiceA = el('a', 'card-action-link card-practice-link', hubPracticeLinkLabel(card));
           practiceA.href = card.route;
           actionsRow.appendChild(practiceA);
-          if (lessonHref) {
+          if (card.youtubeWatchUrl && String(card.youtubeWatchUrl).trim()) {
             actionsRow.appendChild(el('span', 'card-action-sep', '·'));
-            var lessonA = el('a', 'card-action-link card-lesson-link', 'Full lesson');
-            lessonA.href = lessonHref;
-            actionsRow.appendChild(lessonA);
+            var ytA = el('a', 'card-action-link card-youtube-link', 'YouTube');
+            ytA.href = String(card.youtubeWatchUrl).trim();
+            ytA.target = '_blank';
+            ytA.rel = 'noopener noreferrer';
+            actionsRow.appendChild(ytA);
           }
           wrap.appendChild(actionsRow);
           grid.appendChild(wrap);
@@ -481,6 +495,37 @@
       }
       target.appendChild(card);
     });
+  }
+
+  function appendTopicSummarySection(activity, parent) {
+    if (!parent || !activity) {
+      return;
+    }
+    var paras = activity.summaryParagraphs;
+    var hasParas = Array.isArray(paras) && paras.some(function (p) { return p && String(p).trim(); });
+    var hasTopic = activity.topicSummary && String(activity.topicSummary).trim();
+    var hasMnemo = activity.summaryMnemonics && String(activity.summaryMnemonics).trim();
+    if (!hasParas && !hasTopic && !hasMnemo) {
+      return;
+    }
+    var box = el('div', 'topic-summary-box');
+    box.appendChild(el('h3', 'topic-summary-heading', 'Summary'));
+    if (hasParas) {
+      paras.forEach(function (p) {
+        if (p && String(p).trim()) {
+          box.appendChild(el('p', 'topic-summary-p', String(p).trim()));
+        }
+      });
+    } else if (hasTopic) {
+      box.appendChild(el('p', 'topic-summary-p', String(activity.topicSummary).trim()));
+    }
+    if (hasMnemo) {
+      var m = el('div', 'topic-summary-mnemonics');
+      m.appendChild(el('strong', null, 'Mnemonics / steps: '));
+      m.appendChild(document.createTextNode(String(activity.summaryMnemonics).trim()));
+      box.appendChild(m);
+    }
+    parent.appendChild(box);
   }
 
   function answerMatches(value, answer) {
@@ -563,6 +608,8 @@
     } else {
       card.appendChild(el('h3', null, options.practiceHeading || 'Check Your Understanding'));
     }
+
+    appendTopicSummarySection(activity, card);
 
     var form = el('form', 'practice-form');
     activity.questions.forEach(function (question, index) {
@@ -915,6 +962,7 @@
         });
         headerCard.appendChild(objWrap);
       }
+      appendTopicSummarySection(activity, headerCard);
       target.appendChild(headerCard);
 
       // Drill wrap
@@ -1255,18 +1303,48 @@
       card.appendChild(objWrap);
     }
 
-    // Spotify embed — episode-level if spotifyId is set, show-level fallback
     var embedWrap = el('div', 'podcast-embed');
-    var iframe = document.createElement('iframe');
-    var embedBase = activity.spotifyId
-      ? 'https://open.spotify.com/embed/episode/' + activity.spotifyId
-      : 'https://open.spotify.com/embed/show/' + (activity.spotifyShowId || '2uDEXRSkpRdCmZUw8qt5fh');
-    iframe.src = embedBase + '?utm_source=generator&theme=0';
-    iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
-    iframe.setAttribute('loading', 'lazy');
-    iframe.style.borderRadius = '12px';
-    embedWrap.appendChild(iframe);
+    if (activity.youtubeId && String(activity.youtubeId).trim()) {
+      var videoWrap = el('div', 'video-wrap');
+      var ytFrame = document.createElement('iframe');
+      var ytSrc = 'https://www.youtube-nocookie.com/embed/' + String(activity.youtubeId).trim();
+      if (activity.youtubeStartTime) {
+        ytSrc += '?start=' + encodeURIComponent(String(activity.youtubeStartTime));
+      }
+      ytFrame.src = ytSrc;
+      ytFrame.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      ytFrame.allowFullscreen = true;
+      ytFrame.setAttribute('loading', 'lazy');
+      ytFrame.style.borderRadius = '12px';
+      videoWrap.appendChild(ytFrame);
+      embedWrap.appendChild(videoWrap);
+    } else {
+      var iframe = document.createElement('iframe');
+      var embedBase = activity.spotifyId
+        ? 'https://open.spotify.com/embed/episode/' + activity.spotifyId
+        : 'https://open.spotify.com/embed/show/' + (activity.spotifyShowId || '2uDEXRSkpRdCmZUw8qt5fh');
+      iframe.src = embedBase + '?utm_source=generator&theme=0';
+      iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
+      iframe.setAttribute('loading', 'lazy');
+      iframe.style.borderRadius = '12px';
+      embedWrap.appendChild(iframe);
+    }
     card.appendChild(embedWrap);
+
+    var ytOutHref = activity.youtubeWatchUrl && String(activity.youtubeWatchUrl).trim()
+      ? String(activity.youtubeWatchUrl).trim()
+      : (activity.youtubeId && String(activity.youtubeId).trim()
+        ? 'https://www.youtube.com/watch?v=' + encodeURIComponent(String(activity.youtubeId).trim())
+        : '');
+    if (ytOutHref) {
+      var ytOut = el('p', 'podcast-youtube-outlink');
+      var ytA = el('a', 'primary-btn podcast-youtube-btn', 'Open on YouTube');
+      ytA.href = ytOutHref;
+      ytA.target = '_blank';
+      ytA.rel = 'noopener noreferrer';
+      ytOut.appendChild(ytA);
+      card.appendChild(ytOut);
+    }
 
     // podcast metadata
     if (activity.podcastName || activity.episodeNumber) {

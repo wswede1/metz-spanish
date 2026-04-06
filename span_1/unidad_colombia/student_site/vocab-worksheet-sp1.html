@@ -148,6 +148,89 @@
       background: #fff;
     }
 
+    .nav-pages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .nav-pages a {
+      color: #003893;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav-pages a:hover { text-decoration: underline; }
+
+    .grammar-intro {
+      font-size: 10pt;
+      color: #555;
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      background: #f7f2e8;
+      border-radius: 6px;
+      border-left: 3pt solid #ce9c1a;
+    }
+
+    .grammar-intro em {
+      display: block;
+      margin-top: 6px;
+      color: #666;
+      font-style: italic;
+    }
+
+    .grammar-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 14px;
+      font-size: 10pt;
+    }
+
+    .grammar-table th {
+      background: #2e4a6f;
+      color: #fff;
+      padding: 6px 10px;
+      text-align: left;
+      font-weight: 700;
+      border: 1pt solid #1e3550;
+    }
+
+    .grammar-table td {
+      border: 1pt solid #bdc3c7;
+      padding: 6px 10px;
+      vertical-align: middle;
+    }
+
+    .grammar-table tr:nth-child(even) { background: #f8f9fa; }
+
+    .grammar-table .mono { font-family: ui-monospace, monospace; font-size: 9.5pt; }
+
+    .formula-box {
+      margin: 10px 0 14px;
+      padding: 12px 14px;
+      background: #f4eef8;
+      border-radius: 6px;
+      border: 1pt solid #8e6bc9;
+      font-size: 10pt;
+    }
+
+    .formula-box .steps { margin: 8px 0 0 1em; padding: 0; }
+    .formula-box .steps li { margin: 4px 0; }
+    .formula-box .example {
+      margin-top: 10px;
+      font-weight: 700;
+      color: #4a2c6b;
+    }
+
+    .grammar-note {
+      font-size: 9.5pt;
+      color: #555;
+      margin: 6px 0 10px;
+      font-style: italic;
+    }
+
     .page-footer {
       margin-top: 20px;
       padding-top: 10px;
@@ -166,8 +249,14 @@
         box-shadow: none;
         width: 100%;
         min-height: 0;
+        page-break-after: always;
+        break-after: page;
       }
-      .section-title, .vocab-table th {
+      .page:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
+      }
+      .section-title, .vocab-table th, .grammar-table th {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
@@ -177,7 +266,13 @@
 <body>
 
   <p class="no-print">
-    <strong>Tip:</strong> Use <strong>Print → Save as PDF</strong> to share the file. Answers align with the unit flashcards (<code>colombia-vocab-sp1.js</code>).
+    <span class="nav-pages">
+      <a href="#worksheetPage">Vocabulario</a>
+      <span aria-hidden="true">·</span>
+      <a href="#grammarPage">Gramática</a>
+    </span>
+    <br>
+    <strong>Tip:</strong> Use <strong>Print → Save as PDF</strong> to share the file. This file has <strong>two pages</strong> (vocab + grammar). Answers align with the unit flashcards (<code>colombia-vocab-sp1.js</code>).
   </p>
 
   <div class="page" id="worksheetPage">
@@ -200,7 +295,89 @@
 
     <div id="sectionsRoot"></div>
 
-    <div class="page-footer">Unidad Colombia · Vocabulario · Spanish 1</div>
+    <div class="page-footer">Unidad Colombia · Vocabulario · Spanish 1 · página 1 de 2</div>
+  </div>
+
+  <div class="page" id="grammarPage">
+    <div class="header">
+      <div>
+        <div class="header-title">Gramática — Unidad Colombia</div>
+        <div class="header-subtitle">Spanish 1 · Location, present tense, and the verb <em>ir</em></div>
+      </div>
+      <div class="header-info">
+        <div class="header-field"><label>Nombre:</label><div class="line"></div></div>
+        <div class="header-field"><label>Clase:</label><div class="line short"></div></div>
+        <div class="header-field"><label>Fecha:</label><div class="line short"></div></div>
+      </div>
+    </div>
+
+    <div class="grammar-intro">
+      Usa esta página como guía de estudio. Las tablas muestran las formas más importantes del presente.
+      <em>Use this page as a study guide. The charts show the most important present-tense forms.</em>
+    </div>
+
+    <div class="section-title sec-1">Estar + lugar / To be (in a place)</div>
+    <p class="grammar-note">
+      Usa <strong>estar</strong> para decir <strong>dónde está</strong> una persona o cosa. Con muchos lugares usas <strong>en</strong> (“in / on / at”): <span class="mono">Estoy en Colombia.</span> <span class="mono">La bandera está en la pared.</span>
+      <em>Use <strong>estar</strong> to say <strong>where</strong> someone or something <strong>is</strong>. With many places you use <strong>en</strong>: I’m in Colombia. The flag is on the wall.</em>
+    </p>
+    <table class="grammar-table" aria-label="Present tense of estar">
+      <thead>
+        <tr><th>Subject</th><th>Estar</th><th>Subject</th><th>Estar</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>yo</td><td class="mono">estoy</td><td>tú</td><td class="mono">estás</td></tr>
+        <tr><td>él / ella / Ud.</td><td class="mono">está</td><td>nosotros/as</td><td class="mono">estamos</td></tr>
+        <tr><td>ellos / ellas / Uds.</td><td class="mono">están</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <p class="grammar-note"><strong>Ejemplos / Examples:</strong> <span class="mono">¿Dónde estás?</span> — <span class="mono">Estamos en la clase.</span> <span class="mono">Bogotá está en Colombia.</span></p>
+
+    <div class="section-title sec-2">Presente de AR / ER / IR / Present tense (-AR, -ER, -IR)</div>
+    <div class="formula-box">
+      <strong>LA FÓRMULA DE CONJUGACIÓN EN 3 PASOS / THE 3-STEP CONJUGATION FORMULA</strong>
+      <ol class="steps">
+        <li><strong>Paso 1 / Step 1:</strong> Encuentra el infinitivo (verbo en <strong>-AR</strong>, <strong>-ER</strong> o <strong>-IR</strong>). / Find the infinitive (-AR, -ER, or -IR verb).</li>
+        <li><strong>Paso 2 / Step 2:</strong> Quita la terminación para obtener la <strong>raíz</strong> (stem). / Remove the ending to get the <strong>STEM</strong>.</li>
+        <li><strong>Paso 3 / Step 3:</strong> Añade la <strong>nueva terminación</strong> que corresponde al sujeto. / Add the <strong>NEW ending</strong> that matches your subject.</li>
+      </ol>
+      <p class="example mono">hablar → habl- + -o = hablo (I speak / I talk)</p>
+    </div>
+    <table class="grammar-table" aria-label="Present tense endings for AR ER IR verbs">
+      <thead>
+        <tr><th>Subject</th><th>-AR</th><th>-ER</th><th>-IR</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>yo</td><td class="mono">-o</td><td class="mono">-o</td><td class="mono">-o</td></tr>
+        <tr><td>tú</td><td class="mono">-as</td><td class="mono">-es</td><td class="mono">-es</td></tr>
+        <tr><td>él / ella / Ud.</td><td class="mono">-a</td><td class="mono">-e</td><td class="mono">-e</td></tr>
+        <tr><td>nosotros/as</td><td class="mono">-amos</td><td class="mono">-emos</td><td class="mono">-imos</td></tr>
+        <tr><td>vosotros/as</td><td class="mono">-áis</td><td class="mono">-éis</td><td class="mono">-ís</td></tr>
+        <tr><td>ellos / ellas / Uds.</td><td class="mono">-an</td><td class="mono">-en</td><td class="mono">-en</td></tr>
+      </tbody>
+    </table>
+    <p class="grammar-note"><strong>Ejemplo / Example — <span class="mono">comer</span> for <em>yo</em>:</strong> Paso 1: <span class="mono">comer</span> (infinitivo -ER). Paso 2: raíz <span class="mono">com-</span>. Paso 3: <span class="mono">yo</span> + <span class="mono">-o</span> → <span class="mono">como</span>.</p>
+    <p class="grammar-note"><strong>Muestra / Sample verbs:</strong> <span class="mono">hablar</span>: hablo, hablas, habla, hablamos, habláis, hablan · <span class="mono">comer</span>: como, comes, come, comemos, coméis, comen · <span class="mono">vivir</span>: vivo, vives, vive, vivimos, vivís, viven</p>
+
+    <div class="section-title sec-3">Ir / To go</div>
+    <p class="grammar-note">
+      <strong>Ir</strong> significa “to go”. La forma se cambia según la persona, como otros verbos.
+      <em><strong>Ir</strong> means “to go.” The form changes for each subject, like other verbs.</em>
+    </p>
+    <table class="grammar-table" aria-label="Present tense of ir">
+      <thead>
+        <tr><th>Subject</th><th>Ir</th><th>Subject</th><th>Ir</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>yo</td><td class="mono">voy</td><td>tú</td><td class="mono">vas</td></tr>
+        <tr><td>él / ella / Ud.</td><td class="mono">va</td><td>nosotros/as</td><td class="mono">vamos</td></tr>
+        <tr><td>ellos / ellas / Uds.</td><td class="mono">van</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <p class="grammar-note"><strong>Ir + a + lugar / Ir + a + place:</strong> <span class="mono">Voy a la escuela.</span> <span class="mono">Vamos a Bogotá.</span> — <em>Use <strong>a</strong> before a place you’re going <strong>to</strong>.</em></p>
+    <p class="grammar-note"><strong>Ir + a + infinitivo / “going to” (future plan):</strong> <span class="mono">Voy a estudiar.</span> <span class="mono">Van a practicar.</span> — <em><strong>Ir a</strong> + infinitive ≈ “going to” + verb.</em></p>
+
+    <div class="page-footer">Unidad Colombia · Gramática · Spanish 1 · página 2 de 2</div>
   </div>
 
   <script>
