@@ -306,6 +306,22 @@
     });
   }
 
+  /** @returns {string|null} activity id from e.g. activity.html?activity=foo */
+  function activityIdFromHubRoute(route) {
+    if (!route || typeof route !== 'string') {
+      return null;
+    }
+    var q = route.indexOf('?');
+    if (q < 0) {
+      return null;
+    }
+    try {
+      return new URLSearchParams(route.slice(q + 1)).get('activity');
+    } catch (err) {
+      return null;
+    }
+  }
+
   function renderHub(site) {
     setHero(site, null);
     if (byId('overviewHeading')) {
@@ -440,6 +456,11 @@
             });
             link.appendChild(badge);
           }
+          var ckHub = site.courseKey || 'sp1';
+          var hubActId = activityIdFromHubRoute(card.route);
+          if (window.ColombiaProgress && hubActId && ColombiaProgress.isActivityPracticeDone(ckHub, hubActId)) {
+            cardMeta.appendChild(el('span', 'meta-pill meta-pill-done', 'Done'));
+          }
           link.appendChild(cardIcon);
           if (card.tier === 'l2') {
             link.appendChild(el('span', 'card-tier-badge card-tier-l2', 'Language learner'));
@@ -528,14 +549,23 @@
     parent.appendChild(box);
   }
 
-  function answerMatches(value, answer) {
+  var FLEX_ANSWER_MIN_LEN = 4;
+
+  /** @param {{ strict?: boolean }} opts strict=true or question.strictMatch → exact only */
+  function answerMatches(value, answer, opts) {
+    opts = opts || {};
+    var strict = opts.strict === true;
     var normalizedValue = normalize(value);
-    if (Array.isArray(answer)) {
-      return answer.some(function (item) {
-        return normalizedValue === normalize(item);
-      });
+    var candidates = Array.isArray(answer) ? answer : [answer];
+    for (var i = 0; i < candidates.length; i++) {
+      var na = normalize(candidates[i]);
+      if (!na) continue;
+      if (normalizedValue === na) return true;
+      if (!strict && na.length >= FLEX_ANSWER_MIN_LEN && normalizedValue.indexOf(na) !== -1) {
+        return true;
+      }
     }
-    return normalizedValue === normalize(answer);
+    return false;
   }
 
   function evaluateQuestions(questions, form) {
@@ -550,7 +580,7 @@
       } else {
         var input = form.querySelector('[name="q' + index + '"]');
         userValue = input ? input.value : '';
-        correct = answerMatches(userValue, question.answer);
+        correct = answerMatches(userValue, question.answer, { strict: question.strictMatch === true });
       }
       results.push({
         prompt: question.prompt,
@@ -611,6 +641,10 @@
 
     appendTopicSummarySection(activity, card);
 
+    var courseKey = options.courseKey || (window.unitSite && window.unitSite.courseKey) || 'sp1';
+    var activityId = options.activityId || '';
+    var persistEnabled = !!(window.ColombiaProgress && activityId && activity.questions && activity.questions.length);
+
     var form = el('form', 'practice-form');
     activity.questions.forEach(function (question, index) {
       var block = el('div', 'question-block');
@@ -644,6 +678,55 @@
       }
       form.appendChild(block);
     });
+
+    var debounceDraft = null;
+    function readFormDraftMap() {
+      var m = {};
+      activity.questions.forEach(function (q, index) {
+        if (q.type === 'mc') {
+          var c = form.querySelector('input[name="q' + index + '"]:checked');
+          if (c) m['q' + index] = c.value;
+        } else {
+          var inp = form.querySelector('[name="q' + index + '"]');
+          if (inp) m['q' + index] = inp.value;
+        }
+      });
+      return m;
+    }
+    function saveActivityDraftNow() {
+      if (!persistEnabled) return;
+      try {
+        ColombiaProgress.setActivityFormDraft(courseKey, activityId, readFormDraftMap());
+      } catch (e) { /* ignore */ }
+    }
+    function scheduleActivityDraft() {
+      if (!persistEnabled) return;
+      clearTimeout(debounceDraft);
+      debounceDraft = setTimeout(saveActivityDraftNow, 300);
+    }
+    if (persistEnabled) {
+      var loaded = ColombiaProgress.getActivityFormDraft(courseKey, activityId);
+      activity.questions.forEach(function (q, index) {
+        var key = 'q' + index;
+        if (loaded[key] == null || loaded[key] === '') return;
+        if (q.type === 'mc') {
+          var radios = form.querySelectorAll('input[name="q' + index + '"]');
+          for (var ri = 0; ri < radios.length; ri++) {
+            radios[ri].checked = radios[ri].value === String(loaded[key]);
+          }
+        } else {
+          var ti = form.querySelector('[name="q' + index + '"]');
+          if (ti) ti.value = String(loaded[key]);
+        }
+      });
+      form.addEventListener('input', scheduleActivityDraft);
+      form.addEventListener('change', scheduleActivityDraft);
+      window.addEventListener('pagehide', saveActivityDraftNow);
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'hidden') saveActivityDraftNow();
+      });
+    }
+
     var buttonRow = el('div', 'action-group');
     var submit = el('button', 'primary-btn', activity.submitLabel || 'Check Answers');
     submit.type = 'submit';
@@ -653,12 +736,14 @@
       form.reset();
       scoreNode.textContent = '--';
       feedbackList.innerHTML = '';
+      saveActivityDraftNow();
     });
     buttonRow.appendChild(submit);
     buttonRow.appendChild(reset);
     form.appendChild(buttonRow);
     form.addEventListener('submit', function (event) {
       event.preventDefault();
+      saveActivityDraftNow();
       var results = evaluateQuestions(activity.questions, form);
       var correctCount = results.filter(function (item) { return item.correct; }).length;
       scoreNode.textContent = correctCount + '/' + results.length;
@@ -670,6 +755,10 @@
           : '✗ ' + result.prompt + ' — answer: ' + result.expected + (result.explanation ? ' (' + result.explanation + ')' : '');
         feedbackList.appendChild(item);
       });
+      var threshold = typeof activity.doneThreshold === 'number' ? activity.doneThreshold : 1;
+      if (persistEnabled && results.length && correctCount / results.length >= threshold) {
+        ColombiaProgress.markActivityPracticeDone(courseKey, activityId, { score: correctCount, total: results.length });
+      }
     });
 
     card.appendChild(form);
@@ -679,7 +768,7 @@
     target.appendChild(layout);
   }
 
-  function renderReading(target, activity) {
+  function renderReading(target, activity, persistOpts) {
     var wrapper = el('div');
     var card = el('section', 'content-card');
     var header = el('div', 'activity-header');
@@ -833,7 +922,7 @@
     });
     wrapper.appendChild(card);
     target.appendChild(wrapper);
-    renderPractice(target, activity, { embeddedHeader: true, practiceHeading: 'Comprehension Check' });
+    renderPractice(target, activity, Object.assign({}, persistOpts || {}, { embeddedHeader: true, practiceHeading: 'Comprehension Check' }));
   }
 
   function renderResource(target, activity) {
@@ -1029,7 +1118,7 @@
         var userVal = input.value.trim();
         if (!userVal) return;
 
-        var correct = answerMatches(userVal, item.answer);
+        var correct = answerMatches(userVal, item.answer, { strict: item.strictMatch === true });
         state.answered = true;
         input.disabled = true;
 
@@ -1080,7 +1169,7 @@
     renderDrillUI();
   }
 
-  function renderListening(target, activity) {
+  function renderListening(target, activity, persistOpts) {
     var wrapper = el('div');
     wrapper.style.marginBottom = '18px';
     var card = el('section', 'content-card');
@@ -1120,7 +1209,7 @@
     target.appendChild(wrapper);
 
     if (activity.questions && activity.questions.length) {
-      renderPractice(target, activity, { embeddedHeader: true, practiceHeading: 'Comprehension Check' });
+      renderPractice(target, activity, Object.assign({}, persistOpts || {}, { embeddedHeader: true, practiceHeading: 'Comprehension Check' }));
     }
   }
 
@@ -1277,7 +1366,7 @@
     target.appendChild(layout);
   }
 
-  function renderPodcast(target, activity) {
+  function renderPodcast(target, activity, persistOpts) {
     var wrapper = el('div');
     wrapper.style.marginBottom = '18px';
     var card = el('section', 'content-card');
@@ -1367,7 +1456,7 @@
 
     // optional comprehension questions
     if (activity.questions && activity.questions.length) {
-      renderPractice(target, activity, { embeddedHeader: true, practiceHeading: activity.resultTitle || 'Comprehension Check' });
+      renderPractice(target, activity, Object.assign({}, persistOpts || {}, { embeddedHeader: true, practiceHeading: activity.resultTitle || 'Comprehension Check' }));
     }
   }
 
@@ -1399,18 +1488,19 @@
       ColombiaProgress.recordActivityVisit(site.courseKey, activityId, actMeta);
       tryRecordActivityCloudCompletion(site.courseKey, activityId, actMeta);
     }
+    var practicePersist = { activityId: activityId, courseKey: site.courseKey || 'sp1' };
     if (activity.type === 'reading') {
-      renderReading(mount, activity);
+      renderReading(mount, activity, practicePersist);
     } else if (activity.type === 'resource') {
       renderResource(mount, activity);
     } else if (activity.type === 'drill') {
       renderDrill(mount, activity);
     } else if (activity.type === 'listening') {
-      renderListening(mount, activity);
+      renderListening(mount, activity, practicePersist);
     } else if (activity.type === 'word-order') { renderWordOrder(mount, activity);
-    } else if (activity.type === 'podcast') { renderPodcast(mount, activity);
+    } else if (activity.type === 'podcast') { renderPodcast(mount, activity, practicePersist);
     } else {
-      renderPractice(mount, activity);
+      renderPractice(mount, activity, practicePersist);
     }
   }
 

@@ -23,6 +23,23 @@
   function normalize(t) {
     return String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
   }
+  var FLEX_ANSWER_MIN_LEN = 4;
+  /** strict=true → exact normalized match only (pipe-separated alternates still allowed). */
+  function flexibleAnswerMatch(userVal, expectedRaw, strict) {
+    var nu = normalize(userVal);
+    if (expectedRaw == null || expectedRaw === '') return false;
+    var raw = Array.isArray(expectedRaw) ? expectedRaw.join('|') : String(expectedRaw);
+    var parts = raw.split('|');
+    for (var p = 0; p < parts.length; p++) {
+      var segment = parts[p].trim();
+      if (!segment) continue;
+      var na = normalize(segment);
+      if (!na) continue;
+      if (nu === na) return true;
+      if (!strict && na.length >= FLEX_ANSWER_MIN_LEN && nu.indexOf(na) !== -1) return true;
+    }
+    return false;
+  }
   function shuffleArray(arr) {
     var a = arr.slice();
     for (var i = a.length - 1; i > 0; i--) {
@@ -69,18 +86,11 @@
     return window.METZ_LESSON_DAY || '01';
   }
 
-  function vocabReviewHref(lesson) {
-    if (!lesson || lesson.vocabCategory === undefined || lesson.vocabCategory === null) {
-      return null;
-    }
+  /** Hero nav: always full unit deck (matches “Unit flashcards & games”). */
+  function unitVocabGamesHref() {
     var course = getLessonCourse();
     var base = course === 'sp2' ? '../Colombia_Vocab_Review_Spanish2.html' : '../Colombia_Vocab_Review_Spanish1.html';
-    var vc = lesson.vocabCategory;
-    var catParam = vc === 'all' || vc === 0 ? 'all' : String(parseInt(vc, 10));
-    if (catParam !== 'all' && (catParam === 'NaN' || parseInt(catParam, 10) < 1)) {
-      return null;
-    }
-    return base + '?cat=' + encodeURIComponent(catParam);
+    return base + '?cat=all';
   }
 
   function markSectionComplete(id) {
@@ -259,7 +269,10 @@
         inp.className = 'question-input';
         inp.placeholder = q.placeholder || 'Escribe tu respuesta...';
         if (q.answer) {
-          inp.setAttribute('data-answer', q.answer);
+          inp.setAttribute('data-answer', Array.isArray(q.answer) ? q.answer.join('|') : q.answer);
+        }
+        if (q.strictMatch) {
+          inp.setAttribute('data-strict', '1');
         }
         var draftKeyInp = 'q-' + sectionId + '-' + i;
         if (window.ColombiaProgress) {
@@ -306,7 +319,8 @@
           var answer = inp.getAttribute('data-answer');
           if (!answer) return;
           total++;
-          if (normalize(inp.value) === normalize(answer)) {
+          var strict = inp.getAttribute('data-strict') === '1';
+          if (flexibleAnswerMatch(inp.value, answer, strict)) {
             correct++;
             inp.style.borderColor = 'var(--col-green)';
             inp.style.background = '#e8faf0';
@@ -581,8 +595,7 @@
       blanks.forEach(function(b) {
         var answer = b.getAttribute('data-answer');
         if (!answer) return;
-        var answers = answer.split('|').map(function(a) { return normalize(a); });
-        if (answers.indexOf(normalize(b.value)) !== -1) {
+        if (flexibleAnswerMatch(b.value, answer, false)) {
           b.classList.add('correct');
           b.classList.remove('wrong');
           correct++;
@@ -608,10 +621,45 @@
   }
 
   // ── Flip Card Gallery ────────────────────────────────
-  function renderFlipGallery(data) {
+  function renderFlipGallery(data, sectionId) {
     var gallery = el('div', 'flip-gallery');
-    data.cards.forEach(function(c) {
+    var course = getLessonCourse();
+    var day = getLessonDay();
+    var cards = data.cards || [];
+    var n = cards.length;
+    var storageKey = 'flip-' + sectionId;
+    var flippedEver = [];
+    if (window.ColombiaProgress && sectionId) {
+      var rawFlip = ColombiaProgress.getLessonDraft(course, day, storageKey);
+      var parsedFlip = null;
+      try {
+        parsedFlip = rawFlip ? JSON.parse(rawFlip) : null;
+      } catch (e1) {
+        parsedFlip = null;
+      }
+      if (parsedFlip && parsedFlip.flipped && Array.isArray(parsedFlip.flipped)) {
+        flippedEver = parsedFlip.flipped.slice();
+      }
+    }
+    while (flippedEver.length < n) flippedEver.push(false);
+    if (flippedEver.length > n) flippedEver = flippedEver.slice(0, n);
+
+    function persistFlipState() {
+      if (!window.ColombiaProgress || !sectionId) return;
+      ColombiaProgress.setLessonDraft(course, day, storageKey, JSON.stringify({ flipped: flippedEver }));
+    }
+
+    function allEverFlipped() {
+      if (n === 0) return false;
+      for (var i = 0; i < n; i++) {
+        if (!flippedEver[i]) return false;
+      }
+      return true;
+    }
+
+    cards.forEach(function(c, idx) {
       var card = el('div', 'flip-card');
+      if (flippedEver[idx]) card.classList.add('flipped');
       var inner = el('div', 'flip-card-inner');
       var front = el('div', 'flip-card-front');
       front.appendChild(el('div', 'flip-card-label', 'Español'));
@@ -625,7 +673,14 @@
       card.appendChild(inner);
       card.addEventListener('click', function() {
         card.classList.toggle('flipped');
-        if (c.es) speak(c.es);
+        if (card.classList.contains('flipped')) {
+          if (!flippedEver[idx]) {
+            flippedEver[idx] = true;
+            persistFlipState();
+          }
+          if (c.es) speak(c.es);
+        }
+        if (allEverFlipped()) markSectionComplete(sectionId);
       });
       gallery.appendChild(card);
     });
@@ -1171,7 +1226,7 @@
     matching: renderMatching,
     'sentence-order': renderSentenceOrder,
     'fill-blanks': renderFillBlanks,
-    'flip-gallery': function(d) { return renderFlipGallery(d); },
+    'flip-gallery': function(d, sid) { return renderFlipGallery(d, sid); },
     discovery: function(d) { return renderDiscovery(d); },
     'conj-table': renderConjTable,
     reading: function(d) { return renderReading(d); },
@@ -1230,10 +1285,9 @@
     var hubA = html('a', 'lesson-hub-link', '← Back to Hub');
     hubA.href = '../index.html';
     nav.appendChild(hubA);
-    var vr = vocabReviewHref(lesson);
-    if (vr) {
+    if (lesson.vocabCategory !== undefined && lesson.vocabCategory !== null) {
       var vocabA = html('a', 'lesson-vocab-link', '📇 Unit flashcards & games');
-      vocabA.href = vr;
+      vocabA.href = unitVocabGamesHref();
       vocabA.setAttribute('target', '_self');
       nav.appendChild(vocabA);
     }

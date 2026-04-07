@@ -194,6 +194,41 @@
         o[key] = String(text || '');
         safeSet(PREFIX + course + '-tres-p-reflect', JSON.stringify(o));
       }
+    },
+
+    activityFormDraftKey: function (course, activityId) {
+      return PREFIX + course + '-act-form-' + String(activityId || '');
+    },
+
+    getActivityFormDraft: function (course, activityId) {
+      var raw = safeGet(this.activityFormDraftKey(course, activityId));
+      var o = safeJSONParse(raw, null);
+      return o && typeof o === 'object' ? o : {};
+    },
+
+    setActivityFormDraft: function (course, activityId, map) {
+      safeSet(this.activityFormDraftKey(course, activityId), JSON.stringify(map || {}));
+    },
+
+    getActivityPracticeDoneMap: function (course) {
+      var raw = safeGet(PREFIX + course + '-act-practice-done');
+      var o = safeJSONParse(raw, {});
+      return o && typeof o === 'object' ? o : {};
+    },
+
+    setActivityPracticeDoneMap: function (course, map) {
+      safeSet(PREFIX + course + '-act-practice-done', JSON.stringify(map || {}));
+    },
+
+    markActivityPracticeDone: function (course, activityId, meta) {
+      var m = this.getActivityPracticeDoneMap(course);
+      m[String(activityId)] = meta && typeof meta === 'object' ? { at: Date.now(), score: meta.score, total: meta.total } : { at: Date.now() };
+      this.setActivityPracticeDoneMap(course, m);
+    },
+
+    isActivityPracticeDone: function (course, activityId) {
+      var m = this.getActivityPracticeDoneMap(course);
+      return !!m[String(activityId)];
     }
   };
 

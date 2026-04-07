@@ -237,6 +237,11 @@ a {
   font-size: 0.78rem;
 }
 
+.meta-pill-done {
+  background: rgba(34, 139, 34, 0.16);
+  color: #166534;
+}
+
 .section-wrap {
   margin-top: 26px;
 }
