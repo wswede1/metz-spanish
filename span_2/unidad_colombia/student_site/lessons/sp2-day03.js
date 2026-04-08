@@ -1,36 +1,31 @@
 window.LESSON_DATA = {
   dayLabel: "Day 3",
   unit: "Unidad Colombia",
-  title: "Examen de Vocabulario + Gramática -CAR/-GAR/-ZAR",
-  subtitle: "Show vocab knowledge on a quiz, then discover the spelling changes in -CAR, -GAR, -ZAR preterite verbs",
+  title: "Repaso de vocabulario + Gramática -CAR/-GAR/-ZAR",
+  subtitle: "Repaso rápido del vocabulario de viaje, luego descubre y practica los cambios ortográficos en el pretérito (yo).",
   objectives: [
-    "I can demonstrate knowledge of travel vocabulary",
-    "I can identify the -CAR/-GAR/-ZAR yo spelling changes in the preterite",
-    "I can apply the spelling change pattern in sentences"
+    "I can review travel vocabulary in matching and fill-in activities.",
+    "I can explain why -CAR, -GAR, and -ZAR verbs change spelling in the yo preterite.",
+    "I can write the correct yo forms and use them in context."
   ],
   vocabCategory: "all",
   sections: [
     // ──────────────────────────────────────────────────
-    // 1. Vocab Quiz — Section A: Matching
+    // 1. Vocab repaso — Section A: Matching
     // ──────────────────────────────────────────────────
     {
       id: "quiz-a",
-      title: "Examen de Vocabulario — Sección A: Matching",
-      shortTitle: "Quiz A",
+      title: "Repaso de vocabulario — Sección A: Matching",
+      shortTitle: "Repaso A",
       subtitle: "Match the travel words to their English meanings",
       icon: "📋",
       accent: "blue",
       open: true,
       components: [
         {
-          type: "callout",
-          style: "warn",
-          text: "This is your <strong>vocabulary quiz</strong>. Do your best — no notes! Complete Sections A, B, and C."
-        },
-        {
           type: "matching",
           wordBank: true,
-          instructions: "Match each Spanish travel word to its English meaning. No word bank hints this time!",
+          instructions: "Match each Spanish travel word to its English meaning.",
           pairs: [
             { id: "1", es: "el aeropuerto", en: "the airport" },
             { id: "2", es: "el equipaje", en: "the luggage" },
@@ -46,73 +41,25 @@ window.LESSON_DATA = {
     },
 
     // ──────────────────────────────────────────────────
-    // 2. Vocab Quiz — Section B: Fill in the Blank
+    // 2. Vocab repaso — Section B: Fill in the Blank
     // ──────────────────────────────────────────────────
     {
       id: "quiz-b",
-      title: "Examen de Vocabulario — Sección B: Fill in the Blank",
-      shortTitle: "Quiz B",
+      title: "Repaso de vocabulario — Sección B: Fill in the Blank",
+      shortTitle: "Repaso B",
       subtitle: "Complete each preterite sentence with the correct travel word",
       icon: "📝",
       accent: "green",
       components: [
         {
           type: "fill-blanks",
+          wordBank: ["la maleta", "maleta", "el vuelo", "vuelo", "el boleto", "boleto", "la aduana", "aduana", "el pasaporte", "pasaporte"],
           sentences: [
             { text: "Antes del viaje, yo preparé ___.", answer: "la maleta|maleta" },
             { text: "El ___ de Miami a Bogotá duró cinco horas.", answer: "vuelo" },
             { text: "Mi mamá compró ___ por internet.", answer: "el boleto|boleto" },
             { text: "Cuando llegamos al país, pasamos por ___.", answer: "la aduana|aduana" },
             { text: "Necesité mi ___ para entrar a Colombia.", answer: "pasaporte" }
-          ]
-        }
-      ]
-    },
-
-    // ──────────────────────────────────────────────────
-    // 3. Vocab Quiz — Section C: Short Answer
-    // ──────────────────────────────────────────────────
-    {
-      id: "quiz-c",
-      title: "Examen de Vocabulario — Sección C: Short Answer",
-      shortTitle: "Quiz C",
-      subtitle: "Answer each question using travel vocabulary and the preterite",
-      icon: "✍️",
-      accent: "purple",
-      components: [
-        {
-          type: "questions",
-          selfRubric: {
-            id: "quiz-c-rubric",
-            title: "Self-check (honor system):",
-            items: [
-              "I used preterite forms in the sentences that describe past actions.",
-              "I included travel vocabulary from the unit (aeropuerto, hotel, pasaporte, etc.).",
-              "Each answer is a full idea, not only one word."
-            ],
-            completeSectionWhenAllChecked: true
-          },
-          exemplarHtml: "<p><strong>Sample:</strong> Yo compré una revista en el aeropuerto. / Cuando llegué al hotel, yo saqué el pasaporte. El empleado me dio la llave. / 1) el pasaporte 2) el boleto 3) la maleta</p>",
-          exemplarButtonLabel: "Show sample answers",
-          questions: [
-            {
-              prompt: "Escribe una oración completa: ¿Qué compraste en el aeropuerto? (Use a travel vocab word + preterite)",
-              type: "textarea",
-              placeholder: "Yo compré...",
-              rows: 2
-            },
-            {
-              prompt: "Describe what happened when you arrived at the hotel. Write 2 sentences in the preterite using travel vocabulary.",
-              type: "textarea",
-              placeholder: "Cuando llegué al hotel, yo... El empleado...",
-              rows: 3
-            },
-            {
-              prompt: "Name 3 things you need before an international trip. Write them in Spanish.",
-              type: "textarea",
-              placeholder: "1) ... 2) ... 3) ...",
-              rows: 2
-            }
           ]
         }
       ]
@@ -131,23 +78,69 @@ window.LESSON_DATA = {
       components: [
         {
           type: "callout",
+          style: "info",
+          text: "<strong>Primero, lee.</strong> Las oraciones usan el pretérito de <strong>yo</strong> con verbos <strong>-CAR, -GAR y -ZAR</strong>. Son <strong>oraciones de práctica</strong>."
+        },
+        {
+          type: "reading",
+          text: "<p>Imagina un viaje a Colombia.</p><p>Ayer yo <span class=\"verb-highlight\">busqué</span> mi pasaporte en la mochila antes del vuelo. Cuando yo <span class=\"verb-highlight\">llegué</span> al hotel en Cartagena, yo <span class=\"verb-highlight\">pagué</span> la cuenta del taxi. Por la tarde yo <span class=\"verb-highlight\">empecé</span> un recorrido por la ciudad y yo <span class=\"verb-highlight\">toqué</span> la puerta de una cafetería pequeña.</p>"
+        },
+        {
+          type: "callout",
           style: "fire",
-          text: "In the preterite, <strong>-CAR, -GAR, and -ZAR</strong> verbs have a <strong>spelling change in the YO form only</strong>. This keeps the pronunciation correct! Look at the examples below and find the pattern."
+          text: "In the preterite, <strong>-CAR, -GAR, and -ZAR</strong> verbs have a <strong>spelling change in the YO form only</strong>. This keeps the pronunciation correct! Study the examples below, then name the pattern."
         },
         {
           type: "discovery",
           title: "Find the Spelling Change Pattern",
-          instructions: "Look at these YO preterite forms. What changes? Why do you think the spelling changes?",
-          sentences: [
-            "buscar → yo <span class=\"highlight\">busqué</span> (NOT buscé)",
-            "tocar → yo <span class=\"highlight\">toqué</span> (NOT tocé)",
-            "practicar → yo <span class=\"highlight\">practiqué</span> (NOT practicé)",
-            "llegar → yo <span class=\"highlight\">llegué</span> (NOT llegé)",
-            "pagar → yo <span class=\"highlight\">pagué</span> (NOT pagé)",
-            "jugar → yo <span class=\"highlight\">jugué</span> (NOT jugé)",
-            "empezar → yo <span class=\"highlight\">empecé</span> (NOT empezé)",
-            "almorzar → yo <span class=\"highlight\">almorcé</span> (NOT almorzé)",
-            "comenzar → yo <span class=\"highlight\">comencé</span> (NOT comenzé)"
+          instructions: "Each row groups verbs by ending. The English gloss is below the Spanish line.",
+          groups: [
+            {
+              label: "Verbos en -CAR",
+              items: [
+                {
+                  esHtml: "buscar → yo <span class=\"highlight\">busqué</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT buscé)</span>",
+                  en: "to look for → I looked for; the spelling keeps the hard /k/ sound"
+                },
+                {
+                  esHtml: "tocar → yo <span class=\"highlight\">toqué</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT tocé)</span>",
+                  en: "to touch / to play (an instrument) → I touched / I played"
+                },
+                {
+                  esHtml: "practicar → yo <span class=\"highlight\">practiqué</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT practicé)</span>",
+                  en: "to practice → I practiced"
+                }
+              ]
+            },
+            {
+              label: "Verbos en -GAR y -ZAR",
+              items: [
+                {
+                  esHtml: "llegar → yo <span class=\"highlight\">llegué</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT llegé)</span>",
+                  en: "to arrive → I arrived"
+                },
+                {
+                  esHtml: "pagar → yo <span class=\"highlight\">pagué</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT pagé)</span>",
+                  en: "to pay → I paid"
+                },
+                {
+                  esHtml: "jugar → yo <span class=\"highlight\">jugué</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT jugé)</span>",
+                  en: "to play (a sport/game) → I played"
+                },
+                {
+                  esHtml: "empezar → yo <span class=\"highlight\">empecé</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT empezé)</span>",
+                  en: "to begin → I began"
+                },
+                {
+                  esHtml: "almorzar → yo <span class=\"highlight\">almorcé</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT almorzé)</span>",
+                  en: "to eat lunch → I ate lunch"
+                },
+                {
+                  esHtml: "comenzar → yo <span class=\"highlight\">comencé</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT comenzé)</span>",
+                  en: "to begin → I began"
+                }
+              ]
+            }
           ],
           question: "What pattern do you see? What happens to C, G, and Z before the -é ending?",
           placeholder: "I notice that -CAR changes to... -GAR changes to... -ZAR changes to..."
@@ -245,7 +238,7 @@ window.LESSON_DATA = {
                 { value: "a", label: "buscé" },
                 { value: "b", label: "busqué" },
                 { value: "c", label: "buscó" },
-                { value: "d", label: "busqué" }
+                { value: "d", label: "buscamos" }
               ],
               answer: "b"
             },
@@ -291,21 +284,21 @@ window.LESSON_DATA = {
     },
 
     // ──────────────────────────────────────────────────
-    // 6. Partner Talk + Exit Ticket
+    // 6. Explora Colombia + Exit Ticket
     // ──────────────────────────────────────────────────
     {
       id: "exit",
-      title: "Conversación y Boleto de Salida",
+      title: "Explora Colombia y Boleto de Salida",
       shortTitle: "Exit",
-      subtitle: "Practice with a partner, then show what you know",
+      subtitle: "Discover Colombia online, then show what you know",
       icon: "🎫",
       accent: "red",
       components: [
         {
           type: "partner-talk",
-          title: "Conversación — ¿Qué hiciste?",
-          prompt: "Take turns asking and answering these questions using -CAR/-GAR/-ZAR verbs in the yo preterite:<br><strong>1.</strong> ¿A qué hora llegaste a la escuela hoy? (llegar)<br><strong>2.</strong> ¿Qué buscaste en tu mochila esta mañana? (buscar)<br><strong>3.</strong> ¿A qué hora empezaste la tarea anoche? (empezar)",
-          duration: "4 minutes"
+          title: "Explora Colombia en línea",
+          prompt: "<p><strong>Your mission:</strong> Find <strong>one</strong> short, school-appropriate YouTube video about <strong>Colombia</strong>. If you are not sure whether a video is okay, ask your teacher.</p><p><strong>Search ideas</strong> (try these in YouTube):</p><ul style=\"margin:8px 0 12px 20px;line-height:1.55;\"><li>Colombia Amazon rainforest animals</li><li>Colombia biodiversity</li><li>páramo Colombia nature</li><li>Café de Colombia (coffee farms)</li><li>Cartagena Colombia culture (preview first)</li><li>Medellín Colombia metro / comuna (choose age-friendly videos)</li></ul><p><strong>On our class site</strong> you can also explore:</p><ul style=\"margin:8px 0 12px 20px;line-height:1.55;\"><li><a href=\"../index.html#hub-listening\">Listening activities</a></li><li><a href=\"../index.html#hub-podcasts\">Podcasts</a></li></ul><p><strong>Optional:</strong> Share with a partner one new fact you learned — in Spanish if you can.</p>",
+          duration: "10 min"
         },
         {
           type: "exit-ticket",

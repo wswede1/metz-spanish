@@ -387,6 +387,9 @@
         return;
       }
       var wrap = el('section', 'section-wrap');
+      if (section.hubAnchorId) {
+        wrap.id = section.hubAnchorId;
+      }
       var header = el('div', 'section-title');
       var icon = el('div', null, section.icon || '📘');
       icon.setAttribute('aria-hidden', 'true');

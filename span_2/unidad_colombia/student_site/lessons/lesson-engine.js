@@ -554,13 +554,50 @@
   // ── Fill-in-the-Blank ────────────────────────────────
   function renderFillBlanks(data, sectionId) {
     var wrap = el('div');
+    var bankWords = Array.isArray(data.wordBank) ? data.wordBank : [];
+    var selectedChip = null;
+
+    function clearChipSelection() {
+      if (selectedChip) {
+        selectedChip.classList.remove('word-chip-selected');
+        selectedChip = null;
+      }
+    }
+
+    function selectChip(chip) {
+      if (chip.classList.contains('used')) {
+        return;
+      }
+      if (selectedChip === chip) {
+        clearChipSelection();
+        return;
+      }
+      clearChipSelection();
+      selectedChip = chip;
+      chip.classList.add('word-chip-selected');
+    }
 
     // Word bank
-    if (data.wordBank) {
-      var bank = el('div', 'word-bank');
+    if (bankWords.length) {
+      var bank = el('div', 'word-bank word-bank-draggable');
       bank.appendChild(el('div', 'word-bank-label', 'Word Bank'));
-      data.wordBank.forEach(function(w) {
-        bank.appendChild(el('span', 'word-chip', w));
+      bank.appendChild(el('div', 'word-bank-hint', 'Drag a word into a blank — or tap a word, then tap the blank.'));
+      bankWords.forEach(function(w) {
+        var chip = el('span', 'word-chip', w);
+        chip.setAttribute('draggable', 'true');
+        chip.addEventListener('dragstart', function(e) {
+          if (chip.classList.contains('used')) {
+            e.preventDefault();
+            return;
+          }
+          e.dataTransfer.setData('text/plain', String(w));
+          e.dataTransfer.effectAllowed = 'copy';
+        });
+        chip.addEventListener('click', function(e) {
+          e.preventDefault();
+          selectChip(chip);
+        });
+        bank.appendChild(chip);
       });
       wrap.appendChild(bank);
     }
@@ -578,6 +615,7 @@
           inp.type = 'text';
           inp.className = 'fill-blank';
           inp.placeholder = '___';
+          inp.setAttribute('autocomplete', 'off');
           if (s.answer) inp.setAttribute('data-answer', Array.isArray(s.answer) ? s.answer[i] || s.answer[0] : s.answer);
           sent.appendChild(inp);
         }
@@ -586,13 +624,44 @@
     });
     wrap.appendChild(sentWrap);
 
+    var blanks = $$('.fill-blank', sentWrap);
+    if (bankWords.length && blanks.length) {
+      blanks.forEach(function(inp) {
+        inp.addEventListener('dragover', function(e) {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'copy';
+        });
+        inp.addEventListener('dragenter', function() {
+          inp.classList.add('fill-blank-drag-over');
+        });
+        inp.addEventListener('dragleave', function() {
+          inp.classList.remove('fill-blank-drag-over');
+        });
+        inp.addEventListener('drop', function(e) {
+          e.preventDefault();
+          inp.classList.remove('fill-blank-drag-over');
+          var t = e.dataTransfer.getData('text/plain');
+          if (t) {
+            inp.value = t.trim();
+          }
+        });
+        inp.addEventListener('click', function() {
+          if (selectedChip && !selectedChip.classList.contains('used')) {
+            inp.value = selectedChip.textContent.trim();
+            clearChipSelection();
+          }
+        });
+      });
+    }
+
     // Check button
     var btn = el('button', 'check-btn btn-green', '✓ Check');
     btn.style.marginTop = '14px';
     btn.addEventListener('click', function() {
-      var blanks = $$('.fill-blank', sentWrap);
+      clearChipSelection();
+      var blanksNow = $$('.fill-blank', sentWrap);
       var correct = 0;
-      blanks.forEach(function(b) {
+      blanksNow.forEach(function(b) {
         var answer = b.getAttribute('data-answer');
         if (!answer) return;
         if (flexibleAnswerMatch(b.value, answer, false)) {
@@ -604,7 +673,7 @@
           b.classList.remove('correct');
         }
       });
-      var total = blanks.filter(function(b) { return b.getAttribute('data-answer'); }).length;
+      var total = blanksNow.filter(function(b) { return b.getAttribute('data-answer'); }).length;
       if (total > 0) {
         var pct = correct / total;
         showToast(correct + '/' + total, pct >= 0.8 ? 'success' : pct >= 0.5 ? 'partial' : 'retry');
@@ -612,7 +681,7 @@
       }
       // Mark word chips as used
       $$('.word-chip', wrap).forEach(function(chip) {
-        var usedInBlanks = blanks.some(function(b) { return normalize(b.value) === normalize(chip.textContent); });
+        var usedInBlanks = blanksNow.some(function(b) { return normalize(b.value) === normalize(chip.textContent); });
         chip.classList.toggle('used', usedInBlanks);
       });
     });
@@ -695,11 +764,31 @@
       box.appendChild(el('p', null, data.instructions));
       box.lastChild.style.cssText = 'font-size:0.88rem;color:var(--text-muted);margin-bottom:12px';
     }
-    var sentences = el('div', 'discovery-sentences');
-    data.sentences.forEach(function(s) {
-      sentences.appendChild(html('div', 'discovery-sentence', s));
-    });
-    box.appendChild(sentences);
+    if (data.groups && data.groups.length) {
+      data.groups.forEach(function (g) {
+        var row = el('div', 'discovery-row');
+        if (g.label) {
+          row.appendChild(el('div', 'discovery-row-label', g.label));
+        }
+        var itemsWrap = el('div', 'discovery-row-items');
+        (g.items || []).forEach(function (it) {
+          var item = el('div', 'discovery-item');
+          item.appendChild(html('div', 'discovery-item-es', it.esHtml || it.es || ''));
+          if (it.en) {
+            item.appendChild(el('div', 'discovery-gloss', it.en));
+          }
+          itemsWrap.appendChild(item);
+        });
+        row.appendChild(itemsWrap);
+        box.appendChild(row);
+      });
+    } else if (data.sentences && data.sentences.length) {
+      var sentences = el('div', 'discovery-sentences');
+      data.sentences.forEach(function (s) {
+        sentences.appendChild(html('div', 'discovery-sentence', s));
+      });
+      box.appendChild(sentences);
+    }
     if (data.question) {
       var q = el('div', 'input-field');
       q.style.marginTop = '14px';

@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lesson — Colombia Unit</title>
-<link rel="stylesheet" href="lesson-engine.css">
+<link rel="stylesheet" href="lesson-engine.css?v=202604072100">
 </head>
 <body>
 <div id="lessonRoot"></div>
-<script src="../../../unidad_colombia/student_site_assets/colombia-progress.js?v=202604042200"></script>
+<script src="../../../unidad_colombia/student_site_assets/colombia-progress.js?v=202604072100"></script>
 <script src="../../../unidad_colombia/student_site_assets/js/metz-spanish-tts.js"></script>
 <script>
   window.METZ_LESSON_COURSE = 'sp2';
@@ -18,14 +18,14 @@
     window.METZ_LESSON_DAY = String(parseInt(day, 10)).padStart(2, '0');
   })();
 </script>
-<script src="lesson-engine.js?v=202604042200"></script>
+<script src="lesson-engine.js?v=202604072100"></script>
 <script>
 // Load lesson data from query param: ?day=1
 (function() {
   var params = new URLSearchParams(window.location.search);
   var day = params.get('day') || '1';
   var script = document.createElement('script');
-  script.src = 'sp2-day' + day.padStart(2, '0') + '.js';
+  script.src = 'sp2-day' + day.padStart(2, '0') + '.js?v=202604072100';
   script.onload = function() {
     if (window.LESSON_DATA && window.LessonEngine) {
       document.title = window.LESSON_DATA.title + ' — Colombia Unit';

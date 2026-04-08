@@ -130,16 +130,27 @@ export async function mountSupabaseAuthBar(mountEl) {
 
   const mount = async () => {
     const client = await getSupabaseClient();
+    const silentUnconfigured = mountEl.dataset.metzSilentWhenUnconfigured === 'true';
     if (!client) {
-      render(
-        `<div class="metz-auth-bar metz-auth-muted">
-          Cloud backup is not configured yet — your teacher can add the project URL and publishable key in
-          <a href="${settingsUrl}">Sync settings</a>, or ship them in <code>metzSupabasePublicConfig.js</code>.
-        </div>`
-      );
+      if (silentUnconfigured) {
+        mountEl.innerHTML = '';
+        mountEl.hidden = true;
+        mountEl.setAttribute('aria-hidden', 'true');
+      } else {
+        mountEl.hidden = false;
+        mountEl.removeAttribute('aria-hidden');
+        render(
+          `<div class="metz-auth-bar metz-auth-muted">
+            Cloud backup is not configured — add the project URL and publishable key in
+            <a href="${settingsUrl}">Sync settings</a> or in <code>metzSupabasePublicConfig.js</code>.
+          </div>`
+        );
+      }
       return;
     }
 
+    mountEl.hidden = false;
+    mountEl.removeAttribute('aria-hidden');
     await runAuthBootstrap(client);
 
     const {

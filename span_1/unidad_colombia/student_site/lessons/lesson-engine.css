@@ -515,6 +515,13 @@ body {
   color: var(--text-muted);
   margin-bottom: 4px;
 }
+.word-bank-hint {
+  width: 100%;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
 .word-chip {
   padding: 6px 14px;
   background: #fff;
@@ -525,9 +532,22 @@ body {
   cursor: grab;
   transition: var(--transition);
   user-select: none;
+  touch-action: none;
 }
 .word-chip:hover { border-color: var(--col-blue); background: #eef3ff; transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.word-chip:active { cursor: grabbing; }
+.word-chip.word-chip-selected {
+  border-color: var(--col-purple);
+  background: #f3e8ff;
+  box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.25);
+}
 .word-chip.used { opacity: 0.3; pointer-events: none; text-decoration: line-through; }
+
+.fill-blank.fill-blank-drag-over {
+  border-bottom-color: var(--col-purple);
+  box-shadow: 0 4px 12px rgba(142, 68, 173, 0.2);
+  background: rgba(142, 68, 173, 0.06);
+}
 
 /* Discovery Box (grammar) */
 .discovery-box {
@@ -561,6 +581,51 @@ body {
   font-weight: 800;
   color: var(--col-blue);
   padding: 0 2px;
+}
+
+.discovery-row {
+  margin-bottom: 18px;
+}
+.discovery-row:last-of-type {
+  margin-bottom: 0;
+}
+.discovery-row-label {
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: var(--col-blue);
+  margin-bottom: 10px;
+}
+.discovery-row-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: stretch;
+}
+.discovery-item {
+  flex: 1 1 200px;
+  min-width: 160px;
+  padding: 10px 14px;
+  background: #fff;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--col-blue);
+  box-shadow: var(--shadow-sm);
+}
+.discovery-item-es {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.discovery-item-es .highlight {
+  background: linear-gradient(180deg, transparent 60%, rgba(252,209,22,0.35) 60%);
+  font-weight: 800;
+  color: var(--col-blue);
+  padding: 0 2px;
+}
+.discovery-gloss {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  font-style: italic;
 }
 
 /* Conjugation Table (interactive) */

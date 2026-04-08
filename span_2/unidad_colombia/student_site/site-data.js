@@ -9,13 +9,14 @@ window.unitSite = {
   courseKey: "sp2",
   roadmap: {
     enabled: true,
-    day: 2,
+    day: 3,
     courseKey: "sp2",
     objectives: [
-      "I can recognize travel vocabulary in context.",
-      "I can use a travel word in a simple past-tense sentence."
+      "I can review travel vocabulary in matching and fill-in contexts.",
+      "I can recognize the -CAR, -GAR, and -ZAR spelling changes in the yo preterite.",
+      "I can use those spelling-change forms in short travel sentences."
     ],
-    ctaHref: "lessons/lesson.html?day=2"
+    ctaHref: "lessons/lesson.html?day=3"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 2 — ¡Conoce a Colombia!",
@@ -351,6 +352,7 @@ window.unitSite = {
     },
     {
       title: "Listening",
+      hubAnchorId: "hub-listening",
       icon: "🎧",
       description: "Watch and listen to authentic Colombian music and cultural content, then check your comprehension using preterite and cultural vocabulary.",
       cards: [
@@ -364,7 +366,8 @@ window.unitSite = {
           kindLabel: "Listening",
           minutes: 10,
           dayLabel: "Bonus",
-          icon: "🎵"
+          icon: "🎵",
+          hidden: true
         },
         {
           title: "Word Order",
@@ -376,12 +379,14 @@ window.unitSite = {
           kindLabel: "Word Order",
           minutes: 10,
           dayLabel: "Day 4",
-          icon: "🔀"
+          icon: "🔀",
+          hidden: true
         }
       ]
     },
     {
       title: "Podcasts",
+      hubAnchorId: "hub-podcasts",
       icon: "🎙️",
       description: "Listen to real Spanish podcasts made for learners. Build your listening skills with stories told in Spanish.",
       cards: [
