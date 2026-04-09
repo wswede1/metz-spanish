@@ -10,13 +10,13 @@ window.unitSite = {
   /** Hub "Today's path": objectives + CTA; use `ctaHref` for a direct link, or `day` + daily-roadmap.html. */
   roadmap: {
     enabled: true,
-    day: 2,
+    day: 3,
     courseKey: "sp1",
     objectives: [
-      "I can recognize school and place words in context.",
-      "I can match a Colombia sentence to the correct vocabulary word."
+      "I can conjugate present-tense -ER and -IR verbs for common subjects.",
+      "I can use gustar + noun or infinitive in short Colombia-themed sentences."
     ],
-    ctaHref: "lessons/lesson.html?day=2"
+    ctaHref: "activity.html?activity=sp1-day-03-grammar"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 1 — ¡Conoce a Colombia!",

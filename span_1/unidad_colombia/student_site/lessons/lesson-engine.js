@@ -86,6 +86,32 @@
     return window.METZ_LESSON_DAY || '01';
   }
 
+  var lessonDraftFlushers = [];
+  function registerLessonDraftFlush(fn) {
+    if (typeof fn === 'function') lessonDraftFlushers.push(fn);
+  }
+  function flushAllLessonDrafts() {
+    lessonDraftFlushers.forEach(function(f) { try { f(); } catch (e) {} });
+  }
+  if (typeof window !== 'undefined' && !window.__metzLessonDraftUnload) {
+    window.__metzLessonDraftUnload = true;
+    window.addEventListener('pagehide', function() { flushAllLessonDrafts(); });
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'hidden') flushAllLessonDrafts();
+    });
+  }
+  function lessonCmpKey(kind, sectionId, componentIndex) {
+    return kind + '-' + sectionId + '-c' + componentIndex;
+  }
+  function parseDraftJson(raw) {
+    if (!raw) return null;
+    try { return JSON.parse(raw); } catch (e) { return null; }
+  }
+  function setDraftJson(course, day, key, obj) {
+    if (!window.ColombiaProgress) return;
+    ColombiaProgress.setLessonDraft(course, day, key, JSON.stringify(obj));
+  }
+
   /** Hero nav: always full unit deck (matches “Unit flashcards & games”). */
   function unitVocabGamesHref() {
     var course = getLessonCourse();
@@ -141,7 +167,7 @@
   // ═══════════════════════════════════════════════════════
 
   // ── Callout ──────────────────────────────────────────
-  function renderCallout(data) {
+  function renderCallout(data, sectionId, componentIndex) {
     var icons = { info: 'info', tip: 'tip', warn: 'warn', fire: 'fire' };
     var emojis = { info: 'info', tip: 'tip', warn: 'warn', fire: 'fire' };
     var emojiMap = { info: 'ℹ️', tip: '💡', warn: '⚠️', fire: '🔥' };
@@ -153,7 +179,7 @@
   }
 
   // ── KWL Chart ────────────────────────────────────────
-  function renderKWL(data, sectionId) {
+  function renderKWL(data, sectionId, componentIndex) {
     var wrap = el('div');
     var grid = el('div', 'kwl-grid');
     var course = getLessonCourse();
@@ -175,9 +201,19 @@
       ta.placeholder = data.placeholders ? data.placeholders[i] : c.placeholder;
       ta.className = 'kwl-textarea';
       if (window.ColombiaProgress) {
-        ta.value = ColombiaProgress.getLessonDraft(course, day, 'kwl-' + sectionId + '-' + i);
+        var kKey = lessonCmpKey('kwl', sectionId, componentIndex) + '-' + i;
+        ta.value = ColombiaProgress.getLessonDraft(course, day, kKey);
+        var deb = null;
+        function persistK() {
+          ColombiaProgress.setLessonDraft(course, day, kKey, ta.value);
+        }
         ta.addEventListener('input', function() {
-          ColombiaProgress.setLessonDraft(course, day, 'kwl-' + sectionId + '-' + i, ta.value);
+          clearTimeout(deb);
+          deb = setTimeout(function() { deb = null; persistK(); }, 280);
+        });
+        registerLessonDraftFlush(function() {
+          clearTimeout(deb);
+          persistK();
         });
       }
       body.appendChild(ta);
@@ -190,7 +226,7 @@
   }
 
   // ── Video Embed ──────────────────────────────────────
-  function renderVideo(data) {
+  function renderVideo(data, sectionId, componentIndex) {
     var wrap = el('div');
     var area = el('div', 'video-area');
     if (data.youtubeId) {
@@ -226,7 +262,7 @@
   }
 
   // ── Questions List ───────────────────────────────────
-  function renderQuestions(data, sectionId) {
+  function renderQuestions(data, sectionId, componentIndex) {
     var wrap = el('div');
     var list = el('div', 'question-list');
     var course = getLessonCourse();
@@ -239,11 +275,20 @@
         ta.className = 'question-input';
         ta.placeholder = q.placeholder || 'Escribe tu respuesta...';
         ta.rows = q.rows || 2;
-        var draftKey = 'q-' + sectionId + '-' + i;
+        var draftKey = lessonCmpKey('q', sectionId, componentIndex) + '-' + i;
         if (window.ColombiaProgress) {
           ta.value = ColombiaProgress.getLessonDraft(course, day, draftKey);
-          ta.addEventListener('input', function() {
+          var debQ = null;
+          function persistQ() {
             ColombiaProgress.setLessonDraft(course, day, draftKey, ta.value);
+          }
+          ta.addEventListener('input', function() {
+            clearTimeout(debQ);
+            debQ = setTimeout(function() { debQ = null; persistQ(); }, 280);
+          });
+          registerLessonDraftFlush(function() {
+            clearTimeout(debQ);
+            persistQ();
           });
         }
         item.appendChild(ta);
@@ -274,11 +319,20 @@
         if (q.strictMatch) {
           inp.setAttribute('data-strict', '1');
         }
-        var draftKeyInp = 'q-' + sectionId + '-' + i;
+        var draftKeyInp = lessonCmpKey('q', sectionId, componentIndex) + '-' + i;
         if (window.ColombiaProgress) {
           inp.value = ColombiaProgress.getLessonDraft(course, day, draftKeyInp);
-          inp.addEventListener('input', function() {
+          var debQi = null;
+          function persistQi() {
             ColombiaProgress.setLessonDraft(course, day, draftKeyInp, inp.value);
+          }
+          inp.addEventListener('input', function() {
+            clearTimeout(debQi);
+            debQi = setTimeout(function() { debQi = null; persistQi(); }, 280);
+          });
+          registerLessonDraftFlush(function() {
+            clearTimeout(debQi);
+            persistQi();
           });
         }
         item.appendChild(inp);
@@ -288,7 +342,7 @@
     wrap.appendChild(list);
 
     if (data.selfRubric && data.selfRubric.items && data.selfRubric.items.length) {
-      wrap.appendChild(renderSelfRubricBlock(data.selfRubric, sectionId, 'embed-' + sectionId));
+      wrap.appendChild(renderSelfRubricBlock(data.selfRubric, sectionId, 'embed-' + sectionId + '-c' + componentIndex));
     }
 
     if (data.exemplarHtml) {
@@ -394,12 +448,12 @@
     return box;
   }
 
-  function renderRubricSelf(data, sectionId) {
-    return renderSelfRubricBlock(data, sectionId, data.id || sectionId);
+  function renderRubricSelf(data, sectionId, componentIndex) {
+    return renderSelfRubricBlock(data, sectionId, data.id || (sectionId + '-c' + componentIndex));
   }
 
   // ── Matching Exercise ────────────────────────────────
-  function renderMatching(data, sectionId) {
+  function renderMatching(data, sectionId, componentIndex) {
     var wrap = el('div');
     var pairs = data.pairs.slice();
     var leftItems = pairs.map(function(p) { return { text: p.es || p.left, id: p.id || p.es }; });
@@ -411,6 +465,19 @@
       var grid = el('div', 'match-grid');
       var selected = null;
       var matchedCount = 0;
+      var courseM = getLessonCourse();
+      var dayM = getLessonDay();
+      var matchKey = lessonCmpKey('match', sectionId, componentIndex);
+      function persistMatch() {
+        if (!window.ColombiaProgress) return;
+        var ids = [];
+        grid.querySelectorAll('.match-item.matched').forEach(function(t) {
+          var id = String(t.getAttribute('data-id'));
+          if (ids.indexOf(id) === -1) ids.push(id);
+        });
+        setDraftJson(courseM, dayM, matchKey, { matchedIds: ids });
+      }
+      registerLessonDraftFlush(persistMatch);
 
       leftItems.forEach(function(left) {
         var tile = el('div', 'match-item', left.text);
@@ -426,6 +493,16 @@
         tile.addEventListener('click', function() { handleMatchClick(tile); });
         grid.appendChild(tile);
       });
+
+      var savedMatch = window.ColombiaProgress ? parseDraftJson(ColombiaProgress.getLessonDraft(courseM, dayM, matchKey)) : null;
+      if (savedMatch && savedMatch.matchedIds && savedMatch.matchedIds.length) {
+        savedMatch.matchedIds.forEach(function(mid) {
+          grid.querySelectorAll('.match-item').forEach(function(t) {
+            if (String(t.getAttribute('data-id')) === String(mid)) t.classList.add('matched');
+          });
+        });
+        matchedCount = savedMatch.matchedIds.length;
+      }
 
       function handleMatchClick(tile) {
         if (tile.classList.contains('matched')) return;
@@ -446,6 +523,7 @@
           selected.classList.add('matched');
           tile.classList.add('matched');
           matchedCount++;
+          persistMatch();
           if (matchedCount === leftItems.length) {
             showToast('All matched!', 'success');
             markSectionComplete(sectionId);
@@ -468,7 +546,7 @@
   }
 
   // ── Sentence order (tap pool → build line; same schema as roadmap arrange) ──
-  function renderSentenceOrder(data, sectionId) {
+  function renderSentenceOrder(data, sectionId, componentIndex) {
     var wrap = el('div', 'sentence-order-wrap');
     var tokens = (data.tokens || []).slice();
     var order = data.correctOrder && data.correctOrder.length
@@ -488,8 +566,31 @@
       text: data.instructions || 'Tap each word in the correct order. Tap a word in your sentence to put it back. Use the Check button when finished.'
     }));
 
-    var displayIdx = shuffleArray(tokens.map(function(_, i) { return i; }));
+    var courseSo = getLessonCourse();
+    var daySo = getLessonDay();
+    var soKey = lessonCmpKey('sentord', sectionId, componentIndex);
     var picked = [];
+    var savedSo = window.ColombiaProgress ? parseDraftJson(ColombiaProgress.getLessonDraft(courseSo, daySo, soKey)) : null;
+    if (savedSo && Array.isArray(savedSo.picked)) {
+      picked = savedSo.picked.filter(function(idx) {
+        return typeof idx === 'number' && idx >= 0 && idx < tokens.length;
+      });
+    }
+    var debSo = null;
+    function persistSo() {
+      if (!window.ColombiaProgress) return;
+      setDraftJson(courseSo, daySo, soKey, { picked: picked.slice() });
+    }
+    function scheduleSo() {
+      clearTimeout(debSo);
+      debSo = setTimeout(function() { debSo = null; persistSo(); }, 280);
+    }
+    registerLessonDraftFlush(function() {
+      clearTimeout(debSo);
+      persistSo();
+    });
+
+    var displayIdx = shuffleArray(tokens.map(function(_, i) { return i; }));
     var poolMap = {};
 
     var pool = el('div', 'sentence-order-pool');
@@ -513,6 +614,7 @@
           picked.splice(si, 1);
           if (poolMap[tokIdx]) poolMap[tokIdx].style.display = '';
           paintBuilt();
+          scheduleSo();
         });
         built.appendChild(b);
       });
@@ -524,14 +626,18 @@
       b.className = 'sentence-order-token';
       b.textContent = tokens[tokIdx];
       poolMap[tokIdx] = b;
+      if (picked.indexOf(tokIdx) !== -1) b.style.display = 'none';
       b.addEventListener('click', function() {
         if (b.style.display === 'none') return;
         picked.push(tokIdx);
         b.style.display = 'none';
         paintBuilt();
+        scheduleSo();
       });
       pool.appendChild(b);
     });
+
+    paintBuilt();
 
     wrap.appendChild(pool);
     wrap.appendChild(el('div', 'sentence-order-label', 'Your sentence:'));
@@ -552,7 +658,7 @@
   }
 
   // ── Fill-in-the-Blank ────────────────────────────────
-  function renderFillBlanks(data, sectionId) {
+  function renderFillBlanks(data, sectionId, componentIndex) {
     var wrap = el('div');
     var bankWords = Array.isArray(data.wordBank) ? data.wordBank : [];
     var selectedChip = null;
@@ -625,6 +731,32 @@
     wrap.appendChild(sentWrap);
 
     var blanks = $$('.fill-blank', sentWrap);
+    var courseFb = getLessonCourse();
+    var dayFb = getLessonDay();
+    var fbKey = lessonCmpKey('fill', sectionId, componentIndex);
+    var debFb = null;
+    function persistFb() {
+      if (!window.ColombiaProgress) return;
+      var vals = blanks.map(function(b) { return b.value; });
+      setDraftJson(courseFb, dayFb, fbKey, { values: vals });
+    }
+    function scheduleFb() {
+      clearTimeout(debFb);
+      debFb = setTimeout(function() { debFb = null; persistFb(); }, 280);
+    }
+    registerLessonDraftFlush(function() {
+      clearTimeout(debFb);
+      persistFb();
+    });
+    var savedFb = window.ColombiaProgress ? parseDraftJson(ColombiaProgress.getLessonDraft(courseFb, dayFb, fbKey)) : null;
+    if (savedFb && savedFb.values && savedFb.values.length) {
+      blanks.forEach(function(b, i) {
+        if (savedFb.values[i] !== undefined && savedFb.values[i] !== null) b.value = savedFb.values[i];
+      });
+    }
+    blanks.forEach(function(inp) {
+      inp.addEventListener('input', scheduleFb);
+    });
     if (bankWords.length && blanks.length) {
       blanks.forEach(function(inp) {
         inp.addEventListener('dragover', function(e) {
@@ -643,12 +775,14 @@
           var t = e.dataTransfer.getData('text/plain');
           if (t) {
             inp.value = t.trim();
+            scheduleFb();
           }
         });
         inp.addEventListener('click', function() {
           if (selectedChip && !selectedChip.classList.contains('used')) {
             inp.value = selectedChip.textContent.trim();
             clearChipSelection();
+            scheduleFb();
           }
         });
       });
@@ -690,16 +824,17 @@
   }
 
   // ── Flip Card Gallery ────────────────────────────────
-  function renderFlipGallery(data, sectionId) {
+  function renderFlipGallery(data, sectionId, componentIndex) {
     var gallery = el('div', 'flip-gallery');
     var course = getLessonCourse();
     var day = getLessonDay();
     var cards = data.cards || [];
     var n = cards.length;
-    var storageKey = 'flip-' + sectionId;
+    var storageKey = lessonCmpKey('flip', sectionId, componentIndex);
     var flippedEver = [];
     if (window.ColombiaProgress && sectionId) {
       var rawFlip = ColombiaProgress.getLessonDraft(course, day, storageKey);
+      if (!rawFlip) rawFlip = ColombiaProgress.getLessonDraft(course, day, 'flip-' + sectionId);
       var parsedFlip = null;
       try {
         parsedFlip = rawFlip ? JSON.parse(rawFlip) : null;
@@ -757,7 +892,7 @@
   }
 
   // ── Discovery Box (grammar) ──────────────────────────
-  function renderDiscovery(data) {
+  function renderDiscovery(data, sectionId, componentIndex) {
     var box = el('div', 'discovery-box');
     box.appendChild(html('div', 'discovery-title', '🔍 ' + (data.title || 'Grammar Discovery')));
     if (data.instructions) {
@@ -799,12 +934,30 @@
       q.appendChild(label);
       q.appendChild(ta);
       box.appendChild(q);
+      if (window.ColombiaProgress) {
+        var courseD = getLessonCourse();
+        var dayD = getLessonDay();
+        var dKey = lessonCmpKey('disc', sectionId, componentIndex);
+        ta.value = ColombiaProgress.getLessonDraft(courseD, dayD, dKey) || '';
+        var debD = null;
+        function persistD() {
+          ColombiaProgress.setLessonDraft(courseD, dayD, dKey, ta.value);
+        }
+        ta.addEventListener('input', function() {
+          clearTimeout(debD);
+          debD = setTimeout(function() { debD = null; persistD(); }, 280);
+        });
+        registerLessonDraftFlush(function() {
+          clearTimeout(debD);
+          persistD();
+        });
+      }
     }
     return box;
   }
 
   // ── Conjugation Table ────────────────────────────────
-  function renderConjTable(data, sectionId) {
+  function renderConjTable(data, sectionId, componentIndex) {
     var wrap = el('div');
     data.verbs.forEach(function(verb) {
       var table = document.createElement('table');
@@ -835,6 +988,34 @@
       });
       table.appendChild(tbody);
       wrap.appendChild(table);
+    });
+
+    var courseCj = getLessonCourse();
+    var dayCj = getLessonDay();
+    var cjKey = lessonCmpKey('conj', sectionId, componentIndex);
+    var conjInputs = $$('.conj-input', wrap);
+    var debCj = null;
+    function persistCj() {
+      if (!window.ColombiaProgress) return;
+      var vals = conjInputs.map(function(inp) { return inp.value; });
+      setDraftJson(courseCj, dayCj, cjKey, { values: vals });
+    }
+    function scheduleCj() {
+      clearTimeout(debCj);
+      debCj = setTimeout(function() { debCj = null; persistCj(); }, 280);
+    }
+    registerLessonDraftFlush(function() {
+      clearTimeout(debCj);
+      persistCj();
+    });
+    var savedCj = window.ColombiaProgress ? parseDraftJson(ColombiaProgress.getLessonDraft(courseCj, dayCj, cjKey)) : null;
+    if (savedCj && savedCj.values && savedCj.values.length) {
+      conjInputs.forEach(function(inp, i) {
+        if (savedCj.values[i] !== undefined && savedCj.values[i] !== null) inp.value = savedCj.values[i];
+      });
+    }
+    conjInputs.forEach(function(inp) {
+      inp.addEventListener('input', scheduleCj);
     });
 
     var btn = el('button', 'check-btn btn-purple', '✓ Check Conjugations');
@@ -985,7 +1166,7 @@
     return card;
   }
 
-  function renderReading(data) {
+  function renderReading(data, sectionId, componentIndex) {
     var card = el('div', 'reading-card');
     if (data.plain) {
       renderReadingPlain(card, data);
@@ -1028,7 +1209,7 @@
   }
 
   // ── Partner Talk ─────────────────────────────────────
-  function renderPartnerTalk(data) {
+  function renderPartnerTalk(data, sectionId, componentIndex) {
     var card = el('div', 'partner-card');
     card.appendChild(el('div', 'partner-icon', '🗣️'));
     var content = el('div', 'partner-content');
@@ -1044,11 +1225,28 @@
   }
 
   // ── Exit Ticket ──────────────────────────────────────
-  function renderExitTicket(data, sectionId) {
+  function renderExitTicket(data, sectionId, componentIndex) {
     var ticket = el('div', 'exit-ticket');
     ticket.appendChild(html('div', 'exit-title', '🎫 ' + (data.title || 'Boleto de Salida — Exit Ticket')));
     if (data.prompt) ticket.appendChild(el('p', null, data.prompt));
     var list = el('div', 'question-list');
+    var courseEx = getLessonCourse();
+    var dayEx = getLessonDay();
+    var exKey = lessonCmpKey('exit', sectionId, componentIndex);
+    var debEx = null;
+    function persistEx() {
+      if (!window.ColombiaProgress) return;
+      var vals = $$('.question-input', ticket).map(function(el) { return el.value; });
+      setDraftJson(courseEx, dayEx, exKey, { values: vals });
+    }
+    function scheduleEx() {
+      clearTimeout(debEx);
+      debEx = setTimeout(function() { debEx = null; persistEx(); }, 280);
+    }
+    registerLessonDraftFlush(function() {
+      clearTimeout(debEx);
+      persistEx();
+    });
     (data.fields || []).forEach(function(f) {
       var item = el('div', 'question-item');
       item.appendChild(el('div', 'question-prompt', f.label));
@@ -1068,6 +1266,15 @@
       list.appendChild(item);
     });
     ticket.appendChild(list);
+    var savedEx = window.ColombiaProgress ? parseDraftJson(ColombiaProgress.getLessonDraft(courseEx, dayEx, exKey)) : null;
+    if (savedEx && savedEx.values && savedEx.values.length) {
+      $$('.question-input', ticket).forEach(function(inp, i) {
+        if (savedEx.values[i] !== undefined && savedEx.values[i] !== null) inp.value = savedEx.values[i];
+      });
+    }
+    $$('.question-input', ticket).forEach(function(inp) {
+      inp.addEventListener('input', scheduleEx);
+    });
     var btn = el('button', 'check-btn btn-red', '✓ Submit');
     btn.style.marginTop = '12px';
     btn.addEventListener('click', function() {
@@ -1084,7 +1291,7 @@
   }
 
   // ── Map Labels ───────────────────────────────────────
-  function renderMapLabels(data) {
+  function renderMapLabels(data, sectionId, componentIndex) {
     var wrap = el('div');
     var mapArea = el('div', 'map-area');
     if (data.mapImage) {
@@ -1132,7 +1339,7 @@
   }
 
   // ── Station Picker ───────────────────────────────────
-  function renderStations(data) {
+  function renderStations(data, sectionId, componentIndex) {
     var wrap = el('div');
     if (data.instructions) {
       wrap.appendChild(renderCallout({ style: 'warn', text: data.instructions }));
@@ -1181,7 +1388,7 @@
   }
 
   // ── Data Table ───────────────────────────────────────
-  function renderDataTable(data) {
+  function renderDataTable(data, sectionId, componentIndex) {
     var table = document.createElement('table');
     table.className = 'data-table';
     if (data.headers) {
@@ -1213,7 +1420,7 @@
   }
 
   // ── Vocabulary Input List ────────────────────────────
-  function renderVocabList(data) {
+  function renderVocabList(data, sectionId, componentIndex) {
     var wrap = el('div');
     if (data.instructions) {
       wrap.appendChild(el('p', null, data.instructions));
@@ -1243,21 +1450,51 @@
   }
 
   // ── MC Quiz ──────────────────────────────────────────
-  function renderMCQuiz(data, sectionId) {
+  function renderMCQuiz(data, sectionId, componentIndex) {
     var wrap = el('div');
     var list = el('div', 'question-list');
+    var courseMq = getLessonCourse();
+    var dayMq = getLessonDay();
+    var mqKey = lessonCmpKey('mcqsel', sectionId, componentIndex);
+    var debMq = null;
+    function persistMq() {
+      if (!window.ColombiaProgress) return;
+      var sel = {};
+      data.questions.forEach(function(_, qi) {
+        var nm = 'mcq-' + sectionId + '-c' + componentIndex + '-' + qi;
+        var c = wrap.querySelector('input[name="' + nm + '"]:checked');
+        if (c) sel[String(qi)] = c.value;
+      });
+      setDraftJson(courseMq, dayMq, mqKey, { selections: sel });
+    }
+    function scheduleMq() {
+      clearTimeout(debMq);
+      debMq = setTimeout(function() { debMq = null; persistMq(); }, 280);
+    }
+    registerLessonDraftFlush(function() {
+      clearTimeout(debMq);
+      persistMq();
+    });
+    var savedMq = window.ColombiaProgress ? parseDraftJson(ColombiaProgress.getLessonDraft(courseMq, dayMq, mqKey)) : null;
+
     data.questions.forEach(function(q, qi) {
       var item = el('div', 'question-item');
       item.appendChild(html('div', 'question-prompt', q.prompt));
       var optWrap = el('div');
       optWrap.style.cssText = 'display:flex;flex-direction:column;gap:6px;margin-top:8px';
+      var wantVal = savedMq && savedMq.selections ? savedMq.selections[String(qi)] : null;
       (q.options || []).forEach(function(opt) {
         var label = document.createElement('label');
         label.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fafbfd;border:2px solid #e0e5ee;border-radius:8px;cursor:pointer;transition:all 0.2s;font-weight:600;font-size:0.9rem';
         var radio = document.createElement('input');
         radio.type = 'radio';
-        radio.name = 'mcq' + qi;
+        radio.name = 'mcq-' + sectionId + '-c' + componentIndex + '-' + qi;
         radio.value = opt.value;
+        if (wantVal != null && String(opt.value) === String(wantVal)) {
+          radio.checked = true;
+          label.style.borderColor = 'var(--col-blue)';
+          label.style.background = '#d6eaf8';
+        }
         label.appendChild(radio);
         label.appendChild(document.createTextNode(opt.label));
         label.addEventListener('mouseenter', function() { label.style.borderColor = 'var(--col-blue)'; label.style.background = '#eef3ff'; });
@@ -1268,6 +1505,7 @@
           $$('label', optWrap).forEach(function(l) { l.style.borderColor = '#e0e5ee'; l.style.background = '#fafbfd'; });
           label.style.borderColor = 'var(--col-blue)';
           label.style.background = '#d6eaf8';
+          scheduleMq();
         });
         optWrap.appendChild(label);
       });
@@ -1281,7 +1519,8 @@
     btn.addEventListener('click', function() {
       var correct = 0;
       data.questions.forEach(function(q, qi) {
-        var checked = wrap.querySelector('input[name="mcq' + qi + '"]:checked');
+        var nm = 'mcq-' + sectionId + '-c' + componentIndex + '-' + qi;
+        var checked = wrap.querySelector('input[name="' + nm + '"]:checked');
         var labels = $$('label', list.children[qi]);
         labels.forEach(function(l) {
           var r = l.querySelector('input');
@@ -1308,23 +1547,23 @@
   // COMPONENT DISPATCH
   // ═══════════════════════════════════════════════════════
   var renderers = {
-    callout: function(d) { return renderCallout(d); },
+    callout: renderCallout,
     kwl: renderKWL,
-    video: function(d) { return renderVideo(d); },
+    video: renderVideo,
     questions: renderQuestions,
     matching: renderMatching,
     'sentence-order': renderSentenceOrder,
     'fill-blanks': renderFillBlanks,
-    'flip-gallery': function(d, sid) { return renderFlipGallery(d, sid); },
-    discovery: function(d) { return renderDiscovery(d); },
+    'flip-gallery': renderFlipGallery,
+    discovery: renderDiscovery,
     'conj-table': renderConjTable,
-    reading: function(d) { return renderReading(d); },
-    'partner-talk': function(d) { return renderPartnerTalk(d); },
+    reading: renderReading,
+    'partner-talk': renderPartnerTalk,
     'exit-ticket': renderExitTicket,
-    'map-labels': function(d) { return renderMapLabels(d); },
-    stations: function(d) { return renderStations(d); },
-    'data-table': function(d) { return renderDataTable(d); },
-    'vocab-list': function(d) { return renderVocabList(d); },
+    'map-labels': renderMapLabels,
+    stations: renderStations,
+    'data-table': renderDataTable,
+    'vocab-list': renderVocabList,
     'mc-quiz': renderMCQuiz,
     'rubric-self': renderRubricSelf
   };
@@ -1336,6 +1575,7 @@
     var root = document.getElementById('lessonRoot');
     if (!root) return;
     root.innerHTML = '';
+    lessonDraftFlushers.length = 0;
 
     sectionStates = {};
     firstProgressUpdate = true;
@@ -1427,10 +1667,10 @@
 
       // Body
       var body = el('div', 'section-body');
-      (section.components || []).forEach(function(comp) {
+      (section.components || []).forEach(function(comp, componentIndex) {
         var renderer = renderers[comp.type];
         if (renderer) {
-          body.appendChild(renderer(comp, section.id));
+          body.appendChild(renderer(comp, section.id, componentIndex));
         } else {
           body.appendChild(el('p', null, '[Unknown component: ' + comp.type + ']'));
         }

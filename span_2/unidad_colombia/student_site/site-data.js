@@ -16,7 +16,7 @@ window.unitSite = {
       "I can recognize the -CAR, -GAR, and -ZAR spelling changes in the yo preterite.",
       "I can use those spelling-change forms in short travel sentences."
     ],
-    ctaHref: "lessons/lesson.html?day=3"
+    ctaHref: "activity.html?activity=sp2-day-03-cargarzar"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 2 — ¡Conoce a Colombia!",
