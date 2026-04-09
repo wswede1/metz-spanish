@@ -122,30 +122,16 @@ window.unitSite = {
           icon: "⚡"
         },
         {
-          title: "Reading: Language Learner",
+          title: 'Reading and "Y" verbs',
           description: "Read a preterite travel narrative about Cartagena with glossary support and scaffolded questions.",
           route: "activity.html?activity=sp2-day-04-reading-l2",
           lessonDay: 4,
-          tier: "l2",
           releaseDate: "",
           status: "Ready",
           kindLabel: "Reading",
           minutes: 15,
           dayLabel: "Day 4",
           icon: "📖"
-        },
-        {
-          title: "Reading: Heritage Track",
-          description: "An analytical reading on Cartagena's history and cultural identity — deeper vocabulary, critical questions.",
-          route: "activity.html?activity=sp2-day-04-reading-heritage",
-          lessonDay: 4,
-          tier: "heritage",
-          releaseDate: "",
-          status: "Ready",
-          kindLabel: "Reading",
-          minutes: 20,
-          dayLabel: "Day 4",
-          icon: "⭐"
         },
         {
           title: "Stem-Change -IR Practice",
@@ -734,7 +720,6 @@ window.unitSite = {
       dayLabel: "Day 4",
       kindLabel: "Reading",
       type: "reading",
-      tier: "l2",
       audioUrl: "audio/sp2-day-04-reading-l2.mp3",
       minutes: 15,
       description: "Read a preterite-tense travel narrative about a family trip to Cartagena with glossary support.",
@@ -799,77 +784,6 @@ window.unitSite = {
           ],
           answer: "b",
           explanation: "The text says 'El papá pagó' — but the yo-form would be pagué (spelling change)."
-        }
-      ]
-    },
-
-    // ── Day 4 — Heritage Reading ───────────────────────────────────────────────
-    "sp2-day-04-reading-heritage": {
-      title: "Cartagena: entre la historia y el presente",
-      dayLabel: "Day 4",
-      kindLabel: "Reading",
-      type: "reading",
-      tier: "heritage",
-      audioUrl: "audio/sp2-day-04-reading-heritage.mp3",
-      minutes: 20,
-      description: "Un análisis de Cartagena como ciudad histórica y su identidad cultural contemporánea.",
-      instructions: "Lee el texto con atención crítica. Las preguntas requieren análisis, inferencia, y comparación cultural — no solo comprensión literal.",
-      glossary: [
-        "la esclavitud = el sistema histórico que privó de libertad a millones de africanos",
-        "el patrimonio = lo que una comunidad hereda de generaciones anteriores",
-        "el legado = la influencia duradera que deja un período histórico"
-      ],
-      passage: [
-        "Cartagena de Indias fue fundada en 1533 por los españoles y se convirtió en uno de los puertos más importantes del comercio colonial en América. Durante siglos, fue el centro de un sistema brutal: el tráfico de personas esclavizadas procedentes de África Occidental. Esta historia —incómoda pero fundamental— dejó un legado cultural profundo que todavía se manifiesta en la música, la gastronomía, las tradiciones religiosas y los rasgos físicos de la mayoría de los cartageneros actuales.",
-        "En el siglo XX, Cartagena se transformó en un destino turístico internacional. La UNESCO declaró su centro histórico amurallado Patrimonio de la Humanidad en 1984, reconociendo no solo la arquitectura colonial sino también el valor cultural acumulado de siglos de historia. Sin embargo, esta distinción trajo consigo una tensión real: la restauración del casco antiguo para el turismo desplazó gradualmente a las comunidades de bajos recursos que habían vivido allí durante generaciones.",
-        "Hoy, Cartagena es simultáneamente una ciudad de contrastes profundos. Sus barrios turísticos como Getsemaní experimentaron lo que los urbanistas llaman 'gentrificación' — un proceso en el que la inversión y el turismo transformaron el carácter de vecindarios históricos, aumentando los precios y empujando a los residentes originales hacia la periferia. Al mismo tiempo, Getsemaní se convirtió en un símbolo de resistencia cultural: artistas, músicos, y activistas afrodescendientes reclamaron su historia y su espacio público mediante el arte y la organización comunitaria.",
-        "La historia de Cartagena invita a reflexionar sobre una pregunta universal: ¿quién tiene el derecho de contar la historia de un lugar y quién se beneficia de su preservación? Esta pregunta no tiene respuesta fácil, pero es exactamente la que una ciudad como Cartagena — con sus murallas, sus memoriales, y sus barrios en transformación — nos obliga a hacernos."
-      ],
-      questions: [
-        {
-          type: "mc",
-          prompt: "Según el texto, ¿cuál fue el papel de Cartagena durante la época colonial?",
-          options: [
-            { value: "a", label: "Fue un centro agrícola de exportación de café." },
-            { value: "b", label: "Fue uno de los puertos más importantes del comercio colonial, incluyendo el tráfico de personas esclavizadas." },
-            { value: "c", label: "Fue fundada por indígenas de la región caribeña." },
-            { value: "d", label: "Fue una ciudad de artistas y músicos durante el siglo XVI." }
-          ],
-          answer: "b"
-        },
-        {
-          type: "short",
-          prompt: "¿Qué es la 'gentrificación' según el contexto del texto? Explica con tus propias palabras.",
-          placeholder: "Responde en inglés o español...",
-          answer: ["desplazamiento", "displacement", "rich", "prices", "precios", "original residents", "residentes originales", "investment", "inversion"]
-        },
-        {
-          type: "mc",
-          prompt: "What tension does the text identify between UNESCO's recognition and the city's residents?",
-          options: [
-            { value: "a", label: "UNESCO did not want to recognize Cartagena's colonial history." },
-            { value: "b", label: "Restoration for tourism gradually displaced low-income communities who had lived there for generations." },
-            { value: "c", label: "The recognition caused more people to move into the historic district." },
-            { value: "d", label: "The recognition eliminated all cultural traditions of the city." }
-          ],
-          answer: "b"
-        },
-        {
-          type: "short",
-          prompt: "El último párrafo termina con una pregunta. ¿Cuál es esa pregunta y qué opinas tú? Responde con dos oraciones.",
-          placeholder: "Responde en inglés o español...",
-          answer: ["quien", "quién", "who", "right", "derecho", "historia", "history", "preservacion", "preservación", "preservation"]
-        },
-        {
-          type: "mc",
-          prompt: "How does the text characterize Getsemaní?",
-          options: [
-            { value: "a", label: "As a purely tourist neighborhood with no residents." },
-            { value: "b", label: "As both a symbol of displacement and a symbol of cultural resistance." },
-            { value: "c", label: "As an area that was always wealthy and well-preserved." },
-            { value: "d", label: "As a neighborhood that rejected all outside investment." }
-          ],
-          answer: "b"
         }
       ]
     },
