@@ -20,7 +20,18 @@ window.unitSite = {
   },
   totalUnitLessonDays: 14,
   title: "Spanish 2 — ¡Conoce a Colombia!",
-  subtitle: "Use these student-safe pages for travel vocabulary, preterite practice, culture readings, projects, film reflection, and review.",
+  subtitle: "",
+  /** Shown under the main title on the hub when set (replaces subtitle). */
+  subtitleLines: [
+    "I can use travel and hospitality vocabulary in short past-tense sentences.",
+    "I can form the yo preterite with -CAR, -GAR, and -ZAR spelling changes.",
+    "I can use the i→y pattern for leer, creer, and oír in él/ella and ellos preterite forms.",
+    "I can use stem-changing -IR verbs (pedir, dormir, preferir) in the preterite.",
+    "I can use high-frequency irregular preterites: decir, traer, and venir.",
+    "I can read Colombia-themed passages and find preterite verbs in context.",
+    "I can connect products, practices, and perspectives to what I read and hear about Colombia.",
+    "I can describe past experiences in our project and film work using the preterite accurately."
+  ],
   eyebrow: "Spanish 2 Student Site",
   overviewTitle: "Spanish 2 Colombia Student Hub",
   overviewText: "Each card matches the Colombia unit pacing. Focus on the preterite — report what happened, what you learned, what you saw.",

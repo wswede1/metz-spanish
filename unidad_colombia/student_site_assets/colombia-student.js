@@ -292,7 +292,21 @@
       byId('heroTitle').textContent = activity ? activity.title : site.title;
     }
     if (byId('heroSubtitle')) {
-      byId('heroSubtitle').textContent = activity ? first(activity.description, site.subtitle) : site.subtitle;
+      var hs = byId('heroSubtitle');
+      if (activity) {
+        hs.textContent = first(activity.description, site.subtitle);
+      } else if (site.subtitleLines && site.subtitleLines.length) {
+        hs.innerHTML = '';
+        var ul = el('ul', 'hero-unit-objectives');
+        site.subtitleLines.forEach(function (line) {
+          if (line && String(line).trim()) {
+            ul.appendChild(el('li', null, '🎯 ' + String(line).trim()));
+          }
+        });
+        hs.appendChild(ul);
+      } else {
+        hs.textContent = site.subtitle;
+      }
     }
   }
 
