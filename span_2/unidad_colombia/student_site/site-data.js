@@ -9,14 +9,14 @@ window.unitSite = {
   courseKey: "sp2",
   roadmap: {
     enabled: true,
-    day: 3,
+    day: 4,
     courseKey: "sp2",
     objectives: [
-      "I can review travel vocabulary in matching and fill-in contexts.",
-      "I can recognize the -CAR, -GAR, and -ZAR spelling changes in the yo preterite.",
-      "I can use those spelling-change forms in short travel sentences."
+      "I can review -CAR, -GAR, and -ZAR yo-forms in the preterite.",
+      "I can use the i→y pattern for leer, creer, and oír in él/ella and ellos forms.",
+      "I can read a Cartagena travel passage and spot preterite verbs."
     ],
-    ctaHref: "activity.html?activity=sp2-day-03-cargarzar"
+    ctaHref: "lessons/lesson.html?day=4"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 2 — ¡Conoce a Colombia!",

@@ -11,6 +11,91 @@ window.LESSON_DATA = {
   vocabCategory: 4,
   sections: [
     // ──────────────────────────────────────────────────
+    // 0. Quick review — -CAR / -GAR / -ZAR pattern (from Day 3)
+    // ──────────────────────────────────────────────────
+    {
+      id: "cargarzar-review",
+      title: "Repaso — Verbos -CAR, -GAR, -ZAR",
+      shortTitle: "Spelling review",
+      subtitle: "Yo-form spelling changes before we study -Y verbs",
+      icon: "🔤",
+      accent: "orange",
+      open: true,
+      components: [
+        {
+          type: "callout",
+          style: "tip",
+          text: "<strong>Primero, repaso rápido.</strong> These patterns are from Day 3 — we use them all week with the preterite."
+        },
+        {
+          type: "callout",
+          style: "fire",
+          text: "In the preterite, <strong>-CAR, -GAR, and -ZAR</strong> verbs have a <strong>spelling change in the YO form only</strong>. This keeps the pronunciation correct! Study the examples below, then name the pattern."
+        },
+        {
+          type: "discovery",
+          title: "Find the Spelling Change Pattern",
+          instructions: "Each row groups verbs by ending. The English gloss is below the Spanish line.",
+          groups: [
+            {
+              label: "Verbos en -CAR",
+              items: [
+                {
+                  esHtml: "buscar → yo <span class=\"highlight\">busqué</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT buscé)</span>",
+                  en: "to look for → I looked for; the spelling keeps the hard /k/ sound"
+                },
+                {
+                  esHtml: "tocar → yo <span class=\"highlight\">toqué</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT tocé)</span>",
+                  en: "to touch / to play (an instrument) → I touched / I played"
+                },
+                {
+                  esHtml: "practicar → yo <span class=\"highlight\">practiqué</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT practicé)</span>",
+                  en: "to practice → I practiced"
+                }
+              ]
+            },
+            {
+              label: "Verbos en -GAR y -ZAR",
+              items: [
+                {
+                  esHtml: "llegar → yo <span class=\"highlight\">llegué</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT llegé)</span>",
+                  en: "to arrive → I arrived"
+                },
+                {
+                  esHtml: "pagar → yo <span class=\"highlight\">pagué</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT pagé)</span>",
+                  en: "to pay → I paid"
+                },
+                {
+                  esHtml: "jugar → yo <span class=\"highlight\">jugué</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT jugé)</span>",
+                  en: "to play (a sport/game) → I played"
+                },
+                {
+                  esHtml: "empezar → yo <span class=\"highlight\">empecé</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT empezé)</span>",
+                  en: "to begin → I began"
+                },
+                {
+                  esHtml: "almorzar → yo <span class=\"highlight\">almorcé</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT almorzé)</span>",
+                  en: "to eat lunch → I ate lunch"
+                },
+                {
+                  esHtml: "comenzar → yo <span class=\"highlight\">comencé</span> <span style=\"font-weight:600;color:var(--col-red);\">(NOT comenzé)</span>",
+                  en: "to begin → I began"
+                }
+              ]
+            }
+          ],
+          question: "What pattern do you see? What happens to C, G, and Z before the -é ending?",
+          placeholder: "I notice that -CAR changes to... -GAR changes to... -ZAR changes to..."
+        },
+        {
+          type: "callout",
+          style: "info",
+          text: "<strong>The Rules:</strong><br>-CAR → <strong>c → qu</strong> before é (busqué)<br>-GAR → <strong>g → gu</strong> before é (llegué)<br>-ZAR → <strong>z → c</strong> before é (empecé)<br><br>This ONLY happens in the <strong>yo</strong> form. All other forms are regular!"
+        }
+      ]
+    },
+
+    // ──────────────────────────────────────────────────
     // 1. Warm-Up — Preterite Recall
     // ──────────────────────────────────────────────────
     {

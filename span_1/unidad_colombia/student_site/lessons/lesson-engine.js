@@ -112,10 +112,10 @@
     ColombiaProgress.setLessonDraft(course, day, key, JSON.stringify(obj));
   }
 
-  /** Hero nav: always full unit deck (matches “Unit flashcards & games”). */
+  /** Hero nav: full unit deck. Path from lessons/ → ../../ (vocab HTML is next to student_site/). */
   function unitVocabGamesHref() {
     var course = getLessonCourse();
-    var base = course === 'sp2' ? '../Colombia_Vocab_Review_Spanish2.html' : '../Colombia_Vocab_Review_Spanish1.html';
+    var base = course === 'sp2' ? '../../Colombia_Vocab_Review_Spanish2.html' : '../../Colombia_Vocab_Review_Spanish1.html';
     return base + '?cat=all';
   }
 
