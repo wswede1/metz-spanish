@@ -319,11 +319,23 @@ window.LESSON_DATA = {
         {
           type: "questions",
           questions: [
-            { prompt: "¿Qué hizo el cacique muisca en la ceremonia?", type: "textarea", placeholder: "El cacique cubrió su cuerpo con...", rows: 2 },
+            {
+              prompt: "¿Qué hizo el cacique muisca en la ceremonia?",
+              type: "textarea",
+              placeholder: "El cacique cubrió su cuerpo con...",
+              rows: 2,
+              answerKeywords: ["polvo", "oro", "lago"]
+            },
             { prompt: "¿Qué creyeron los conquistadores?", placeholder: "Los conquistadores creyeron que...", answer: "había una ciudad de oro" },
             { prompt: "¿Qué leyeron los exploradores? ¿Los ayudó?", type: "textarea", placeholder: "Los exploradores leyeron... pero no...", rows: 2 },
             { prompt: "Find and write ALL the Y-verbs (i→y) from the reading:", type: "textarea", placeholder: "1) oyeron 2) creyeron 3) ...", rows: 2 },
-            { prompt: "¿Encontraron los españoles El Dorado? ¿Qué existe hoy en Bogotá?", type: "textarea", placeholder: "No, los españoles no... Hoy en Bogotá existe...", rows: 2 }
+            {
+              prompt: "¿Encontraron los españoles El Dorado? ¿Qué existe hoy en Bogotá?",
+              type: "textarea",
+              placeholder: "No, los españoles no... Hoy en Bogotá existe...",
+              rows: 2,
+              answerKeywords: ["museo", "oro", "bogotá"]
+            }
           ]
         },
         {

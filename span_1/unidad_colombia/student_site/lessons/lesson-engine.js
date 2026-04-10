@@ -24,6 +24,8 @@
     return String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
   }
   var FLEX_ANSWER_MIN_LEN = 4;
+  /** Skip very short keyword tokens (e.g. el, la) to limit false positives. */
+  var KEYWORD_MIN_LEN = 3;
   /** strict=true → exact normalized match only (pipe-separated alternates still allowed). */
   function flexibleAnswerMatch(userVal, expectedRaw, strict) {
     var nu = normalize(userVal);
@@ -39,6 +41,90 @@
       if (!strict && na.length >= FLEX_ANSWER_MIN_LEN && nu.indexOf(na) !== -1) return true;
     }
     return false;
+  }
+  /**
+   * keywordsRaw: pipe-separated keywords/phrases (same encoding as data-answer-keywords).
+   * mode 'all' (default): every keyword of length >= KEYWORD_MIN_LEN must appear as substring in normalized user text.
+   * mode 'any': at least one such keyword must appear.
+   */
+  function keywordsMatch(userVal, keywordsRaw, mode) {
+    mode = mode || 'all';
+    var nu = normalize(userVal);
+    if (keywordsRaw == null || String(keywordsRaw).trim() === '') return false;
+    var parts = String(keywordsRaw).split('|');
+    var keys = [];
+    for (var i = 0; i < parts.length; i++) {
+      var nk = normalize(parts[i].trim());
+      if (!nk || nk.length < KEYWORD_MIN_LEN) continue;
+      keys.push(nk);
+    }
+    if (keys.length === 0) return false;
+    if (mode === 'any') {
+      for (var a = 0; a < keys.length; a++) {
+        if (nu.indexOf(keys[a]) !== -1) return true;
+      }
+      return false;
+    }
+    for (var j = 0; j < keys.length; j++) {
+      if (nu.indexOf(keys[j]) === -1) return false;
+    }
+    return true;
+  }
+  /**
+   * Combined scoring for question inputs / fill-blanks with data-answer and/or data-answer-keywords.
+   * OR: pass if phrase match OR keyword match (when both attrs present).
+   */
+  function questionInputCorrect(inp) {
+    var v = inp.value;
+    var answer = inp.getAttribute('data-answer');
+    var kw = inp.getAttribute('data-answer-keywords');
+    var kwMode = inp.getAttribute('data-keyword-mode') || 'all';
+    var strict = inp.getAttribute('data-strict') === '1';
+    var hasA = answer != null && String(answer).length > 0;
+    var hasK = kw != null && String(kw).trim().length > 0;
+    if (!hasA && !hasK) return false;
+    var okA = hasA && flexibleAnswerMatch(v, answer, strict);
+    var okK = hasK && keywordsMatch(v, kw, kwMode);
+    if (hasA && hasK) return okA || okK;
+    if (hasA) return okA;
+    return okK;
+  }
+  function applyQuestionAnswerAttrs(el, q) {
+    if (q.answer) {
+      el.setAttribute('data-answer', Array.isArray(q.answer) ? q.answer.join('|') : q.answer);
+    }
+    if (q.answerKeywords) {
+      el.setAttribute(
+        'data-answer-keywords',
+        Array.isArray(q.answerKeywords) ? q.answerKeywords.join('|') : String(q.answerKeywords)
+      );
+    }
+    if (q.keywordMode === 'any') {
+      el.setAttribute('data-keyword-mode', 'any');
+    }
+    if (q.strictMatch) {
+      el.setAttribute('data-strict', '1');
+    }
+  }
+  /** Per-blank attrs for fill-in sentences (same fields as questions, on sentence object `s`). */
+  function applyFillBlankAttrs(inp, s, blankIndex) {
+    var q = {};
+    if (s.answer != null && s.answer !== '') {
+      q.answer = Array.isArray(s.answer)
+        ? (s.answer[blankIndex] !== undefined ? s.answer[blankIndex] : s.answer[0])
+        : s.answer;
+    }
+    if (s.answerKeywords != null && s.answerKeywords !== '') {
+      var ak = s.answerKeywords;
+      if (Array.isArray(ak) && ak.length > 0 && Array.isArray(ak[0])) {
+        q.answerKeywords = ak[blankIndex] !== undefined ? ak[blankIndex] : ak[0];
+      } else {
+        q.answerKeywords = ak;
+      }
+    }
+    if (s.keywordMode === 'any') q.keywordMode = 'any';
+    if (s.strictMatch) q.strictMatch = true;
+    applyQuestionAnswerAttrs(inp, q);
   }
   function shuffleArray(arr) {
     var a = arr.slice();
@@ -275,6 +361,7 @@
         ta.className = 'question-input';
         ta.placeholder = q.placeholder || 'Escribe tu respuesta...';
         ta.rows = q.rows || 2;
+        applyQuestionAnswerAttrs(ta, q);
         var draftKey = lessonCmpKey('q', sectionId, componentIndex) + '-' + i;
         if (window.ColombiaProgress) {
           ta.value = ColombiaProgress.getLessonDraft(course, day, draftKey);
@@ -313,12 +400,7 @@
         inp.type = 'text';
         inp.className = 'question-input';
         inp.placeholder = q.placeholder || 'Escribe tu respuesta...';
-        if (q.answer) {
-          inp.setAttribute('data-answer', Array.isArray(q.answer) ? q.answer.join('|') : q.answer);
-        }
-        if (q.strictMatch) {
-          inp.setAttribute('data-strict', '1');
-        }
+        applyQuestionAnswerAttrs(inp, q);
         var draftKeyInp = lessonCmpKey('q', sectionId, componentIndex) + '-' + i;
         if (window.ColombiaProgress) {
           inp.value = ColombiaProgress.getLessonDraft(course, day, draftKeyInp);
@@ -363,18 +445,18 @@
     }
 
     // Check button if answers exist
-    var hasAnswers = data.questions.some(function(q) { return q.answer; });
+    var hasAnswers = data.questions.some(function(q) { return q.answer || q.answerKeywords; });
     if (hasAnswers) {
       var btn = el('button', 'check-btn btn-blue', '✓ Check Answers');
       btn.addEventListener('click', function() {
         var correct = 0;
         var total = 0;
         $$('.question-input', list).forEach(function(inp) {
-          var answer = inp.getAttribute('data-answer');
-          if (!answer) return;
+          var hasA = inp.getAttribute('data-answer');
+          var hasK = inp.getAttribute('data-answer-keywords');
+          if (!hasA && !hasK) return;
           total++;
-          var strict = inp.getAttribute('data-strict') === '1';
-          if (flexibleAnswerMatch(inp.value, answer, strict)) {
+          if (questionInputCorrect(inp)) {
             correct++;
             inp.style.borderColor = 'var(--col-green)';
             inp.style.background = '#e8faf0';
@@ -400,7 +482,11 @@
       wrap.appendChild(row);
     }
 
-    var allOpen = data.questions.length && data.questions.every(function(q) { return q.type === 'textarea' && !q.answer; });
+    var allOpen =
+      data.questions.length &&
+      data.questions.every(function(q) {
+        return q.type === 'textarea' && !q.answer && !q.answerKeywords;
+      });
     if (allOpen && data.markCompleteLabel) {
       var doneBtn = el('button', 'check-btn btn-green', data.markCompleteLabel);
       doneBtn.type = 'button';
@@ -722,7 +808,7 @@
           inp.className = 'fill-blank';
           inp.placeholder = '___';
           inp.setAttribute('autocomplete', 'off');
-          if (s.answer) inp.setAttribute('data-answer', Array.isArray(s.answer) ? s.answer[i] || s.answer[0] : s.answer);
+          applyFillBlankAttrs(inp, s, i);
           sent.appendChild(inp);
         }
       });
@@ -796,9 +882,10 @@
       var blanksNow = $$('.fill-blank', sentWrap);
       var correct = 0;
       blanksNow.forEach(function(b) {
-        var answer = b.getAttribute('data-answer');
-        if (!answer) return;
-        if (flexibleAnswerMatch(b.value, answer, false)) {
+        var hasA = b.getAttribute('data-answer');
+        var hasK = b.getAttribute('data-answer-keywords');
+        if (!hasA && !hasK) return;
+        if (questionInputCorrect(b)) {
           b.classList.add('correct');
           b.classList.remove('wrong');
           correct++;
@@ -807,7 +894,9 @@
           b.classList.remove('correct');
         }
       });
-      var total = blanksNow.filter(function(b) { return b.getAttribute('data-answer'); }).length;
+      var total = blanksNow.filter(function(b) {
+        return b.getAttribute('data-answer') || b.getAttribute('data-answer-keywords');
+      }).length;
       if (total > 0) {
         var pct = correct / total;
         showToast(correct + '/' + total, pct >= 0.8 ? 'success' : pct >= 0.5 ? 'partial' : 'retry');
