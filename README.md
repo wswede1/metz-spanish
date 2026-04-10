@@ -29,6 +29,8 @@ Do this **before** students use the hub with cloud backup:
 5. **District emails only (strongly recommended):** the hub adds Google’s `hd` hint and **signs out** anyone whose email is not `@` your `SCHOOL_EMAIL_DOMAIN`. For enforcement that students cannot bypass, add a **Supabase Auth Hook** (see [Auth Hooks](https://supabase.com/docs/guides/auth/auth-hooks)) to reject sign-in when the email domain does not match.
 6. **Verify:** a personal Gmail is rejected on the hub after OAuth; a `@mcpsva.org` (or your domain) account works. Two district test accounts cannot read each other’s rows; one signed-in visit to an activity inserts into `activity_completions` if you use that for grades.
 
+**Maintainer notes:** [Repo cleanup backlog and Supabase follow-ups](docs/REPO_CLEANUP_AND_SUPABASE_TODO.md) (deferred housekeeping, teacher visibility of completions, cloud-backed hub progress).
+
 ## Features
 
 - Practice activities, readings, drills, and listening activities
