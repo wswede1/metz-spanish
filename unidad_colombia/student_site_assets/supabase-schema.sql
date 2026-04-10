@@ -96,6 +96,17 @@ CREATE TABLE IF NOT EXISTS public.activity_completions (
 CREATE INDEX IF NOT EXISTS activity_completions_user_course_idx ON public.activity_completions (user_id, course_key);
 CREATE INDEX IF NOT EXISTS activity_completions_course_activity_idx ON public.activity_completions (course_key, activity_id);
 
+-- Allowlisted teacher accounts (rows inserted only via Dashboard / service_role).
+-- Authenticated teachers can read their own row to verify access; teacher SELECT on activity_completions uses this table.
+CREATE TABLE IF NOT EXISTS public.teacher_accounts (
+  auth_user_id uuid PRIMARY KEY REFERENCES auth.users (id) ON DELETE CASCADE,
+  email text,
+  note text,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS teacher_accounts_email_lower_idx ON public.teacher_accounts (lower(email));
+
 -- RLS
 ALTER TABLE public.students ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.sessions ENABLE ROW LEVEL SECURITY;
@@ -103,6 +114,7 @@ ALTER TABLE public.item_responses ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.fsrs_cards ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.bkt_skills ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.activity_completions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.teacher_accounts ENABLE ROW LEVEL SECURITY;
 
 DROP POLICY IF EXISTS metz_anon_students_all ON public.students;
 DROP POLICY IF EXISTS metz_anon_sessions_all ON public.sessions;
@@ -120,6 +132,10 @@ DROP POLICY IF EXISTS metz_item_responses_rw_own ON public.item_responses;
 DROP POLICY IF EXISTS metz_fsrs_cards_rw_own ON public.fsrs_cards;
 DROP POLICY IF EXISTS metz_bkt_skills_rw_own ON public.bkt_skills;
 DROP POLICY IF EXISTS metz_activity_completions_own ON public.activity_completions;
+DROP POLICY IF EXISTS metz_activity_completions_insert ON public.activity_completions;
+DROP POLICY IF EXISTS metz_activity_completions_select_own ON public.activity_completions;
+DROP POLICY IF EXISTS metz_activity_completions_select_teacher ON public.activity_completions;
+DROP POLICY IF EXISTS teacher_accounts_self_read ON public.teacher_accounts;
 
 -- Authenticated users only; scoped to their auth.users id via students.auth_user_id
 CREATE POLICY metz_students_rw_own ON public.students
@@ -187,10 +203,23 @@ CREATE POLICY metz_bkt_skills_rw_own ON public.bkt_skills
     )
   );
 
-CREATE POLICY metz_activity_completions_own ON public.activity_completions
-  FOR ALL TO authenticated
-  USING (user_id = auth.uid())
+CREATE POLICY teacher_accounts_self_read ON public.teacher_accounts
+  FOR SELECT TO authenticated
+  USING (auth_user_id = auth.uid());
+
+CREATE POLICY metz_activity_completions_insert ON public.activity_completions
+  FOR INSERT TO authenticated
   WITH CHECK (user_id = auth.uid());
+
+CREATE POLICY metz_activity_completions_select_own ON public.activity_completions
+  FOR SELECT TO authenticated
+  USING (user_id = auth.uid());
+
+CREATE POLICY metz_activity_completions_select_teacher ON public.activity_completions
+  FOR SELECT TO authenticated
+  USING (EXISTS (
+    SELECT 1 FROM public.teacher_accounts t WHERE t.auth_user_id = auth.uid()
+  ));
 
 GRANT USAGE ON SCHEMA public TO anon, authenticated;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO authenticated;
@@ -202,17 +231,10 @@ REVOKE ALL ON TABLE public.item_responses FROM anon;
 REVOKE ALL ON TABLE public.fsrs_cards FROM anon;
 REVOKE ALL ON TABLE public.bkt_skills FROM anon;
 REVOKE ALL ON TABLE public.activity_completions FROM anon;
+REVOKE ALL ON TABLE public.teacher_accounts FROM anon;
 
--- Teacher reads / exports: use Supabase Dashboard (SQL Editor / Table Editor) as project owner,
--- or a server-side script with the service_role key (never in the browser).
---
--- Example: recent activity completions
---   SELECT course_key, activity_id, user_id, occurred_at
---   FROM public.activity_completions
---   ORDER BY occurred_at DESC;
---
--- Example: aggregate counts for grading views
---   SELECT course_key, activity_id, count(*)::int AS completions, max(occurred_at) AS last_at
---   FROM public.activity_completions
---   GROUP BY course_key, activity_id
---   ORDER BY last_at DESC;
+REVOKE INSERT, UPDATE, DELETE ON TABLE public.teacher_accounts FROM authenticated;
+GRANT SELECT ON TABLE public.teacher_accounts TO authenticated;
+
+-- Teacher dashboard (browser): publishable key + Google + row in teacher_accounts. See teacher-dashboard.html.
+-- Ad-hoc queries as project owner: Supabase Dashboard SQL Editor still works.

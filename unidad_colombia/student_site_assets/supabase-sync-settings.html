@@ -48,7 +48,7 @@
   </div>
 
   <div class="note">
-    <strong>Google sign-in is required</strong> for cloud sync and for the <code>activity_completions</code> table. Row-level security ties each row to the signed-in user. Teachers do <strong>not</strong> get a global read of all students through the publishable key; use the Supabase <strong>Dashboard</strong> (SQL Editor / Table Editor) while logged in as the project owner, or run a <strong>server-side</strong> export script that uses <code>service_role</code> only on a machine you control.
+    <strong>Google sign-in is required</strong> for cloud sync and for the <code>activity_completions</code> table. Row-level security ties student rows to the signed-in user. <strong>Teachers:</strong> allowlisted accounts in <code>teacher_accounts</code> can open <a href="./teacher-dashboard.html">teacher-dashboard.html</a> (publishable key only) to view class completions after you run <code>supabase-migration-teacher-dashboard.sql</code> and add your user row via SQL. Others: use the Supabase <strong>Dashboard</strong> or a <strong>server-side</strong> script with <code>service_role</code> (never in the browser).
   </div>
 
   <div id="metz-supabase-auth-root" class="metz-auth-mount-settings" aria-label="Google sign-in for sync testing"></div>

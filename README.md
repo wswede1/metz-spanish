@@ -12,6 +12,10 @@ A browser-based Spanish learning site for middle and high school students. Works
 Optional **profile setup** (IndexedDB adaptive profile):  
 `https://wswede1.github.io/metz-spanish/unidad_colombia/student_site_assets/student-profile-setup.html`
 
+**Teacher dashboard** (activity completions, allowlisted accounts):  
+`https://wswede1.github.io/metz-spanish/unidad_colombia/student_site_assets/teacher-dashboard.html`  
+Run the SQL migration for `teacher_accounts` (see [supabase-migration-teacher-dashboard.sql](unidad_colombia/student_site_assets/supabase-migration-teacher-dashboard.sql)), add your row in `teacher_accounts`, and add this URL to Supabase **Authentication → URL configuration → Redirect URLs**.
+
 **Intro week (no cloud / no login):** ship [unidad_colombia/student_site_assets/js/metzSupabasePublicConfig.js](unidad_colombia/student_site_assets/js/metzSupabasePublicConfig.js) with **`DEFAULT_SUPABASE_ANON_KEY`** empty and **`DEFAULT_SUPABASE_URL`** still a placeholder (`YOUR_PROJECT_REF`), and **`SCHOOL_EMAIL_DOMAIN`** empty. Students see a short “cloud not configured” note on the hub; activities and local progress still work. Test in **Incognito** so old Sync-settings `localStorage` does not re-enable a client. When you are ready for Supabase, set real URL + anon key and your district domain in that file and redeploy.
 
 **Typical first visit (cloud on):** open the hub → **Sign in with Google** with a **district email** (`SCHOOL_EMAIL_DOMAIN` in config, e.g. `mcpsva.org`) → optional auto profile from Google → use activities as assigned. Optional: [student profile setup](unidad_colombia/student_site_assets/student-profile-setup.html) for learner track or display name.

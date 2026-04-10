@@ -18,20 +18,19 @@ Internal maintainer notes: deferred housekeeping and weekend work for teacher vi
 
 ### What already exists
 
-- **Schema:** `activity_completions` in [`unidad_colombia/student_site_assets/supabase-schema.sql`](../unidad_colombia/student_site_assets/supabase-schema.sql) — `user_id`, `course_key`, `activity_id`, `occurred_at`, `payload` (jsonb), with RLS so each auth user only sees their own rows.
+- **Schema:** `activity_completions` in [`unidad_colombia/student_site_assets/supabase-schema.sql`](../unidad_colombia/student_site_assets/supabase-schema.sql) — `user_id`, `course_key`, `activity_id`, `occurred_at`, `payload` (jsonb), with RLS: students see/insert own rows; allowlisted teachers (see `teacher_accounts`) may `SELECT` all completion rows.
 - **Client insert:** [`recordActivityCompletionIfSignedIn`](../unidad_colombia/student_site_assets/js/activityCompletionsSync.js) runs when the student is signed in; [`colombia-student.js`](../unidad_colombia/student_site_assets/colombia-student.js) calls it via `tryRecordActivityCloudCompletion` when an activity page loads.
 - **Adaptive mirror (Dexie → Postgres):** `students`, `sessions`, `item_responses`, `fsrs_cards`, `bkt_skills` — synced via [`supabaseSync.js`](../unidad_colombia/student_site_assets/js/supabaseSync.js). This is separate from hub “lesson progress” in localStorage.
 
+### Teacher visibility (implemented)
+
+- **Allowlist table:** `teacher_accounts` + RLS policies (see [`supabase-schema.sql`](../unidad_colombia/student_site_assets/supabase-schema.sql) or run [`supabase-migration-teacher-dashboard.sql`](../unidad_colombia/student_site_assets/supabase-migration-teacher-dashboard.sql) on existing projects).
+- **UI:** [`teacher-dashboard.html`](../unidad_colombia/student_site_assets/teacher-dashboard.html) — Google sign-in with the publishable key; teachers must have a row in `teacher_accounts` (insert via SQL as postgres). Add the dashboard URL to Supabase Auth **Redirect URLs**.
+- **Still valid:** Dashboard SQL / Table Editor for admins; optional **server-side** export with `service_role` or **Edge Functions** if you later need aggregates beyond what the browser table provides — never put `service_role` in client JS.
+
 ### Gaps to close later
 
-**Teacher visibility of `activity_completions`**
-
-The publishable (anon) key in the browser cannot list all students; RLS is by design. Options:
-
-- **Quick:** Supabase Dashboard → Table Editor or SQL for ad-hoc queries (see also [`supabase-sync-settings.html`](../unidad_colombia/student_site_assets/supabase-sync-settings.html)).
-- **Better:** A small **server-side** script (Node with `service_role`, run only on a machine you control) or a **Supabase Edge Function** with teacher allowlisting — never expose `service_role` in static HTML or client JS.
-
-**Progress beyond completion rows**
+**Hub progress (localStorage) beyond completion pings**
 
 [`colombia-progress.js`](../unidad_colombia/student_site_assets/colombia-progress.js) stores lesson drafts, section completion, and last-activity pointers in **localStorage** only. Cloud inserts today are mainly adaptive sync plus optional `activity_completions` on visit.
 
