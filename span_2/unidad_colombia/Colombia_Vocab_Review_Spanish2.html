@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>🇨🇴 Colombia Vocabulary Review — Spanish 2</title>
+<title>Colombia Vocabulary Review — Spanish 2</title>
 <script>window.__METZ_VOCAB_ITEM_PREFIX='sp2-co';window.__METZ_ADAPTIVE_UNIT_ID='colombia_sp2';</script>
 <script src="https://unpkg.com/dexie@3/dist/dexie.min.js"></script>
 <style>
@@ -256,7 +256,7 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 <body>
 
 <div class="app-header">
-  <h1>🇨🇴 ¡Conoce a Colombia!</h1>
+  <h1>¡Conoce a Colombia!</h1>
   <p class="subtitle">Spanish 2 — Vocabulary Review</p>
 </div>
 
@@ -392,7 +392,8 @@ const categories = window.__METZ_COLOMBIA_VOCAB_DATA_SP2.categories;
 // ═══════════════════════════════════
 // APP STATE
 
-let currentCat = 0;
+let selectedCatIndices = new Set([0]);
+let activeWords = [];
 let currentIdx = 0;
 let deck = [];
 window.__METZ_PATCH_FLASH_DECK = (words, idx) => {
@@ -486,35 +487,80 @@ function cleanupActiveMode() {
 // ═══════════════════════════════════
 // INIT & NAVIGATION
 // ═══════════════════════════════════
-function getInitialCategoryIndex() {
+function normalizeEsKey(s) {
+  return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+function uniqueByEsWords(list) {
+  const seen = {};
+  const out = [];
+  list.forEach(function (wrd) {
+    const k = normalizeEsKey(wrd.es);
+    if (!seen[k]) { seen[k] = true; out.push(wrd); }
+  });
+  return out;
+}
+function recomputeActiveWords() {
+  if (selectedCatIndices.size === 1 && selectedCatIndices.has(0)) {
+    activeWords = categories[0].words.slice();
+    return;
+  }
+  let merged = [];
+  selectedCatIndices.forEach(function (i) {
+    if (i > 0 && categories[i]) merged = merged.concat(categories[i].words);
+  });
+  activeWords = uniqueByEsWords(merged);
+}
+function getCategoryIndexForAdaptive() {
+  if (selectedCatIndices.size === 1 && selectedCatIndices.has(0)) return 0;
+  const themes = Array.from(selectedCatIndices).filter(function (i) { return i > 0; }).sort(function (a, b) { return a - b; });
+  return themes.length ? themes[0] : 1;
+}
+function getSelectionLabel() {
+  if (selectedCatIndices.size === 1 && selectedCatIndices.has(0)) return 'All unit';
+  return Array.from(selectedCatIndices).filter(function (i) { return i > 0; }).sort(function (a, b) { return a - b; })
+    .map(function (i) { return categories[i].name; }).join(' + ');
+}
+function applyCategorySelection() {
+  recomputeActiveWords();
+  currentIdx = 0;
+  deck = [...activeWords];
+  known = new Set();
+  streak = 0;
+  window.__METZ_VOCAB_CATEGORY_INDEX = getCategoryIndexForAdaptive();
+  renderNav();
+  updateStats();
+  setMode(mode);
+}
+function initFromUrl() {
   var raw = new URLSearchParams(window.location.search).get('cat');
-  if (raw === 'all') return 0;
+  if (raw === 'all') { selectedCatIndices = new Set([0]); return; }
   var n = parseInt(raw, 10);
-  if (!isNaN(n) && n >= 1 && n < categories.length) return n;
-  return 0;
+  if (!isNaN(n) && n >= 1 && n < categories.length) { selectedCatIndices = new Set([n]); return; }
+  selectedCatIndices = new Set([0]);
 }
 function init() {
+  initFromUrl();
   renderNav();
-  selectCategory(getInitialCategoryIndex());
+  applyCategorySelection();
 }
 
 function renderNav() {
   const bar = document.getElementById('navBar');
   bar.innerHTML = categories.map((c, i) =>
-    `<button class="nav-btn ${c.color}${i === currentCat ? ' active' : ''}" onclick="selectCategory(${i})">${c.name}</button>`
+    `<button type="button" class="nav-btn ${c.color}${selectedCatIndices.has(i) ? ' nav-selected' : ''}" onclick="toggleCategory(${i})">${c.name}</button>`
   ).join('');
 }
 
-function selectCategory(idx) {
-  currentCat = idx;
-  window.__METZ_VOCAB_CATEGORY_INDEX = idx;
-  currentIdx = 0;
-  deck = [...categories[idx].words];
-  known = new Set();
-  streak = 0;
-  renderNav();
-  updateStats();
-  setMode(mode);
+function toggleCategory(idx) {
+  if (idx === 0) {
+    selectedCatIndices = new Set([0]);
+  } else {
+    selectedCatIndices.delete(0);
+    if (selectedCatIndices.has(idx)) selectedCatIndices.delete(idx);
+    else selectedCatIndices.add(idx);
+    if (selectedCatIndices.size === 0) selectedCatIndices = new Set([0]);
+  }
+  applyCategorySelection();
 }
 
 // ═══════════════════════════════════
@@ -617,14 +663,14 @@ function showComplete() {
   el.style.display = '';
   el.innerHTML = `<div class="complete-screen">
     <h2>🎉 ¡Excelente!</h2>
-    <p>You've reviewed all cards in <strong>${categories[currentCat].name}</strong>!</p>
-    <div class="big-stat">${known.size} / ${categories[currentCat].words.length}</div>
+    <p>You've reviewed all cards in <strong>${getSelectionLabel()}</strong>!</p>
+    <div class="big-stat">${known.size} / ${activeWords.length}</div>
     <p>Words marked as known</p>
     <button class="ctrl-btn btn-next" onclick="resetCategory()" style="margin-top:12px">🔄 Study Again</button>
     <button class="ctrl-btn" style="background:#8E44AD;margin-top:8px" onclick="setMode('boss')">👾 Boss Battle!</button>
   </div>`;
 }
-function resetCategory() { selectCategory(currentCat); }
+function resetCategory() { applyCategorySelection(); }
 
 // ═══════════════════════════════════
 // QUIZ MODE (existing)
@@ -632,7 +678,7 @@ function resetCategory() { selectCategory(currentCat); }
 function startQuiz() { quizScore = 0; quizTotal = 0; nextQuiz(); }
 function nextQuiz() {
   window.__metzQuizT0 = Date.now();
-  const words = categories[currentCat].words;
+  const words = activeWords;
   if (words.length < 4) return;
   const correct = words[Math.floor(Math.random() * words.length)];
   const dir = Math.random() > .5 ? 'es2en' : 'en2es';
@@ -676,7 +722,7 @@ function answerQuiz(btn, isCorrect) {
 // MATCH MODE (existing)
 // ═══════════════════════════════════
 function startMatch() {
-  const words = categories[currentCat].words;
+  const words = activeWords;
   const count = Math.min(6, words.length);
   const shuffled = getRandItems(words, count);
   const tiles = [];
@@ -725,7 +771,7 @@ function matchTap(tile) {
 // ═══════════════════════════════════
 function updateStats() {
   document.getElementById('learnedCount').textContent = known.size;
-  document.getElementById('totalCount').textContent = categories[currentCat].words.length;
+  document.getElementById('totalCount').textContent = activeWords.length;
   document.getElementById('streak').textContent = streak;
 }
 
@@ -741,7 +787,7 @@ function checkStreakBonus() {
 let scrambleWord, scrambleLetters, scrambleGuess;
 
 function initScramble() {
-  const words = categories[currentCat].words;
+  const words = activeWords;
   scrambleWord = words[Math.floor(Math.random() * words.length)];
   const chars = [...scrambleWord.es].map((c, i) => ({ char: c, id: i, used: false }));
   shuffleArray(chars);
@@ -824,7 +870,7 @@ const HM_PARTS = [
 ];
 
 function initHangman() {
-  hmWord = categories[currentCat].words[Math.floor(Math.random() * categories[currentCat].words.length)];
+  hmWord = activeWords[Math.floor(Math.random() * activeWords.length)];
   hmGuesses = new Set();
   hmWrong = 0;
   renderHangman();
@@ -895,7 +941,7 @@ function initMole() {
 function startMoleRound() {
   if (moleRound >= 10) { endMole(); return; }
   moleRound++;
-  const words = categories[currentCat].words;
+  const words = activeWords;
   moleTarget = words[Math.floor(Math.random() * words.length)];
   const others = words.filter(w => w !== moleTarget);
   shuffleArray(others);
@@ -944,7 +990,7 @@ function endMole() {
 let memCards, memFlipped, memMatched, memMoves, memLocked;
 
 function initMemory() {
-  const words = getRandItems(categories[currentCat].words, 8);
+  const words = getRandItems(activeWords, 8);
   const pairs = [];
   words.forEach((w, i) => {
     pairs.push({ id: i, type: 'es', text: w.es, paired: false });
@@ -998,7 +1044,7 @@ let wsGrid, wsWords, wsDragStart, wsCurrent;
 const WS_SIZE = 12;
 
 function initWordSearch() {
-  const words = categories[currentCat].words;
+  const words = activeWords;
   const candidates = words.map(w => ({
     original: w,
     clean: stripArticle(w.es).replace(/[^a-záéíóúñü]/gi, '').toUpperCase().slice(0, 10)
@@ -1119,7 +1165,7 @@ function initCrossword() {
   cwGrid = Array(cwSize).fill(0).map(() => Array(cwSize).fill(null));
   cwWords = [];
 
-  const words = getRandItems(categories[currentCat].words, 10);
+  const words = getRandItems(activeWords, 10);
   const candidates = words.map(w => ({
     word: stripArticle(w.es).replace(/[^a-záéíóúñü]/gi, '').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
     clue: w.en, original: w.es
@@ -1234,7 +1280,7 @@ let chainUsed, chainCurrent, chainScore, chainTimeLeft;
 
 function initChain() {
   chainUsed = new Set(); chainScore = 0; chainTimeLeft = 10;
-  chainCurrent = categories[currentCat].words[Math.floor(Math.random() * categories[currentCat].words.length)];
+  chainCurrent = activeWords[Math.floor(Math.random() * activeWords.length)];
   chainUsed.add(normalizeText(chainCurrent.es));
   renderChain();
   startChainTimer();
@@ -1273,7 +1319,7 @@ function chainSubmit() {
   if (!inp) return;
   const val = normalizeText(inp.value);
   if (!val) return;
-  const allWords = categories[currentCat].words;
+  const allWords = activeWords;
   const match = allWords.find(w => normalizeText(w.es) === val);
   if (!match) { showToast('Not in this category!', 1500); inp.value = ''; return; }
   if (chainUsed.has(val)) { showToast('Already used!', 1500); inp.value = ''; return; }
@@ -1305,7 +1351,7 @@ function initListen() {
 }
 
 function nextListen() {
-  const words = categories[currentCat].words;
+  const words = activeWords;
   if (words.length < 4) return;
   listenWord = words[Math.floor(Math.random() * words.length)];
   let opts = [listenWord];
@@ -1348,7 +1394,7 @@ function listenAnswer(btn, answer) {
 let echoWord, echoBlob;
 
 function initEcho() {
-  echoWord = categories[currentCat].words[Math.floor(Math.random() * categories[currentCat].words.length)];
+  echoWord = activeWords[Math.floor(Math.random() * activeWords.length)];
   echoBlob = null;
   renderEcho();
 }
@@ -1415,11 +1461,29 @@ let oddWords, oddCorrectIdx;
 function initOddOne() {
   const cats = categories;
   if (cats.length < 2) { document.getElementById('oddoneMode').innerHTML = `<div class="game-card"><div class="game-title">🎧 Odd One Out</div><p style="color:#666;text-align:center">Need more categories.</p></div>`; return; }
-  const sameCat = cats[currentCat].words;
-  const otherCats = cats.filter((_, i) => i !== currentCat);
-  const otherCat = otherCats[Math.floor(Math.random() * otherCats.length)];
-  const three = getRandItems(sameCat, 3);
-  const odd = otherCat.words[Math.floor(Math.random() * otherCat.words.length)];
+  const pool = activeWords.slice();
+  if (pool.length < 3) {
+    document.getElementById('oddoneMode').innerHTML = `<div class="game-card"><div class="game-title">🎧 Odd One Out</div><p style="color:#666;text-align:center">Choose a selection with at least 3 words.</p></div>`;
+    return;
+  }
+  const three = getRandItems(pool, 3);
+  const threeKeys = new Set(three.map(w => normalizeEsKey(w.es)));
+  let oddPool = [];
+  for (let i = 1; i < cats.length; i++) {
+    if (!selectedCatIndices.has(i)) oddPool = oddPool.concat(cats[i].words);
+  }
+  oddPool = uniqueByEsWords(oddPool).filter(w => !threeKeys.has(normalizeEsKey(w.es)));
+  if (oddPool.length === 0) {
+    oddPool = uniqueByEsWords(cats[0].words).filter(w => !threeKeys.has(normalizeEsKey(w.es)));
+  }
+  if (oddPool.length === 0 && cats.length > 1) {
+    oddPool = cats[1].words.filter(w => !threeKeys.has(normalizeEsKey(w.es)));
+  }
+  if (oddPool.length === 0) {
+    document.getElementById('oddoneMode').innerHTML = `<div class="game-card"><div class="game-title">🎧 Odd One Out</div><p style="color:#666;text-align:center">Could not build a round — try a different category mix.</p></div>`;
+    return;
+  }
+  const odd = oddPool[Math.floor(Math.random() * oddPool.length)];
   oddWords = [...three, odd];
   shuffleArray(oddWords);
   oddCorrectIdx = oddWords.indexOf(odd);
@@ -1427,7 +1491,7 @@ function initOddOne() {
   const el = document.getElementById('oddoneMode');
   el.innerHTML = `<div class="game-card" style="text-align:center">
     <div class="game-title">🎧 Odd One Out</div>
-    <p class="game-subtitle">3 words are from <strong>${cats[currentCat].name}</strong>. Tap the odd one out!</p>
+    <p class="game-subtitle">3 words are from your selection (<strong>${getSelectionLabel()}</strong>). Tap the odd one out!</p>
     <button class="ctrl-btn" style="background:#8E44AD;margin:10px 0" onclick="oddPlayAll()">🔊 Play All Words</button>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
       ${oddWords.map((w, i) => `<button class="quiz-opt" style="text-align:center" onclick="oddAnswer(this,${i})">${w.es}</button>`).join('')}
@@ -1471,7 +1535,7 @@ const FILL_FRAMES = [
 ];
 
 function initFillBlank() {
-  const words = categories[currentCat].words;
+  const words = activeWords;
   const correct = words[Math.floor(Math.random() * words.length)];
   const frame = FILL_FRAMES[Math.floor(Math.random() * FILL_FRAMES.length)];
   const sentence = frame.replace('___', `<strong style="color:#CE1126;text-decoration:underline">___</strong>`);
@@ -1520,7 +1584,7 @@ function nextTF() {
     </div>`; return;
   }
   tfRound++;
-  const words = categories[currentCat].words;
+  const words = activeWords;
   const w = words[Math.floor(Math.random() * words.length)];
   const isTrue = Math.random() > .5;
   let shownEn = w.en;
@@ -1574,7 +1638,7 @@ function conjugatePreterite(inf, pronoun) {
 }
 
 function initConjugation() {
-  const words = categories[currentCat].words;
+  const words = activeWords;
   // Check for → entries first (pre-conjugated forms)
   const arrowEntries = words.filter(w => w.es.includes('→'));
   if (arrowEntries.length > 0) {
@@ -1633,11 +1697,25 @@ function conjCheck(answer) {
 // ═══════════════════════════════════════════════
 let sortCat1, sortCat2, sortItems, sortZone1, sortZone2;
 
+function getSortItColumnIndices() {
+  const cats = categories;
+  const themes = Array.from(selectedCatIndices).filter(i => i > 0).sort((a, b) => a - b);
+  if (themes.length >= 2) return [themes[0], themes[1]];
+  if (themes.length === 1) {
+    const idx1 = themes[0];
+    let idx2 = idx1 + 1;
+    if (idx2 >= cats.length) idx2 = 1;
+    if (idx2 === idx1) idx2 = idx1 > 1 ? idx1 - 1 : Math.min(idx1 + 1, cats.length - 1);
+    return [idx1, idx2];
+  }
+  return [1, Math.min(2, cats.length - 1)];
+}
 function initSortIt() {
   const cats = categories;
-  if (cats.length < 2) { document.getElementById('sortitMode').innerHTML = `<div class="game-card"><p style="color:#666">Need 2+ categories.</p></div>`; return; }
-  const idx1 = currentCat;
-  let idx2 = (currentCat + 1) % cats.length;
+  if (cats.length < 3) { document.getElementById('sortitMode').innerHTML = `<div class="game-card"><p style="color:#666">Need 2+ theme categories.</p></div>`; return; }
+  const pair = getSortItColumnIndices();
+  let idx1 = pair[0], idx2 = pair[1];
+  if (idx1 === idx2) idx2 = idx1 === cats.length - 1 ? 1 : idx1 + 1;
   sortCat1 = cats[idx1]; sortCat2 = cats[idx2];
   const w1 = getRandItems(sortCat1.words, 4).map(w => ({ ...w, cat: 0 }));
   const w2 = getRandItems(sortCat2.words, 4).map(w => ({ ...w, cat: 1 }));
@@ -1713,7 +1791,7 @@ const FUNCTION_WORDS = ['es', 'en', 'de', 'la', 'el', 'un', 'una', 'muy', 'y', '
 let bsTiles, bsSentence;
 
 function initBuildSentence() {
-  const words = getRandItems(categories[currentCat].words, 3);
+  const words = getRandItems(activeWords, 3);
   const vocabTiles = words.map(w => stripArticle(w.es).split(' ')[0].toLowerCase());
   const funcTiles = getRandItems(FUNCTION_WORDS, 4);
   bsTiles = shuffleArray([...new Set([...vocabTiles, ...funcTiles])]).map((t, i) => ({ text: t, id: i, used: false }));
@@ -1772,7 +1850,7 @@ async function bsValidate() {
 let grNouns, grIdx, grScore, grTimeLeft;
 
 function initGender() {
-  const words = categories[currentCat].words;
+  const words = activeWords;
   grNouns = words.filter(w => /^(el|la)\s/i.test(w.es)).map(w => ({
     noun: w.es.replace(/^(el|la)\s+/i, ''), gender: w.es.match(/^(el|la)/i)[0].toLowerCase(), en: w.en
   }));
@@ -1848,7 +1926,7 @@ function nextTrans() {
     </div>`; return;
   }
   transRound++;
-  const words = categories[currentCat].words;
+  const words = activeWords;
   const w = words[Math.floor(Math.random() * words.length)];
 
   document.getElementById('translationMode').innerHTML = `<div class="game-card" style="text-align:center">
@@ -2003,7 +2081,7 @@ function initFalling() {
 }
 
 function pickFallingWord() {
-  const words = categories[currentCat].words;
+  const words = activeWords;
   fwWord = words[Math.floor(Math.random() * words.length)];
   fwY = 0; if (fwCanvas) fwX = Math.random() * (fwCanvas.width - 100) + 10;
 }
@@ -2075,7 +2153,7 @@ function nextRace() {
     </div>`; return;
   }
   raceRound++;
-  const words = categories[currentCat].words;
+  const words = activeWords;
   raceCorrect = words[Math.floor(Math.random() * words.length)];
   let opts = [raceCorrect];
   while (opts.length < 4) { const r = words[Math.floor(Math.random() * words.length)]; if (!opts.includes(r)) opts.push(r); }
@@ -2142,7 +2220,7 @@ function nextBossRound() {
   if (bossHP <= 0) { bossVictory(); return; }
   if (playerHP <= 0) { bossDefeat(); return; }
   bossRound++;
-  const words = categories[currentCat].words;
+  const words = activeWords;
   bossWord = words[Math.floor(Math.random() * words.length)];
   let opts = [bossWord];
   while (opts.length < 4) { const r = words[Math.floor(Math.random() * words.length)]; if (!opts.includes(r)) opts.push(r); }
