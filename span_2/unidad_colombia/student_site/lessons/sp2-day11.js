@@ -2,11 +2,11 @@ window.LESSON_DATA = {
   dayLabel: "Day 11",
   unit: "Unidad Colombia",
   title: "Encanto — Part 1 Viewing Guide (Pretérito)",
-  subtitle: "Watch Part 1 of Encanto and track characters, settings, and preterite verbs you hear",
+  subtitle: "Watch Part 1 of Encanto and track characters, settings, and what they did",
   objectives: [
     "I can identify main characters and describe their traits",
     "I can notice Colombia-inspired settings and cultural details in the film",
-    "I can track preterite verbs used in the film dialogue"
+    "I can describe character actions and observations using the preterite where appropriate"
   ],
   vocabCategory: 1,
   sections: [
@@ -38,7 +38,7 @@ window.LESSON_DATA = {
         {
           type: "callout",
           style: "fire",
-          text: "<strong>Your mission while watching:</strong> Listen for preterite verbs in the dialogue. When a character talks about something that <em>already happened</em>, write down the verb. Examples: <em>dijo</em> (said), <em>fue</em> (went/was), <em>hizo</em> (did/made), <em>perdió</em> (lost)."
+          text: "<strong>Your mission while watching:</strong> Pay attention to how characters talk about the past. When you describe what someone <em>did</em>, use the preterite in your notes. Examples: <em>dijo</em> (said), <em>fue</em> (went/was), <em>hizo</em> (did/made), <em>perdió</em> (lost)."
         }
       ]
     },
@@ -69,34 +69,8 @@ window.LESSON_DATA = {
       ]
     },
     {
-      id: "verb-tracker",
-      title: "Part 3 — Preterite Verb Tracker",
-      shortTitle: "Verb Tracker",
-      subtitle: "Listen carefully — catch preterite verbs as they happen!",
-      icon: "👂",
-      accent: "purple",
-      components: [
-        {
-          type: "callout",
-          style: "info",
-          text: "Every time you hear a past-tense verb, write it down. Don't worry about getting every single one — aim for at least 5."
-        },
-        {
-          type: "data-table",
-          headers: ["Verb I Heard", "Who Said/Did It", "What It Means"],
-          rows: [
-            [{ editable: true, placeholder: "e.g., dijo" }, { editable: true, placeholder: "Abuela" }, { editable: true, placeholder: "said" }],
-            [{ editable: true, placeholder: "e.g., fue" }, { editable: true, placeholder: "Mirabel" }, { editable: true, placeholder: "went / was" }],
-            [{ editable: true, placeholder: "verb..." }, { editable: true, placeholder: "who..." }, { editable: true, placeholder: "meaning..." }],
-            [{ editable: true, placeholder: "verb..." }, { editable: true, placeholder: "who..." }, { editable: true, placeholder: "meaning..." }],
-            [{ editable: true, placeholder: "verb..." }, { editable: true, placeholder: "who..." }, { editable: true, placeholder: "meaning..." }]
-          ]
-        }
-      ]
-    },
-    {
       id: "observations",
-      title: "Part 4 — Observations",
+      title: "Part 3 — Observations",
       shortTitle: "Observations",
       subtitle: "What did you notice about the setting and language?",
       icon: "🔍",
@@ -115,7 +89,7 @@ window.LESSON_DATA = {
     },
     {
       id: "exit",
-      title: "Part 5 — Exit Ticket",
+      title: "Part 4 — Exit Ticket",
       shortTitle: "Exit",
       subtitle: "Quick check before you go",
       icon: "🎟️",
