@@ -10,13 +10,13 @@ window.unitSite = {
   /** Hub "Today's path": objectives + CTA; use `ctaHref` for a direct link, or `day` + daily-roadmap.html. */
   roadmap: {
     enabled: true,
-    day: 3,
+    day: 11,
     courseKey: "sp1",
     objectives: [
-      "I can conjugate present-tense -ER and -IR verbs for common subjects.",
-      "I can use gustar + noun or infinitive in short Colombia-themed sentences."
+      "I can track setting, characters, and emotional language during Part 1 of Encanto.",
+      "I can connect film details to our Colombia unit respectfully (film ≠ documentary)."
     ],
-    ctaHref: "activity.html?activity=sp1-day-03-grammar"
+    ctaHref: "activity.html?activity=sp1-day-11-encanto-1"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 1 — ¡Conoce a Colombia!",

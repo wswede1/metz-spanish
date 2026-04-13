@@ -9,14 +9,13 @@ window.unitSite = {
   courseKey: "sp2",
   roadmap: {
     enabled: true,
-    day: 4,
+    day: 11,
     courseKey: "sp2",
     objectives: [
-      "I can review -CAR, -GAR, and -ZAR yo-forms in the preterite.",
-      "I can use the i→y pattern for leer, creer, and oír in él/ella and ellos forms.",
-      "I can read a Cartagena travel passage and spot preterite verbs."
+      "I can track verbs, character actions, and setting details during Part 1 of Encanto.",
+      "I can use the preterite to retell key moments from the film."
     ],
-    ctaHref: "lessons/lesson.html?day=4"
+    ctaHref: "activity.html?activity=sp2-day-11-encanto-1"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 2 — ¡Conoce a Colombia!",
