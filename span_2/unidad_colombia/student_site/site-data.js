@@ -15,6 +15,7 @@ window.unitSite = {
       "I can track verbs, character actions, and setting details during Part 1 of Encanto.",
       "I can use the preterite to retell key moments from the film."
     ],
+    ctaLessonDay: 11,
     ctaHref: "lessons/lesson.html?day=11"
   },
   totalUnitLessonDays: 14,

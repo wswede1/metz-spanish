@@ -7,7 +7,7 @@
 
 window.unitSite = {
   courseKey: "sp1",
-  /** Hub "Today's path": objectives + CTA; use `ctaHref` for a direct link, or `day` + daily-roadmap.html. */
+  /** Hub "Today's path": objectives + CTA. Prefer `ctaLessonDay` for full lesson-engine pages (overrides cached `ctaHref`). */
   roadmap: {
     enabled: true,
     day: 11,
@@ -16,6 +16,7 @@ window.unitSite = {
       "I can track setting, characters, and emotional language during Part 1 of Encanto.",
       "I can connect film details to our Colombia unit respectfully (film ≠ documentary)."
     ],
+    ctaLessonDay: 11,
     ctaHref: "lessons/lesson.html?day=11"
   },
   totalUnitLessonDays: 14,

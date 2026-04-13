@@ -369,8 +369,10 @@
       var rDay = parseInt(String(road.day), 10);
       var rCourse = road.courseKey || site.courseKey || 'sp1';
       var hasCtaHref = !!(road.ctaHref && String(road.ctaHref).trim());
+      var ctaLessonNum = parseInt(String(road.ctaLessonDay != null ? road.ctaLessonDay : ''), 10);
+      var hasCtaLessonDay = !isNaN(ctaLessonNum) && ctaLessonNum > 0;
       var hasDay = !isNaN(rDay) && rDay > 0;
-      if (hasCtaHref || hasDay) {
+      if (hasCtaHref || hasDay || hasCtaLessonDay) {
         var rb = el('section', 'roadmap-hub-banner');
         var rInner = el('div', 'roadmap-hub-banner-inner');
         rInner.appendChild(el('h2', 'roadmap-hub-title', "Today's path"));
@@ -385,9 +387,14 @@
         var ctaLabel = road.ctaLabel && String(road.ctaLabel).trim()
           ? String(road.ctaLabel).trim()
           : 'Vamos!/Get started';
-        var ctaHref = hasCtaHref
-          ? String(road.ctaHref).trim()
-          : 'daily-roadmap.html?day=' + encodeURIComponent(String(rDay)) + '&course=' + encodeURIComponent(rCourse);
+        var ctaHref;
+        if (hasCtaLessonDay) {
+          ctaHref = 'lessons/lesson.html?day=' + encodeURIComponent(String(ctaLessonNum));
+        } else if (hasCtaHref) {
+          ctaHref = String(road.ctaHref).trim();
+        } else {
+          ctaHref = 'daily-roadmap.html?day=' + encodeURIComponent(String(rDay)) + '&course=' + encodeURIComponent(rCourse);
+        }
         var rA = el('a', 'primary-btn roadmap-hub-cta', ctaLabel);
         rA.href = ctaHref;
         rInner.appendChild(rA);
