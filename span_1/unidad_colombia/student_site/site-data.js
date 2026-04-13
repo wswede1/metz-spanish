@@ -16,7 +16,7 @@ window.unitSite = {
       "I can track setting, characters, and emotional language during Part 1 of Encanto.",
       "I can connect film details to our Colombia unit respectfully (film ≠ documentary)."
     ],
-    ctaHref: "activity.html?activity=sp1-day-11-encanto-1"
+    ctaHref: "lessons/lesson.html?day=11"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 1 — ¡Conoce a Colombia!",

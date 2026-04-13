@@ -15,7 +15,7 @@ window.unitSite = {
       "I can track verbs, character actions, and setting details during Part 1 of Encanto.",
       "I can use the preterite to retell key moments from the film."
     ],
-    ctaHref: "activity.html?activity=sp2-day-11-encanto-1"
+    ctaHref: "lessons/lesson.html?day=11"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 2 — ¡Conoce a Colombia!",
