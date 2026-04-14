@@ -3,25 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clase Dashboard</title>
-  <script src="https://unpkg.com/dexie@3/dist/dexie.min.js"></script>
+  <title>Teacher — Metz Spanish</title>
   <link rel="stylesheet" href="unidad_colombia/student_site_assets/colombia-student.css">
 </head>
 <body>
   <div class="teacher-page">
-    <a class="teacher-back" href="span_1/unidad_colombia/student_site/index.html">← Student site</a>
-    <a class="teacher-back" href="unidad_colombia/student_site_assets/supabase-sync-settings.html" style="margin-left:16px">Sync settings</a>
-    <h1>Clase Dashboard</h1>
-    <p class="metz-dash-hint">Uses IndexedDB on this browser. For a full class view across devices, sync data to Supabase first.</p>
-
-    <nav class="teacher-tabs" id="teacherTabs" aria-label="Dashboard sections">
-      <button type="button" class="teacher-tab active" data-tab="overview">Class overview</button>
-      <button type="button" class="teacher-tab" data-tab="skill">By skill</button>
-      <button type="button" class="teacher-tab" data-tab="items">Item diagnostics</button>
-    </nav>
-
-    <div id="tdRoot"></div>
+    <a class="teacher-back" href="span_1/unidad_colombia/student_site/index.html">← Spanish 1 hub</a>
+    <a class="teacher-back" href="span_2/unidad_colombia/student_site/index.html" style="margin-left:16px">Spanish 2 hub</a>
+    <h1>Teacher resources</h1>
+    <p class="metz-dash-hint">
+      Colombia unit student progress is stored in each learner’s browser on this device (local storage / IndexedDB).
+      This deployment does not use cloud sync or a class database.
+    </p>
+    <p class="metz-dash-hint" style="margin-top:12px">
+      Share the student hub links above. Optional “Your progress” panels on each hub use the same browser profile.
+    </p>
   </div>
-  <script type="module" src="unidad_colombia/student_site_assets/js/teacherDashboard.js"></script>
 </body>
 </html>

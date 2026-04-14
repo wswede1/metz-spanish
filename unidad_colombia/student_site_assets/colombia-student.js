@@ -27,20 +27,6 @@
     return value === undefined || value === null || value === '' ? fallback : value;
   }
 
-  /** Optional cloud row in activity_completions when signed in (ESM; no-op if import fails). */
-  function tryRecordActivityCloudCompletion(courseKey, activityId, meta) {
-    var script = document.querySelector('script[src*="colombia-student.js"]');
-    var src = script && script.getAttribute('src');
-    if (!src) return;
-    var modUrl = src.replace(/\/colombia-student\.js(\?[^#]*)?$/i, '/js/activityCompletionsSync.js$1');
-    if (modUrl === src) return;
-    import(modUrl).then(function (m) {
-      if (typeof m.recordActivityCompletionIfSignedIn === 'function') {
-        m.recordActivityCompletionIfSignedIn(courseKey, activityId, meta || {});
-      }
-    }).catch(function () {});
-  }
-
   // ── Glossary helpers ────────────────────────────────────────────────────────
 
   function buildGlossMap(glossary) {
@@ -1510,7 +1496,6 @@
         href: 'activity.html?activity=' + encodeURIComponent(activityId)
       };
       ColombiaProgress.recordActivityVisit(site.courseKey, activityId, actMeta);
-      tryRecordActivityCloudCompletion(site.courseKey, activityId, actMeta);
     }
     var practicePersist = { activityId: activityId, courseKey: site.courseKey || 'sp1' };
     if (activity.type === 'reading') {

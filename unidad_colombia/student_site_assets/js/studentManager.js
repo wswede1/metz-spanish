@@ -200,13 +200,6 @@ export async function getOrCreateStudent(displayName, learnerTrack = 'auto') {
     out = { ...row, id };
   }
 
-  try {
-    const m = await import('./supabaseSync.js');
-    await m.syncFromSupabase(studentId);
-    m.scheduleSyncToSupabase(studentId);
-  } catch (e) {
-    console.warn('[SUPABASE SYNC]', e?.message || e);
-  }
   return out;
 }
 

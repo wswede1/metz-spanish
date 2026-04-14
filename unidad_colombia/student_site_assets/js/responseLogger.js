@@ -70,9 +70,6 @@ export async function logResponse(payload) {
     sessionId: payload.sessionId,
   };
   const newId = await itemResponses.add(row);
-  import('./supabaseSync.js')
-    .then((m) => m.scheduleSyncToSupabase(payload.studentId))
-    .catch(() => {});
   return newId;
 }
 
