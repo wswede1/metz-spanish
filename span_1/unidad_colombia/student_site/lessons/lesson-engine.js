@@ -1562,7 +1562,6 @@
     var courseMq = getLessonCourse();
     var dayMq = getLessonDay();
     var mqKey = lessonCmpKey('mcqsel', sectionId, componentIndex);
-    var debMq = null;
     function persistMq() {
       if (!window.ColombiaProgress) return;
       var sel = {};
@@ -1573,14 +1572,7 @@
       });
       setDraftJson(courseMq, dayMq, mqKey, { selections: sel });
     }
-    function scheduleMq() {
-      clearTimeout(debMq);
-      debMq = setTimeout(function() { debMq = null; persistMq(); }, 280);
-    }
-    registerLessonDraftFlush(function() {
-      clearTimeout(debMq);
-      persistMq();
-    });
+    registerLessonDraftFlush(persistMq);
     var savedMq = window.ColombiaProgress ? parseDraftJson(ColombiaProgress.getLessonDraft(courseMq, dayMq, mqKey)) : null;
 
     data.questions.forEach(function(q, qi) {
@@ -1611,7 +1603,7 @@
           $$('label', optWrap).forEach(function(l) { l.style.borderColor = '#e0e5ee'; l.style.background = '#fafbfd'; });
           label.style.borderColor = 'var(--col-blue)';
           label.style.background = '#d6eaf8';
-          scheduleMq();
+          persistMq();
         });
         optWrap.appendChild(label);
       });
