@@ -22,12 +22,25 @@ window.LESSON_DATA = {
         {
           type: "callout",
           style: "info",
-          text: "We use <strong>estar</strong> (not <strong>ser</strong>) to talk about <em>location</em>. First, build one sentence for each subject. Then match each form of <strong>estar</strong> to its meaning. Finally, type the full conjugation in the chart."
+          text: "We use <strong>estar</strong> (not <strong>ser</strong>) to talk about <em>location</em>. First, match each form of <strong>estar</strong> to who uses it. Then build one sentence for each subject. Finally, type the full conjugation in the chart."
         },
         {
           type: "callout",
           style: "tip",
-          text: "<strong>Build each sentence</strong> — tap words in order, then <strong>✓ Check order</strong>. One sentence per line uses a different form of <strong>estar</strong>."
+          text: "<strong>1)</strong> Match Spanish forms to English. <strong>2)</strong> Build each sentence — tap words in order, then <strong>✓ Check order</strong> (one sentence per subject of <strong>estar</strong>)."
+        },
+        {
+          type: "matching",
+          wordBank: true,
+          skipMarkSectionComplete: true,
+          instructions: "Match each <strong>estar</strong> form to who uses it (English).",
+          pairs: [
+            { es: "estoy", en: "I am (yo)" },
+            { es: "estás", en: "you are (tú)" },
+            { es: "está", en: "he/she/it is; you are (usted)" },
+            { es: "estamos", en: "we are (nosotros/as)" },
+            { es: "están", en: "they are; you all are (ellos/ellas/ustedes)" }
+          ]
         },
         {
           type: "sentence-order",
@@ -63,19 +76,6 @@ window.LESSON_DATA = {
           tokens: ["Los", "estudiantes", "están", "en", "el", "salón."],
           correctOrder: [0, 1, 2, 3, 4, 5],
           skipMarkSectionComplete: true
-        },
-        {
-          type: "matching",
-          wordBank: true,
-          skipMarkSectionComplete: true,
-          instructions: "Match each <strong>estar</strong> form to who uses it (English).",
-          pairs: [
-            { es: "estoy", en: "I am (yo)" },
-            { es: "estás", en: "you are (tú)" },
-            { es: "está", en: "he/she/it is; you are (usted)" },
-            { es: "estamos", en: "we are (nosotros/as)" },
-            { es: "están", en: "they are; you all are (ellos/ellas/ustedes)" }
-          ]
         },
         {
           type: "conj-table",
