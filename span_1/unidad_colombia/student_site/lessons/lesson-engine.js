@@ -621,7 +621,7 @@
           persistMatch();
           if (matchedCount === leftItems.length) {
             showToast('All matched!', 'success');
-            markSectionComplete(sectionId);
+            if (data.skipMarkSectionComplete !== true) markSectionComplete(sectionId);
           }
         } else {
           tile.classList.add('wrong');
@@ -746,7 +746,7 @@
       var got = picked.map(function(i) { return tokens[i]; }).join(' ');
       var ok = got === target;
       showToast(ok ? 'Perfect order!' : 'Not quite — tap words in your sentence to fix the order.', ok ? 'success' : 'retry');
-      if (ok) markSectionComplete(sectionId);
+      if (ok && data.skipMarkSectionComplete !== true) markSectionComplete(sectionId);
     });
     wrap.appendChild(check);
     return wrap;

@@ -22,20 +22,60 @@ window.LESSON_DATA = {
         {
           type: "callout",
           style: "info",
-          text: "We use <strong>estar</strong> (not ser) to talk about <em>location</em>. Look at these sentences — what forms of estar do you see?"
+          text: "We use <strong>estar</strong> (not <strong>ser</strong>) to talk about <em>location</em>. First, build one sentence for each subject. Then match each form of <strong>estar</strong> to its meaning. Finally, type the full conjugation in the chart."
         },
         {
-          type: "discovery",
-          title: "Observe the Pattern",
-          instructions: "How does estar change with different subjects?",
-          sentences: [
-            "El libro <span class=\"highlight\">está</span> en la mesa.",
-            "Los estudiantes <span class=\"highlight\">están</span> en la clase.",
-            "Yo <span class=\"highlight\">estoy</span> en el colegio.",
-            "Nosotros <span class=\"highlight\">estamos</span> en Bogotá."
-          ],
-          question: "Write out all the forms of estar you can figure out:",
-          placeholder: "yo = estoy, tú = ..., él/ella = ..., nosotros = ..., ellos = ..."
+          type: "callout",
+          style: "tip",
+          text: "<strong>Build each sentence</strong> — tap words in order, then <strong>✓ Check order</strong>. One sentence per line uses a different form of <strong>estar</strong>."
+        },
+        {
+          type: "sentence-order",
+          prompt: "<strong>Yo</strong> — Put in order: <em>I am in Spanish class.</em>",
+          tokens: ["Yo", "estoy", "en", "la", "clase", "de", "español."],
+          correctOrder: [0, 1, 2, 3, 4, 5, 6],
+          skipMarkSectionComplete: true
+        },
+        {
+          type: "sentence-order",
+          prompt: "<strong>Tú</strong> — Put in order: <em>Are you in the library?</em>",
+          tokens: ["¿Tú", "estás", "en", "la", "biblioteca?"],
+          correctOrder: [0, 1, 2, 3, 4],
+          skipMarkSectionComplete: true
+        },
+        {
+          type: "sentence-order",
+          prompt: "<strong>Él / ella / usted</strong> — Put in order: <em>The book is on the desk.</em>",
+          tokens: ["El", "libro", "está", "encima", "del", "escritorio."],
+          correctOrder: [0, 1, 2, 3, 4, 5],
+          skipMarkSectionComplete: true
+        },
+        {
+          type: "sentence-order",
+          prompt: "<strong>Nosotros</strong> — Put in order: <em>We are in Bogotá.</em>",
+          tokens: ["Nosotros", "estamos", "en", "Bogotá."],
+          correctOrder: [0, 1, 2, 3],
+          skipMarkSectionComplete: true
+        },
+        {
+          type: "sentence-order",
+          prompt: "<strong>Ellos / ellas / ustedes</strong> — Put in order: <em>The students are in the classroom.</em>",
+          tokens: ["Los", "estudiantes", "están", "en", "el", "salón."],
+          correctOrder: [0, 1, 2, 3, 4, 5],
+          skipMarkSectionComplete: true
+        },
+        {
+          type: "matching",
+          wordBank: true,
+          skipMarkSectionComplete: true,
+          instructions: "Match each <strong>estar</strong> form to who uses it (English).",
+          pairs: [
+            { es: "estoy", en: "I am (yo)" },
+            { es: "estás", en: "you are (tú)" },
+            { es: "está", en: "he/she/it is; you are (usted)" },
+            { es: "estamos", en: "we are (nosotros/as)" },
+            { es: "están", en: "they are; you all are (ellos/ellas/ustedes)" }
+          ]
         },
         {
           type: "conj-table",
