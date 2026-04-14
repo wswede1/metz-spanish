@@ -190,6 +190,7 @@
   if (typeof window !== 'undefined' && !window.__metzLessonDraftUnload) {
     window.__metzLessonDraftUnload = true;
     window.addEventListener('pagehide', function() { flushAllLessonDrafts(); });
+    window.addEventListener('beforeunload', function() { flushAllLessonDrafts(); });
     document.addEventListener('visibilitychange', function() {
       if (document.visibilityState === 'hidden') flushAllLessonDrafts();
     });
@@ -828,28 +829,34 @@
     var courseFb = getLessonCourse();
     var dayFb = getLessonDay();
     var fbKey = lessonCmpKey('fill', sectionId, componentIndex);
-    var debFb = null;
     function persistFb() {
       if (!window.ColombiaProgress) return;
       var vals = blanks.map(function(b) { return b.value; });
       setDraftJson(courseFb, dayFb, fbKey, { values: vals });
     }
-    function scheduleFb() {
-      clearTimeout(debFb);
-      debFb = setTimeout(function() { debFb = null; persistFb(); }, 280);
+    registerLessonDraftFlush(persistFb);
+    function syncWordBankUsed() {
+      if (!bankWords.length) return;
+      var blanksNow = $$('.fill-blank', sentWrap);
+      $$('.word-chip', wrap).forEach(function(chip) {
+        var usedInBlanks = blanksNow.some(function(b) { return normalize(b.value) === normalize(chip.textContent); });
+        chip.classList.toggle('used', usedInBlanks);
+      });
     }
-    registerLessonDraftFlush(function() {
-      clearTimeout(debFb);
-      persistFb();
-    });
     var savedFb = window.ColombiaProgress ? parseDraftJson(ColombiaProgress.getLessonDraft(courseFb, dayFb, fbKey)) : null;
     if (savedFb && savedFb.values && savedFb.values.length) {
       blanks.forEach(function(b, i) {
         if (savedFb.values[i] !== undefined && savedFb.values[i] !== null) b.value = savedFb.values[i];
       });
+      syncWordBankUsed();
     }
     blanks.forEach(function(inp) {
-      inp.addEventListener('input', scheduleFb);
+      function onVal() {
+        persistFb();
+        syncWordBankUsed();
+      }
+      inp.addEventListener('input', onVal);
+      inp.addEventListener('blur', onVal);
     });
     if (bankWords.length && blanks.length) {
       blanks.forEach(function(inp) {
@@ -869,14 +876,16 @@
           var t = e.dataTransfer.getData('text/plain');
           if (t) {
             inp.value = t.trim();
-            scheduleFb();
+            persistFb();
+            syncWordBankUsed();
           }
         });
         inp.addEventListener('click', function() {
           if (selectedChip && !selectedChip.classList.contains('used')) {
             inp.value = selectedChip.textContent.trim();
             clearChipSelection();
-            scheduleFb();
+            persistFb();
+            syncWordBankUsed();
           }
         });
       });
