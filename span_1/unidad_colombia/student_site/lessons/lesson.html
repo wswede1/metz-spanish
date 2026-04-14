@@ -4,29 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lesson — Colombia Unit</title>
-<link rel="stylesheet" href="lesson-engine.css?v=202604111200">
+<link rel="stylesheet" href="lesson-engine.css?v=202604141600">
 </head>
 <body>
 <div id="lessonRoot"></div>
-<script src="../../../unidad_colombia/student_site_assets/colombia-progress.js?v=202604111200"></script>
+<script src="../../../unidad_colombia/student_site_assets/colombia-progress.js?v=202604141600"></script>
 <script src="../../../unidad_colombia/student_site_assets/js/metz-spanish-tts.js"></script>
 <script>
+(function () {
   window.METZ_LESSON_COURSE = 'sp1';
-  (function () {
-    var params = new URLSearchParams(window.location.search);
-    var day = params.get('day') || '1';
-    window.METZ_LESSON_DAY = String(parseInt(day, 10)).padStart(2, '0');
-  })();
-</script>
-<script src="lesson-engine.js?v=202604111200"></script>
-<script>
-// Load lesson data from query param: ?day=1
-(function() {
   var params = new URLSearchParams(window.location.search);
-  var day = params.get('day') || '1';
+  var raw = params.get('day');
+  if (raw == null || String(raw).trim() === '') raw = '1';
+  var n = parseInt(String(raw).trim(), 10);
+  if (!isFinite(n) || n < 1) n = 1;
+  if (n > 99) n = 99;
+  window.METZ_LESSON_DAY = String(n).padStart(2, '0');
+})();
+</script>
+<script src="lesson-engine.js?v=202604141600"></script>
+<script>
+(function () {
+  var day = window.METZ_LESSON_DAY || '01';
   var script = document.createElement('script');
-  script.src = 'sp1-day' + day.padStart(2, '0') + '.js?v=202604111200';
-  script.onload = function() {
+  script.src = 'sp1-day' + day + '.js?v=202604141600';
+  script.onload = function () {
     if (window.LESSON_DATA && window.LessonEngine) {
       document.title = window.LESSON_DATA.title + ' — Colombia Unit';
       window.LessonEngine.render(window.LESSON_DATA);

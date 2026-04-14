@@ -515,6 +515,13 @@ body {
   color: var(--text-muted);
   margin-bottom: 4px;
 }
+.word-bank-hint {
+  width: 100%;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
 .word-chip {
   padding: 6px 14px;
   background: #fff;
@@ -525,9 +532,22 @@ body {
   cursor: grab;
   transition: var(--transition);
   user-select: none;
+  touch-action: none;
 }
 .word-chip:hover { border-color: var(--col-blue); background: #eef3ff; transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.word-chip:active { cursor: grabbing; }
+.word-chip.word-chip-selected {
+  border-color: var(--col-purple);
+  background: #f3e8ff;
+  box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.25);
+}
 .word-chip.used { opacity: 0.3; pointer-events: none; text-decoration: line-through; }
+
+.fill-blank.fill-blank-drag-over {
+  border-bottom-color: var(--col-purple);
+  box-shadow: 0 4px 12px rgba(142, 68, 173, 0.2);
+  background: rgba(142, 68, 173, 0.06);
+}
 
 /* Discovery Box (grammar) */
 .discovery-box {
@@ -1188,6 +1208,19 @@ body {
 }
 .self-rubric-item input {
   margin-top: 3px;
+}
+
+.lesson-storage-warn {
+  flex-basis: 100%;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 .lesson-hub-link,

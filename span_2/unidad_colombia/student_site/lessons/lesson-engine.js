@@ -168,8 +168,16 @@
   function getLessonCourse() {
     return window.METZ_LESSON_COURSE || 'sp1';
   }
+  /** Normalize day so localStorage keys always match (avoids NaN / wrong deck). */
   function getLessonDay() {
-    return window.METZ_LESSON_DAY || '01';
+    var d = window.METZ_LESSON_DAY;
+    if (d == null || d === '') return '01';
+    var s = String(d).trim();
+    if (/^\d{1,2}$/.test(s)) {
+      var n = parseInt(s, 10);
+      if (n >= 1 && n <= 99) return String(n).padStart(2, '0');
+    }
+    return '01';
   }
 
   var lessonDraftFlushers = [];
@@ -1703,6 +1711,13 @@
     var hubA = html('a', 'lesson-hub-link', '← Back to Hub');
     hubA.href = '../index.html';
     nav.appendChild(hubA);
+    if (window.ColombiaProgress && window.ColombiaProgress.storageAvailable === false) {
+      var stWarn = el('div', 'lesson-storage-warn');
+      stWarn.setAttribute('role', 'alert');
+      stWarn.textContent =
+        'This browser cannot save lesson progress (storage blocked or full). Use a normal browsing window, not guest mode, or ask your school to allow data for this site.';
+      nav.appendChild(stWarn);
+    }
     if (lesson.vocabCategory !== undefined && lesson.vocabCategory !== null) {
       var vocabA = html('a', 'lesson-vocab-link', '📇 Unit flashcards & games');
       vocabA.href = unitVocabGamesHref();

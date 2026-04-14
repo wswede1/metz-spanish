@@ -15,7 +15,16 @@
   function safeSet(key, val) {
     try {
       global.localStorage.setItem(key, val);
-    } catch (e) {}
+      return true;
+    } catch (e) {
+      if (typeof console !== 'undefined' && console.warn) {
+        console.warn(
+          '[ColombiaProgress] Could not save to localStorage (blocked, quota, or private mode):',
+          e && e.message ? e.message : e
+        );
+      }
+      return false;
+    }
   }
 
   function safeJSONParse(s, fallback) {
@@ -31,8 +40,21 @@
     return PREFIX + course + '-lesson-' + day + '-';
   }
 
+  /** False if localStorage is unavailable (policy, incognito, quota). */
+  var storageAvailable = (function () {
+    try {
+      var k = '__metz_ls_probe';
+      global.localStorage.setItem(k, '1');
+      global.localStorage.removeItem(k);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  })();
+
   var ColombiaProgress = {
     PREFIX: PREFIX,
+    storageAvailable: storageAvailable,
 
     lessonDraftKey: function (course, day, key) {
       return lessonPrefix(course, day) + key;
