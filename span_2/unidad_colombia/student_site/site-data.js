@@ -9,14 +9,14 @@ window.unitSite = {
   courseKey: "sp2",
   roadmap: {
     enabled: true,
-    day: 11,
+    day: 5,
     courseKey: "sp2",
     objectives: [
-      "I can track verbs, character actions, and setting details during Part 1 of Encanto.",
-      "I can use the preterite to retell key moments from the film."
+      "I can conjugate pedir, dormir, and preferir in the preterite (stem change in él/ella and ellos).",
+      "I can use stem-changing -IR verbs in Colombia travel contexts."
     ],
-    ctaLessonDay: 11,
-    ctaHref: "lessons/lesson.html?day=11"
+    ctaLessonDay: 5,
+    ctaHref: "lessons/lesson.html?day=5"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 2 — ¡Conoce a Colombia!",
