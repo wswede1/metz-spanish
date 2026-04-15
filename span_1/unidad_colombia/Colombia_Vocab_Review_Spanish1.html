@@ -384,12 +384,29 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 <!-- Completion -->
 <div id="completeMode" style="display:none"></div>
 
-<script src="../../unidad_colombia/student_site_assets/data/colombia-vocab-sp1.js?v=202604152000"></script>
+<script src="../../unidad_colombia/student_site_assets/data/colombia-vocab-sp1.js?v=202604152100"></script>
 <script>
 // ═══════════════════════════════════════════════
 // VOCABULARY DATA — Spanish 1 (see colombia-vocab-sp1.js)
 // ═══════════════════════════════════════════════
-const categories = window.__METZ_COLOMBIA_VOCAB_DATA_SP1.categories;
+(function () {
+  if (location.protocol === 'file:') {
+    var w = document.createElement('div');
+    w.setAttribute('role', 'status');
+    w.style.cssText = 'background:#fff3cd;color:#664d03;padding:10px 14px;text-align:center;font-size:.85rem;font-weight:700;border-bottom:2px solid #ffc107;line-height:1.4';
+    w.innerHTML = 'This page must be opened over <strong>http://</strong> (not <code>file://</code>) so vocabulary data loads. From the repo root run <code>python3 -m http.server 8890</code> then open <code>http://127.0.0.1:8890/span_1/unidad_colombia/Colombia_Vocab_Review_Spanish1.html</code>';
+    document.body.insertBefore(w, document.body.firstChild);
+  }
+})();
+var __vocabBundle = window.__METZ_COLOMBIA_VOCAB_DATA_SP1;
+if (!__vocabBundle || !__vocabBundle.categories || !__vocabBundle.categories.length) {
+  var err = document.createElement('div');
+  err.setAttribute('role', 'alert');
+  err.style.cssText = 'background:#fdeaea;border:2px solid #c0392b;color:#333;padding:16px 20px;margin:12px auto;max-width:640px;border-radius:10px;font-size:.9rem;line-height:1.5';
+  err.innerHTML = '<strong>Vocabulary did not load.</strong> Serve the repository root with a local web server so <code>../../unidad_colombia/student_site_assets/data/colombia-vocab-sp1.js</code> resolves. Example: <code>cd</code> to the project folder, run <code>python3 -m http.server 8890</code>, then use <code>http://127.0.0.1:8890/span_1/unidad_colombia/Colombia_Vocab_Review_Spanish1.html</code> — then hard-refresh (<kbd>Cmd+Shift+R</kbd>).';
+  document.body.insertBefore(err, document.body.firstChild);
+}
+const categories = (__vocabBundle && __vocabBundle.categories) ? __vocabBundle.categories : [];
 
 // ═══════════════════════════════════
 // APP STATE
@@ -537,12 +554,14 @@ function applyCategorySelection() {
 }
 /** Jump to workbook-aligned Vocabulario deck (Unidad 2) and open flashcards. */
 function focusVocabularioDeck() {
+  if (!categories || !categories.length) return;
   const idx = categories.findIndex(function (c) { return c.name === 'Vocabulario'; });
   if (idx < 0) return;
   selectedCatIndices = new Set([idx]);
   mode = 'flashcard';
   applyCategorySelection();
 }
+window.focusVocabularioDeck = focusVocabularioDeck;
 function initFromUrl() {
   var raw = new URLSearchParams(window.location.search).get('cat');
   if (raw === 'all') { selectedCatIndices = new Set([0]); return; }
@@ -586,7 +605,7 @@ function setMode(m) {
     if (el) el.style.display = (id === m) ? '' : 'none';
   });
   document.getElementById('completeMode').style.display = 'none';
-  document.querySelectorAll('.mode-btn').forEach(b => {
+  document.querySelectorAll('.mode-btn[data-mode]').forEach(b => {
     b.classList.toggle('active', b.dataset.mode === m);
   });
   const inits = {
@@ -2387,7 +2406,9 @@ function dialCheck() {
 // ═══════════════════════════════════
 // INITIALIZE
 // ═══════════════════════════════════
-init();
+if (categories.length) {
+  init();
+}
 </script>
 <script type="module" src="../../unidad_colombia/student_site_assets/js/adaptiveColombiaVocabBridge.js?v=202604071200"></script>
 </body>
