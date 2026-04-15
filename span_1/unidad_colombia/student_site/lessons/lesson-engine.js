@@ -1444,6 +1444,54 @@
     return wrap;
   }
 
+  // ── Lesson figure (screenshots, workbook pages) ────
+  function resolveLessonImageSrc(src) {
+    if (!src) return '';
+    var s = String(src).trim();
+    if (/^https?:\/\//i.test(s) || s.indexOf('data:') === 0) return s;
+    if (s.charAt(0) === '/') return s;
+    var base = window.METZ_LESSON_IMAGE_BASE;
+    if (base && String(base).length) {
+      return String(base).replace(/\/?$/, '/') + s.replace(/^\//, '');
+    }
+    return s;
+  }
+
+  function renderLessonFigure(data, sectionId, componentIndex) {
+    var wrap = el('div', 'lesson-figure-wrap');
+    var figure = el('figure', 'lesson-figure');
+    var img = document.createElement('img');
+    img.className = 'lesson-screenshot';
+    img.src = resolveLessonImageSrc(data.src);
+    img.alt = data.alt != null ? String(data.alt) : '';
+    if (data.loading === 'lazy') img.loading = 'lazy';
+    figure.appendChild(img);
+    if (data.caption) {
+      var cap = document.createElement('figcaption');
+      cap.className = 'lesson-figure-caption';
+      cap.innerHTML = data.caption;
+      figure.appendChild(cap);
+    }
+    wrap.appendChild(figure);
+    if (data.answersHtml) {
+      var exBtn = el('button', 'exemplar-toggle check-btn btn-blue', data.exemplarButtonLabel || 'Show sample answers');
+      var exPanel = el('div', 'exemplar-panel exemplar-panel-wide lesson-figure-answers');
+      exPanel.setAttribute('hidden', '');
+      exPanel.innerHTML = data.answersHtml;
+      exBtn.type = 'button';
+      exBtn.addEventListener('click', function() {
+        var open = exPanel.hasAttribute('hidden');
+        if (open) exPanel.removeAttribute('hidden');
+        else exPanel.setAttribute('hidden', '');
+        exBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      exBtn.setAttribute('aria-expanded', 'false');
+      wrap.appendChild(exBtn);
+      wrap.appendChild(exPanel);
+    }
+    return wrap;
+  }
+
   // ── Station Picker ───────────────────────────────────
   function renderStations(data, sectionId, componentIndex) {
     var wrap = el('div');
@@ -1663,7 +1711,8 @@
     'data-table': renderDataTable,
     'vocab-list': renderVocabList,
     'mc-quiz': renderMCQuiz,
-    'rubric-self': renderRubricSelf
+    'rubric-self': renderRubricSelf,
+    'lesson-figure': renderLessonFigure
   };
 
   // ═══════════════════════════════════════════════════════

@@ -293,6 +293,33 @@ window.LESSON_DATA = {
           ]
         }
       ]
+    },
+
+    {
+      id: "screenshot-layout-demo",
+      title: "Layout demo — workbook screenshots",
+      shortTitle: "Figures",
+      subtitle: "Example for authors (collapsed by default)",
+      icon: "🖼",
+      accent: "teal",
+      open: false,
+      components: [
+        {
+          type: "callout",
+          style: "info",
+          text:
+            "This section demonstrates the <strong>lesson-figure</strong> component. Remove or hide this section when publishing if you do not want students to see it. See <code>README-screenshots.md</code> in this folder."
+        },
+        {
+          type: "lesson-figure",
+          src: "workbook/demo.png",
+          alt: "Demo placeholder image for screenshot path testing",
+          caption:
+            "Replace <code>demo.png</code> with real workbook exports in <code>unidad_colombia/student_site_assets/images/workbook/</code>.",
+          answersHtml: "<p><strong>Sample answers</strong> — model sentences or an answer key go here (HTML allowed).</p>",
+          exemplarButtonLabel: "Show sample answers"
+        }
+      ]
     }
   ]
 };

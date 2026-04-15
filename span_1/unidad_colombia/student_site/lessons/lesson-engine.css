@@ -1232,6 +1232,37 @@ body {
   border-color: rgba(252, 209, 22, 0.45);
 }
 
+/* ── Figures / screenshots (lesson-figure + callout HTML) ─ */
+.lesson-figure-wrap {
+  margin: 12px 0 18px;
+  max-width: 100%;
+}
+.lesson-figure {
+  margin: 0;
+  max-width: 100%;
+}
+img.lesson-screenshot {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-sm);
+}
+.lesson-figure-caption {
+  margin-top: 10px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+.lesson-figure-caption code {
+  font-size: 0.82rem;
+}
+.lesson-figure-answers {
+  margin-top: 8px;
+  text-align: left;
+}
+
 /* ── Responsive ─────────────────────────────────────── */
 @media (max-width: 700px) {
   .lesson-hero { padding: 36px 16px 30px; }
