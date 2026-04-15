@@ -1,5 +1,5 @@
 /**
- * Spanish 1 — Colombia unit core vocabulary (~24 terms + "All unit" deck).
+ * Spanish 1 — Colombia unit vocabulary + Unidad 2 Lección 2 workbook deck (Vocabulario).
  * Loaded by Colombia_Vocab_Review_Spanish1.html and vocab-worksheet-sp1.html
  */
 (function (w) {
@@ -42,10 +42,22 @@
       color: 'cat-3',
       words: [
         { es: 'estar', en: 'to be (location/feeling)' },
-        { es: 'está', en: 'he/she is (location)' },
+        { es: 'estoy', en: 'I am' },
+        { es: 'estás', en: 'you are (tú)' },
+        { es: 'está', en: 'he/she is; you are (usted)' },
+        { es: 'estamos', en: 'we are' },
+        { es: 'están', en: 'they / you all are' },
         { es: 'aquí', en: 'here' },
+        { es: 'en', en: 'in / on / at' },
         { es: 'al lado (de)', en: 'next to' },
-        { es: 'encima (de)', en: 'on top (of)' }
+        { es: 'encima (de)', en: 'on top (of)' },
+        { es: 'debajo (de)', en: 'under / below' },
+        { es: 'detrás (de)', en: 'behind' },
+        { es: 'delante (de)', en: 'in front of' },
+        { es: 'entre', en: 'between' },
+        { es: 'cerca (de)', en: 'near' },
+        { es: 'lejos (de)', en: 'far from' },
+        { es: 'dentro (de)', en: 'inside' }
       ]
     },
     {
@@ -56,7 +68,56 @@
         { es: 'voy', en: 'I go' },
         { es: 'contento/a', en: 'happy' },
         { es: 'triste', en: 'sad' },
-        { es: 'el parque', en: 'the park' }
+        { es: 'el parque', en: 'the park' },
+        { es: 'la biblioteca', en: 'the library' },
+        { es: 'la cafetería', en: 'the cafeteria' },
+        { es: 'el pasillo', en: 'the hall(way)' },
+        { es: 'el gimnasio', en: 'the gym' },
+        { es: 'la clase', en: 'the class' },
+        { es: 'el salón', en: 'the classroom' }
+      ]
+    },
+    {
+      name: 'Vocabulario',
+      color: 'cat-5',
+      words: [
+        { es: 'el escritorio', en: 'the desk' },
+        { es: 'la mochila', en: 'the backpack' },
+        { es: 'el cuaderno', en: 'the notebook' },
+        { es: 'el lápiz', en: 'the pencil' },
+        { es: 'la pluma', en: 'the pen' },
+        { es: 'el papel', en: 'the paper' },
+        { es: 'la silla', en: 'the chair' },
+        { es: 'el pizarrón', en: 'the (chalk)board' },
+        { es: 'la puerta', en: 'the door' },
+        { es: 'la ventana', en: 'the window' },
+        { es: 'la calculadora', en: 'the calculator' },
+        { es: 'el mapa', en: 'the map' },
+        { es: 'la mesa', en: 'the table' },
+        { es: 'el libro', en: 'the book' },
+        { es: 'la tiza', en: 'the chalk' },
+        { es: 'el borrador', en: 'the eraser' },
+        { es: 'la biblioteca', en: 'the library' },
+        { es: 'la cafetería', en: 'the cafeteria' },
+        { es: 'el pasillo', en: 'the hall(way)' },
+        { es: 'el gimnasio', en: 'the gym' },
+        { es: 'los baños', en: 'the restrooms' },
+        { es: 'la oficina del director', en: "the principal's office" },
+        { es: 'el salón de clases', en: 'the classroom' },
+        { es: 'el examen', en: 'the test / exam' },
+        { es: 'la tarea', en: 'homework' },
+        { es: 'el maestro', en: 'the (male) teacher' },
+        { es: 'la maestra', en: 'the (female) teacher' },
+        { es: 'el director', en: 'the principal' },
+        { es: 'los estudiantes', en: 'the students' },
+        { es: 'cansado/a', en: 'tired' },
+        { es: 'nervioso/a', en: 'nervous' },
+        { es: 'divertido/a', en: 'fun' },
+        { es: 'aburrido/a', en: 'bored / boring' },
+        { es: 'interesante', en: 'interesting' },
+        { es: 'difícil', en: 'difficult' },
+        { es: 'ocupado/a', en: 'busy' },
+        { es: 'tranquilo/a', en: 'calm' }
       ]
     }
   ];

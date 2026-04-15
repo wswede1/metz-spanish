@@ -34,6 +34,7 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 .cat-2{background:#1E8449}.cat-2.active{background:#166b3a}
 .cat-3{background:#8E44AD}.cat-3.active{background:#6f3488}
 .cat-4{background:#D4AC0D}.cat-4.active{background:#b8960b}
+.cat-5{background:#138d75}.cat-5.active{background:#0f705d}
 .cat-all{background:#34495e}.cat-all.active{background:#2c3e50}
 
 /* Stats bar */
@@ -268,6 +269,7 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 
 <div class="mode-bar" id="modeBar">
   <span class="mode-section">VOCAB</span>
+  <button type="button" class="mode-btn" onclick="focusVocabularioDeck()" title="Unidad 2 Lección 2 — school &amp; classroom words">📖 Vocabulario</button>
   <button class="mode-btn active" data-mode="flashcard" onclick="setMode('flashcard')">📇 Flash</button>
   <button class="mode-btn" data-mode="quiz" onclick="setMode('quiz')">❓ Quiz</button>
   <button class="mode-btn" data-mode="match" onclick="setMode('match')">🔗 Match</button>
@@ -382,7 +384,7 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0
 <!-- Completion -->
 <div id="completeMode" style="display:none"></div>
 
-<script src="../../unidad_colombia/student_site_assets/data/colombia-vocab-sp1.js"></script>
+<script src="../../unidad_colombia/student_site_assets/data/colombia-vocab-sp1.js?v=202604152000"></script>
 <script>
 // ═══════════════════════════════════════════════
 // VOCABULARY DATA — Spanish 1 (see colombia-vocab-sp1.js)
@@ -532,6 +534,14 @@ function applyCategorySelection() {
   renderNav();
   updateStats();
   setMode(mode);
+}
+/** Jump to workbook-aligned Vocabulario deck (Unidad 2) and open flashcards. */
+function focusVocabularioDeck() {
+  const idx = categories.findIndex(function (c) { return c.name === 'Vocabulario'; });
+  if (idx < 0) return;
+  selectedCatIndices = new Set([idx]);
+  mode = 'flashcard';
+  applyCategorySelection();
 }
 function initFromUrl() {
   var raw = new URLSearchParams(window.location.search).get('cat');
