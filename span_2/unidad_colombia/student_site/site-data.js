@@ -9,14 +9,15 @@ window.unitSite = {
   courseKey: "sp2",
   roadmap: {
     enabled: true,
-    day: 5,
+    day: 6,
     courseKey: "sp2",
     objectives: [
-      "I can conjugate pedir, dormir, and preferir in the preterite (stem change in él/ella and ellos).",
-      "I can use stem-changing -IR verbs in Colombia travel contexts."
+      "I can conjugate decir, traer, and venir in the preterite",
+      "I can recognize these forms in short Colombia travel dialogues",
+      "I can avoid mixing these stems with regular -ER/-IR patterns"
     ],
-    ctaLessonDay: 5,
-    ctaHref: "lessons/lesson.html?day=5"
+    ctaLessonDay: 6,
+    ctaHref: "lessons/lesson.html?day=6"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 2 — ¡Conoce a Colombia!",
@@ -169,7 +170,7 @@ window.unitSite = {
           icon: "⚡"
         },
         {
-          title: "Irregular Preterite Practice",
+          title: "Irregular Past Practice",
           description: "Use the high-frequency irregulars decir, traer, venir in past-tense dialogue.",
           route: "activity.html?activity=sp2-day-06-irregulars",
           lessonDay: 6,
@@ -181,7 +182,7 @@ window.unitSite = {
           icon: "💬"
         },
         {
-          title: "Irregular Preterite Drill",
+          title: "Irregular Past Drill",
           description: "Drill the stems dij-, traj-, vin- across all subjects. Watch out — no accent marks on these stems!",
           route: "activity.html?activity=sp2-day-06-drill",
           lessonDay: 6,

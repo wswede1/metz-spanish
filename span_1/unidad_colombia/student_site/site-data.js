@@ -10,14 +10,15 @@ window.unitSite = {
   /** Hub "Today's path": objectives + CTA. Prefer `ctaLessonDay` for full lesson-engine pages (overrides cached `ctaHref`). */
   roadmap: {
     enabled: true,
-    day: 5,
+    day: 6,
     courseKey: "sp1",
     objectives: [
-      "I can say where classroom objects are with estar.",
-      "I can use prepositions like al lado de, debajo de, and encima de."
+      "I can describe emotions using estar + adjective",
+      "I can say where I'm going using ir + a + place",
+      "I can express future plans with ir + a + infinitive"
     ],
-    ctaLessonDay: 5,
-    ctaHref: "lessons/lesson.html?day=5"
+    ctaLessonDay: 6,
+    ctaHref: "lessons/lesson.html?day=6"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 1 — ¡Conoce a Colombia!",
