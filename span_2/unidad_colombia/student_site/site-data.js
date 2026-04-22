@@ -336,7 +336,7 @@ window.unitSite = {
         },
         {
           title: "Study Guide — Review Stations",
-          description: "Partner rotation through six preterite stations (same targets as the unit review packet). Review, not a test — open the main Day 14 lesson for the full walkthrough.",
+          description: "Six independent review stations for the preterite (same targets as the unit review packet). Review, not a test — open the main Day 14 lesson for the full walkthrough.",
           route: "activity.html?activity=sp2-day-14-study",
           lessonDay: 14,
           releaseDate: "",
@@ -1418,8 +1418,8 @@ window.unitSite = {
       kindLabel: "Study Guide",
       type: "practice",
       minutes: 10,
-      description: "Three fast checks before you dive into the full partner stations on the Day 14 lesson page (use the main card link above).",
-      callout: "The full rotation (six stations, partner roles, and timing cues) lives in Lessons → Day 14 (use the main Study Guide card link). Use this page only if you want a short digital warm-up.",
+      description: "Three fast checks before you open the full Day 14 station lesson (use the main card link above).",
+      callout: "All six stations with formulas and practice live in Lessons → Day 14 (main Study Guide card link). Use this page only if you want a short digital warm-up.",
       objectives: [
         "I can warm up regular and spelling-change preterites before station work."
       ],
