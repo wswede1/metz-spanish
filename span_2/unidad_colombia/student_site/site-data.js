@@ -335,14 +335,14 @@ window.unitSite = {
           icon: "🔁"
         },
         {
-          title: "Study Guide — Review Stations",
-          description: "Six independent review stations for the preterite (same targets as the unit review packet). Review, not a test — open the main Day 14 lesson for the full walkthrough.",
+          title: "Study Guide Check",
+          description: "Six station-style reviews on the Day 14 lesson page (formulas + practice). Review, not a test. Use Summary and practice for the shorter written check-in.",
           route: "activity.html?activity=sp2-day-14-study",
           lessonDay: 14,
           releaseDate: "",
           status: "Study",
           kindLabel: "Study Guide",
-          minutes: 40,
+          minutes: 35,
           dayLabel: "Day 14",
           icon: "📋"
         }
@@ -1413,34 +1413,67 @@ window.unitSite = {
 
     // ── Day 14 ─────────────────────────────────────────────────────────────────
     "sp2-day-14-study": {
-      title: "Day 14 — Quick warm-up",
+      title: "Day 14 Study Guide Check",
       dayLabel: "Day 14",
       kindLabel: "Study Guide",
       type: "practice",
-      minutes: 10,
-      description: "Three fast checks before you open the full Day 14 station lesson (use the main card link above).",
-      callout: "All six stations with formulas and practice live in Lessons → Day 14 (main Study Guide card link). Use this page only if you want a short digital warm-up.",
+      minutes: 15,
+      description: "Final check-in before the Colombia unit exam. Review, not a test.",
+      callout: "If one section feels shaky, return to the related day card or your classroom packet before the exam.",
       objectives: [
-        "I can warm up regular and spelling-change preterites before station work."
+        "I can decide which preterite patterns need final review."
       ],
       questions: [
         {
-          type: "short",
-          prompt: "Nosotros ___ (llegar) al aeropuerto de Bogotá a las ocho.",
-          placeholder: "preterite form",
-          answer: ["llegamos"]
+          type: "mc",
+          prompt: "Choose the correct yo form of pagar:",
+          options: [
+            { value: "a", label: "pagué" },
+            { value: "b", label: "pagé" },
+            { value: "c", label: "pagó" },
+            { value: "d", label: "paguéron" }
+          ],
+          answer: "a"
         },
         {
           type: "short",
-          prompt: "Yo ___ (pagar) la cuenta del taxi.",
+          prompt: "Write the correct form: Ella ____ un artículo sobre Colombia. (leer)",
           placeholder: "preterite form",
-          answer: ["pague", "pagué"]
+          answer: ["leyo", "leyó"]
+        },
+        {
+          type: "mc",
+          prompt: "Choose the best form: Ellos ____ recuerdos al hotel. (traer)",
+          options: [
+            { value: "a", label: "trajeron" },
+            { value: "b", label: "traeron" },
+            { value: "c", label: "trajeronon" },
+            { value: "d", label: "trajimos" }
+          ],
+          answer: "a"
         },
         {
           type: "short",
-          prompt: "La guía ___ (explicar) la historia del barrio. (él/ella)",
+          prompt: "Write the third-person plural form of pedir in the preterite.",
           placeholder: "preterite form",
-          answer: ["explico", "explicó"]
+          answer: ["pidieron"]
+        },
+        {
+          type: "mc",
+          prompt: "Which sentence is accurate?",
+          options: [
+            { value: "a", label: "Nosotros creímos que el viaje fue increíble." },
+            { value: "b", label: "Nosotros creyimos que el viaje fue increíble." },
+            { value: "c", label: "Nosotros creyeron que el viaje fue increíble." },
+            { value: "d", label: "Nosotros creeron que el viaje fue increíble." }
+          ],
+          answer: "a"
+        },
+        {
+          type: "short",
+          prompt: "Write the yo form of empezar in the preterite.",
+          placeholder: "preterite form",
+          answer: ["empece", "empecé"]
         }
       ]
     },
