@@ -9,15 +9,16 @@ window.unitSite = {
   courseKey: "sp2",
   roadmap: {
     enabled: true,
-    day: 6,
+    day: 13,
     courseKey: "sp2",
     objectives: [
-      "I can conjugate decir, traer, and venir in the preterite",
-      "I can recognize these forms in short Colombia travel dialogues",
-      "I can avoid mixing these stems with regular -ER/-IR patterns"
+      "I can use regular and irregular preterite forms in short sentences",
+      "I can apply spelling changes (-car, -gar, -zar) and -y patterns where they apply",
+      "I can use stem-changing -IR and high-frequency irregulars in the past tense",
+      "I can self-check my forms before the unit exam"
     ],
-    ctaLessonDay: 6,
-    ctaHref: "lessons/lesson.html?day=6"
+    ctaLessonDay: 13,
+    ctaHref: "lessons/lesson.html?day=13"
   },
   totalUnitLessonDays: 14,
   title: "Spanish 2 — ¡Conoce a Colombia!",
@@ -197,6 +198,7 @@ window.unitSite = {
     },
     {
       title: "Culture, Projects, and Film",
+      hidden: true,
       icon: "🌎",
       description: "Culture readings, project work, presentations, and the Encanto film sequence.",
       cards: [
@@ -276,6 +278,7 @@ window.unitSite = {
     },
     {
       title: "Las 3 P's",
+      hidden: true,
       icon: "🌍",
       description: "Explore Colombian culture through the ACTFL lens: Productos, Prácticas, and Perspectivas.",
       cards: [
@@ -335,16 +338,18 @@ window.unitSite = {
           icon: "🔁"
         },
         {
-          title: "Study Guide Check",
-          description: "Six station-style reviews on the Day 14 lesson page (formulas + practice). Review, not a test. Use Summary and practice for the shorter written check-in.",
-          route: "activity.html?activity=sp2-day-14-study",
+          title: "Study Guide — Estaciones de Repaso",
+          description: "Same six-station lesson flow as class (vocab → patterns → reading → self-check). Review, not a test. Optional: use Summary and practice for the short written check-in activity.",
+          route: "lessons/lesson.html?day=14",
           lessonDay: 14,
+          hidePracticeLink: true,
           releaseDate: "",
           status: "Study",
           kindLabel: "Study Guide",
-          minutes: 35,
+          minutes: 40,
           dayLabel: "Day 14",
-          icon: "📋"
+          icon: "📋",
+          hidden: true
         }
       ]
     },
